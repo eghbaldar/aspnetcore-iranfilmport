@@ -1,0 +1,13 @@
+E:\IranFilmPort\IranFilmPort.Common\bin\Debug\net8.0\IranFilmPort.Common.deps.json
+E:\IranFilmPort\IranFilmPort.Common\bin\Debug\net8.0\IranFilmPort.Common.dll
+E:\IranFilmPort\IranFilmPort.Common\bin\Debug\net8.0\IranFilmPort.Common.pdb
+E:\IranFilmPort\IranFilmPort.Common\obj\Debug\net8.0\IranFilmPort.Common.GeneratedMSBuildEditorConfig.editorconfig
+E:\IranFilmPort\IranFilmPort.Common\obj\Debug\net8.0\IranFilmPort.Common.AssemblyInfoInputs.cache
+E:\IranFilmPort\IranFilmPort.Common\obj\Debug\net8.0\IranFilmPort.Common.AssemblyInfo.cs
+E:\IranFilmPort\IranFilmPort.Common\obj\Debug\net8.0\IranFilmPort.Common.csproj.CoreCompileInputs.cache
+E:\IranFilmPort\IranFilmPort.Common\obj\Debug\net8.0\IranFilmPort.Common.sourcelink.json
+E:\IranFilmPort\IranFilmPort.Common\obj\Debug\net8.0\IranFilmPort.Common.dll
+E:\IranFilmPort\IranFilmPort.Common\obj\Debug\net8.0\refint\IranFilmPort.Common.dll
+E:\IranFilmPort\IranFilmPort.Common\obj\Debug\net8.0\IranFilmPort.Common.pdb
+E:\IranFilmPort\IranFilmPort.Common\obj\Debug\net8.0\ref\IranFilmPort.Common.dll
+E:\IranFilmPort\IranFilmPort.Common\obj\Debug\net8.0\IranFilmPort.Common.csproj.AssemblyReference.cache

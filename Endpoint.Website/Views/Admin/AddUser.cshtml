@@ -1,0 +1,167 @@
+﻿@using Endpoint.Website.Models.AddUsers;
+@using IranFilmPort.Common.Helpers;
+@using IranFilmPort.Common.Constants
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["HeadTitle"] = "درج کاربر";
+}
+@model ModelAddUsers
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="row">
+                <div class="col-12">
+                    <a href="/admin/newscategories"
+                       class="btn btn-success waves-effect width-md waves-light">درج کاربر</a>
+                    <div class="p-2">
+                        <div class="form-group row">
+                            <label class="col-sm-2  col-form-label">دسته خبر</label>
+                            <div class="col-sm-10">
+                                @{
+                                    if (Model.GetUserByIdServiceDto == null)
+                                    {
+                                        // add news
+                                        <select class="custom-select mt-3" id="selectRole">
+                                            <option value="-1" selected="">نقش کاربر...</option>
+                                            @{
+                                                foreach (var item in Model.ResultGetAllRolesServiceDto.Result)
+                                                {
+                                                    <option value="@item.Id">@item.Title</option>
+                                                }
+                                            }
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <select class="custom-select mt-3" id="selectRole">
+                                            <option value="-1" selected="">دسته اصلی خبر را انتخاب کنید...</option>
+                                            @{
+                                                foreach (var item in Model.ResultGetAllRolesServiceDto.Result)
+                                                {
+                                                    <option selected="@(Model.GetUserByIdServiceDto.RoleId== item.Id)"
+                                                            value="@item.Id">@item.Title</option>
+                                                }
+                                            }
+                                        </select>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                        <div class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">نام کاربر</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model.GetUserByIdServiceDto == null)
+                                        {
+                // add news
+                                            <input type="text" id="txFirstname" class="form-control" placeholder="متن دلخواه شما...">
+
+                                        }
+                                        else
+                                        {
+                                        //  update news
+                                            <input type="text" id="txFirstname"
+                                                   value="@Model.GetUserByIdServiceDto.Firstname"
+                                                   class="form-control" placeholder="متن دلخواه شما...">
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+                                                        <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">نام خانوادگی کاربر</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model.GetUserByIdServiceDto == null)
+                                        {
+                // add news
+                                            <input type="text" id="txtLastname" class="form-control" placeholder="متن دلخواه شما...">
+
+                                        }
+                                        else
+                                        {
+                                        //  update news
+                                            <input type="text" id="txtLastname"
+                                                   value="@Model.GetUserByIdServiceDto.Lastname"
+                                                   class="form-control" placeholder="متن دلخواه شما...">
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">نام کاربری کاربر</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model.GetUserByIdServiceDto == null)
+                                        {
+                // add news
+                                            <input type="text" id="txtUsername" class="form-control" placeholder="متن دلخواه شما...">
+
+                                        }
+                                        else
+                                        {
+                                        //  update news
+                                            <input type="text" id="txtUsername"
+                                                   value="@Model.GetUserByIdServiceDto.Username"
+                                                   class="form-control" placeholder="متن دلخواه شما...">
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">
+                                    پسورد
+                                    <input type="checkbox" id="chkChangePassword" />
+                                    >
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="txtPassword" class="form-control" placeholder="متن دلخواه شما...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @{
+                        if (Model.GetUserByIdServiceDto == null)
+                        {
+                            // add news
+                            <button type="button" onclick="addUser();"
+                                    class="btn btn-primary waves-effect width-md waves-light">
+                                درج
+                            </button>
+                        }
+                        else
+                        {
+                        //  update news
+                            <button type="button" onclick="updateUser('@Model.GetUserByIdServiceDto.Id');"
+                                    class="btn btn-primary waves-effect width-md waves-light">
+                                ویرایش
+                            </button>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- end row -->
+
+</div>
+@section Styles {
+
+}
+@section Scripts {
+    @{
+        if (Model.GetUserByIdServiceDto != null)
+        {
+            <script>
+                var _userId = '@Model.GetUserByIdServiceDto.Id';
+            </script>
+        }
+    }
+    <script src="~/admintemplate/pagejscss/adduser/adduser.js"></script>
+}

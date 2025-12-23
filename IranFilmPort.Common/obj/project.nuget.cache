@@ -1,8 +1,25 @@
 {
   "version": 2,
-  "dgSpecHash": "wvbzubAPv+A=",
+  "dgSpecHash": "E8EL8+75Uzk=",
   "success": true,
   "projectFilePath": "E:\\IranFilmPort\\IranFilmPort.Common\\IranFilmPort.Common.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
+  "expectedPackageFiles": [
+    "C:\\Users\\Kinh\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.22\\microsoft.aspnetcore.cryptography.internal.8.0.22.nupkg.sha512",
+    "C:\\Users\\Kinh\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.22\\microsoft.aspnetcore.cryptography.keyderivation.8.0.22.nupkg.sha512",
+    "C:\\Users\\Kinh\\.nuget\\packages\\persiandatetime\\1.1.5082.36395\\persiandatetime.1.1.5082.36395.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "message": "Package 'PersianDateTime 1.1.5082.36395' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "projectPath": "E:\\IranFilmPort\\IranFilmPort.Common\\IranFilmPort.Common.csproj",
+      "warningLevel": 1,
+      "filePath": "E:\\IranFilmPort\\IranFilmPort.Common\\IranFilmPort.Common.csproj",
+      "libraryId": "PersianDateTime",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

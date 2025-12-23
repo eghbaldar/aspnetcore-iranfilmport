@@ -1,0 +1,65 @@
+﻿@using IranFilmPort.Application.Services.Users.GetAllUsers
+@using IranFilmPort.Common.Helpers;
+@using IranFilmPort.Common.Constants
+@model ResultGetAllUsersServiceDto
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["HeadTitle"] = "مدیریت کاربران";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div>
+            <a href="/admin/adduser/" class="btn btn-primary waves-effect width-md waves-light">کاربر جدید</a>
+        </div>
+        <div class="card-box mt-20">
+            <h4 class="mt-0 header-title">لیست تمام کاربرها</h4>
+            <div class="table-responsive" id="divNews">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>نام</th>
+                            <th>نام کاربری</th>
+                            <th>تاریخ درج</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in Model.Result)
+                            {
+                                <tr>                                    
+                                    <td>@item.Fullname</td>
+                                    <td>@item.Username</td>
+                                   
+                                    <td>
+                                        @{
+                                            var shamsidate = new PersianDateTime(@item.InsertDateTime);
+                                            var shamsidateString = shamsidate.ToString("yyyy/MM/dd");
+                                            var persiandateTime = PersianNumberHelper.ConvertToPersian(shamsidateString);
+                                            @persiandateTime
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="dropdown float-right">
+                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="/admin/addUser/@item.UserId" class="dropdown-item">ویرایش</a>
+                                                <a href="/admin/userLogs/@item.UserId" class="dropdown-item">ویرایش</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    <script src="~/admintemplate/pagejscss/news/news.js"></script>
+}

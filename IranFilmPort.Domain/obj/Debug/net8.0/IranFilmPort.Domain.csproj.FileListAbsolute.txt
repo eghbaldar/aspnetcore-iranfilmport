@@ -1,0 +1,12 @@
+E:\IranFilmPort\IranFilmPort.Domain\bin\Debug\net8.0\IranFilmPort.Domain.deps.json
+E:\IranFilmPort\IranFilmPort.Domain\bin\Debug\net8.0\IranFilmPort.Domain.dll
+E:\IranFilmPort\IranFilmPort.Domain\bin\Debug\net8.0\IranFilmPort.Domain.pdb
+E:\IranFilmPort\IranFilmPort.Domain\obj\Debug\net8.0\IranFilmPort.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\IranFilmPort\IranFilmPort.Domain\obj\Debug\net8.0\IranFilmPort.Domain.AssemblyInfoInputs.cache
+E:\IranFilmPort\IranFilmPort.Domain\obj\Debug\net8.0\IranFilmPort.Domain.AssemblyInfo.cs
+E:\IranFilmPort\IranFilmPort.Domain\obj\Debug\net8.0\IranFilmPort.Domain.csproj.CoreCompileInputs.cache
+E:\IranFilmPort\IranFilmPort.Domain\obj\Debug\net8.0\IranFilmPort.Domain.sourcelink.json
+E:\IranFilmPort\IranFilmPort.Domain\obj\Debug\net8.0\IranFilmPort.Domain.dll
+E:\IranFilmPort\IranFilmPort.Domain\obj\Debug\net8.0\refint\IranFilmPort.Domain.dll
+E:\IranFilmPort\IranFilmPort.Domain\obj\Debug\net8.0\IranFilmPort.Domain.pdb
+E:\IranFilmPort\IranFilmPort.Domain\obj\Debug\net8.0\ref\IranFilmPort.Domain.dll

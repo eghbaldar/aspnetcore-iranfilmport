@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36109.1 d17.14
+VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -24,8 +24,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IranFilmPort.Domain", "IranFilmPort.Domain\IranFilmPort.Domain.csproj", "{3E1E1C1B-73FC-4CB7-BE88-A6D6AFC73ED0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IranFilmPort.Infranstructure", "IranFilmPort.Infranstructure\IranFilmPort.Infranstructure.csproj", "{60AD6774-F138-4F3D-B5A6-FFC67148A56A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{93E2FBEB-4AE9-4A08-A50A-699092939226} = {93E2FBEB-4AE9-4A08-A50A-699092939226}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IranFilmPort.Persistence", "IranFilmPort.Persistence\IranFilmPort.Persistence.csproj", "{5D158831-72E4-4E44-83B0-AE88DC874ECE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB} = {E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endpoint.Website", "Endpoint.Website\Endpoint.Website.csproj", "{4E1862C2-C658-4D4F-B135-32309169D815}"
 EndProject

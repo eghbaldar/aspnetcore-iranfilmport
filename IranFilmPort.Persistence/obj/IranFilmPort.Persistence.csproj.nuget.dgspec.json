@@ -4,14 +4,100 @@
     "E:\\IranFilmPort\\IranFilmPort.Persistence\\IranFilmPort.Persistence.csproj": {}
   },
   "projects": {
-    "E:\\IranFilmPort\\IranFilmPort.Persistence\\IranFilmPort.Persistence.csproj": {
+    "E:\\IranFilmPort\\IranFilmPort.Application\\IranFilmPort.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\IranFilmPort\\IranFilmPort.Persistence\\IranFilmPort.Persistence.csproj",
-        "projectName": "IranFilmPort.Persistence",
-        "projectPath": "E:\\IranFilmPort\\IranFilmPort.Persistence\\IranFilmPort.Persistence.csproj",
+        "projectUniqueName": "E:\\IranFilmPort\\IranFilmPort.Application\\IranFilmPort.Application.csproj",
+        "projectName": "IranFilmPort.Application",
+        "projectPath": "E:\\IranFilmPort\\IranFilmPort.Application\\IranFilmPort.Application.csproj",
         "packagesPath": "C:\\Users\\Kinh\\.nuget\\packages\\",
-        "outputPath": "E:\\IranFilmPort\\IranFilmPort.Persistence\\obj\\",
+        "outputPath": "E:\\IranFilmPort\\IranFilmPort.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "d:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Kinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "E:\\IranFilmPort\\IranFilmPort.Common\\IranFilmPort.Common.csproj": {
+                "projectPath": "E:\\IranFilmPort\\IranFilmPort.Common\\IranFilmPort.Common.csproj"
+              },
+              "E:\\IranFilmPort\\IranFilmPort.Domain\\IranFilmPort.Domain.csproj": {
+                "projectPath": "E:\\IranFilmPort\\IranFilmPort.Domain\\IranFilmPort.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[8.0.22, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\IranFilmPort\\IranFilmPort.Common\\IranFilmPort.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\IranFilmPort\\IranFilmPort.Common\\IranFilmPort.Common.csproj",
+        "projectName": "IranFilmPort.Common",
+        "projectPath": "E:\\IranFilmPort\\IranFilmPort.Common\\IranFilmPort.Common.csproj",
+        "packagesPath": "C:\\Users\\Kinh\\.nuget\\packages\\",
+        "outputPath": "E:\\IranFilmPort\\IranFilmPort.Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "d:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -49,6 +135,257 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
+              "target": "Package",
+              "version": "[8.0.22, )"
+            },
+            "PersianDateTime": {
+              "target": "Package",
+              "version": "[1.1.5082.36395, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\IranFilmPort\\IranFilmPort.Domain\\IranFilmPort.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\IranFilmPort\\IranFilmPort.Domain\\IranFilmPort.Domain.csproj",
+        "projectName": "IranFilmPort.Domain",
+        "projectPath": "E:\\IranFilmPort\\IranFilmPort.Domain\\IranFilmPort.Domain.csproj",
+        "packagesPath": "C:\\Users\\Kinh\\.nuget\\packages\\",
+        "outputPath": "E:\\IranFilmPort\\IranFilmPort.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "d:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Kinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\IranFilmPort\\IranFilmPort.Infranstructure\\IranFilmPort.Infranstructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\IranFilmPort\\IranFilmPort.Infranstructure\\IranFilmPort.Infranstructure.csproj",
+        "projectName": "IranFilmPort.Infranstructure",
+        "projectPath": "E:\\IranFilmPort\\IranFilmPort.Infranstructure\\IranFilmPort.Infranstructure.csproj",
+        "packagesPath": "C:\\Users\\Kinh\\.nuget\\packages\\",
+        "outputPath": "E:\\IranFilmPort\\IranFilmPort.Infranstructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "d:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Kinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "E:\\IranFilmPort\\IranFilmPort.Common\\IranFilmPort.Common.csproj": {
+                "projectPath": "E:\\IranFilmPort\\IranFilmPort.Common\\IranFilmPort.Common.csproj"
+              },
+              "E:\\IranFilmPort\\IranFilmPort.Domain\\IranFilmPort.Domain.csproj": {
+                "projectPath": "E:\\IranFilmPort\\IranFilmPort.Domain\\IranFilmPort.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\IranFilmPort\\IranFilmPort.Persistence\\IranFilmPort.Persistence.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\IranFilmPort\\IranFilmPort.Persistence\\IranFilmPort.Persistence.csproj",
+        "projectName": "IranFilmPort.Persistence",
+        "projectPath": "E:\\IranFilmPort\\IranFilmPort.Persistence\\IranFilmPort.Persistence.csproj",
+        "packagesPath": "C:\\Users\\Kinh\\.nuget\\packages\\",
+        "outputPath": "E:\\IranFilmPort\\IranFilmPort.Persistence\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "d:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Kinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "E:\\IranFilmPort\\IranFilmPort.Application\\IranFilmPort.Application.csproj": {
+                "projectPath": "E:\\IranFilmPort\\IranFilmPort.Application\\IranFilmPort.Application.csproj"
+              },
+              "E:\\IranFilmPort\\IranFilmPort.Infranstructure\\IranFilmPort.Infranstructure.csproj": {
+                "projectPath": "E:\\IranFilmPort\\IranFilmPort.Infranstructure\\IranFilmPort.Infranstructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

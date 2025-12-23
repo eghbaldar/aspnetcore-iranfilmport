@@ -9,7 +9,8 @@ namespace IranFilmPort.Domain.Entities.User
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string Phone { get; set; }
         public byte ProviderId { get; set; } // ProviderConstants.cs
-        public byte RoleId { get; set; } // RoleConstants.cs
+        public Guid RoleId { get; set; } // RoleConstants.cs
     }
 }

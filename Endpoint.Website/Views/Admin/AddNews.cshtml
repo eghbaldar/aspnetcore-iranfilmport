@@ -1,0 +1,366 @@
+﻿@using Endpoint.Website.Models.AddNews
+@using IranFilmPort.Common.Helpers;
+@using IranFilmPort.Common.Constants
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["HeadTitle"] = "درج خبر";
+}
+@model ModelAddNews
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="row">
+                <div class="col-12">
+                    <a href="/admin/newscategories"
+                       class="btn btn-success waves-effect width-md waves-light">دسته بندی</a>
+                    <div class="p-2">
+                        <div class="form-horizontal">
+
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">فعال یا غیرفعال</label>
+                                <div class="col-sm-10 alignCenter">
+                                    <div class="custom-control custom-switch ">
+                                        @{
+                                            if (Model.GetNewsForAdminServiceDto == null)
+                                            {
+                                                // add news
+                                                <label class="custom-control material-switch">
+                                                    <input type="checkbox" name="active" id="chkActive" class="material-switch-control-input">
+                                                    <span class="material-switch-control-indicator"></span>
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                //  update news
+                                                if ((bool)Model.GetNewsForAdminServiceDto.Active)
+                                                {
+                                                    <label class="custom-control material-switch">
+                                                        <input checked type="checkbox" name="active" id="chkActive" class="material-switch-control-input">
+                                                        <span class="material-switch-control-indicator"></span>
+                                                    </label>
+                                                }
+                                                else
+                                                {
+                                                    <label class="custom-control material-switch">
+                                                        <input type="checkbox" name="active" id="chkActive" class="material-switch-control-input">
+                                                        <span class="material-switch-control-indicator"></span>
+                                                    </label>
+                                                }
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label">دسته خبر</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model.GetNewsForAdminServiceDto == null)
+                                        {
+                                            // add news
+                                            <select class="custom-select mt-3" id="selectMainCat">
+                                                <option value="-1" selected="">دسته اصلی خبر را انتخاب کنید...</option>
+                                                @{
+                                                    foreach (var item in Model.ResultGetParentCategoriesDto.Result)
+                                                    {
+                                                        <option value="@item.Id">@item.Title</option>
+                                                    }
+                                                }
+                                            </select>
+                                            <select class="custom-select mt-3" id="selectChildCategory">
+                                            </select>
+                                        }
+                                        else
+                                        {
+                                            <select class="custom-select mt-3" id="selectMainCat">
+                                                <option value="-1" selected="">دسته اصلی خبر را انتخاب کنید...</option>
+                                                @{
+                                                    foreach (var item in Model.ResultGetParentCategoriesDto.Result)
+                                                    {
+                                                        <option selected="@(Model.GetNewsForAdminServiceDto.ParentCategoryId == item.Id)"
+                                                                value="@item.Id">@item.Title</option>
+                                                    }
+                                                }
+                                            </select>
+                                            <select class="custom-select mt-3" id="selectChildCategory">
+                                                <option value="-1" selected="">دسته فرعی خبر را انتخاب کنید...</option>
+                                                @{
+                                                    foreach (var item in Model.ResultGetChildrenCategoriesDto.Result)
+                                                    {
+                                                        <option selected="@(Model.GetNewsForAdminServiceDto.ChildrenCategoryId == item.Id)"
+                                                                value="@item.Id">@item.Title</option>
+                                                    }
+                                                }
+                                            </select>
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">عنوان خبر</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model.GetNewsForAdminServiceDto == null)
+                                        {
+                                        // add news
+                                            <input type="text" id="txtTitle" class="form-control" placeholder="متن دلخواه شما...">
+
+                                        }
+                                        else
+                                        {
+                                        //  update news
+                                            <input type="text" id="txtTitle"
+                                                   value="@Model.GetNewsForAdminServiceDto.Title"
+                                                   class="form-control" placeholder="متن دلخواه شما...">
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            @{
+                                if (Model.GetNewsForAdminServiceDto != null)
+                                {
+                                    <div class="form-group row">
+                                        <label class="col-sm-2  col-form-label" for="simpleinput"></label>
+                                        <div class="col-sm-10">
+                                            <label for="chkEditSLug">تغییر اسلاگ براساس متن زیر باشد:</label>
+                                            <input type="checkbox" id="chkEditSLug" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2  col-form-label" for="simpleinput">اسلاگ</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="txtEditSlug"
+                                                   style="background-color:lightgreen"
+                                                   value="@Model.GetNewsForAdminServiceDto.Slug" class="form-control"
+                                                   placeholder="متن دلخواه شما...">
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-password">خلاصه متن</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetNewsForAdminServiceDto == null)
+                                {
+                                // add news
+                                    <textarea rows="5" class="form-control" id="txtSummary"></textarea>
+
+                                }
+                                else
+                                {
+                                //  update news
+                                    <textarea rows="5" class="form-control"
+                                              id="txtSummary">@Model.GetNewsForAdminServiceDto.Summary</textarea>
+
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-email">متن کامل خبر:</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetNewsForAdminServiceDto == null)
+                                {
+                                // add news
+                                    <textarea name="editor1" id="txtBodyText"></textarea>
+
+                                }
+                                else
+                                {
+                                //  update news
+                                    <textarea name="editor1" id="txtBodyText">@Model.GetNewsForAdminServiceDto.BodyText</textarea>
+
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-fileinput"></label>
+                        <div class="col-sm-10">
+                            <input type="checkbox" id="chkAllowedOver150">
+                            <label for="chkAllowedOver150">پذیرش تصویر بالای حجم 150 کلیوبایت</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-fileinput">تصویر اصلی خبر</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="fileImage">
+                        </div>
+                    </div>
+                    @{
+                        if (Model.GetNewsForAdminServiceDto != null)
+                        {
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="example-fileinput"></label>
+                                <div class="col-sm-10">
+
+                                    <img class="img-fluid rounded"
+                                         src="/UploadedStuff/admin/images/admin-news-images/@Model.GetNewsForAdminServiceDto.MainImage-thumbnail.jpg" />
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-placeholder">نویسنده</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetNewsForAdminServiceDto == null)
+                                {
+                                // add news
+                                    <input type="text" id="txtAuthor" class="form-control" placeholder="نویسنده ...">
+                                }
+                                else
+                                {
+                                //  update news
+                                    <input type="text" id="txtAuthor" class="form-control"
+                                           value="@Model.GetNewsForAdminServiceDto.Author"
+                                           placeholder="نویسنده ...">
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-placeholder">منبع</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetNewsForAdminServiceDto == null)
+                                {
+                                // add news
+                                    <input type="text" id="txtReference" class="form-control" placeholder="منبع ...">
+
+                                }
+                                else
+                                {
+                                //  update news
+                                    <input type="text" id="txtReference"
+                                           value="@Model.GetNewsForAdminServiceDto.Reference"
+                                           class="form-control" placeholder="منبع ...">
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label">تاریخ درج در آینده</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetNewsForAdminServiceDto == null)
+                                {
+                                // add news
+                                    <input type="text" id="txtShamsiDate" class="form-control shamsidate" readonly>
+
+                                }
+                                else
+                                {
+                                    //  update news
+                                    var shamsidateFuture = new PersianDateTime(Convert.ToDateTime(Model.GetNewsForAdminServiceDto.FutureDateTime));
+                                    var shamsidateStringFuture = shamsidateFuture.ToString("yyyy/MM/dd");
+                                    var persiandateTimeFuture = PersianNumberHelper.ConvertToPersian(shamsidateStringFuture);
+
+                                    <input type="text" id="txtShamsiDate"
+                                           value="@persiandateTimeFuture"
+                                           class="form-control shamsidate" readonly>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label">تگ ها</label>
+                        <div class="col-sm-10">
+                            <div class="tags-default">
+                                @{
+                                    if (Model.GetNewsForAdminServiceDto == null)
+                                    {
+                                    // add news
+                                        <input type="text" data-role="tagsinput" placeholder="افزودن تگ..." />
+                                    }
+                                    else
+                                    {
+                                        //  update news
+                                        var tags = "";
+                                        foreach (var tag in Model.GetNewsForAdminServiceDto.Tags)
+                                        {
+                                            tags += tag.Value + ",";
+                                        }
+                                        <input type="text" data-role="tagsinput"
+                                               value="@tags"
+                                               placeholder="افزودن تگ..." />
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    @{
+                        if (Model.GetNewsForAdminServiceDto == null)
+                        {
+                            // add news
+                            <button type="button" onclick="addNews();"
+                                    class="btn btn-primary waves-effect width-md waves-light">
+                                درج
+                            </button>
+                        }
+                        else
+                        {
+                            //  update news
+                            <button type="button" onclick="updateNews('@Model.GetNewsForAdminServiceDto.Id');"
+                                    class="btn btn-primary waves-effect width-md waves-light">
+                                ویرایش
+                            </button>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- end row -->
+
+</div>
+@section Styles {
+    <link href="~/lib/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="~/admintemplate/pagejscss/postnews/postnews.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script>
+        $(".shamsidate").persianDatepicker();
+    </script>
+    <script src="~/lib/fileextensionsize/fileextensionsize.js"></script>
+    <script src="~/lib/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.9.2/full-all/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('txtBodyText',
+            {
+                extraPlugins: 'codesnippet',
+                codeSnippet_theme: 'monokai_sublime',
+                toolbar: [
+                    { name: 'document', items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates'] }, { name: 'bidi', items: ['BidiLtr', 'BidiRtl'] },
+                    '/', // Line break
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', '-', 'RemoveFormat'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv'] },
+                    { name: 'alignment', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] }, // Alignment options
+                    { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                    { name: 'colors', items: ['TextColor', 'BGColor'] },
+                    { name: 'insert', items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'] },
+                    '/', // Line break
+                    { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt'] },
+                    { name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+                    { name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] },
+                    { name: 'forms', items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'] },
+                    '/', // Line break
+                    { name: 'coding', items: ['CodeSnippet'] },
+                ],
+                filebrowserUploadUrl: '/admin/UploadArticleMiddlePost/', // Update this URL to your server-side upload handler
+                filebrowserImageUploadUrl: '/admin/UploadArticleMiddlePost?type=Images',
+                filebrowserImageBrowseUrl: '/admin/AdminArticleImageBrower/', // Update this URL to point to your image browser
+            });
+    </script>
+    <script src="~/admintemplate/pagejscss/postnews/postnews.js"></script>
+}

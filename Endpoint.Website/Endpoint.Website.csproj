@@ -11,4 +11,19 @@
     <Folder Include="wwwroot\UserTemplate\pagecssjs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IranFilmPort.Application\IranFilmPort.Application.csproj" />
+    <ProjectReference Include="..\IranFilmPort.Common\IranFilmPort.Common.csproj" />
+    <ProjectReference Include="..\IranFilmPort.Persistence\IranFilmPort.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

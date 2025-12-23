@@ -1,0 +1,57 @@
+﻿@using Endpoint.Website.Models.AddUsers;
+@using IranFilmPort.Application.Services.News.NewsComments.GetAllComments
+@using IranFilmPort.Common.Helpers;
+@using IranFilmPort.Common.Constants
+@model ResultGetAllCommentsServiceDto
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["HeadTitle"] = "اخبار";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div>
+            <a href="/admin/addnews/" class="btn btn-primary waves-effect width-md waves-light">خبر جدید</a>
+        </div>
+        <div class="card-box mt-20">
+            <h4 class="mt-0 header-title">لیست تمام کامنت های اخبار</h4>
+            <div class="table-responsive" id="divNews">
+                @{
+                    if(Model.Result.Count==0){
+                        <span>داده ای وجود ندارد.</span>
+                    }
+                    else{
+                        <table class="table table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th>عنوان</th>
+                                    <th>کل کامنت ها</th>
+                                    <th>کل کامنت های بررسی نشده</th>
+                                    <th>باز شدن خبر</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var item in Model.Result)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.NewsTitle
+                                            </td>
+                                            <td>@item.CommentNumber</td>
+                                            <td>@item.UnderConsiderationCommentNumbers</td>
+                                            <td><a href="/blog/@item.NewsSlug" target="_blank">مشاهده</a></td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    }
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    <script src="~/admintemplate/pagejscss/news/news.js"></script>
+}

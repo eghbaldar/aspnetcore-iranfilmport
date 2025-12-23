@@ -1,0 +1,74 @@
+﻿using IranFilmPort.Application.Interfaces;
+using IranFilmPort.Domain.Entities.Contact;
+using IranFilmPort.Domain.Entities.News;
+using IranFilmPort.Domain.Entities.Newsletter;
+using IranFilmPort.Domain.Entities.User;
+using IranFilmPort.Infranstructure.Configurations.Roles;
+using Microsoft.EntityFrameworkCore;
+using System.Data;
+
+namespace IranFilmPort.Persistence.Contexts
+{
+    public class DataBaseContext : DbContext, IDataBaseContext
+    {
+        public DataBaseContext(DbContextOptions options) : base(options)
+        {
+
+        }
+        //users
+        public DbSet<Users> Users { get; set; }
+        public DbSet<Roles> Roles { get; set; }
+
+        //news
+        public DbSet<News> News { get; set; }
+        public DbSet<NewsCategories> NewsCategories { get; set; }
+        public DbSet<NewsComments> NewsComments { get; set; }
+        public DbSet<NewsTags> NewsTags { get; set; }
+
+        //guest
+        public DbSet<Contacts> Contacts { get; set; }
+        public DbSet<Newsletters> Newsletters { get; set; }
+
+        // Entities Configurations
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Microsoft.EntityFrameworkCore.Relational
+            modelBuilder.HasDefaultSchema("dbo");
+
+            modelBuilder.ApplyConfiguration(new RolesConfigurations());
+        }
+        public override int SaveChanges()
+        {
+            var modifiedEntries = ChangeTracker.Entries()
+           .Where(e =>
+               e.State == EntityState.Modified ||
+               e.State == EntityState.Added ||
+               e.State == EntityState.Deleted
+               ).ToList();
+            foreach (var entry in modifiedEntries)
+            {
+                var entityType = entry.Context.Model.FindEntityType(entry.Entity.GetType());
+                var inserted = entityType.FindProperty("InsertDate");
+                var updated = entityType.FindProperty("UpdateDate");
+                var deleted = entityType.FindProperty("DeleteDate");
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        if (inserted != null) entry.Property("InsertDate").CurrentValue = DateTime.Now;
+                        break;
+                    case EntityState.Modified:
+                        if (updated != null) entry.Property("UpdateDate").CurrentValue = DateTime.Now;
+                        break;
+                    case EntityState.Deleted:
+                        if (deleted != null)
+                        {
+                            entry.Property("DeleteDate").CurrentValue = DateTime.Now;
+                            entry.State = EntityState.Modified;
+                        }
+                        break;
+                }
+            }
+            return base.SaveChanges();
+        }
+    }
+}
