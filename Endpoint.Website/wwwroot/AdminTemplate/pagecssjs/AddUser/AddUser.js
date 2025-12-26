@@ -7,12 +7,20 @@
         KingWarningStyleOff("#selectRole", 0);
     }
 
-    if (isEmptyKing($("#txtFullname").val())) {
-        KingWarningStyle("#txtFullname", 0);
+    if (isEmptyKing($("#txtFirstname").val())) {
+        KingWarningStyle("#txtFirstname", 0);
         KingSweetAlert(0, "نام کامل کاربر وارد شود.");
         return;
     } else {
-        KingWarningStyleOff("#txtFullname", 0);
+        KingWarningStyleOff("#txtFirstname", 0);
+    }
+
+    if (isEmptyKing($("#txtLastname").val())) {
+        KingWarningStyle("#txtLastname", 0);
+        KingSweetAlert(0, "نام خانوادگی کاربری وارد شود.");
+        return;
+    } else {
+        KingWarningStyleOff("#txtLastname", 0);
     }
 
     if (isEmptyKing($("#txtUsername").val())) {
@@ -23,18 +31,37 @@
         KingWarningStyleOff("#txtUsername", 0);
     }
 
+    if (isEmptyKing($("#txtemail").val())) {
+        KingWarningStyle("#txtemail", 0);
+        KingSweetAlert(0, "ایمیل وارد شود.");
+        return;
+    } else {
+        KingWarningStyleOff("#txtemail", 0);
+    }
+
+    if (isEmptyKing($("#txtPhone").val())) {
+        KingWarningStyle("#txtPhone", 0);
+        KingSweetAlert(0, "شماره موبایل وارد شود.");
+        return;
+    } else {
+        KingWarningStyleOff("#txtPhone", 0);
+    }
+
     if (isEmptyKing($("#txtPassword").val())) {
         KingWarningStyle("#txtPassword", 0);
-        KingSweetAlert(0, "پسورد وارد شود.");
+        KingSweetAlert(0, "کلمه عبور وارد شود.");
         return;
     } else {
         KingWarningStyleOff("#txtPassword", 0);
     }
 
     var postData = {
-        Fullname: $("#txtFullname").val(),
+        Firstname: $("#txtFirstname").val(),
+        Lastname: $("#txtLastname").val(),
         Username: $("#txtUsername").val(),
+        Email: $("#txtemail").val(),
         Password: $("#txtPassword").val(),
+        Phone: $("#txtPhone").val(),
         RoleId: $("#selectRole").val()
     };
     $.ajax({
@@ -46,19 +73,23 @@
         success: function (data) {
             if (data.isSuccess) {
                 KingSweetAlert(1, "درج با موفقیت انجام شد.");
-                window.location = "/admin/users";
+
+                const params = new URLSearchParams(window.location.search);
+                var parameterValue = params.get('role');
+                window.location = `/admin/users/${parameterValue}`;
             }
             else {
-                KingSweetAlert(0, "خطایی رخ داده است.");
+                KingSweetAlert(0,data.message);
             }
         },
         error: function (e) {
-            alert(e);
+            KingSweetAlert(1, "خطایی رخ داده است.");
         }
     })
 }
-function updateUser() {
+function updateUser(userId) {
 
+    var postData = new FormData();
     if ($("#selectRole").val() == "-1") {
         KingWarningStyle("#selectRole", 0);
         KingSweetAlert(0, "نقش را انتخاب کنید.");
@@ -67,12 +98,20 @@ function updateUser() {
         KingWarningStyleOff("#selectRole", 0);
     }
 
-    if (isEmptyKing($("#txtFullname").val())) {
-        KingWarningStyle("#txtFullname", 0);
+    if (isEmptyKing($("#txtFirstname").val())) {
+        KingWarningStyle("#txtFirstname", 0);
         KingSweetAlert(0, "نام کامل کاربر وارد شود.");
         return;
     } else {
-        KingWarningStyleOff("#txtFullname", 0);
+        KingWarningStyleOff("#txtFirstname", 0);
+    }
+
+    if (isEmptyKing($("#txtLastname").val())) {
+        KingWarningStyle("#txtLastname", 0);
+        KingSweetAlert(0, "نام خانوادگی کاربری وارد شود.");
+        return;
+    } else {
+        KingWarningStyleOff("#txtLastname", 0);
     }
 
     if (isEmptyKing($("#txtUsername").val())) {
@@ -83,7 +122,22 @@ function updateUser() {
         KingWarningStyleOff("#txtUsername", 0);
     }
 
-    if ($("#ChangingPassword").prop("checked")) {
+    if (isEmptyKing($("#txtemail").val())) {
+        KingWarningStyle("#txtemail", 0);
+        KingSweetAlert(0, "ایمیل وارد شود.");
+        return;
+    } else {
+        KingWarningStyleOff("#txtemail", 0);
+    }
+
+    if (isEmptyKing($("#txtPhone").val())) {
+        KingWarningStyle("#txtPhone", 0);
+        KingSweetAlert(0, "شماره موبایل وارد شود.");
+        return;
+    } else {
+        KingWarningStyleOff("#txtPhone", 0);
+    }
+    if ($("#chkChangePassword").prop("checked")) {        
         if (isEmptyKing($("#txtPassword").val())) {
             KingWarningStyle("#txtPassword", 0);
             KingSweetAlert(0, "پسورد وارد شود.");
@@ -91,32 +145,34 @@ function updateUser() {
         } else {
             KingWarningStyleOff("#txtPassword", 0);
         }
+        postData.append("Password", $("#txtPassword").val());
     }
+    
+    postData.append("UserId", userId);
+    postData.append("Firstname", $("#txtFirstname").val());
+    postData.append("Lastname", $("#txtLastname").val());
+    postData.append("Username", $("#txtUsername").val());
+    postData.append("Email", $("#txtemail").val());
+    postData.append("Phone", $("#txtPhone").val());
+    postData.append("RoleId", $("#selectRole").val());
 
-    var postData = {
-        UserId: _userId,
-        Fullname: $("#txtFullname").val(),
-        Username: $("#txtUsername").val(),
-        ChangingPassword: $("#ChangingPassword").prop("checked"),
-        Password: $("#txtPassword").val(),
-        RoleId: $("#selectRole").val()
-    };
+
     $.ajax({
-        contentType: 'application/x-www-form-urlencoded',
-        dataType: 'json',
+        contentType: false,
+        processData: false,
         type: 'PUT',
-        url: '/admin/UpdateAddUser',
+        url: '/admin/UpdateUser',
         data: postData,
         success: function (data) {
             if (data.isSuccess) {
-                KingSweetAlert(1, "درج با موفقیت انجام شد.");
+                KingSweetAlert(1, "ویرایش با موفقیت انجام شد.");
             }
             else {
-                KingSweetAlert(0, "خطایی رخ داده است.");
+                KingSweetAlert(0, data.message);
             }
         },
         error: function (e) {
-            alert(e);
+            KingSweetAlert(1, "خطایی رخ داده است.");
         }
     })
 }

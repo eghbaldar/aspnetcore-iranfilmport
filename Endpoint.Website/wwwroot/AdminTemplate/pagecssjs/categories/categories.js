@@ -1,37 +1,38 @@
-﻿function add() {
-    if (isEmptyKing($("#txtCat").val())) {
-        KingWarningStyle("#txtCat", 0);
+﻿function addCategory() {
+    if (isEmptyKing($("#txtTitle").val())) {
+        KingWarningStyle("#txtTitle", 0);
         KingSweetAlert(0, "عنوان دسته باید پر شود.");
         return;
     } else {
-        KingWarningStyleOff("#txtCat", 0);
+        KingWarningStyleOff("#txtTitle", 0);
     }
     var postData = {
-        Title: $("#txtCat").val(),
-        SubId: $("#selectParentId").val() 
+        Title: $("#txtTitle").val(),
+        SubId: $("#selectCatParent").val()
     };
     $.ajax({
         contentType: 'application/x-www-form-urlencoded',
         dataType: 'json',
         type: 'POST',
-        url: '/admin/PostAddCategoryNews',
+        url: '/admin/PostNewsCategory',
         data: postData,
         success: function (data) {
             if (data.isSuccess) {
                 KingSweetAlert(1, "درج با موفقیت انجام شد.");
                 $("#treeview").load("/admin/newscategories #treeview");
-                $("#mainContent").load("/admin/newscategories #mainContent");                $("#txtCat").val("");
+                $("#tbCat").load("/admin/newscategories #tbCat");
+                $("#txtTitle").val("");
             }
             else {
                 KingSweetAlert(0, "خطایی رخ داده است.");
             }
         },
         error: function (e) {
-            alert(e);
+            KingSweetAlert(0, "خطایی رخ داده است.");
         }
     })
 }
-function deleteCat(id) {
+function deleteCategory(id) {
     Swal.fire({
         title: "حذف دسته",
         text: "آیا از حذف این دسته مطمئن هستید؟",
@@ -40,69 +41,81 @@ function deleteCat(id) {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "حذف",
-        cancelButtonText:'لغو',
+        cancelButtonText: 'لغو',
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'json',
                 type: 'PUT',
-                url: '/admin/DeleteAddCategoryNews',
+                url: '/admin/DeleteNewsCategory',
                 data: { Id: id },
                 success: function (data) {
                     if (data.isSuccess) {
                         KingSweetAlert(1, "با موفقیت حذف شد.");
                         $("#treeview").load("/admin/newscategories #treeview");
-                        $("#mainContent").load("/admin/newscategories #mainContent");
+                        $("#tbCat").load("/admin/newscategories #tbCat");
+                        $("#txtTitle").val("");
                     }
                     else {
                         KingSweetAlert(0, "خطایی رخ داده است.");
                     }
                 },
                 error: function (e) {
-                    alert(e);
+                    KingSweetAlert(0, "خطایی رخ داده است.");
                 }
             })
         }
     });
 }
-function showUpdationModal(id, title) {
-    $("#updationCategory").modal("show");
-    $("#idUpdationCategory").val(id);
-    $("#txtUpdationCat").val(title);
-}
-function updateCat() {
-
-    if (isEmptyKing($("#txtUpdationCat").val())) {
-        KingWarningStyle("#txtUpdationCat", 0);
-        KingSweetAlert(0, "عنوان دسته باید پر شود.");
-        return;
-    } else {
-        KingWarningStyleOff("#txtUpdationCat", 0);
-    }
-    var postData = {
-        Title: $("#txtUpdationCat").val(),
-        Id: $("#idUpdationCategory").val()
-    };
-    $.ajax({
-        contentType: 'application/x-www-form-urlencoded',
-        dataType: 'json',
-        type: 'PUT',
-        url: '/admin/UpdateCategoryNews',
-        data: postData,
-        success: function (data) {
-            if (data.isSuccess) {
-                KingSweetAlert(1, "بروزرسانی با موفقیت انجام شد.");
-                $("#treeview").load("/admin/newscategories #treeview");
-                $("#mainContent").load("/admin/newscategories #mainContent");                $("#txtUpdationCat").val("");
-                $("#updationCategory").modal("hide");
+function updateCategory(id, title) {
+    Swal.fire({
+        title: "ویرایش عنوان دسته",
+        input: "text",
+        inputValue: title,
+        showCancelButton: true,
+        inputValidator: (value) => {
+            if (!value) {
+                return "عنوان جدید الزامی است";
+            } else {
+                Swal.fire({
+                    title: 'ویرایش',
+                    text: 'مطمئن هستید؟',
+                    icon: 'info',                    
+                    showCancelButton: true,
+                    confirmButtonColor: '#000222',
+                    cancelButtonColor: '#000222',
+                    confirmButtonText: 'بله,حتما.',
+                    cancelButtonText: 'کنسل'
+                }).then((result) => {
+                    if (result.value) {
+                        var postData = new FormData();
+                        postData.append("Id", id);
+                        postData.append("Title", value);
+                        $.ajax({
+                            contentType: false,
+                            processData: false,
+                            type: 'PUT',
+                            data: postData,
+                            url: '/admin/UpdateNewsCategory',
+                            success: function (data) {
+                                if (data.isSuccess) {
+                                    KingSweetAlert(true, "انجام شد.");
+                                    $("#treeview").load("/admin/newscategories #treeview");
+                                    $("#tbCat").load("/admin/newscategories #tbCat");
+                                    $("#txtTitle").val("");
+                                }
+                                else {
+                                    KingSweetAlert(false, "خطا!");
+                                }
+                            },
+                            error: function (e) {
+                                KingSweetAlert(false, "خطا!");
+                            }
+                        });
+                    }
+                });
             }
-            else {
-                KingSweetAlert(0, "خطایی رخ داده است.");
-            }
-        },
-        error: function (e) {
-            alert(e);
         }
-    })
+    });
 }

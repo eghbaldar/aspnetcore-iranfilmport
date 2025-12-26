@@ -3,6 +3,6 @@
     public class KingAttributeEnum
     {
         // based on: RolesConstants.cs
-        public enum UserRole { King, Admin, Doctor , Secertary }
+        public enum UserRole { King, SuperAdmin, Admin, Client, User }
     }
 }

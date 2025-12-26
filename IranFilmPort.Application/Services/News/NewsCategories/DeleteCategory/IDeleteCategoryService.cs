@@ -1,5 +1,5 @@
 ﻿using IranFilmPort.Application.Common;
-using IranFilmPort.Application.Interfaces;
+using IranFilmPort.Application.Interfaces.Context;
 
 namespace IranFilmPort.Application.Services.News.NewsCategories.DeleteCategory
 {
@@ -63,7 +63,7 @@ namespace IranFilmPort.Application.Services.News.NewsCategories.DeleteCategory
                 var children = _context.NewsCategories.Any(x => x.SubId == categoryId);
                 if (children) return false; else return true;
             }
-            return _context.News.Any(x => x.CategoryId == categoryId);
+            return _context.News.Any(x => x.NewsCategoryId == categoryId);
         }
     }
 }

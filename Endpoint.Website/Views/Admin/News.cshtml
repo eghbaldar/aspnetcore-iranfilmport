@@ -1,7 +1,7 @@
 ﻿@using Endpoint.Website.Models.AddUsers;
-@using IranFilmPort.Application.Services.News.News.GetAllNewsForAdmin
-@using IranFilmPort.Common.Helpers;
+@using IranFilmPort.Application.Services.News.News.Queries.GetAllNewsForAdmin
 @using IranFilmPort.Common.Constants
+@using IranFilmPort.Common.Helpers;
 @model ResultGetAllNewsForAdminServiceDto
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -74,8 +74,8 @@
                                                 <i class="mdi mdi-dots-vertical"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="/admin/addnews/@item.Id" class="dropdown-item">ویرایش</a>
-                                                <a href="/@item.Slug" target="_blank" class="dropdown-item">مشاهده</a>
+                                                <a href="/admin/addnews/@item.UniqueCode" class="dropdown-item">ویرایش</a>
+                                                <a href="/@item.UniqueCode" target="_blank" class="dropdown-item">مشاهده</a>
                                                 <a onclick="deleteNews('@item.Id')" class="dropdown-item">حذف</a>
                                             </div>
                                         </div>

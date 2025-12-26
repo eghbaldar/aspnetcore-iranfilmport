@@ -2,7 +2,7 @@
 @using IranFilmPort.Common.Helpers;
 @using IranFilmPort.Common.Constants
 @{
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
     ViewData["HeadTitle"] = "درج خبر";
 }
 @model ModelAddNews
@@ -22,7 +22,7 @@
                                 <div class="col-sm-10 alignCenter">
                                     <div class="custom-control custom-switch ">
                                         @{
-                                            if (Model.GetNewsForAdminServiceDto == null)
+                                            if (Model.GetNewsServiceDto == null)
                                             {
                                                 // add news
                                                 <label class="custom-control material-switch">
@@ -33,7 +33,7 @@
                                             else
                                             {
                                                 //  update news
-                                                if ((bool)Model.GetNewsForAdminServiceDto.Active)
+                                                if ((bool)Model.GetNewsServiceDto.Active)
                                                 {
                                                     <label class="custom-control material-switch">
                                                         <input checked type="checkbox" name="active" id="chkActive" class="material-switch-control-input">
@@ -56,7 +56,7 @@
                                 <label class="col-sm-2  col-form-label">دسته خبر</label>
                                 <div class="col-sm-10">
                                     @{
-                                        if (Model.GetNewsForAdminServiceDto == null)
+                                        if (Model.GetNewsServiceDto == null)
                                         {
                                             // add news
                                             <select class="custom-select mt-3" id="selectMainCat">
@@ -78,7 +78,7 @@
                                                 @{
                                                     foreach (var item in Model.ResultGetParentCategoriesDto.Result)
                                                     {
-                                                        <option selected="@(Model.GetNewsForAdminServiceDto.ParentCategoryId == item.Id)"
+                                                        <option selected="@(Model.GetNewsServiceDto.ParentCategoryId == item.Id)"
                                                                 value="@item.Id">@item.Title</option>
                                                     }
                                                 }
@@ -88,7 +88,7 @@
                                                 @{
                                                     foreach (var item in Model.ResultGetChildrenCategoriesDto.Result)
                                                     {
-                                                        <option selected="@(Model.GetNewsForAdminServiceDto.ChildrenCategoryId == item.Id)"
+                                                        <option selected="@(Model.GetNewsServiceDto.ChildrenCategoryId == item.Id)"
                                                                 value="@item.Id">@item.Title</option>
                                                     }
                                                 }
@@ -102,7 +102,7 @@
                                 <label class="col-sm-2  col-form-label" for="simpleinput">عنوان خبر</label>
                                 <div class="col-sm-10">
                                     @{
-                                        if (Model.GetNewsForAdminServiceDto == null)
+                                        if (Model.GetNewsServiceDto == null)
                                         {
                                         // add news
                                             <input type="text" id="txtTitle" class="form-control" placeholder="متن دلخواه شما...">
@@ -112,42 +112,20 @@
                                         {
                                         //  update news
                                             <input type="text" id="txtTitle"
-                                                   value="@Model.GetNewsForAdminServiceDto.Title"
+                                                   value="@Model.GetNewsServiceDto.Title"
                                                    class="form-control" placeholder="متن دلخواه شما...">
 
                                         }
                                     }
                                 </div>
                             </div>
-
-                            @{
-                                if (Model.GetNewsForAdminServiceDto != null)
-                                {
-                                    <div class="form-group row">
-                                        <label class="col-sm-2  col-form-label" for="simpleinput"></label>
-                                        <div class="col-sm-10">
-                                            <label for="chkEditSLug">تغییر اسلاگ براساس متن زیر باشد:</label>
-                                            <input type="checkbox" id="chkEditSLug" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2  col-form-label" for="simpleinput">اسلاگ</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" id="txtEditSlug"
-                                                   style="background-color:lightgreen"
-                                                   value="@Model.GetNewsForAdminServiceDto.Slug" class="form-control"
-                                                   placeholder="متن دلخواه شما...">
-                                        </div>
-                                    </div>
-                                }
-                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2  col-form-label" for="example-password">خلاصه متن</label>
                         <div class="col-sm-10">
                             @{
-                                if (Model.GetNewsForAdminServiceDto == null)
+                                if (Model.GetNewsServiceDto == null)
                                 {
                                 // add news
                                     <textarea rows="5" class="form-control" id="txtSummary"></textarea>
@@ -157,7 +135,7 @@
                                 {
                                 //  update news
                                     <textarea rows="5" class="form-control"
-                                              id="txtSummary">@Model.GetNewsForAdminServiceDto.Summary</textarea>
+                                              id="txtSummary">@Model.GetNewsServiceDto.Summary</textarea>
 
                                 }
                             }
@@ -167,7 +145,7 @@
                         <label class="col-sm-2  col-form-label" for="example-email">متن کامل خبر:</label>
                         <div class="col-sm-10">
                             @{
-                                if (Model.GetNewsForAdminServiceDto == null)
+                                if (Model.GetNewsServiceDto == null)
                                 {
                                 // add news
                                     <textarea name="editor1" id="txtBodyText"></textarea>
@@ -176,7 +154,7 @@
                                 else
                                 {
                                 //  update news
-                                    <textarea name="editor1" id="txtBodyText">@Model.GetNewsForAdminServiceDto.BodyText</textarea>
+                                    <textarea name="editor1" id="txtBodyText">@Model.GetNewsServiceDto.BodyText</textarea>
 
                                 }
                             }
@@ -196,14 +174,14 @@
                         </div>
                     </div>
                     @{
-                        if (Model.GetNewsForAdminServiceDto != null)
+                        if (Model.GetNewsServiceDto != null)
                         {
                             <div class="form-group row">
                                 <label class="col-sm-2  col-form-label" for="example-fileinput"></label>
                                 <div class="col-sm-10">
 
                                     <img class="img-fluid rounded"
-                                         src="/UploadedStuff/admin/images/admin-news-images/@Model.GetNewsForAdminServiceDto.MainImage-thumbnail.jpg" />
+                                         src="/UploadedStuff/admin/images/admin-news-images/@Model.GetNewsServiceDto.MainImage-thumbnail.jpg" />
                                 </div>
                             </div>
                         }
@@ -212,7 +190,7 @@
                         <label class="col-sm-2  col-form-label" for="example-placeholder">نویسنده</label>
                         <div class="col-sm-10">
                             @{
-                                if (Model.GetNewsForAdminServiceDto == null)
+                                if (Model.GetNewsServiceDto == null)
                                 {
                                 // add news
                                     <input type="text" id="txtAuthor" class="form-control" placeholder="نویسنده ...">
@@ -221,7 +199,7 @@
                                 {
                                 //  update news
                                     <input type="text" id="txtAuthor" class="form-control"
-                                           value="@Model.GetNewsForAdminServiceDto.Author"
+                                           value="@Model.GetNewsServiceDto.Author"
                                            placeholder="نویسنده ...">
                                 }
                             }
@@ -231,7 +209,7 @@
                         <label class="col-sm-2  col-form-label" for="example-placeholder">منبع</label>
                         <div class="col-sm-10">
                             @{
-                                if (Model.GetNewsForAdminServiceDto == null)
+                                if (Model.GetNewsServiceDto == null)
                                 {
                                 // add news
                                     <input type="text" id="txtReference" class="form-control" placeholder="منبع ...">
@@ -241,7 +219,7 @@
                                 {
                                 //  update news
                                     <input type="text" id="txtReference"
-                                           value="@Model.GetNewsForAdminServiceDto.Reference"
+                                           value="@Model.GetNewsServiceDto.Reference"
                                            class="form-control" placeholder="منبع ...">
                                 }
                             }
@@ -251,7 +229,7 @@
                         <label class="col-sm-2  col-form-label">تاریخ درج در آینده</label>
                         <div class="col-sm-10">
                             @{
-                                if (Model.GetNewsForAdminServiceDto == null)
+                                if (Model.GetNewsServiceDto == null)
                                 {
                                 // add news
                                     <input type="text" id="txtShamsiDate" class="form-control shamsidate" readonly>
@@ -260,7 +238,7 @@
                                 else
                                 {
                                     //  update news
-                                    var shamsidateFuture = new PersianDateTime(Convert.ToDateTime(Model.GetNewsForAdminServiceDto.FutureDateTime));
+                                    var shamsidateFuture = new PersianDateTime(Convert.ToDateTime(Model.GetNewsServiceDto.FutureDateTime));
                                     var shamsidateStringFuture = shamsidateFuture.ToString("yyyy/MM/dd");
                                     var persiandateTimeFuture = PersianNumberHelper.ConvertToPersian(shamsidateStringFuture);
 
@@ -276,7 +254,7 @@
                         <div class="col-sm-10">
                             <div class="tags-default">
                                 @{
-                                    if (Model.GetNewsForAdminServiceDto == null)
+                                    if (Model.GetNewsServiceDto == null)
                                     {
                                     // add news
                                         <input type="text" data-role="tagsinput" placeholder="افزودن تگ..." />
@@ -285,7 +263,7 @@
                                     {
                                         //  update news
                                         var tags = "";
-                                        foreach (var tag in Model.GetNewsForAdminServiceDto.Tags)
+                                        foreach (var tag in Model.GetNewsServiceDto.Tags)
                                         {
                                             tags += tag.Value + ",";
                                         }
@@ -298,7 +276,7 @@
                         </div>
                     </div>
                     @{
-                        if (Model.GetNewsForAdminServiceDto == null)
+                        if (Model.GetNewsServiceDto == null)
                         {
                             // add news
                             <button type="button" onclick="addNews();"
@@ -309,7 +287,7 @@
                         else
                         {
                             //  update news
-                            <button type="button" onclick="updateNews('@Model.GetNewsForAdminServiceDto.Id');"
+                            <button type="button" onclick="updateNews('@Model.GetNewsServiceDto.Id');"
                                     class="btn btn-primary waves-effect width-md waves-light">
                                 ویرایش
                             </button>

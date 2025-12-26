@@ -1,0 +1,124 @@
+﻿@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="IRAN FILM PORT AUTHENTICATION" name="description" />
+    <meta content="Alimohammad Eghbaldar" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="robots" content="noindex, nofollow">
+    <title>ورود به سامانه | درگاه فیلم ایران</title>
+    <link href="~/authtemplate/css/bootstrap-rtl.min.css" rel="stylesheet" />
+    <link href="~/authtemplate/css/font-awesome.min.css" rel="stylesheet" />    
+    <link href="~/authtemplate/css/style.css" rel="stylesheet" />    
+    <link href="~/common/sweetalert/sweetalert2.min.css" rel="stylesheet" />
+</head>
+<body dir="rtl">
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="form-container">
+                <!-- Login Form -->
+                <div class="card form-card active" id="login-form">
+                    <div class="card-header">
+                        <h3>ورود</h3>
+                        <div class="d-flex justify-content-end social_icon">
+                            <span><img class="iranfilmportgraysvg" src="~/common/images/iranfilmport_gray-svg.svg" /></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form id="loginForm">
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text input-icon"><i class="fas fa-user"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="txtUsername" placeholder="نام کاربری" required>
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text input-icon"><i class="fas fa-key"></i></span>
+                                </div>
+                                <input type="password" class="form-control" id="txtPassword" placeholder="رمز عبور" required>
+                            </div>
+                            <div class="row align-items-center remember">
+                                <input type="checkbox" disabled checked="checked" id="remember-me">مرا بخاطر بسپار
+                            </div>
+                            <div class="form-group">
+                                <input type="button" onclick="GetLogin()" value="ورود" class="btn float-right login_btn">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-center links">
+                            هنوز ثبت نام نکرده اید؟<a href="#" id="show-register">ثبت نام</a>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <a href="#" id="forgot-password">بازگردانی رمز عبور!</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Register Form -->
+                <div class="card form-card" id="register-form">
+                    <div class="card-header">
+                        <h3>ثبت نام</h3>
+                        <div class="d-flex justify-content-end social_icon">
+                            <span><img class="iranfilmportgraysvg" src="~/common/images/iranfilmport_gray-svg.svg" /></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form id="registerForm">
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text input-icon"><i class="fas fa-user"></i></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="نام کامل" required>
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text input-icon"><i class="fas fa-envelope"></i></span>
+                                </div>
+                                <input type="email" class="form-control" placeholder="ایمیل" required>
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text input-icon"><i class="fas fa-key"></i></span>
+                                </div>
+                                <input type="password" class="form-control" placeholder="رمز عبور" required>
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text input-icon"><i class="fas fa-key"></i></span>
+                                </div>
+                                <input type="password" class="form-control" placeholder="تکرار رمز عبور" required>
+                            </div>
+                            <div class="row align-items-center remember">
+                                <input type="checkbox" required>با <a href="#">قوانین و مقررات</a> موافقم
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="ثبت نام" class="btn float-right login_btn">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-center links">
+                            قبلاً ثبت نام کرده اید؟<a href="#" id="show-login">ورود</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/authtemplate/js/jquery-3.1.1.min.js"></script>
+    <script src="~/authtemplate/js/bootstrap.min.js"></script>
+    <script src="~/authtemplate/js/main.js"></script>
+    <script src="~/authtemplate/pagecssjs/login/login.js"></script>
+    <script src="~/common/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/common/kingsweetalert/kingsweetalert.js"></script>
+    <script src="~/common/general/general.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.7/purify.min.js" integrity="sha512-78KH17QLT5e55GJqP76vutp1D2iAoy06WcYBXB6iBCsmO6wWzx0Qdg8EDpm8mKXv68BcvHOyeeP4wxAL0twJGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>

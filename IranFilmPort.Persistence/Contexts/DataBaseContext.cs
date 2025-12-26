@@ -1,8 +1,9 @@
-﻿using IranFilmPort.Application.Interfaces;
+﻿using IranFilmPort.Application.Interfaces.Context;
 using IranFilmPort.Domain.Entities.Contact;
 using IranFilmPort.Domain.Entities.News;
 using IranFilmPort.Domain.Entities.Newsletter;
 using IranFilmPort.Domain.Entities.User;
+using IranFilmPort.Infranstructure.Configurations.NewsCategories;
 using IranFilmPort.Infranstructure.Configurations.Roles;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
@@ -18,6 +19,9 @@ namespace IranFilmPort.Persistence.Contexts
         //users
         public DbSet<Users> Users { get; set; }
         public DbSet<Roles> Roles { get; set; }
+        public DbSet<UsersSuspicious> UsersSuspicious { get; set; }
+        public DbSet<UsersLogs> UsersLogs { get; set; }
+        public DbSet<UserRefreshToken> UserRefreshToken { get; set; }
 
         //news
         public DbSet<News> News { get; set; }
@@ -36,6 +40,7 @@ namespace IranFilmPort.Persistence.Contexts
             modelBuilder.HasDefaultSchema("dbo");
 
             modelBuilder.ApplyConfiguration(new RolesConfigurations());
+            modelBuilder.ApplyConfiguration(new NewsCategoriesConfigurations());
         }
         public override int SaveChanges()
         {

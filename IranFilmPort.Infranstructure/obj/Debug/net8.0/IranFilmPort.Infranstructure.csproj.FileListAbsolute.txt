@@ -16,3 +16,5 @@ E:\IranFilmPort\IranFilmPort.Infranstructure\obj\Debug\net8.0\IranFilmPort.Infra
 E:\IranFilmPort\IranFilmPort.Infranstructure\obj\Debug\net8.0\refint\IranFilmPort.Infranstructure.dll
 E:\IranFilmPort\IranFilmPort.Infranstructure\obj\Debug\net8.0\IranFilmPort.Infranstructure.pdb
 E:\IranFilmPort\IranFilmPort.Infranstructure\obj\Debug\net8.0\ref\IranFilmPort.Infranstructure.dll
+E:\IranFilmPort\IranFilmPort.Infranstructure\bin\Debug\net8.0\IranFilmPort.Application.dll
+E:\IranFilmPort\IranFilmPort.Infranstructure\bin\Debug\net8.0\IranFilmPort.Application.pdb

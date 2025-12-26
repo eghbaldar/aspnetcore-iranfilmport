@@ -1,52 +1,63 @@
 ﻿@using Endpoint.Website.Models.AddUsers;
-@using IranFilmPort.Application.Services.News.NewsComments.GetAllComments
+@using IranFilmPort.Application.Services.News.NewsComments.GetNewsComments
 @using IranFilmPort.Common.Helpers;
 @using IranFilmPort.Common.Constants
-@model ResultGetAllCommentsServiceDto
+@model ResultGetNewsCommentsServiceDto
 @{
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    ViewData["HeadTitle"] = "اخبار";
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    ViewData["HeadTitle"] = "کامنت پست ها";
 }
 <div class="row">
     <div class="col-lg-12">
-        <div>
-            <a href="/admin/addnews/" class="btn btn-primary waves-effect width-md waves-light">خبر جدید</a>
-        </div>
-        <div class="card-box mt-20">
-            <h4 class="mt-0 header-title">لیست تمام کامنت های اخبار</h4>
-            <div class="table-responsive" id="divNews">
-                @{
-                    if(Model.Result.Count==0){
-                        <span>داده ای وجود ندارد.</span>
-                    }
-                    else{
-                        <table class="table table-striped mb-0">
-                            <thead>
-                                <tr>
-                                    <th>عنوان</th>
-                                    <th>کل کامنت ها</th>
-                                    <th>کل کامنت های بررسی نشده</th>
-                                    <th>باز شدن خبر</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @{
-                                    foreach (var item in Model.Result)
-                                    {
-                                        <tr>
-                                            <td>
-                                                @item.NewsTitle
-                                            </td>
-                                            <td>@item.CommentNumber</td>
-                                            <td>@item.UnderConsiderationCommentNumbers</td>
-                                            <td><a href="/blog/@item.NewsSlug" target="_blank">مشاهده</a></td>
-                                        </tr>
-                                    }
-                                }
-                            </tbody>
-                        </table>
-                    }
-                }
+        <div class="card-box">
+            <h4 class="mt-0 header-title">کامت های پست ها</h4>
+            <p class="text-muted font-14 mb-3">
+                بدون توضیحات
+            </p>
+
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>پست</th>
+                            <th>تعداد کامنت ها</th>
+                            <th>تعداد بررسی نشده</th>
+                            <th>تائید شده ها</th>
+                            <th>تائید نشده ها</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var article in Model.Result)
+                        {
+                            <tr>
+                                <td>@article.NewsTitle</td>
+                                <td>
+                                    @article.Total
+                                </td>
+                                <td>
+                                    @article.UnderConsiderationCount
+                                </td>
+                                <td>
+                                    @article.AcceptedCount
+                                </td>
+                                <td>
+                                    <b style="color:red;">@article.RejectedCount</b>
+                                </td>
+                                <td>
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a href="/blog/@article.NewsUniqueCode" class="dropdown-item" target="_blank">مشاهده مقاله</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
 

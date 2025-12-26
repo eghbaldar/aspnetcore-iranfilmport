@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IranFilmPort.Infranstructure.Attributes;
+using Microsoft.AspNetCore.Mvc;
+using Role = IranFilmPort.Common.Enums.KingAttributeEnum.UserRole;
 
 namespace Endpoint.Website.Controllers
 {
+    [KingAuthorize(Role.King, Role.SuperAdmin, Role.Client)]
     public class ClientController : Controller
     {
         public IActionResult Index()

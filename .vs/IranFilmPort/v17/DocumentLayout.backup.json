@@ -1,7 +1,32 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\IranFilmPort\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\views\\admin\\newscategories.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\views\\admin\\newscategories.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|e:\\iranfilmport\\iranfilmport.application\\services\\newscategories\\queries\\getnewscategories\\getnewscategoriesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|solutionrelative:iranfilmport.application\\services\\newscategories\\queries\\getnewscategories\\getnewscategoriesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|e:\\iranfilmport\\iranfilmport.application\\services\\newscategories\\queries\\getnewscategories\\getnewscategoriesservicedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|solutionrelative:iranfilmport.application\\services\\newscategories\\queries\\getnewscategories\\getnewscategoriesservicedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E1E1C1B-73FC-4CB7-BE88-A6D6AFC73ED0}|IranFilmPort.Domain\\IranFilmPort.Domain.csproj|e:\\iranfilmport\\iranfilmport.domain\\entities\\news\\newscategories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E1E1C1B-73FC-4CB7-BE88-A6D6AFC73ED0}|IranFilmPort.Domain\\IranFilmPort.Domain.csproj|solutionrelative:iranfilmport.domain\\entities\\news\\newscategories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\wwwroot\\admintemplate\\pagecssjs\\categories\\categories.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\wwwroot\\admintemplate\\pagecssjs\\categories\\categories.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +34,89 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "NewsCategories.cs",
+              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Domain\\Entities\\News\\NewsCategories.cs",
+              "RelativeDocumentMoniker": "IranFilmPort.Domain\\Entities\\News\\NewsCategories.cs",
+              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Domain\\Entities\\News\\NewsCategories.cs",
+              "RelativeToolTip": "IranFilmPort.Domain\\Entities\\News\\NewsCategories.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-26T18:39:10.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GetNewsCategoriesService.cs",
+              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\NewsCategories\\Queries\\GetNewsCategories\\GetNewsCategoriesService.cs",
+              "RelativeDocumentMoniker": "IranFilmPort.Application\\Services\\NewsCategories\\Queries\\GetNewsCategories\\GetNewsCategoriesService.cs",
+              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\NewsCategories\\Queries\\GetNewsCategories\\GetNewsCategoriesService.cs",
+              "RelativeToolTip": "IranFilmPort.Application\\Services\\NewsCategories\\Queries\\GetNewsCategories\\GetNewsCategoriesService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-26T18:38:49.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GetNewsCategoriesServiceDto.cs",
+              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\NewsCategories\\Queries\\GetNewsCategories\\GetNewsCategoriesServiceDto.cs",
+              "RelativeDocumentMoniker": "IranFilmPort.Application\\Services\\NewsCategories\\Queries\\GetNewsCategories\\GetNewsCategoriesServiceDto.cs",
+              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\NewsCategories\\Queries\\GetNewsCategories\\GetNewsCategoriesServiceDto.cs",
+              "RelativeToolTip": "IranFilmPort.Application\\Services\\NewsCategories\\Queries\\GetNewsCategories\\GetNewsCategoriesServiceDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-26T18:38:36.888Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Endpoint.Website\\Controllers\\AdminController.cs",
+              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Endpoint.Website\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAowHQAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-26T18:02:43.27Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "categories.js",
+              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\categories\\categories.js",
+              "RelativeDocumentMoniker": "Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\categories\\categories.js",
+              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\categories\\categories.js",
+              "RelativeToolTip": "Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\categories\\categories.js",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAowGMAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-12-26T18:16:10.819Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NewsCategories.cshtml",
+              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\NewsCategories.cshtml",
+              "RelativeDocumentMoniker": "Endpoint.Website\\Views\\Admin\\NewsCategories.cshtml",
+              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\NewsCategories.cshtml*",
+              "RelativeToolTip": "Endpoint.Website\\Views\\Admin\\NewsCategories.cshtml*",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAB0AAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-26T18:16:28.708Z",
+              "EditorCaption": ""
             }
           ]
         }

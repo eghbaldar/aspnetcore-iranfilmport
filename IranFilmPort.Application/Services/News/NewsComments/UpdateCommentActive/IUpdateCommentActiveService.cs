@@ -1,5 +1,5 @@
 ﻿using IranFilmPort.Application.Common;
-using IranFilmPort.Application.Interfaces;
+using IranFilmPort.Application.Interfaces.Context;
 
 namespace IranFilmPort.Application.Services.News.NewsComments.UpdateCommentActive
 {

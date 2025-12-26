@@ -1,0 +1,121 @@
+﻿@using System.Security.Claims
+@using IranFilmPort.Common.Constants
+@{
+    var claimIdentity = User.Identity as ClaimsIdentity;
+}
+<div class="left-side-menu">
+    <div class="slimscroll-menu">
+
+        <!-- User box -->
+        <div class="user-box text-center">
+            <img src="/common/images/square-colored-logo.webp" alt="تصویر" height="100" class="rounded-circle img-thumbnail avatar-lg">
+            <img src="/UserTemplate/assets/images/users/user-1.jpg" alt="تصویر کاربر" title="قائم امیدی" class="rounded-circle img-thumbnail avatar-lg">
+            <div class="dropdown">
+                <a href="#" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown">قائم امیدی</a>
+                <div class="dropdown-menu user-pro-dropdown">
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <i class="fe-user mr-1"></i>
+                        <span>حساب کاربری</span>
+                    </a>
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <i class="fe-settings mr-1"></i>
+                        <span>تنظیمات</span>
+                    </a>
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <i class="fe-lock mr-1"></i>
+                        <span>قفل کردن صفحه</span>
+                    </a>
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <i class="fe-log-out mr-1"></i>
+                        <span>خروج</span>
+                    </a>
+
+                </div>
+            </div>
+            <p class="text-muted">مدیر</p>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="#" class="text-muted">
+                        <i class="mdi mdi-settings"></i>
+                    </a>
+                </li>
+
+                <li class="list-inline-item">
+                    <a href="#" class="text-custom">
+                        <i class="mdi mdi-power"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+
+            <ul class="metismenu" id="side-menu">
+
+                <li class="menu-title">داشبُرد</li>
+
+                <li>
+                    <a href="/admin/">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span> پیشخوان </span>
+                    </a>
+                </li>
+                @{
+                    if (claimIdentity.FindFirst(ClaimTypes.Role).Value.ToString() == RoleConstants.King ||
+                    claimIdentity.FindFirst(ClaimTypes.Role).Value.ToString() == RoleConstants.SuperAdmin)
+                    {
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="mdi mdi-invert-colors"></i>
+                                <span> مدیریت کاربران </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="/admin/users/king">پادشاهی</a></li>
+                                <li><a href="/admin/users/superadmin">سوپرادمین‌ها</a></li>
+                                <li><a href="/admin/users/admin">ادمین ها</a></li>
+                                <li><a href="/admin/users/client">مشتریان</a></li>
+                                <li><a href="/admin/users/user">کاربران عادی</a></li>
+                            </ul>
+                        </li>
+                    }
+                    if (
+                    claimIdentity.FindFirst(ClaimTypes.Role).Value.ToString() == RoleConstants.King ||
+                    claimIdentity.FindFirst(ClaimTypes.Role).Value.ToString() == RoleConstants.SuperAdmin ||
+                        claimIdentity.FindFirst(ClaimTypes.Role).Value.ToString() == RoleConstants.Admin)
+                    {
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="mdi mdi-invert-colors"></i>
+                                <span> مدیریت پست ها </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="/admin/news">نمایش پست ها</a></li>
+                                <li><a href="/admin/newscategories">دسته بندی پست ها</a></li>
+                                <li><a href="/admin/addnews">درج پست جدید</a></li>
+                                <li><a href="/admin/newscomments">کامنت پست ها</a></li>
+                            </ul>
+                        </li>
+                    }
+                }
+            </ul>
+
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="clearfix"></div>
+
+    </div>
+    <!-- Sidebar -left -->
+
+</div>

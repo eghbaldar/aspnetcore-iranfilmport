@@ -69,7 +69,7 @@ namespace IranFilmPort.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool?>("Active")
+                    b.Property<bool>("Active")
                         .HasColumnType("bit");
 
                     b.Property<string>("Author")
@@ -80,13 +80,10 @@ namespace IranFilmPort.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime?>("DeleteDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("FutureDateTime")
+                    b.Property<DateTime>("FutureDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("InsertDateTime")
@@ -96,11 +93,10 @@ namespace IranFilmPort.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Reference")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("NewsCategoryId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Slug")
+                    b.Property<string>("Reference")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -112,9 +108,8 @@ namespace IranFilmPort.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UniqueCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("UniqueCode")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("UpdateDateTime")
                         .HasColumnType("datetime2");
@@ -124,7 +119,7 @@ namespace IranFilmPort.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("NewsCategoryId");
 
                     b.ToTable("News", "dbo");
                 });
@@ -287,39 +282,73 @@ namespace IranFilmPort.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("33401075-c524-4430-8702-e7d8a725fbc6"),
-                            InsertDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("5aabeadb-4f56-4787-bc6f-a253fbb548e3"),
+                            InsertDateTime = new DateTime(2025, 12, 26, 21, 32, 1, 859, DateTimeKind.Local).AddTicks(8683),
                             Title = "King",
                             UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("24aa3034-0dcb-4274-8d0d-4b437a9539b5"),
-                            InsertDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("75918b63-9d8d-46be-ad39-70da56d0bae4"),
+                            InsertDateTime = new DateTime(2025, 12, 26, 21, 32, 1, 859, DateTimeKind.Local).AddTicks(8725),
                             Title = "SuperAdmin",
                             UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("65f203f2-6e45-4f33-a4e4-af45236ddcb7"),
-                            InsertDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "King",
+                            Id = new Guid("cbdcbd5e-7a94-4d0c-887d-db7cea7f8816"),
+                            InsertDateTime = new DateTime(2025, 12, 26, 21, 32, 1, 859, DateTimeKind.Local).AddTicks(8730),
+                            Title = "Admin",
                             UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("9843e328-2d2f-47dc-a922-8ba16fcc7ef4"),
-                            InsertDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("fc031c5c-712d-4a9e-b7e3-5e3d9a9d570b"),
+                            InsertDateTime = new DateTime(2025, 12, 26, 21, 32, 1, 859, DateTimeKind.Local).AddTicks(8748),
                             Title = "Client",
                             UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("8d7395a1-c933-401b-8f8a-1afd596d727b"),
-                            InsertDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("ea28ff58-c301-4084-b517-dcbf2e680a8d"),
+                            InsertDateTime = new DateTime(2025, 12, 26, 21, 32, 1, 859, DateTimeKind.Local).AddTicks(8753),
                             Title = "User",
                             UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
+                });
+
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.User.UserRefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Exp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IP")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsRevoke")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserAgent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRefreshToken", "dbo");
                 });
 
             modelBuilder.Entity("IranFilmPort.Domain.Entities.User.Users", b =>
@@ -372,15 +401,107 @@ namespace IranFilmPort.Persistence.Migrations
                     b.ToTable("Users", "dbo");
                 });
 
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.User.UsersLogs", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Auth")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("DeleteDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IP")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("InsertDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Method")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MethodName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequestPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserAgent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UsersLogs", "dbo");
+                });
+
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.User.UsersSuspicious", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("BanDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IP")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("InsertDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserAgent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UsersId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("UsersSuspicious", "dbo");
+                });
+
             modelBuilder.Entity("IranFilmPort.Domain.Entities.News.News", b =>
                 {
-                    b.HasOne("IranFilmPort.Domain.Entities.News.NewsCategories", "Category")
+                    b.HasOne("IranFilmPort.Domain.Entities.News.NewsCategories", "NewsCategory")
                         .WithMany()
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("NewsCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("NewsCategory");
                 });
 
             modelBuilder.Entity("IranFilmPort.Domain.Entities.News.NewsComments", b =>
@@ -405,11 +526,47 @@ namespace IranFilmPort.Persistence.Migrations
                     b.Navigation("News");
                 });
 
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.User.UserRefreshToken", b =>
+                {
+                    b.HasOne("IranFilmPort.Domain.Entities.User.Users", "User")
+                        .WithMany("UserRefreshToken")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.User.UsersLogs", b =>
+                {
+                    b.HasOne("IranFilmPort.Domain.Entities.User.Users", "User")
+                        .WithMany("UsersLogs")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.User.UsersSuspicious", b =>
+                {
+                    b.HasOne("IranFilmPort.Domain.Entities.User.Users", null)
+                        .WithMany("UsersSuspicious")
+                        .HasForeignKey("UsersId");
+                });
+
             modelBuilder.Entity("IranFilmPort.Domain.Entities.News.News", b =>
                 {
                     b.Navigation("NewsComments");
 
                     b.Navigation("NewsTags");
+                });
+
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.User.Users", b =>
+                {
+                    b.Navigation("UserRefreshToken");
+
+                    b.Navigation("UsersLogs");
+
+                    b.Navigation("UsersSuspicious");
                 });
 #pragma warning restore 612, 618
         }

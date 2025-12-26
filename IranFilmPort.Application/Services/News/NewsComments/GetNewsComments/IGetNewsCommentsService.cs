@@ -1,17 +1,15 @@
-﻿using IranFilmPort.Application.Interfaces;
+﻿using IranFilmPort.Application.Interfaces.Context;
 namespace IranFilmPort.Application.Services.News.NewsComments.GetNewsComments
 {
     public class GetNewsCommentsServiceDto
     {
         public Guid NewsId { get; set; }
-        public string Comment { get; set; }
-        public bool Admin { get; set; } // false: regular user
-                                        // true: admin
-        public Guid? ParentId { get; set; }
-        public byte Active { get; set; } // NewsCommentActiveConstants.cs
-        public string? Email { get; set; }
-        public string? Fullname { get; set; }
-        public DateTime InsertDateTime { get; set; }
+        public long NewsUniqueCode { get; set; }
+        public string NewsTitle { get; set; }
+        public int Total { get; set; }
+        public int UnderConsiderationCount { get; set; }
+        public int AcceptedCount { get; set; }
+        public int RejectedCount { get; set; }
     }
     public class ResultGetNewsCommentsServiceDto
     {
@@ -30,23 +28,24 @@ namespace IranFilmPort.Application.Services.News.NewsComments.GetNewsComments
         }
         public ResultGetNewsCommentsServiceDto Execute()
         {
-            var result = _context.NewsComments
-                .OrderByDescending(x => x.InsertDateTime)
-                .Select(x => new GetNewsCommentsServiceDto
-                {
-                    Active = x.Active,
-                    NewsId = x.NewsId,
-                    Admin = x.Admin,
-                    Comment = x.Comment,
-                    Email = x.Email,
-                    Fullname = x.Fullname,
-                    ParentId = x.ParentId,
-                    InsertDateTime = x.InsertDateTime
-                })
-                .ToList();
+            var groupedComments = _context.NewsComments
+           .GroupBy(c => c.NewsId)
+           .Select(g => new GetNewsCommentsServiceDto
+           {
+               NewsId = g.Key,
+               Total = g.Count(),
+               UnderConsiderationCount = g.Where(c => c.Active == 0).ToList().Count,
+               AcceptedCount = g.Where(c => c.Active == 1).ToList().Count,
+               RejectedCount = g.Where(c => c.Active == 2).ToList().Count,
+               NewsTitle = _context.News.Where(x => x.Id == g.Key).First().Title,
+               NewsUniqueCode = _context.News.Where(x => x.Id == g.Key).First().UniqueCode,
+           })
+           .OrderByDescending(c => c.UnderConsiderationCount)
+           .ToList();
+
             return new ResultGetNewsCommentsServiceDto
             {
-                Result = result
+                Result = groupedComments,
             };
         }
     }

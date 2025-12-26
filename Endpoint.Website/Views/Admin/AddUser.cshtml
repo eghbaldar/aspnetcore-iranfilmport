@@ -2,8 +2,10 @@
 @using IranFilmPort.Common.Helpers;
 @using IranFilmPort.Common.Constants
 @{
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    ViewData["HeadTitle"] = "درج کاربر";
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    ViewData["HeadTitle"] = "مدیریت کاربران";
+    ViewData["pageHeadTitle"] = "درج کاربر جدید";
+    ViewData["pageSubTitle"] = "";
 }
 @model ModelAddUsers
 <div class="row">
@@ -11,33 +13,54 @@
         <div class="card-box">
             <div class="row">
                 <div class="col-12">
-                    <a href="/admin/newscategories"
-                       class="btn btn-success waves-effect width-md waves-light">درج کاربر</a>
-                    <div class="p-2">
-                        <div class="form-group row">
-                            <label class="col-sm-2  col-form-label">دسته خبر</label>
+                       <a href="/admin/users/king"
+                       class="btn btn-primary waves-effect width-md waves-light">پادشاه</a>
+                                        <a href="/admin/users/superadmin"
+                       class="btn btn-primary waves-effect width-md waves-light">مشاهده سوپرادمین‌ها</a>
+                    <a href="/admin/users/admin"
+                       class="btn btn-primary waves-effect width-md waves-light">مشاهده ادمین‌ها</a>
+                        <a href="/admin/users/client"
+                       class="btn btn-primary waves-effect width-md waves-light">مشاهده مشتریان</a>
+                        <a href="/admin/users/user  "
+                       class="btn btn-primary waves-effect width-md waves-light">مشاهده کاربران عادی</a>
+                       <hr/>
+                        <div class="alert alert-warning" role="alert">
+                          <ul>
+                              <li>نقش پادشاه: ورود به همه بخش ها</li>
+                              <li>نقش سوپر ادمین: ورود به همه بخش ها بجز مدیریت کاربران</li>
+                              <li>نقش ادمین: ورود به بخش اخبار، کارنامه، کامنت، مدیریت تک صفحات - نمیتواند به پروفایل کاربران عادی و مشتریان ورود کند</li>
+                              <li>نقش یوزر: فقط میتواند بخش کاربران عادی را ببیند</li>
+                              <li>نقش کلاینت: فقط میتواند بخش مشتریان را ببیند</li>
+                          </ul>
+                        </div>
+                    <div class="p-2">                        
+                        <div class="form-horizontal">
+                            <div class="form-group row">
+                            <label class="col-sm-2  col-form-label">نقش کاربر</label>
                             <div class="col-sm-10">
                                 @{
                                     if (Model.GetUserByIdServiceDto == null)
                                     {
                                         // add news
-                                        <select class="custom-select mt-3" id="selectRole">
+                                        <select class="custom-select" id="selectRole">
                                             <option value="-1" selected="">نقش کاربر...</option>
                                             @{
                                                 foreach (var item in Model.ResultGetAllRolesServiceDto.Result)
                                                 {
-                                                    <option value="@item.Id">@item.Title</option>
+                                                    <option
+                                                    selected="@(Model.RoleTitle.ToLower() == item.Title.ToLower())"
+                                                    value="@item.Id">@item.Title</option>
                                                 }
                                             }
                                         </select>
                                     }
                                     else
                                     {
-                                        <select class="custom-select mt-3" id="selectRole">
+                                        <select class="custom-select" id="selectRole">
                                             <option value="-1" selected="">دسته اصلی خبر را انتخاب کنید...</option>
                                             @{
                                                 foreach (var item in Model.ResultGetAllRolesServiceDto.Result)
-                                                {
+                                                {                                                    
                                                     <option selected="@(Model.GetUserByIdServiceDto.RoleId== item.Id)"
                                                             value="@item.Id">@item.Title</option>
                                                 }
@@ -45,10 +68,8 @@
                                         </select>
                                     }
                                 }
-
                             </div>
-                        </div>
-                        <div class="form-horizontal">
+                            </div>
                             <div class="form-group row">
                                 <label class="col-sm-2  col-form-label" for="simpleinput">نام کاربر</label>
                                 <div class="col-sm-10">
@@ -56,13 +77,13 @@
                                         if (Model.GetUserByIdServiceDto == null)
                                         {
                 // add news
-                                            <input type="text" id="txFirstname" class="form-control" placeholder="متن دلخواه شما...">
+                                            <input type="text" id="txtFirstname" class="form-control" placeholder="متن دلخواه شما...">
 
                                         }
                                         else
                                         {
                                         //  update news
-                                            <input type="text" id="txFirstname"
+                                            <input type="text" id="txtFirstname"
                                                    value="@Model.GetUserByIdServiceDto.Firstname"
                                                    class="form-control" placeholder="متن دلخواه شما...">
 
@@ -70,19 +91,16 @@
                                     }
                                 </div>
                             </div>
-                                                        <div class="form-group row">
+                            <div class="form-group row">
                                 <label class="col-sm-2  col-form-label" for="simpleinput">نام خانوادگی کاربر</label>
                                 <div class="col-sm-10">
                                     @{
                                         if (Model.GetUserByIdServiceDto == null)
                                         {
-                // add news
                                             <input type="text" id="txtLastname" class="form-control" placeholder="متن دلخواه شما...">
-
                                         }
                                         else
                                         {
-                                        //  update news
                                             <input type="text" id="txtLastname"
                                                    value="@Model.GetUserByIdServiceDto.Lastname"
                                                    class="form-control" placeholder="متن دلخواه شما...">
@@ -113,15 +131,72 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">ایمیل کاربر</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model.GetUserByIdServiceDto == null)
+                                        {
+                // add news
+                                            <input type="text" id="txtemail" class="form-control" placeholder="متن دلخواه شما...">
+
+                                        }
+                                        else
+                                        {
+                                        //  update news
+                                            <input type="text" id="txtemail"
+                                                   value="@Model.GetUserByIdServiceDto.Email"
+                                                   class="form-control" placeholder="متن دلخواه شما...">
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">شماره موبایل کاربر</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model.GetUserByIdServiceDto == null)
+                                        {
+                                            <input type="text" id="txtPhone" class="form-control" placeholder="متن دلخواه شما...">
+
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="txtPhone"
+                                                   value="@Model.GetUserByIdServiceDto.Phone"
+                                                   class="form-control" placeholder="متن دلخواه شما...">
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            @{
+                                        if (Model.GetUserByIdServiceDto == null)
+                                        {
+                                            <div class="form-group row">
                                 <label class="col-sm-2  col-form-label" for="simpleinput">
-                                    پسورد
-                                    <input type="checkbox" id="chkChangePassword" />
-                                    >
+                                    پسورد                                    
                                 </label>
                                 <div class="col-sm-10">
                                     <input type="text" id="txtPassword" class="form-control" placeholder="متن دلخواه شما...">
                                 </div>
                             </div>
+
+                                        }
+                                        else
+                                        {
+                                       <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">
+                                    پسورد
+                                    <input type="checkbox" id="chkChangePassword" />                                    
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="txtPassword" class="form-control" placeholder="متن دلخواه شما...">
+                                </div>
+                            </div>
+
+                                        }
+                                    }                            
                         </div>
                     </div>
                     @{
@@ -129,7 +204,7 @@
                         {
                             // add news
                             <button type="button" onclick="addUser();"
-                                    class="btn btn-primary waves-effect width-md waves-light">
+                                    class="btn btn-success waves-effect width-md waves-light">
                                 درج
                             </button>
                         }
@@ -137,7 +212,7 @@
                         {
                         //  update news
                             <button type="button" onclick="updateUser('@Model.GetUserByIdServiceDto.Id');"
-                                    class="btn btn-primary waves-effect width-md waves-light">
+                                    class="btn btn-success waves-effect width-md waves-light">
                                 ویرایش
                             </button>
                         }
@@ -163,5 +238,5 @@
             </script>
         }
     }
-    <script src="~/admintemplate/pagejscss/adduser/adduser.js"></script>
+    <script src="~/admintemplate/pagecssjs/adduser/adduser.js"></script>
 }

@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Um+EMEj9L/k=",
+  "dgSpecHash": "nygY7XnM0OE=",
   "success": true,
   "projectFilePath": "E:\\IranFilmPort\\IranFilmPort.Application\\IranFilmPort.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kinh\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.22\\microsoft.aspnetcore.cryptography.internal.8.0.22.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.22\\microsoft.aspnetcore.cryptography.keyderivation.8.0.22.nupkg.sha512",
+    "C:\\Users\\Kinh\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.3.0\\microsoft.aspnetcore.http.abstractions.2.3.0.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.0\\microsoft.entityframeworkcore.8.0.0.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.0\\microsoft.entityframeworkcore.abstractions.8.0.0.nupkg.sha512",
@@ -19,9 +20,11 @@
     "C:\\Users\\Kinh\\.nuget\\packages\\microsoft.extensions.options\\8.0.0\\microsoft.extensions.options.8.0.0.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0\\microsoft.win32.systemevents.8.0.0.nupkg.sha512",
+    "C:\\Users\\Kinh\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\persiandatetime\\1.1.5082.36395\\persiandatetime.1.1.5082.36395.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\system.drawing.common\\8.0.22\\system.drawing.common.8.0.22.nupkg.sha512",
-    "C:\\Users\\Kinh\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
+    "C:\\Users\\Kinh\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512",
+    "C:\\Users\\Kinh\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512"
   ],
   "logs": [
     {

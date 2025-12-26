@@ -1,4 +1,13 @@
-﻿using IranFilmPort.Application.Interfaces;
+﻿using IranFilmPort.Application.Interfaces.Context;
+using IranFilmPort.Application.Interfaces.FacadePattern;
+using IranFilmPort.Application.Services.News.News.FacadePattern;
+using IranFilmPort.Application.Services.NewsCategories.FacadePattern;
+using IranFilmPort.Application.Services.NewsComments.FacadePattern;
+using IranFilmPort.Application.Services.Roles.FacadePattern;
+using IranFilmPort.Application.Services.UserRefreshToken;
+using IranFilmPort.Application.Services.Users.FacadePattern;
+using IranFilmPort.Application.Services.UsersLogs.Commands.PostUserLog;
+using IranFilmPort.Application.Services.UsersSuspicious;
 using IranFilmPort.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +24,17 @@ builder.Services.AddHttpContextAccessor();  // ✅
 builder.Services.AddMemoryCache();
 // Interface
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
+// Other Intercaes
+builder.Services.AddScoped<INewsFacadePattern, NewsFacadePattern>();
+builder.Services.AddScoped<IUsersFacadePattern, UsersFacadePattern>();
+builder.Services.AddScoped<IRoleFacadePattern, RoleFacadePattern>();
+builder.Services.AddScoped<INewsCategoriesFacadePattern, NewsCategoriesFacadePattern>();
+builder.Services.AddScoped<INewsCommentsFacadePattern, NewsCommentsFacadePattern>();
+
+builder.Services.AddScoped<UserLogsService>();
+builder.Services.AddScoped<UserRefreshTokenService>();
+builder.Services.AddScoped<UsersSuspiciousService>();
+builder.Services.AddScoped<UsersFacadePattern>();
 #endregion Services
 
 #region DataBase

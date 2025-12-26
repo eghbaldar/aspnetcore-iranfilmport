@@ -1,4 +1,4 @@
-﻿using IranFilmPort.Application.Interfaces;
+﻿using IranFilmPort.Application.Interfaces.Context;
 using IranFilmPort.Common.Constants;
 
 namespace IranFilmPort.Application.Services.News.NewsComments.GetAllComments
@@ -6,6 +6,7 @@ namespace IranFilmPort.Application.Services.News.NewsComments.GetAllComments
     public class GetAllCommentsServiceDto
     {
         public Guid NewsId { get; set; }
+        public long UniqueCode { get; set; }
         public string NewsTitle { get; set; }
         public string NewsSlug { get; set; }
         public int CommentNumber { get; set; }
@@ -38,7 +39,7 @@ namespace IranFilmPort.Application.Services.News.NewsComments.GetAllComments
                     UnderConsiderationCommentNumbers =
                         x.Count(y => y.Active == NewsCommentActivateConstants.UnderConsideration),
                     NewsTitle = _context.News.First(y => y.Id == x.First().NewsId).Title,
-                    NewsSlug = _context.News.First(y => y.Id == x.First().NewsId).Slug,
+                    UniqueCode = _context.News.First(y => y.Id == x.First().NewsId).UniqueCode,
                 })
                 .OrderByDescending(x => x.UnderConsiderationCommentNumbers)
                 .ToList();

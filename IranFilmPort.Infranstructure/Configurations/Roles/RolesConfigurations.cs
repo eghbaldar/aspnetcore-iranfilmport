@@ -9,7 +9,7 @@ namespace IranFilmPort.Infranstructure.Configurations.Roles
         {
             builder.HasData(new IranFilmPort.Domain.Entities.User.Roles() { Id = Guid.NewGuid(), Title = RoleConstants.King });
             builder.HasData(new IranFilmPort.Domain.Entities.User.Roles() { Id = Guid.NewGuid(), Title = RoleConstants.SuperAdmin });
-            builder.HasData(new IranFilmPort.Domain.Entities.User.Roles() { Id = Guid.NewGuid(), Title = RoleConstants.King });
+            builder.HasData(new IranFilmPort.Domain.Entities.User.Roles() { Id = Guid.NewGuid(), Title = RoleConstants.Admin });
             builder.HasData(new IranFilmPort.Domain.Entities.User.Roles() { Id = Guid.NewGuid(), Title = RoleConstants.Client});
             builder.HasData(new IranFilmPort.Domain.Entities.User.Roles() { Id = Guid.NewGuid(), Title = RoleConstants.User });
         }
