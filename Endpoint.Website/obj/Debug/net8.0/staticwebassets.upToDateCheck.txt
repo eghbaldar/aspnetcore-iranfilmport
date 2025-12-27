@@ -119,6 +119,7 @@ wwwroot\common\sweetalert\sweetalert2.min.css
 wwwroot\common\sweetalert\sweetalert2.min.js
 wwwroot\common\tabNavigation\tab.css
 wwwroot\common\tabNavigation\tab.js
+wwwroot\common\waitMe\googleEffects.js
 wwwroot\common\waitMe\img.svg
 wwwroot\common\waitMe\LICENSE.md
 wwwroot\common\waitMe\README.md
@@ -171,6 +172,8 @@ wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
 wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
 wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
 wwwroot\lib\bootstrap\LICENSE
+wwwroot\lib\bootstrap-tagsinput\bootstrap-tagsinput.css
+wwwroot\lib\bootstrap-tagsinput\bootstrap-tagsinput.min.js
 wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
@@ -302,6 +305,8 @@ wwwroot\SiteTemplate\assets\js\vendor\popper.min.js
 wwwroot\SiteTemplate\assets\js\vendor\slick.min.js
 wwwroot\SiteTemplate\assets\js\vendor\waypoints.min.js
 wwwroot\SiteTemplate\assets\js\vendor\wow.min.js
+wwwroot\UploadedStuff\admin\images\admin-news-images\20251227171611-639024525710482587.webp
+wwwroot\UploadedStuff\ckeditor-uploads-news\79d853bb-6fae-4c88-ad5b-6dcf8d1f94ca_images (1).jpg
 wwwroot\UserTemplate\assets\css\app.css
 wwwroot\UserTemplate\assets\css\app.min.css
 wwwroot\UserTemplate\assets\css\app.min.css.map

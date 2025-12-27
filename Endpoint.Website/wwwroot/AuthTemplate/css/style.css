@@ -35,7 +35,7 @@ body {
 .form-container {
   position: relative;
   width: 400px;
-  min-height: 370px;
+  min-height: 600px;
   overflow: visible; /* Changed from hidden to visible for social icons */
   margin: 45px 0; /* Add margin for social icons space */
       place-self: center;
@@ -61,7 +61,7 @@ body {
   opacity: 0;
   transform: translateX(100%);
   visibility: hidden;
-  height: 370px;
+  height: 600px;
 }
 
 .form-card.active {
@@ -186,4 +186,23 @@ input:focus{
 .iranfilmportgraysvg {
     width: 100px;
     filter: brightness(0) saturate(100%) invert(93%) sepia(60%) saturate(6584%) hue-rotate(337deg) brightness(98%) contrast(104%);
+}
+.form-control{
+    border-radius:0px;
+}
+.form-control.en{
+    direction:ltr !important;
+    text-align:left !important;
+}
+    .form-control.letterWithSpace {
+        letter-spacing:10px;
+        font-weight:bold;
+        font-size:20px;
+    }
+    input{
+        font-size: 20px !important;
+    }
+/*button loading*/
+.waitMe_progress.pulse {
+    transform: unset !important;
 }

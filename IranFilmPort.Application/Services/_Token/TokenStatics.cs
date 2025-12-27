@@ -16,7 +16,7 @@
         public static int ExpirationDayRefreshCookie = 30;
 
         public static string DestinationControllerAfterLogout = "auth";
-        public static string DestinationActionAfterLogout = "login";
+        public static string DestinationActionAfterLogout = "";
 
         public static string BandPageController = "Auth";
         public static string BandPageAction = "Forbidden";

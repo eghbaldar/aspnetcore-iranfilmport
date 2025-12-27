@@ -7,7 +7,7 @@
             contentType: 'application/json',
             dataType: 'json',
             type: 'GET',
-            url: '/admin/GetChildrenCategories',
+            url: '/admin/GetNewsCategoriesBySubId',
             data: postData,
             success: function (data) {
                 $("#selectChildCategory").empty();
@@ -22,6 +22,8 @@
     });
 });
 function addNews() {
+    var editor = CKEDITOR.instances['txtBodyText'];
+    $("#txtSummary").text(DOMPurify.sanitize(editor.getData()));
 
     if ($("#selectChildCategory").val() == null) {
         KingSweetAlert(0, "دسته باید انتخاب شود.");
@@ -43,9 +45,7 @@ function addNews() {
     } else {
         KingWarningStyleOff("#txtSummary", 0);
     }
-
-
-    var editor = CKEDITOR.instances['txtBodyText'];
+    
     if (isEmptyKing(editor.getData())) {
         KingWarningStyle("#txtBodyText", 0);
         KingSweetAlert(0, "متن کامل خبر باید پر شود.");
@@ -66,7 +66,7 @@ function addNews() {
     var _file = $("#fileImage")[0].files[0];
     var maxSize = "160600";
     if (!$("#chkAllowedOver150").prop("checked")) {
-        if (!KingCheckSizeExtension(_file, ["jpg", "png", "bmp", "jpeg", "webp"],
+        if (!KingCheckSizeExtension(_file, ["webp"],
             maxSize, true)) {
             return;
         }
@@ -117,6 +117,7 @@ function addNews() {
     postData.append("Reference", $("#txtReference").val());
     postData.append("Active", $("#chkActive").prop("checked"));
     postData.append("CategoryId", $("#selectChildCategory").val());
+    postData.append("AllowedOver150", $("#chkAllowedOver150").prop("checked"));
     postData.append("Tags", tags.join(','));
     postData.append("FutureDateTime",
         farvardin.solarToGregorian(shamsiYear, shamsiMonth, shamsiDay).toString().replaceAll(',', '-'));
@@ -127,7 +128,7 @@ function addNews() {
         contentType: false,
         processData: false,
         type: 'POST',
-        url: '/admin/PostAddNews',
+        url: '/admin/PostNews',
         data: postData,
         success: function (data) {
             if (data.isSuccess) {
@@ -242,9 +243,7 @@ function updateNews(newsId) {
     postData.append("Summary", $("#txtSummary").val());
     postData.append("BodyText", editor.getData());
     postData.append("Author", $("#txtAuthor").val());
-    postData.append("AllowToChangeSlug", $("#chkEditSLug").prop("checked"));
-
-    postData.append("Slug", $("#txtEditSlug").val());
+    postData.append("AllowedOver150", $("#chkAllowedOver150").prop("checked"));
     postData.append("Reference", $("#txtReference").val());
     postData.append("Active", $("#chkActive").prop("checked"));
     postData.append("CategoryId", $("#selectChildCategory").val());
@@ -274,3 +273,10 @@ function updateNews(newsId) {
         }
     });
 }
+
+$("#btnShowHideMainImage").on("click", function () {
+    if ($("#mainImgContent").prop("hidden"))
+        $("#mainImgContent").prop("hidden", false);
+    else
+        $("#mainImgContent").prop("hidden", true);
+})

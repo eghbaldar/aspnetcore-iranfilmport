@@ -18,7 +18,7 @@ function run_waitMe(el, num, effect) {
             textPos = 'horizontal';
             fontSize = '18px';
             break;
-    }    
+    }        
     el.waitMe({
         effect: effect,
         text: text,
@@ -35,7 +35,7 @@ function run_waitMe(el, num, effect) {
 // with ID
 function btnWaitMe_Start(e) {
     $('#' + e).attr('disabled', 'disabled !important'); // disable submit button temporary
-    $('#' + e).addClass('forbidden'); // disable submit button temporary
+    $('#' + e).addClass('forbidden'); // disable submit button temporary    
     run_waitMe($('#' + e), 2, 'pulse');
 }
 function btnWaitMe_Stop(e) {

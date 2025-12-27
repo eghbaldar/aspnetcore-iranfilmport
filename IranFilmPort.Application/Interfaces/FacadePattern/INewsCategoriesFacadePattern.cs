@@ -5,6 +5,8 @@ using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsByNewsCate
 using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsCategories;
 using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsCategoriesById;
 using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsCategoriesBySubId;
+using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsChildrenCategories;
+using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsParentCategories;
 using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsSubCategories;
 
 namespace IranFilmPort.Application.Interfaces.FacadePattern
@@ -19,5 +21,7 @@ namespace IranFilmPort.Application.Interfaces.FacadePattern
         public GetNewsCategoriesByIdService GetNewsCategoriesByIdService { get; }
         public GetNewsCategoriesBySubIdService GetNewsCategoriesBySubIdService { get; }
         public GetNewsSubCategoriesService GetNewsSubCategoriesService { get; }
+        public GetNewsChildrenCategories GetNewsChildrenCategories { get; }
+        public GetNewsParentCategories GetNewsParentCategories { get; }
     }
 }

@@ -1,14 +1,14 @@
 ﻿using IranFilmPort.Application.Services.News.News.Queries.GetNews;
-using IranFilmPort.Application.Services.News.NewsCategories.GetChildrenCategories;
-using IranFilmPort.Application.Services.News.NewsCategories.GetParentCategories;
+using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsChildrenCategories;
+using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsParentCategories;
 
 namespace Endpoint.Website.Models.AddNews
 {
     public class ModelAddNews
     {
         // will fill the SELECT Control
-        public ResultGetParentCategoriesDto ResultGetParentCategoriesDto { get; set; }
-        public GetNewsServiceDto? GetNewsServiceDto { get; set; }
-        public ResultGetChildrenCategoriesDto? ResultGetChildrenCategoriesDto { get; set; }
+        public ResultGetNewsParentCategoriesDto ResultGetNewsParentCategoriesDto { get; set; }
+        public ResultGetNewsChildrenCategoriesDto? ResultGetNewsChildrenCategoriesDto { get; set; }
+        public GetNewsServiceDto? GetNewsServiceDto { get; set; }        
     }
 }

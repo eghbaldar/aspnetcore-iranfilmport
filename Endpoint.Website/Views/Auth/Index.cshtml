@@ -1,6 +1,7 @@
-﻿@{
+﻿ @{
     Layout = "";
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +14,11 @@
     <meta name="robots" content="noindex, nofollow">
     <title>ورود به سامانه | درگاه فیلم ایران</title>
     <link href="~/authtemplate/css/bootstrap-rtl.min.css" rel="stylesheet" />
-    <link href="~/authtemplate/css/font-awesome.min.css" rel="stylesheet" />    
-    <link href="~/authtemplate/css/style.css" rel="stylesheet" />    
+    <link href="~/authtemplate/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/authtemplate/css/style.css" rel="stylesheet" />
     <link href="~/common/sweetalert/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/common/waitme/waitme.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://challenges.cloudflare.com">
 </head>
 <body dir="rtl">
     <div class="container">
@@ -30,26 +33,30 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form id="loginForm">
+                        <div id="loginForm">
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text input-icon"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control" id="txtUsername" placeholder="نام کاربری" required>
+                                <input type="text" class="form-control en letterWithSpace " id="txtUsername" placeholder="Username ..." required>
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text input-icon"><i class="fas fa-key"></i></span>
                                 </div>
-                                <input type="password" class="form-control" id="txtPassword" placeholder="رمز عبور" required>
+                                <input type="password" class="form-control en" id="txtPassword" placeholder="Password ..." required>
                             </div>
                             <div class="row align-items-center remember">
                                 <input type="checkbox" disabled checked="checked" id="remember-me">مرا بخاطر بسپار
                             </div>
                             <div class="form-group">
-                                <input type="button" onclick="GetLogin()" value="ورود" class="btn float-right login_btn">
+                                <button id="btnLogin" onclick="GetLogin()"
+                                        class="btn float-right login_btn">
+                                    ورود
+                                </button>
                             </div>
-                        </form>
+                            <div id="turnstile-login"></div>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-center links">
@@ -75,25 +82,37 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text input-icon"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="نام کامل" required>
+                                <input type="text" class="form-control" placeholder="نام ...">
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text input-icon"><i class="fas fa-user"></i></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="نام خانوادگی ...">
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text input-icon"><i class="fas fa-envelope"></i></span>
                                 </div>
-                                <input type="email" class="form-control" placeholder="ایمیل" required>
+                                <input type="email" class="form-control en" placeholder="Email ...">
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text input-icon"><i class="fas fa-envelope"></i></span>
+                                </div>
+                                <input type="email" class="form-control en" placeholder="Mobile ...">
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text input-icon"><i class="fas fa-key"></i></span>
                                 </div>
-                                <input type="password" class="form-control" placeholder="رمز عبور" required>
+                                <input type="password" class="form-control en" placeholder="Password ...">
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text input-icon"><i class="fas fa-key"></i></span>
                                 </div>
-                                <input type="password" class="form-control" placeholder="تکرار رمز عبور" required>
+                                <input type="password" class="form-control en" placeholder="re-Password ...">
                             </div>
                             <div class="row align-items-center remember">
                                 <input type="checkbox" required>با <a href="#">قوانین و مقررات</a> موافقم
@@ -101,6 +120,7 @@
                             <div class="form-group">
                                 <input type="submit" value="ثبت نام" class="btn float-right login_btn">
                             </div>
+                            <div id="turnstile-register"></div>
                         </form>
                     </div>
                     <div class="card-footer">
@@ -114,11 +134,15 @@
     </div>
     <script src="~/authtemplate/js/jquery-3.1.1.min.js"></script>
     <script src="~/authtemplate/js/bootstrap.min.js"></script>
-    <script src="~/authtemplate/js/main.js"></script>
-    <script src="~/authtemplate/pagecssjs/login/login.js"></script>
     <script src="~/common/sweetalert/sweetalert2.all.min.js"></script>
     <script src="~/common/kingsweetalert/kingsweetalert.js"></script>
     <script src="~/common/general/general.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.7/purify.min.js" integrity="sha512-78KH17QLT5e55GJqP76vutp1D2iAoy06WcYBXB6iBCsmO6wWzx0Qdg8EDpm8mKXv68BcvHOyeeP4wxAL0twJGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="~/authtemplate/js/main.js"></script>
+    <script src="~/authtemplate/pagecssjs/login/login.js"></script>
+    <script src="~/common/waitme/waitme.min.js"></script>
+    <script src="~/common/waitme/waitmeking.js"></script>
+    <script src="~/common/waitme/googleeffects.js"></script>
 </body>
 </html>

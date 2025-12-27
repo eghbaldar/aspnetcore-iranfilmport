@@ -1,4 +1,0 @@
-E:\IranFilmPort\Endpoint.Website\wwwroot\AuthTemplate\js\authBg-1.webp
-E:\IranFilmPort\Endpoint.Website\wwwroot\AuthTemplate\js\authBg-2.webp
-E:\IranFilmPort\Endpoint.Website\wwwroot\AuthTemplate\js\authBg-3.webp
-E:\IranFilmPort\Endpoint.Website\wwwroot\AuthTemplate\js\authBg-4.webp

@@ -1,6 +1,7 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
 using IranFilmPort.Application.Interfaces.FacadePattern;
 using IranFilmPort.Application.Services._Token;
+using IranFilmPort.Application.Services._Turnstile;
 using IranFilmPort.Application.Services.UserRefreshToken;
 using IranFilmPort.Application.Services.Users.Queries.CheckUsernamePassword;
 using IranFilmPort.Infranstructure.Attributes;
@@ -14,11 +15,16 @@ namespace Endpoint.Website.Controllers
     {
         private readonly IDataBaseContext _context;
         private readonly IUsersFacadePattern _usersFacadePattern;
-        public AuthController(IUsersFacadePattern usersFacadePattern,
-            IDataBaseContext context)
+        private readonly ITurnstileService _turnstileService;
+
+        public AuthController(
+            IUsersFacadePattern usersFacadePattern,
+            IDataBaseContext context,
+            ITurnstileService turnstileService)
         {
             _usersFacadePattern = usersFacadePattern;
             _context = context;
+            _turnstileService = turnstileService;
         }
 
         [KingCheckUserAttribute(Role.King, Role.SuperAdmin, Role.Admin, Role.Client, Role.User)]
@@ -38,14 +44,25 @@ namespace Endpoint.Website.Controllers
             // 2. Clear claims identity (optional)
             HttpContext.User = new ClaimsPrincipal(new ClaimsIdentity());
         }
-        public IActionResult GetLogin(RequestCheckUsernamePasswordServiceDto req)
+        public async Task<IActionResult> GetLogin(RequestCheckUsernamePasswordServiceDto req)
         {
-            // remove cookies & sessions
-            Clearup();
-            // the rest of process ...
-            var login = _usersFacadePattern.CheckUsernamePasswordService.Execute(req);
-            if (login != null)
+            // Add more comprehensive validation
+            if (req == null || string.IsNullOrWhiteSpace(req.Username) || string.IsNullOrWhiteSpace(req.Password))
             {
+                return Json(new { IsSuccess = false, Message = "نام کاربری و رمز عبور الزامی است." });
+            }
+
+            // Add try-catch for error handling
+            try
+            {
+                // captcha
+                if (!await _turnstileService.VerifyAsync(req.TurnstileToken))
+                    return Json(new { IsSuccess = false, Message = "هویت شما ربات تشخیص داده شده است، لطفا دوباره و یا در زمان دیگری اقدام کنید." });
+                // remove cookies & sessions
+                Clearup();
+                // the rest of process ...
+                var login = await _usersFacadePattern.CheckUsernamePasswordService.Execute(req);
+                // ... rest of the code
                 if (login.IsSuccess)
                 {
                     ///////////////////////////////////////////////////////////////
@@ -91,8 +108,17 @@ namespace Endpoint.Website.Controllers
                     // generate cookie
                     var checkCookie = cookieService.GenerateCookie(TokenStatics.AuthCookieName, token, exp);
                 }
+                else
+                {
+                    return Json(new { IsSuccess = false, Message = login.Message });
+                }
             }
-            return Json(login);
+            catch (Exception ex)
+            {
+                // Log the exception
+                return Json(new { IsSuccess = false, Message = "خطایی در سامانه رخ داده است. لطفا مجددا تلاش کنید." });
+            }
+            return Json(new { IsSuccess = true});
         }
         public IActionResult Logout()
         {

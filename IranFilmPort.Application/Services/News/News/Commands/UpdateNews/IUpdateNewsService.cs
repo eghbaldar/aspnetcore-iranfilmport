@@ -21,6 +21,7 @@ namespace IranFilmPort.Application.Services.News.News.Commands.UpdateNews
         public bool Active { get; set; } // NewsActiveConstants.cs
         public DateTime FutureDateTime { get; set; } // FutureDateTime < DateTime.Now()
         public Guid CategoryId { get; set; }
+        public bool AllowedOver150 { get; set; }
         public string Tags { get; set; } // "AI,DotNet,Csharp"
     }
     public interface IUpdateNewsService
@@ -66,7 +67,7 @@ namespace IranFilmPort.Application.Services.News.News.Commands.UpdateNews
             if (req.MainImage != null)
             {
                 // upload the main photo
-                var file = CreateFilename(req.MainImage);
+                var file = CreateFilename(req.MainImage,req.AllowedOver150);
                 switch (file.IsSuccess)
                 {
                     case true:
@@ -115,7 +116,7 @@ namespace IranFilmPort.Application.Services.News.News.Commands.UpdateNews
             if (_context.SaveChanges() >= 0) return new ResultDto { IsSuccess = true };
             else return new ResultDto { IsSuccess = false };
         }
-        private ResultUploadDto CreateFilename(IFormFile file)
+        private ResultUploadDto CreateFilename(IFormFile file,bool AllowedOver150)
         {
             UploadFileService uploadFileService = new UploadFileService();
             var filename = uploadFileService.UploadFile(new RequestUploadFileServiceDto
@@ -124,8 +125,8 @@ namespace IranFilmPort.Application.Services.News.News.Commands.UpdateNews
                 DirectoryROOT = "admin",
                 DirectoryNameLevelParent = "images",
                 DirectoryNameLevelChild = "admin-news-images",
-                Extension = new string[] { ".jpg", ".png", ".bmp", ".jpeg" },
-                FileSize = "160000",
+                Extension = new string[] { ".webp" },
+                FileSize = (AllowedOver150) ? "1600000" : "160000",
                 File = file,
                 Scales = new Dictionary<string, string>
                 {

@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 
 namespace IranFilmPort.Application.Services.Common.UploadFile
 {
@@ -45,7 +46,7 @@ namespace IranFilmPort.Application.Services.Common.UploadFile
                 return new ResultUploadDto
                 {
                     IsSuccess = false,
-                    Message = $"حجم فایل باید کمتر از {int.Parse(req.FileSize) / 1048576} مگابایت باشد.", // 1024*1024=1048576
+                    Message = $"حجم فایل باید کمتر از {Math.Round(Convert.ToDouble(req.FileSize) / 1048576, 2)} مگابایت باشد.",
                     Filename = "",
                 };
             }
@@ -61,25 +62,49 @@ namespace IranFilmPort.Application.Services.Common.UploadFile
             {
                 if (!req.Type) // Photo
                 {
-                    using (MemoryStream memoryStream = new MemoryStream())
+                    if (info.Extension.ToLower() == ".webp")
                     {
-                        req.File.CopyTo(memoryStream);// Copy the file contents to the MemoryStream
-                        memoryStream.Position = 0;// Reset the position of the MemoryStream to the beginning
-                                                  // Now you can use the MemoryStream as needed
-                                                  // For example, you can pass it to the SaveImageFromMemoryStream method                
-                        filename = SaveImageFromMemoryStream(
-                            memoryStream,
-                            ".jpg",//info.Extension.ToLower()
-                            req.Scales,
-                            uploadRootFolder,
-                            req.Suffix);
+                        using (MemoryStream memoryStream = new MemoryStream())
+                        {
+                            req.File.CopyToAsync(memoryStream);
+                            memoryStream.Position = 0;
+                            // For WebP, save directly without Image processing
+                            filename = GenerateFilenameExceptImageOne(info.Extension.ToLower(), req.Suffix);
+                            var outputPath = Path.Combine(uploadRootFolder, filename);
+                            using (var fileStream = new FileStream(outputPath, FileMode.Create))
+                            {
+                                memoryStream.WriteTo(fileStream);
+                            }
+                            return new ResultUploadDto
+                            {
+                                IsSuccess = true,
+                                Message = "فایل با موفقیت آپلود شد.",
+                                Filename = filename,
+                            };
+                        }
                     }
-                    return new ResultUploadDto
+                    else
                     {
-                        IsSuccess = true,
-                        Message = "فایل با موفقیت آپلود شد.",
-                        Filename = filename,
-                    };
+                        using (MemoryStream memoryStream = new MemoryStream())
+                        {
+                            req.File.CopyTo(memoryStream);// Copy the file contents to the MemoryStream
+                            memoryStream.Position = 0;// Reset the position of the MemoryStream to the beginning
+                                                      // Now you can use the MemoryStream as needed
+                                                      // For example, you can pass it to the SaveImageFromMemoryStream method                
+                            filename = SaveImageFromMemoryStream(
+                                memoryStream,
+                                ".jpg",//info.Extension.ToLower()
+                                req.Scales,
+                                uploadRootFolder,
+                                req.Suffix);
+                        }
+                        return new ResultUploadDto
+                        {
+                            IsSuccess = true,
+                            Message = "فایل با موفقیت آپلود شد.",
+                            Filename = filename,
+                        };
+                    }
                 }
                 else // other kind of files
                 {
@@ -106,7 +131,7 @@ namespace IranFilmPort.Application.Services.Common.UploadFile
                 return new ResultUploadDto
                 {
                     IsSuccess = false,
-                    Message = "خطایی رخ داده است..",
+                    Message = "خطایی رخ داده است.",
                 };
             }
         }

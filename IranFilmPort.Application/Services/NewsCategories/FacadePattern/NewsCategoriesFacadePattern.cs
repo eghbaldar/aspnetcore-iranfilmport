@@ -7,6 +7,8 @@ using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsByNewsCate
 using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsCategories;
 using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsCategoriesById;
 using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsCategoriesBySubId;
+using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsChildrenCategories;
+using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsParentCategories;
 using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsSubCategories;
 
 namespace IranFilmPort.Application.Services.NewsCategories.FacadePattern
@@ -66,6 +68,18 @@ namespace IranFilmPort.Application.Services.NewsCategories.FacadePattern
         public GetNewsSubCategoriesService GetNewsSubCategoriesService
         {
             get { return _getNewsSubCategoriesService = _getNewsSubCategoriesService ?? new GetNewsSubCategoriesService(_context); }
+        }
+        // GetNewsParentCategories
+        public GetNewsParentCategories _getNewsParentCategories;
+        public GetNewsParentCategories GetNewsParentCategories
+        {
+            get { return _getNewsParentCategories = _getNewsParentCategories ?? new GetNewsParentCategories(_context); }
+        }
+        // GetNewsChildrenCategories
+        public GetNewsChildrenCategories _getNewsChildrenCategories;
+        public GetNewsChildrenCategories GetNewsChildrenCategories
+        {
+            get { return _getNewsChildrenCategories = _getNewsChildrenCategories ?? new GetNewsChildrenCategories(_context); }
         }
     }
 }

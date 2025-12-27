@@ -1,0 +1,67 @@
+﻿@*
+    DeVeloped: Alimohammad Eghbaldar
+    www.eghbaldar.ir
+    www.caspianworld.ir
+*@
+@model List<string>
+@{
+    Layout = "~/views/shared/_LayoutImageBrower.cshtml";
+}
+<h1>Click, Copy url and paste into the URL field</h1>
+<div>
+    <div class="image-gallery">
+    @foreach (var image in Model)
+    {
+            <a href="#" onclick="window.parent.CKEDITOR.tools.callFunction(1, '/UploadedStuff/ckeditor-uploads-news/@image', ''); return false;">
+                <img onclick="copyImageUrl(this)" src="/UploadedStuff/ckeditor-uploads-news/@image" alt="@image" class="imgHere">
+            </a>        
+    }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function copyImageUrl(imageElement) {
+            // Create a temporary textarea element to use for copying
+            const tempInput = document.createElement('textarea');
+            document.body.appendChild(tempInput);
+
+            // Set the value to the image URL
+            tempInput.value = imageElement.src;
+
+            // Select and copy the text
+            tempInput.select();
+            document.execCommand('copy');
+
+            // Remove the temporary textarea
+            document.body.removeChild(tempInput);
+
+            // Optionally, alert the user that the URL has been copied
+            alert('Image URL copied to clipboard: ' + imageElement.src);
+        }
+    </script>
+}
+
+@section Styles {
+    <style>
+        .imgHere{
+            width: 100px;
+            height: 100px;
+            img-crop-square
+        }
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+        }
+
+            .image-gallery img {
+                max-width: 200px; /* Adjust as needed */
+                height: auto;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+    </style>
+}

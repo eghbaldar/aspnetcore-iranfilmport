@@ -1,41 +1,41 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
 
-namespace IranFilmPort.Application.Services.News.NewsCategories.GetParentCategories
+namespace IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsParentCategories
 {
-    public class GetParentCategoriesDto
+    public class GetNewsParentCategoriesDto
     {
         public string Title { get; set; }
         public Guid Id { get; set; }
         public Guid? ParentId { get; set; }
     }
-    public class ResultGetParentCategoriesDto
+    public class ResultGetNewsParentCategoriesDto
     {
-        public List<GetParentCategoriesDto> Result { get; set; }
+        public List<GetNewsParentCategoriesDto> Result { get; set; }
     }
-    public interface IGetParentCategories
+    public interface IGetNewsParentCategories
     {
-        ResultGetParentCategoriesDto Execute();
+        ResultGetNewsParentCategoriesDto Execute();
     }
-    public class GetParentCategories : IGetParentCategories
+    public class GetNewsParentCategories : IGetNewsParentCategories
     {
         private readonly IDataBaseContext _context;
-        public GetParentCategories(IDataBaseContext context)
+        public GetNewsParentCategories(IDataBaseContext context)
         {
             _context = context;
         }
-        public ResultGetParentCategoriesDto Execute()
+        public ResultGetNewsParentCategoriesDto Execute()
         {
             var _result = _context.NewsCategories
                 .Where(x => x.SubId == Guid.Empty || x.SubId == null)
                 .OrderByDescending(x => x.InsertDateTime)
-                .Select(x => new GetParentCategoriesDto
+                .Select(x => new GetNewsParentCategoriesDto
                 {
                     Title = x.Title,
                     Id = x.Id,
                     ParentId = x.SubId
                 })
                 .ToList();
-            return new ResultGetParentCategoriesDto
+            return new ResultGetNewsParentCategoriesDto
             {
                 Result = _result
             };

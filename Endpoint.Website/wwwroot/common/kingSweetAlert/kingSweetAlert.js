@@ -97,6 +97,25 @@ function KingSweetAlertCenterTimer(message) {
     }).then((result) => {
     });
 }
+function KingSweetAlertCenterParticularTimer(message,time) {
+    let timerInterval;
+    Swal.fire({
+        title: message,
+        timer: time,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+                timer.textContent = `${Swal.getTimerLeft()}`;
+            }, 100);
+        },
+        willClose: () => {
+            clearInterval(timerInterval);
+        }
+    }).then((result) => {
+    });
+}
 function KingSweetAlertCenterWithoutTimer(message) {
     // to stop the process use: "KingSweetStop();"
     let timerInterval;

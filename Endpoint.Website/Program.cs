@@ -1,5 +1,6 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
 using IranFilmPort.Application.Interfaces.FacadePattern;
+using IranFilmPort.Application.Services._Turnstile;
 using IranFilmPort.Application.Services.News.News.FacadePattern;
 using IranFilmPort.Application.Services.NewsCategories.FacadePattern;
 using IranFilmPort.Application.Services.NewsComments.FacadePattern;
@@ -31,6 +32,8 @@ builder.Services.AddScoped<IRoleFacadePattern, RoleFacadePattern>();
 builder.Services.AddScoped<INewsCategoriesFacadePattern, NewsCategoriesFacadePattern>();
 builder.Services.AddScoped<INewsCommentsFacadePattern, NewsCommentsFacadePattern>();
 
+// token and authentication services
+builder.Services.AddScoped<ITurnstileService, TurnstileService>();
 builder.Services.AddScoped<UserLogsService>();
 builder.Services.AddScoped<UserRefreshTokenService>();
 builder.Services.AddScoped<UsersSuspiciousService>();

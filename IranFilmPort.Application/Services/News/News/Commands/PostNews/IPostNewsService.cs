@@ -20,6 +20,7 @@ namespace IranFilmPort.Application.Services.News.News.Commands.PostNews
         public DateTime FutureDateTime { get; set; } // FutureDateTime < DateTime.Now()
         public Guid CategoryId { get; set; }
         public string Tags { get; set; } // "AI,DotNet,Csharp"
+        public bool AllowedOver150 { get; set; }
     }
     public interface IPostNewsService
     {
@@ -67,7 +68,8 @@ namespace IranFilmPort.Application.Services.News.News.Commands.PostNews
                 Summary = req.Summary.Trim()
             };
             // upload the main photo
-            var file = CreateFilename(req.MainImage);
+            
+            var file = CreateFilename(req.MainImage,req.AllowedOver150);
             switch (file.IsSuccess)
             {
                 case true:
@@ -125,7 +127,7 @@ namespace IranFilmPort.Application.Services.News.News.Commands.PostNews
             }
             return baseUniqueCode;
         }
-        private ResultUploadDto CreateFilename(IFormFile file)
+        private ResultUploadDto CreateFilename(IFormFile file,bool AllowedOver150)
         {
             UploadFileService uploadFileService = new UploadFileService();
             var filename = uploadFileService.UploadFile(new RequestUploadFileServiceDto
@@ -134,8 +136,8 @@ namespace IranFilmPort.Application.Services.News.News.Commands.PostNews
                 DirectoryROOT = "admin",
                 DirectoryNameLevelParent = "images",
                 DirectoryNameLevelChild = "admin-news-images",
-                Extension = new string[] { ".jpg", ".png", ".bmp", ".jpeg" },
-                FileSize = "160000",
+                Extension = new string[] {".webp" },
+                FileSize = (AllowedOver150)?"1600000": "160000",
                 File = file,
                 Scales = new Dictionary<string, string>
                 {

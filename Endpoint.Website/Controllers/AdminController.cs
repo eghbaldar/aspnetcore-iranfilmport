@@ -1,17 +1,22 @@
-﻿using Endpoint.Website.Models.AddUsers;
-using Endpoint.Website.Models.NewsCategories;
+﻿using Endpoint.Website.Models.AddNews;
+using Endpoint.Website.Models.AddUsers;
 using Endpoint.Website.Models.Users;
 using IranFilmPort.Application.Interfaces.FacadePattern;
+using IranFilmPort.Application.Services.News.News.Commands.PostNews;
+using IranFilmPort.Application.Services.News.News.Commands.UpdateNews;
 using IranFilmPort.Application.Services.News.News.Queries.GetNews;
 using IranFilmPort.Application.Services.NewsCategories.Commands.DeleteNewsCategory;
 using IranFilmPort.Application.Services.NewsCategories.Commands.PostNewsCategory;
 using IranFilmPort.Application.Services.NewsCategories.Commands.UpdateNewsCategory;
+using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsCategoriesBySubId;
+using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsChildrenCategories;
 using IranFilmPort.Application.Services.Users.Commands.PostUser;
 using IranFilmPort.Application.Services.Users.Commands.UpdateUser;
 using IranFilmPort.Application.Services.Users.Queries.GetAllUsers;
 using IranFilmPort.Application.Services.Users.Queries.GetUserById;
 using IranFilmPort.Infranstructure.Attributes;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using Role = IranFilmPort.Common.Enums.KingAttributeEnum.UserRole;
 
 namespace Endpoint.Website.Controllers
@@ -40,7 +45,7 @@ namespace Endpoint.Website.Controllers
         {
             return View();
         }
-        public IActionResult AddUser(Guid? id,string? role)
+        public IActionResult AddUser(Guid? id, string? role)
         {
             ModelAddUsers modelAddUsers = new ModelAddUsers()
             {
@@ -86,11 +91,45 @@ namespace Endpoint.Website.Controllers
         [HttpGet]
         public IActionResult AddNews(long? id)
         {
-            return View(_newsFacadePattern.GetNewsService.Execute(new RequestGetNewsServiceDto
+            if (id == null)
             {
-                IsAdmin = true,
-                UniqueCode = id
-            }));
+                ModelAddNews modelAddNews = new ModelAddNews()
+                {
+                    GetNewsServiceDto = null,
+                    ResultGetNewsParentCategoriesDto = _newsCategoriesFacadePattern.GetNewsParentCategories.Execute(),
+                    ResultGetNewsChildrenCategoriesDto = null,
+                };
+                return View(modelAddNews);
+            }
+            else
+            {
+                var news = _newsFacadePattern.GetNewsService.Execute(new RequestGetNewsServiceDto
+                {
+                    IsAdmin = true,
+                    UniqueCode = id
+                });
+                ModelAddNews modelAddNews = new ModelAddNews()
+                {
+                    GetNewsServiceDto = news,
+                    ResultGetNewsParentCategoriesDto = _newsCategoriesFacadePattern.GetNewsParentCategories.Execute(),
+                    ResultGetNewsChildrenCategoriesDto = _newsCategoriesFacadePattern.GetNewsChildrenCategories.Execute(new RequestGetNewsChildrenCategoriesDto
+                    {
+                        ParentId = (Guid)news.ParentCategoryId
+                    })
+                };
+                return View(modelAddNews);
+            }
+        }
+        [HttpPut]
+        public IActionResult UpdateNews(RequestUpdateNewsServiceDto req)
+        {
+            if (Request.Form.Files.Count > 0) req.MainImage = Request.Form.Files[0];
+            return Json(_newsFacadePattern.UpdateNewsService.Execute(req));
+        }
+        [HttpPost]
+        public IActionResult PostNews(RequestPostNewsServiceDto req)
+        {
+            return Json(_newsFacadePattern.PostNewsService.Execute(req));
         }
         [HttpGet]
         public IActionResult NewsComments()
@@ -116,6 +155,44 @@ namespace Endpoint.Website.Controllers
         public IActionResult UpdateNewsCategory(RequestUpdateNewsCategoryServiceDto req)
         {
             return Json(_newsCategoriesFacadePattern.UpdateNewsCategoryService.Execute(req));
+        }
+        [HttpGet]
+        public IActionResult GetNewsCategoriesBySubId(RequestGetNewsChildrenCategoriesDto req)
+        {
+            var result = _newsCategoriesFacadePattern.GetNewsChildrenCategories.Execute(req);
+            return Json(result);
+        }
+        // CKeditor
+        [HttpPost]
+        public async Task<IActionResult> UploadNewsMiddlePost(IFormFile upload)
+        {
+            if (upload != null && upload.Length > 0)
+            {
+                var fileName = Guid.NewGuid().ToString() + Path.GetFileName(upload.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UploadedStuff/ckeditor-uploads-news", fileName);
+                Directory.CreateDirectory(Path.GetDirectoryName(filePath)); // Ensure directory exists
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await upload.CopyToAsync(stream);
+                }
+
+                var url = $"/UploadedStuff/ckeditor-uploads-news/{fileName}";
+                return Json(new { uploaded = 1, url });
+            }
+
+            return Json(new { uploaded = 0, error = new { message = "مشکل در آپلود." } });
+        }
+        [HttpGet]
+        public IActionResult AdminNewsImageBrower()
+        {
+            // Serve a view that lists images in your uploads folder
+            var imageFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UploadedStuff/ckeditor-uploads-news    ");
+            var images = Directory.GetFiles(imageFolder)
+                                  .Select(file => new FileInfo(file).Name)
+                                  .ToList();
+
+            return View(images);
         }
     }
 }

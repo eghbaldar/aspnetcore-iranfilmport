@@ -18,7 +18,7 @@ namespace IranFilmPort.Application.Services.Common.UploadFile
                     byte[] fileBytes = ms.ToArray();
 
                     // Check the file signature
-                    if (IsPDF(fileBytes) || IsJPEG(fileBytes) || IsPNG(fileBytes) || VideoFormat(fileBytes))
+                    if (IsWEBP(fileBytes) || IsPDF(fileBytes) || IsJPEG(fileBytes) || IsPNG(fileBytes) || VideoFormat(fileBytes))
                     {
                         return new ResultDto
                         {
@@ -54,7 +54,7 @@ namespace IranFilmPort.Application.Services.Common.UploadFile
                 byte[] fileBytes = File.ReadAllBytes(filePath);
 
                 // Check the file signature
-                if (IsPDF(fileBytes) || IsMP3(fileBytes) || IsZIP(fileBytes) || IsRAR(fileBytes) || IsJPEG(fileBytes) || IsPNG(fileBytes)
+                if (IsWEBP(fileBytes) || IsPDF(fileBytes) || IsMP3(fileBytes) || IsZIP(fileBytes) || IsRAR(fileBytes) || IsJPEG(fileBytes) || IsPNG(fileBytes)
                     || IsGIF(fileBytes) || IsBMP(fileBytes) || IsDoc(fileBytes) || IsTIFF(fileBytes) || IsHEIC(fileBytes) || IsOGG(fileBytes) || IsDOCX(fileBytes))
                 {
                     return new ResultDto
@@ -93,7 +93,6 @@ namespace IranFilmPort.Application.Services.Common.UploadFile
             //return header[0] == 0xFF && (header[1] & 0xE0) == 0xE0;
             return header[0] == 0x49 && header[1] == 0x44 && header[2] == 0x33;
         }
-
         private static bool IsZIP(byte[] header)
         {
             // Check if the file signature matches a ZIP file
@@ -145,6 +144,22 @@ namespace IranFilmPort.Application.Services.Common.UploadFile
         private static bool IsDOCX(byte[] header)
         {
             return header[0] == 0x50 && header[1] == 0x4B && header[2] == 0x03 && header[3] == 0x04 && header[4] == 0x14 && header[5] == 0x4E && header[6] == 0x6E && header[7] == 0x61;
+        }
+        private static bool IsWEBP(byte[] header)
+        {
+            // WebP signature: "RIFF" (4 bytes) + file size (4 bytes) + "WEBP" (4 bytes)
+            // First check minimum length
+            if (header.Length < 12) return false;
+
+            // Check for "RIFF" signature (ASCII)
+            if (header[0] != 0x52 || header[1] != 0x49 || header[2] != 0x46 || header[3] != 0x46)
+                return false;
+
+            // Check for "WEBP" after the file size (which starts at byte 8)
+            if (header[8] != 0x57 || header[9] != 0x45 || header[10] != 0x42 || header[11] != 0x50)
+                return false;
+
+            return true;
         }
         private static bool VideoFormat(byte[] header)
         {

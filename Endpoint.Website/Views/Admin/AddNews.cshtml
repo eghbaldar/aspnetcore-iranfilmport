@@ -3,7 +3,7 @@
 @using IranFilmPort.Common.Constants
 @{
     Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
-    ViewData["HeadTitle"] = "درج خبر";
+    ViewData["HeadTitle"] = "درج پست";
 }
 @model ModelAddNews
 <div class="row">
@@ -15,8 +15,6 @@
                        class="btn btn-success waves-effect width-md waves-light">دسته بندی</a>
                     <div class="p-2">
                         <div class="form-horizontal">
-
-
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">فعال یا غیرفعال</label>
                                 <div class="col-sm-10 alignCenter">
@@ -26,7 +24,7 @@
                                             {
                                                 // add news
                                                 <label class="custom-control material-switch">
-                                                    <input type="checkbox" name="active" id="chkActive" class="material-switch-control-input">
+                                                    <input checked="checked" type="checkbox" name="active" id="chkActive" class="material-switch-control-input">
                                                     <span class="material-switch-control-indicator"></span>
                                                 </label>
                                             }
@@ -53,7 +51,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2  col-form-label">دسته خبر</label>
+                                <label class="col-sm-2  col-form-label">دسته پست</label>
                                 <div class="col-sm-10">
                                     @{
                                         if (Model.GetNewsServiceDto == null)
@@ -62,7 +60,7 @@
                                             <select class="custom-select mt-3" id="selectMainCat">
                                                 <option value="-1" selected="">دسته اصلی خبر را انتخاب کنید...</option>
                                                 @{
-                                                    foreach (var item in Model.ResultGetParentCategoriesDto.Result)
+                                                    foreach (var item in Model.ResultGetNewsParentCategoriesDto.Result)
                                                     {
                                                         <option value="@item.Id">@item.Title</option>
                                                     }
@@ -76,7 +74,7 @@
                                             <select class="custom-select mt-3" id="selectMainCat">
                                                 <option value="-1" selected="">دسته اصلی خبر را انتخاب کنید...</option>
                                                 @{
-                                                    foreach (var item in Model.ResultGetParentCategoriesDto.Result)
+                                                    foreach (var item in Model.ResultGetNewsParentCategoriesDto.Result)
                                                     {
                                                         <option selected="@(Model.GetNewsServiceDto.ParentCategoryId == item.Id)"
                                                                 value="@item.Id">@item.Title</option>
@@ -86,7 +84,7 @@
                                             <select class="custom-select mt-3" id="selectChildCategory">
                                                 <option value="-1" selected="">دسته فرعی خبر را انتخاب کنید...</option>
                                                 @{
-                                                    foreach (var item in Model.ResultGetChildrenCategoriesDto.Result)
+                                                    foreach (var item in Model.ResultGetNewsChildrenCategoriesDto.Result)
                                                     {
                                                         <option selected="@(Model.GetNewsServiceDto.ChildrenCategoryId == item.Id)"
                                                                 value="@item.Id">@item.Title</option>
@@ -105,7 +103,10 @@
                                         if (Model.GetNewsServiceDto == null)
                                         {
                                         // add news
-                                            <input type="text" id="txtTitle" class="form-control" placeholder="متن دلخواه شما...">
+                                            <input type="text" id="txtTitle"
+                                            oninput="updateCounter(this, 95)"
+                                                    onkeydown="enforceMaxLength(this, 95)"
+                                            class="form-control" placeholder="متن دلخواه شما...">
 
                                         }
                                         else
@@ -113,10 +114,22 @@
                                         //  update news
                                             <input type="text" id="txtTitle"
                                                    value="@Model.GetNewsServiceDto.Title"
+                                                   oninput="updateCounter(this, 95)"
+                                                    onkeydown="enforceMaxLength(this, 95)"
                                                    class="form-control" placeholder="متن دلخواه شما...">
 
                                         }
                                     }
+                                                            @{
+                            if (Model.GetNewsServiceDto == null)
+                            {
+                                <span class="form-label-counter" id="txtTitleCounter">0 / 95</span>
+                            }
+                            else
+                            {
+                                <span class="form-label-counter" id="txtTitleCounter">@Model.GetNewsServiceDto.Title.Length / 95</span>
+                            }
+                        }
                                 </div>
                             </div>
                         </div>
@@ -143,7 +156,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2  col-form-label" for="example-email">متن کامل خبر:</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-10">                            
                             @{
                                 if (Model.GetNewsServiceDto == null)
                                 {
@@ -168,20 +181,34 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2  col-form-label" for="example-fileinput">تصویر اصلی خبر</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-2  col-form-label" for="example-fileinput">تصویر اصلی پست</label>                       
+                        <div class="col-sm-10">                             
                             <input type="file" class="form-control" id="fileImage">
+                        <div class="alert alert-primary" role="alert">
+                          <a target="_blank" href="https://www.freeconvert.com/jpg-to-webp" class="btn btn-lighten-purple waves-effect  width-md waves-purple">jpg->webp (1)</a>
+                          <a target="_blank" href="https://cloudconvert.com/jpg-to-webp" class="btn btn-lighten-purple waves-effect  width-md waves-purple">jpg->webp (2)</a>
+                          <a target="_blank" href="http://optimizilla.com/" class="btn btn-lighten-primary waves-effect  width-md waves-purple">optmize jpg (1)</a>
+                          <a target="_blank" href="https://www.imgonline.com.ua/eng/compress-image-size.php" class="btn btn-lighten-primary waves-effect  width-md waves-purple">optmize jpg (2)</a>
                         </div>
-                    </div>
+                            @{
+                                if (Model.GetNewsServiceDto != null)
+                                {
+                                    <div class="mt-10">
+                                    <a id="btnShowHideMainImage" class="cursorPointer kingBlueText">(نمایش تصویر)</a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>                    
                     @{
                         if (Model.GetNewsServiceDto != null)
-                        {
-                            <div class="form-group row">
+                        {                            
+                            <div class="form-group row" id="mainImgContent" hidden>
                                 <label class="col-sm-2  col-form-label" for="example-fileinput"></label>
                                 <div class="col-sm-10">
 
                                     <img class="img-fluid rounded"
-                                         src="/UploadedStuff/admin/images/admin-news-images/@Model.GetNewsServiceDto.MainImage-thumbnail.jpg" />
+                                         src="/UploadedStuff/admin/images/admin-news-images/@Model.GetNewsServiceDto.MainImage" />
                                 </div>
                             </div>
                         }
@@ -226,8 +253,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2  col-form-label">تاریخ درج در آینده</label>
-                        <div class="col-sm-10">
+                    <div class="input-group">
+                         <label class="col-sm-2  col-form-label" for="example-placeholder"></label>
+                        <label class="input-group-text">تاریخ درج در آینده</label>
                             @{
                                 if (Model.GetNewsServiceDto == null)
                                 {
@@ -247,7 +275,10 @@
                                            class="form-control shamsidate" readonly>
                                 }
                             }
-                        </div>
+
+                        <label class="input-group-text" for="example-time">زمان</label>
+                            <input class="form-control" type="time" name="time" id="example-time">
+                    </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2  col-form-label">تگ ها</label>
@@ -303,15 +334,23 @@
 
 </div>
 @section Styles {
+    @*Remaing Characters*@
+    <link href="~/common/remainingcharacters/remainingcharacters.css" rel="stylesheet" />
+    @*Datapicker*@
+    <link href="~/common/datapicker/css/persiandatepicker-default.css" rel="stylesheet" />
+    @*tags*@
     <link href="~/lib/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+    @*page*@
     <link href="~/admintemplate/pagejscss/postnews/postnews.css" rel="stylesheet" />
 }
 @section Scripts {
+    <script src="~/common/fileextensionsize/fileextensionsize.js"></script>
+    <script src="~/lib/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script src="~/common/datapicker/js/persiandatepicker.min.js"></script>
+    <script src="~/common/datapicker/js/farvardin.min.js"></script>
     <script>
         $(".shamsidate").persianDatepicker();
     </script>
-    <script src="~/lib/fileextensionsize/fileextensionsize.js"></script>
-    <script src="~/lib/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.9.2/full-all/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('txtBodyText',
@@ -335,10 +374,24 @@
                     '/', // Line break
                     { name: 'coding', items: ['CodeSnippet'] },
                 ],
-                filebrowserUploadUrl: '/admin/UploadArticleMiddlePost/', // Update this URL to your server-side upload handler
-                filebrowserImageUploadUrl: '/admin/UploadArticleMiddlePost?type=Images',
-                filebrowserImageBrowseUrl: '/admin/AdminArticleImageBrower/', // Update this URL to point to your image browser
+                filebrowserUploadUrl: '/admin/UploadNewsMiddlePost/', // Update this URL to your server-side upload handler
+                filebrowserImageUploadUrl: '/admin/UploadNewsMiddlePost?type=Images',
+                filebrowserImageBrowseUrl: '/admin/AdminNewsImageBrower/', // Update this URL to point to your image browser
             });
+            // Clean the textarea content before CKEditor loads
+            KingSweetAlertCenterParticularTimer("در حال آماده سازی فرم ها ...",2000);
     </script>
-    <script src="~/admintemplate/pagejscss/postnews/postnews.js"></script>
+@{
+        if (Model.GetNewsServiceDto == null)
+        {
+            <script>
+                setTimeout(function(){
+                // کد زیر برای این گذاشتم که متاسفانه ی سری تگ های html برای خودش اد میکرد
+                CKEDITOR.instances.txtBodyText.setData('');                
+                },2000);
+            </script>
+        }
+    }
+    <script src="~/admintemplate/pagecssjs/postnews/postnews.js"></script>
+    <script src="~/common/remainingcharacters/remainingcharacters.js"></script>
 }

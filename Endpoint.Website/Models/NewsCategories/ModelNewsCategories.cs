@@ -1,5 +1,5 @@
 ﻿using IranFilmPort.Application.Services.News.NewsCategories.GetCategories;
-using IranFilmPort.Application.Services.News.NewsCategories.GetParentCategories;
+using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsParentCategories;
 
 namespace Endpoint.Website.Models.NewsCategories
 {
@@ -7,6 +7,6 @@ namespace Endpoint.Website.Models.NewsCategories
     {        // the following code will fill the TREEVIEW
         public ResultGetCategoriesServiceDto ResultGetCategoriesServiceDto { get; set; }
         // will fill the SELECT Control
-        public ResultGetParentCategoriesDto ResultGetParentCategoriesDto { get; set; }
+        public ResultGetNewsParentCategoriesDto ResultGetParentCategoriesDto { get; set; }
     }
 }

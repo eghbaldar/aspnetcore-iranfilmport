@@ -1,5 +1,6 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
 using IranFilmPort.Application.Services.News.News.Commands.UpdateNewsVisit;
+using IranFilmPort.Domain.Entities.News;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -50,10 +51,13 @@ namespace IranFilmPort.Application.Services.News.News.Queries.GetNews
             var result = _context.News
                 .Include(x => x.NewsCategory)
                 .Include(x => x.NewsTags)
-                .Where(x => x.UniqueCode == req.UniqueCode);
+                .Where(x => x.UniqueCode == req.UniqueCode)
+                .AsQueryable();
+            if (result == null) return null;
 
             var final = result
-                .Select(x => new GetNewsServiceDto
+                .Include(x => x.NewsTags)
+                .Select(x => new
                 {
                     Active = x.Active,
                     CategoryName = x.NewsCategory.Title,
@@ -70,9 +74,10 @@ namespace IranFilmPort.Application.Services.News.News.Queries.GetNews
                     Reference = x.Reference,
                     Summary = x.Summary,
                     UniqueCode = x.UniqueCode,
-                    Tags = x.NewsTags.ToList().ToDictionary(t => t.Id, t => t.Title),
+                    NewsTags = x.NewsTags.Select(t => new { t.Id, t.Title }).ToList()
                 })
                 .FirstOrDefault();
+
 
             if (result == null) return null;
 
@@ -90,7 +95,25 @@ namespace IranFilmPort.Application.Services.News.News.Queries.GetNews
             }
 
             // apply your process to memory-data
-            return final;
+            return new GetNewsServiceDto
+            {
+                Active = final.Active,
+                CategoryName = final.CategoryName,
+                FutureDateTime = final.FutureDateTime,
+                Id = final.Id,
+                InsertDate = final.InsertDate,
+                Title = final.Title,
+                Visit = final.Visit,
+                Author = final.Author,
+                BodyText = final.BodyText,
+                ParentCategoryId = final.ParentCategoryId,
+                ChildrenCategoryId = final.ChildrenCategoryId,
+                MainImage = final.MainImage,
+                Reference = final.Reference,
+                Summary = final.Summary,
+                UniqueCode = final.UniqueCode,
+                Tags = final.NewsTags.ToDictionary(t => t.Id, t => t.Title)
+            };
         }
 
     }
