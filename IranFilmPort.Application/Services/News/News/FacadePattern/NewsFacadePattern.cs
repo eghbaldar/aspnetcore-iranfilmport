@@ -6,6 +6,7 @@ using IranFilmPort.Application.Services.News.News.Commands.UpdateNews;
 using IranFilmPort.Application.Services.News.News.Commands.UpdateNewsVisit;
 using IranFilmPort.Application.Services.News.News.Queries.GetAllNewsForAdmin;
 using IranFilmPort.Application.Services.News.News.Queries.GetNews;
+using IranFilmPort.Application.Services.News.News.Queries.GetNewsByFilterForAdmin;
 
 namespace IranFilmPort.Application.Services.News.News.FacadePattern
 {
@@ -54,6 +55,12 @@ namespace IranFilmPort.Application.Services.News.News.FacadePattern
         public UpdateNewsVisitService UpdateNewsVisitService
         {
             get { return _updateNewsVisitService = _updateNewsVisitService ?? new UpdateNewsVisitService(_context); }
+        }
+        // GetNewsByFilterForAdminService
+        public GetNewsByFilterForAdminService _getNewsByFilterForAdminService;
+        public GetNewsByFilterForAdminService GetNewsByFilterForAdminService
+        {
+            get { return _getNewsByFilterForAdminService = _getNewsByFilterForAdminService ?? new GetNewsByFilterForAdminService(_context); }
         }
     }
 }

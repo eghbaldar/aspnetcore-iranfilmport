@@ -125,3 +125,7 @@ body.modal-open {
 .otherThanSigninSignup{
     width:300px !important;
 }
+.ltr{
+    direction:ltr !important;
+    text-align:left !important;
+}

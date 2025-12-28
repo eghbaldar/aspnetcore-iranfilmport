@@ -3,9 +3,12 @@
 @using IranFilmPort.Common.Constants
 @using IranFilmPort.Common.Helpers;
 @model ResultGetAllNewsForAdminServiceDto
+@addTagHelper *,LazZiya.TagHelpers
 @{
     Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
     ViewData["HeadTitle"] = "پست ها";
+    int currentPage = 1;
+    int.TryParse(Context.Request.Query["page"], out currentPage);
 }
 <div class="row">
     <div class="col-lg-12">
@@ -13,7 +16,12 @@
             <a href="/admin/addnews/" class="btn btn-primary waves-effect width-md waves-light">خبر جدید</a>
         </div>
         <div class="card-box mt-20">
-            <h4 class="mt-0 header-title">لیست تمام اخبار</h4>
+            <h4 class="mt-0 header-title">لیست پست ها</h4>
+            <div class="mt-10 mb-20">
+                <a href="/admin/news" class="btn btn-warning waves-effect width-md waves-light">همه</a>
+                <a href="/admin/newsByFilterOnlyPublished" class="btn btn-warning waves-effect width-md waves-light">منتشر شدها</a>
+                <a href="/admin/newsByFilterOnlyFuture" class="btn btn-warning waves-effect width-md waves-light">درآینده‌ها</a>
+            </div>
             <div class="table-responsive" id="divNews">
                 <table class="table table-striped mb-0">
                     <thead>
@@ -26,7 +34,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbNews">
                         @{
                             foreach (var item in Model.Result)
                             {
@@ -43,19 +51,25 @@
                                                 <input type="checkbox" disabled />
                                             }
                                         }
-
-                                        @item.Title
+                                        <a target="_blank" href="/admin/addnews/@item.UniqueCode">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5" />
+                                                <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z" />
+                                            </svg>
+                                        </a>
+                                        <a href="/admin/addnews/@item.UniqueCode">@item.Title</a>
                                     </td>
                                     <td>@item.CategoryName</td>
                                     <td>@item.Visit</td>
                                     <td>
                                         @{
                                             if (item.FutureDateTime != null &&
-                                                Convert.ToDateTime(item.FutureDateTime).Date > DateTime.Now.Date)
+                                            Convert.ToDateTime(item.FutureDateTime).Date > DateTime.Now.Date)
                                             {
                                                 <span class="badge badge-warning">در آینده</span>
                                             }
-                                            else{
+                                            else
+                                            {
                                                 <span class="badge badge-success">منتشر شده</span>
                                             }
                                         }
@@ -86,10 +100,27 @@
                     </tbody>
                 </table>
             </div>
+            <div class="row mt-10">
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers"
+                         id="datatable-buttons_paginate">
+                        <paging page-no="@currentPage == 0 ? 1 : currentPage"
+                                query-string-key-page-no="page"
+                                page-size="@Model.RowsOnEachPage"
+                                total-records="@Model.RowCount">
+                        </paging>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
 </div>
-@section Scripts{
-    <script src="~/admintemplate/pagejscss/news/news.js"></script>
+@section Scripts {
+    <script>
+        var statusAll = '@NewsStatusContants.All';
+        var statusPublished = '@NewsStatusContants.Published';
+        var statusFuture = '@NewsStatusContants.Future';
+        var _filter = '@Model.Filter'; // این صرفا در کد ایجکس باعث تشخیص در بروز کردن دایو جدول میشود
+    </script>
+    <script src="~/admintemplate/pagecssjs/news/news.js"></script>
 }

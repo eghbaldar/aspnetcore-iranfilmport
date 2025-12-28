@@ -8,130 +8,155 @@
 @model ModelAddNews
 <div class="row">
     <div class="col-12">
+        <a href="/admin/newscategories"
+                       class="btn btn-success waves-effect width-md waves-light">دسته بندی</a>  
         <div class="card-box">
             <div class="row">
-                <div class="col-12">
-                    <a href="/admin/newscategories"
-                       class="btn btn-success waves-effect width-md waves-light">دسته بندی</a>
-                    <div class="p-2">
-                        <div class="form-horizontal">
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">فعال یا غیرفعال</label>
-                                <div class="col-sm-10 alignCenter">
-                                    <div class="custom-control custom-switch ">
-                                        @{
-                                            if (Model.GetNewsServiceDto == null)
-                                            {
-                                                // add news
-                                                <label class="custom-control material-switch">
-                                                    <input checked="checked" type="checkbox" name="active" id="chkActive" class="material-switch-control-input">
-                                                    <span class="material-switch-control-indicator"></span>
-                                                </label>
-                                            }
-                                            else
-                                            {
-                                                //  update news
-                                                if ((bool)Model.GetNewsServiceDto.Active)
-                                                {
-                                                    <label class="custom-control material-switch">
-                                                        <input checked type="checkbox" name="active" id="chkActive" class="material-switch-control-input">
-                                                        <span class="material-switch-control-indicator"></span>
-                                                    </label>
-                                                }
-                                                else
-                                                {
-                                                    <label class="custom-control material-switch">
-                                                        <input type="checkbox" name="active" id="chkActive" class="material-switch-control-input">
-                                                        <span class="material-switch-control-indicator"></span>
-                                                    </label>
-                                                }
-                                            }
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2  col-form-label">دسته پست</label>
-                                <div class="col-sm-10">
-                                    @{
-                                        if (Model.GetNewsServiceDto == null)
+                <div class="col-12">                    
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">فعال یا غیرفعال</label>
+                        <div class="col-sm-10 alignCenter">
+                            <div class="custom-control custom-switch ">
+                                @{
+                                    if (Model.GetNewsServiceDto == null)
+                                    {
+                                        <label class="custom-control material-switch">
+                                            <input checked="checked" type="checkbox" name="active" id="chkActive" class="material-switch-control-input">
+                                            <span class="material-switch-control-indicator"></span>
+                                        </label>
+                                    }
+                                    else
+                                    {
+                                        if ((bool)Model.GetNewsServiceDto.Active)
                                         {
-                                            // add news
-                                            <select class="custom-select mt-3" id="selectMainCat">
-                                                <option value="-1" selected="">دسته اصلی خبر را انتخاب کنید...</option>
-                                                @{
-                                                    foreach (var item in Model.ResultGetNewsParentCategoriesDto.Result)
-                                                    {
-                                                        <option value="@item.Id">@item.Title</option>
-                                                    }
-                                                }
-                                            </select>
-                                            <select class="custom-select mt-3" id="selectChildCategory">
-                                            </select>
+                                            <label class="custom-control material-switch">
+                                                <input checked type="checkbox" name="active" id="chkActive" class="material-switch-control-input">
+                                                <span class="material-switch-control-indicator"></span>
+                                            </label>
                                         }
                                         else
                                         {
-                                            <select class="custom-select mt-3" id="selectMainCat">
-                                                <option value="-1" selected="">دسته اصلی خبر را انتخاب کنید...</option>
-                                                @{
-                                                    foreach (var item in Model.ResultGetNewsParentCategoriesDto.Result)
-                                                    {
-                                                        <option selected="@(Model.GetNewsServiceDto.ParentCategoryId == item.Id)"
-                                                                value="@item.Id">@item.Title</option>
-                                                    }
-                                                }
-                                            </select>
-                                            <select class="custom-select mt-3" id="selectChildCategory">
-                                                <option value="-1" selected="">دسته فرعی خبر را انتخاب کنید...</option>
-                                                @{
-                                                    foreach (var item in Model.ResultGetNewsChildrenCategoriesDto.Result)
-                                                    {
-                                                        <option selected="@(Model.GetNewsServiceDto.ChildrenCategoryId == item.Id)"
-                                                                value="@item.Id">@item.Title</option>
-                                                    }
-                                                }
-                                            </select>
+                                            <label class="custom-control material-switch">
+                                                <input type="checkbox" name="active" id="chkActive" class="material-switch-control-input">
+                                                <span class="material-switch-control-indicator"></span>
+                                            </label>
                                         }
                                     }
-
-                                </div>
+                                }
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2  col-form-label" for="simpleinput">عنوان خبر</label>
-                                <div class="col-sm-10">
-                                    @{
-                                        if (Model.GetNewsServiceDto == null)
-                                        {
-                                        // add news
-                                            <input type="text" id="txtTitle"
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label">دسته پست</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetNewsServiceDto == null)
+                                {
+                                    <select class="custom-select mt-3" id="selectMainCat">
+                                        <option value="-1" selected="">دسته اصلی خبر را انتخاب کنید...</option>
+                                        @{
+                                            foreach (var item in Model.ResultGetNewsParentCategoriesDto.Result)
+                                            {
+                                                <option value="@item.Id">@item.Title</option>
+                                            }
+                                        }
+                                    </select>
+                                    <select class="custom-select mt-3" id="selectChildCategory">
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="custom-select mt-3" id="selectMainCat">
+                                        <option value="-1" selected="">دسته اصلی خبر را انتخاب کنید...</option>
+                                        @{
+                                            foreach (var item in Model.ResultGetNewsParentCategoriesDto.Result)
+                                            {
+                                                <option selected="@(Model.GetNewsServiceDto.ParentCategoryId == item.Id)"
+                                                        value="@item.Id">@item.Title</option>
+                                            }
+                                        }
+                                    </select>
+                                    <select class="custom-select mt-3" id="selectChildCategory">
+                                        <option value="-1" selected="">دسته فرعی خبر را انتخاب کنید...</option>
+                                        @{
+                                            foreach (var item in Model.ResultGetNewsChildrenCategoriesDto.Result)
+                                            {
+                                                <option selected="@(Model.GetNewsServiceDto.ChildrenCategoryId == item.Id)"
+                                                        value="@item.Id">@item.Title</option>
+                                            }
+                                        }
+                                    </select>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">عنوان خبر</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetNewsServiceDto == null)
+                                {
+                                    <input type="text" id="txtTitle"
+                                    oninput="updateCounter(this, 95)"
+                                            onkeydown="enforceMaxLength(this, 95)"
+                                    class="form-control" placeholder="متن دلخواه شما...">
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtTitle"
+                                            value="@Model.GetNewsServiceDto.Title"
                                             oninput="updateCounter(this, 95)"
-                                                    onkeydown="enforceMaxLength(this, 95)"
+                                            onkeydown="enforceMaxLength(this, 95)"
                                             class="form-control" placeholder="متن دلخواه شما...">
 
-                                        }
-                                        else
-                                        {
-                                        //  update news
-                                            <input type="text" id="txtTitle"
-                                                   value="@Model.GetNewsServiceDto.Title"
-                                                   oninput="updateCounter(this, 95)"
-                                                    onkeydown="enforceMaxLength(this, 95)"
-                                                   class="form-control" placeholder="متن دلخواه شما...">
+                                }
+                            }
+                                                    @{
+                    if (Model.GetNewsServiceDto == null)
+                    {
+                        <span class="form-label-counter" id="txtTitleCounter">0 / 95</span>
+                    }
+                    else
+                    {
+                        <span class="form-label-counter" id="txtTitleCounter">@Model.GetNewsServiceDto.Title.Length / 95</span>
+                    }
+                }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">Title</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetNewsServiceDto == null)
+                                {
+                                    <input type="text" id="txtTitleEn"
+                                    oninput="updateCounter(this, 95)"
+                                            onkeydown="enforceMaxLength(this, 95)"
+                                    class="form-control ltr"  placeholder="News English Title ...">
 
-                                        }
-                                    }
-                                                            @{
-                            if (Model.GetNewsServiceDto == null)
-                            {
-                                <span class="form-label-counter" id="txtTitleCounter">0 / 95</span>
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtTitleEn"
+                                            value="@Model.GetNewsServiceDto.TitleEn"
+                                            oninput="updateCounter(this, 95)"
+                                            onkeydown="enforceMaxLength(this, 95)"
+                                            class="form-control ltr" placeholder="News English Title ...">
+
+                                }
                             }
-                            else
-                            {
-                                <span class="form-label-counter" id="txtTitleCounter">@Model.GetNewsServiceDto.Title.Length / 95</span>
-                            }
-                        }
-                                </div>
-                            </div>
+                                                    @{
+                    if (Model.GetNewsServiceDto == null)
+                    {
+                        <span class="form-label-counter" id="txtTitleEnCounter">0 / 95</span>
+                    }
+                    else
+                    {
+                        <span class="form-label-counter" id="txtTitleEnCounter">@Model.GetNewsServiceDto.TitleEn.Length / 95</span>
+                    }
+                }
                         </div>
                     </div>
                     <div class="form-group row">
@@ -140,13 +165,11 @@
                             @{
                                 if (Model.GetNewsServiceDto == null)
                                 {
-                                // add news
                                     <textarea rows="5" class="form-control" id="txtSummary"></textarea>
 
                                 }
                                 else
                                 {
-                                //  update news
                                     <textarea rows="5" class="form-control"
                                               id="txtSummary">@Model.GetNewsServiceDto.Summary</textarea>
 
@@ -160,13 +183,11 @@
                             @{
                                 if (Model.GetNewsServiceDto == null)
                                 {
-                                // add news
                                     <textarea name="editor1" id="txtBodyText"></textarea>
 
                                 }
                                 else
                                 {
-                                //  update news
                                     <textarea name="editor1" id="txtBodyText">@Model.GetNewsServiceDto.BodyText</textarea>
 
                                 }
@@ -219,12 +240,10 @@
                             @{
                                 if (Model.GetNewsServiceDto == null)
                                 {
-                                // add news
                                     <input type="text" id="txtAuthor" class="form-control" placeholder="نویسنده ...">
                                 }
                                 else
                                 {
-                                //  update news
                                     <input type="text" id="txtAuthor" class="form-control"
                                            value="@Model.GetNewsServiceDto.Author"
                                            placeholder="نویسنده ...">
@@ -238,13 +257,11 @@
                             @{
                                 if (Model.GetNewsServiceDto == null)
                                 {
-                                // add news
                                     <input type="text" id="txtReference" class="form-control" placeholder="منبع ...">
 
                                 }
                                 else
                                 {
-                                //  update news
                                     <input type="text" id="txtReference"
                                            value="@Model.GetNewsServiceDto.Reference"
                                            class="form-control" placeholder="منبع ...">
@@ -254,30 +271,65 @@
                     </div>
                     <div class="form-group row">
                     <div class="input-group">
-                         <label class="col-sm-2  col-form-label" for="example-placeholder"></label>
+                        <label class="col-sm-2  col-form-label" for="example-placeholder"></label>
                         <label class="input-group-text">تاریخ درج در آینده</label>
                             @{
                                 if (Model.GetNewsServiceDto == null)
                                 {
-                                // add news
                                     <input type="text" id="txtShamsiDate" class="form-control shamsidate" readonly>
-
+                                    <label class="input-group-text" for="example-time">زمان</label>
+                                    <select class="form-control"  id="txtTimeHour">
+                                        <option disabled selected>ساعت انتشار</option>
+                                        @for (int h = 0; h < 24; h++)
+                                        {
+                                            <option value="@h.ToString("D2")">
+                                                @h.ToString("D2")
+                                            </option>
+                                        }
+                                    </select>
+                                    <select class="form-control" id="txtTimeMinutes">
+                                        <option disabled selected>دقیقه انتشار</option>
+                                        @for (int m = 0; m < 60; m++)
+                                        {
+                                            <option value="@m.ToString("D2")">
+                                                @m.ToString("D2")
+                                            </option>
+                                        }
+                                    </select>
                                 }
                                 else
                                 {
-                                    //  update news
-                                    var shamsidateFuture = new PersianDateTime(Convert.ToDateTime(Model.GetNewsServiceDto.FutureDateTime));
+                                    var pureDateTime = Model.GetNewsServiceDto.FutureDateTime;
+                                    @* ----- *@
+                                    var shamsidateFuture = new PersianDateTime(Convert.ToDateTime(pureDateTime).Date);
                                     var shamsidateStringFuture = shamsidateFuture.ToString("yyyy/MM/dd");
                                     var persiandateTimeFuture = PersianNumberHelper.ConvertToPersian(shamsidateStringFuture);
-
                                     <input type="text" id="txtShamsiDate"
                                            value="@persiandateTimeFuture"
                                            class="form-control shamsidate" readonly>
+                                    <label class="input-group-text" for="example-time">زمان</label>
+                                    <select class="form-control"  id="txtTimeHour">
+                                        <option disabled>ساعت انتشار</option>
+                                        @for (int h = 0; h < 24; h++)
+                                        {
+                                            <option value="@h.ToString("D2")"
+                                                    selected="@(Convert.ToDateTime(pureDateTime).ToString("HH") == h.ToString("D2"))">
+                                                @h.ToString("D2")
+                                            </option>
+                                        }
+                                    </select>
+                                    <select class="form-control" id="txtTimeMinutes">
+                                        <option disabled>دقیقه انتشار</option>
+                                        @for (int m = 0; m < 60; m++)
+                                        {
+                                            <option value="@m.ToString("D2")"
+                                                    selected="@(Convert.ToDateTime(pureDateTime).ToString("mm") == m.ToString("D2"))">
+                                                @m.ToString("D2")
+                                            </option>
+                                        }
+                                    </select>
                                 }
                             }
-
-                        <label class="input-group-text" for="example-time">زمان</label>
-                            <input class="form-control" type="time" name="time" id="example-time">
                     </div>
                     </div>
                     <div class="form-group row">
@@ -287,12 +339,10 @@
                                 @{
                                     if (Model.GetNewsServiceDto == null)
                                     {
-                                    // add news
                                         <input type="text" data-role="tagsinput" placeholder="افزودن تگ..." />
                                     }
                                     else
                                     {
-                                        //  update news
                                         var tags = "";
                                         foreach (var tag in Model.GetNewsServiceDto.Tags)
                                         {
@@ -309,7 +359,6 @@
                     @{
                         if (Model.GetNewsServiceDto == null)
                         {
-                            // add news
                             <button type="button" onclick="addNews();"
                                     class="btn btn-primary waves-effect width-md waves-light">
                                 درج
@@ -317,7 +366,6 @@
                         }
                         else
                         {
-                            //  update news
                             <button type="button" onclick="updateNews('@Model.GetNewsServiceDto.Id');"
                                     class="btn btn-primary waves-effect width-md waves-light">
                                 ویرایش
@@ -328,10 +376,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <!-- end row -->
-
 </div>
 @section Styles {
     @*Remaing Characters*@
@@ -394,4 +439,6 @@
     }
     <script src="~/admintemplate/pagecssjs/postnews/postnews.js"></script>
     <script src="~/common/remainingcharacters/remainingcharacters.js"></script>
+<script src="http://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.js"></script>
+
 }

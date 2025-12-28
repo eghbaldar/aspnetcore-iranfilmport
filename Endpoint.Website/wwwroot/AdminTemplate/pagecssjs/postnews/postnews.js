@@ -38,6 +38,14 @@ function addNews() {
         KingWarningStyleOff("#txtTitle", 0);
     }
 
+    if (isEmptyKing($("#txtTitleEn").val())) {
+        KingWarningStyle("#txtTitleEn", 0);
+        KingSweetAlert(0, "عنوان انگلیسی خبر باید پر شود.");
+        return;
+    } else {
+        KingWarningStyleOff("#txtTitleEn", 0);
+    }
+
     if (isEmptyKing($("#txtSummary").val())) {
         KingWarningStyle("#txtSummary", 0);
         KingSweetAlert(0, "خلاصه متن خبر باید پر شود.");
@@ -45,7 +53,7 @@ function addNews() {
     } else {
         KingWarningStyleOff("#txtSummary", 0);
     }
-    
+
     if (isEmptyKing(editor.getData())) {
         KingWarningStyle("#txtBodyText", 0);
         KingSweetAlert(0, "متن کامل خبر باید پر شود.");
@@ -96,6 +104,23 @@ function addNews() {
         KingWarningStyleOff("#txtShamsiDate", 0);
     }
 
+    if (isEmptyKing($("#txtTimeHour").val())) {
+        KingWarningStyle("#txtTimeHour", 0);
+        KingSweetAlert(0, "ساعت انتشار خبر باید پر شود.");
+        return;
+    } else {
+        KingWarningStyleOff("#txtTimeHour", 0);
+    }
+
+    if (isEmptyKing($("#txtTimeMinutes").val())) {
+        KingWarningStyle("#txtTimeMinutes", 0);
+        KingSweetAlert(0, "دقیقه انتشار خبر باید پر شود.");
+        return;
+    } else {
+        KingWarningStyleOff("#txtTimeMinutes", 0);
+    }
+
+
     var tags = [];
     $(".bootstrap-tagsinput").each(function () {
         $(this).children("span").each(function () {
@@ -108,9 +133,12 @@ function addNews() {
     }
 
     const [shamsiYear, shamsiMonth, shamsiDay] = $("#txtShamsiDate").val().split('/').map(Number);
+    const time = `${$("#txtTimeHour").val()}:${$("#txtTimeMinutes").val()}`;
+
 
     var postData = new FormData();
     postData.append("Title", $("#txtTitle").val());
+    postData.append("TitleEn", $("#txtTitleEn").val());
     postData.append("Summary", $("#txtSummary").val());
     postData.append("BodyText", editor.getData());
     postData.append("Author", $("#txtAuthor").val());
@@ -120,7 +148,8 @@ function addNews() {
     postData.append("AllowedOver150", $("#chkAllowedOver150").prop("checked"));
     postData.append("Tags", tags.join(','));
     postData.append("FutureDateTime",
-        farvardin.solarToGregorian(shamsiYear, shamsiMonth, shamsiDay).toString().replaceAll(',', '-'));
+        `${farvardin.solarToGregorian(shamsiYear, shamsiMonth, shamsiDay).toString().replaceAll(',', '-')} ${time}`);
+
     postData.append("MainImage", _file);
 
 
@@ -159,6 +188,16 @@ function updateNews(newsId) {
         KingWarningStyleOff("#txtTitle", 0);
     }
 
+
+    if (isEmptyKing($("#txtTitleEn").val())) {
+        KingWarningStyle("#txtTitleEn", 0);
+        KingSweetAlert(0, "عنوان انگلیسی خبر باید پر شود.");
+        return;
+    } else {
+        KingWarningStyleOff("#txtTitleEn", 0);
+    }
+
+
     if (isEmptyKing($("#txtSummary").val())) {
         KingWarningStyle("#txtSummary", 0);
         KingSweetAlert(0, "خلاصه متن خبر باید پر شود.");
@@ -176,7 +215,7 @@ function updateNews(newsId) {
     } else {
         KingWarningStyleOff("#txtBodyText", 0);
     }
-   
+
 
     if (isEmptyKing($("#txtAuthor").val())) {
         KingWarningStyle("#txtAuthor", 0);
@@ -201,7 +240,23 @@ function updateNews(newsId) {
     } else {
         KingWarningStyleOff("#txtShamsiDate", 0);
     }
-;
+
+    if (isEmptyKing($("#txtTimeHour").val())) {
+        KingWarningStyle("#txtTimeHour", 0);
+        KingSweetAlert(0, "ساعت انتشار خبر باید پر شود.");
+        return;
+    } else {
+        KingWarningStyleOff("#txtTimeHour", 0);
+    }
+
+    if (isEmptyKing($("#txtTimeMinutes").val())) {
+        KingWarningStyle("#txtTimeMinutes", 0);
+        KingSweetAlert(0, "دقیقه انتشار خبر باید پر شود.");
+        return;
+    } else {
+        KingWarningStyleOff("#txtTimeMinutes", 0);
+    }
+
     var tags = [];
     $(".bootstrap-tagsinput").each(function () {
         $(this).children("span").each(function () {
@@ -212,8 +267,10 @@ function updateNews(newsId) {
         KingSweetAlert(0, "حداقل تعداد تگ ها باید 3 عدد باشد.");
         return;
     }
+
     const [shamsiYear, shamsiMonth, shamsiDay] =
         KingConvertPersianNumberToEnglishNumber($("#txtShamsiDate").val()).split('/').map(Number);
+    const time = `${$("#txtTimeHour").val()}:${$("#txtTimeMinutes").val()}`;
 
     var postData = new FormData();
     // file validationsa
@@ -240,6 +297,7 @@ function updateNews(newsId) {
 
     postData.append("Id", newsId);
     postData.append("Title", $("#txtTitle").val());
+    postData.append("TitleEn", $("#txtTitleEn").val());
     postData.append("Summary", $("#txtSummary").val());
     postData.append("BodyText", editor.getData());
     postData.append("Author", $("#txtAuthor").val());
@@ -251,7 +309,7 @@ function updateNews(newsId) {
 
 
     postData.append("FutureDateTime",
-        farvardin.solarToGregorian(shamsiYear, shamsiMonth, shamsiDay).toString().replaceAll(',', '-'));
+        `${farvardin.solarToGregorian(shamsiYear, shamsiMonth, shamsiDay).toString().replaceAll(',', '-')} ${time}`);
 
 
     $.ajax({
@@ -262,7 +320,7 @@ function updateNews(newsId) {
         data: postData,
         success: function (data) {
             if (data.isSuccess) {
-                KingSweetAlert(1,"ویرایش خبر با موفقیت انجام شد");
+                KingSweetAlert(1, "ویرایش خبر با موفقیت انجام شد");
             }
             else {
                 KingSweetAlert(0, data.message);
@@ -272,6 +330,7 @@ function updateNews(newsId) {
             KingSweetAlert(0, e);
         }
     });
+
 }
 
 $("#btnShowHideMainImage").on("click", function () {
@@ -279,4 +338,10 @@ $("#btnShowHideMainImage").on("click", function () {
         $("#mainImgContent").prop("hidden", false);
     else
         $("#mainImgContent").prop("hidden", true);
+})
+
+$("#txtTimeHour").on("change", function () {
+    if (parseInt($("#txtTimeHour").val()) < 20) {
+        KingSweetAtCenter("توجه مهم", "ساعت انتخاب شده خارج عرف تعیین شده از طرف مدیریت است. ساعات عرف، 20،21،22 و 23 می باشد. آیا مطمئن هستید؟", "info");
+    }
 })

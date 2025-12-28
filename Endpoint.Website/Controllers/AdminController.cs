@@ -2,9 +2,12 @@
 using Endpoint.Website.Models.AddUsers;
 using Endpoint.Website.Models.Users;
 using IranFilmPort.Application.Interfaces.FacadePattern;
+using IranFilmPort.Application.Services.News.News.Commands.DeleteNews;
 using IranFilmPort.Application.Services.News.News.Commands.PostNews;
 using IranFilmPort.Application.Services.News.News.Commands.UpdateNews;
+using IranFilmPort.Application.Services.News.News.Queries.GetAllNewsForAdmin;
 using IranFilmPort.Application.Services.News.News.Queries.GetNews;
+using IranFilmPort.Application.Services.News.News.Queries.GetNewsByFilterForAdmin;
 using IranFilmPort.Application.Services.NewsCategories.Commands.DeleteNewsCategory;
 using IranFilmPort.Application.Services.NewsCategories.Commands.PostNewsCategory;
 using IranFilmPort.Application.Services.NewsCategories.Commands.UpdateNewsCategory;
@@ -14,6 +17,7 @@ using IranFilmPort.Application.Services.Users.Commands.PostUser;
 using IranFilmPort.Application.Services.Users.Commands.UpdateUser;
 using IranFilmPort.Application.Services.Users.Queries.GetAllUsers;
 using IranFilmPort.Application.Services.Users.Queries.GetUserById;
+using IranFilmPort.Common.Constants;
 using IranFilmPort.Infranstructure.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -84,9 +88,30 @@ namespace Endpoint.Website.Controllers
             return Json(_usersFacadePattern.UpdateUserService.Execute(req));
         }
         [HttpGet]
-        public IActionResult News()
+        public IActionResult News(int page)
         {
-            return View(_newsFacadePattern.GetAllNewsForAdminService.Execute());
+            return View(_newsFacadePattern.GetAllNewsForAdminService.Execute(new RequestGetAllNewsForAdminServiceDto
+            {
+                CurrentPage = page
+            }));
+        }
+        [HttpGet]
+        public IActionResult NewsByFilterOnlyPublished(int page)
+        {
+            return View(_newsFacadePattern.GetNewsByFilterForAdminService.Execute(new RequestGetNewsByFilterForAdminServiceDto
+            {
+                CurrentPage = page,
+                Filter = NewsStatusContants.Published,
+            }));
+        }
+        [HttpGet]
+        public IActionResult NewsByFilterOnlyFuture(int page)
+        {
+            return View(_newsFacadePattern.GetNewsByFilterForAdminService.Execute(new RequestGetNewsByFilterForAdminServiceDto
+            {
+                CurrentPage = page,
+                Filter = NewsStatusContants.Future,
+            }));
         }
         [HttpGet]
         public IActionResult AddNews(long? id)
@@ -126,6 +151,11 @@ namespace Endpoint.Website.Controllers
             if (Request.Form.Files.Count > 0) req.MainImage = Request.Form.Files[0];
             return Json(_newsFacadePattern.UpdateNewsService.Execute(req));
         }
+        [HttpPut]
+        public IActionResult DeleteNews(RequestDeleteNewsServiceDto req)
+        {
+            return Json(_newsFacadePattern.DeleteNewsService.Execute(req));
+        }
         [HttpPost]
         public IActionResult PostNews(RequestPostNewsServiceDto req)
         {
@@ -162,6 +192,7 @@ namespace Endpoint.Website.Controllers
             var result = _newsCategoriesFacadePattern.GetNewsChildrenCategories.Execute(req);
             return Json(result);
         }
+
         // CKeditor
         [HttpPost]
         public async Task<IActionResult> UploadNewsMiddlePost(IFormFile upload)

@@ -5,6 +5,7 @@ namespace IranFilmPort.Domain.Entities.News
     public class News: BaseEntity
     {
         public string Title { get; set; }
+        public string TitleEn { get; set; }
         public string Summary { get; set; }
         public string BodyText { get; set; }
         public string MainImage { get; set; } 

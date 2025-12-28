@@ -1,8 +1,14 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
+using IranFilmPort.Common.Constants;
+using IranFilmPort.Common.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace IranFilmPort.Application.Services.News.News.Queries.GetAllNewsForAdmin
 {
+    public class RequestGetAllNewsForAdminServiceDto
+    {
+        public int CurrentPage { get; set; } // current page
+    }
     public class GetAllNewsForAdminServiceDto
     {
         public Guid Id { get; set; }
@@ -17,10 +23,13 @@ namespace IranFilmPort.Application.Services.News.News.Queries.GetAllNewsForAdmin
     public class ResultGetAllNewsForAdminServiceDto
     {
         public List<GetAllNewsForAdminServiceDto> Result { get; set; }
+        public int RowCount { get; set; }//  <---- pagination
+        public int RowsOnEachPage { get; set; }//  <---- pagination
+        public byte Filter { get; set; } // NewsStatusContants.cs
     }
     public interface IGetAllNewsForAdminService
     {
-        ResultGetAllNewsForAdminServiceDto Execute();
+        ResultGetAllNewsForAdminServiceDto Execute(RequestGetAllNewsForAdminServiceDto req);
     }
     public class GetAllNewsForAdminService : IGetAllNewsForAdminService
     {
@@ -29,8 +38,11 @@ namespace IranFilmPort.Application.Services.News.News.Queries.GetAllNewsForAdmin
         {
             _context = context;
         }
-        public ResultGetAllNewsForAdminServiceDto Execute()
+        public ResultGetAllNewsForAdminServiceDto Execute(RequestGetAllNewsForAdminServiceDto req)
         {
+            int RowsCount; //<------ pagination
+            int RowsOnEachPage = 50; //<------ pagination
+
             var result = _context.News
                 .Include(x => x.NewsCategory)
                 .Select(x => new GetAllNewsForAdminServiceDto
@@ -45,10 +57,14 @@ namespace IranFilmPort.Application.Services.News.News.Queries.GetAllNewsForAdmin
                     UniqueCode = x.UniqueCode
                 })
                 .OrderByDescending(x => x.InsertDate)
+                 .ToPaged(req.CurrentPage, RowsOnEachPage, out RowsCount) //  <----  pagination
                 .ToList();
             return new ResultGetAllNewsForAdminServiceDto
             {
-                Result = result
+                Result = result,
+                RowCount = RowsCount, //  <---- pagination
+                RowsOnEachPage = RowsOnEachPage, //  <---- pagination
+                Filter = NewsStatusContants.All
             };
         }
     }

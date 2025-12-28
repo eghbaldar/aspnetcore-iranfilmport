@@ -3,6 +3,7 @@ using IranFilmPort.Domain.Entities.Contact;
 using IranFilmPort.Domain.Entities.News;
 using IranFilmPort.Domain.Entities.Newsletter;
 using IranFilmPort.Domain.Entities.User;
+using IranFilmPort.Infranstructure.Configurations.News;
 using IranFilmPort.Infranstructure.Configurations.NewsCategories;
 using IranFilmPort.Infranstructure.Configurations.NewsTags;
 using IranFilmPort.Infranstructure.Configurations.Roles;
@@ -43,6 +44,7 @@ namespace IranFilmPort.Persistence.Contexts
             modelBuilder.ApplyConfiguration(new RolesConfigurations());
             modelBuilder.ApplyConfiguration(new NewsCategoriesConfigurations());
             modelBuilder.ApplyConfiguration(new NewsTagsConfigurations());
+            modelBuilder.ApplyConfiguration(new NewsConfigurations());
         }
         public override int SaveChanges()
         {

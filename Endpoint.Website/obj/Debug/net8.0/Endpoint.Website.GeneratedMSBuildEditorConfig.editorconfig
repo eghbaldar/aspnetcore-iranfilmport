@@ -44,6 +44,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTmV3cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/IranFilmPort/Endpoint.Website/Views/Admin/NewsByFilterOnlyFuture.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTmV3c0J5RmlsdGVyT25seUZ1dHVyZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/IranFilmPort/Endpoint.Website/Views/Admin/NewsByFilterOnlyPublished.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTmV3c0J5RmlsdGVyT25seVB1Ymxpc2hlZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/IranFilmPort/Endpoint.Website/Views/Admin/NewsCategories.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTmV3c0NhdGVnb3JpZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

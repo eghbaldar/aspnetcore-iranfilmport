@@ -12,6 +12,7 @@ namespace IranFilmPort.Application.Services.News.News.Commands.UpdateNews
     {
         public Guid Id { get; set; }
         public string Title { get; set; } // سایت خبری کنیگتو افتتاح شد
+        public string TitleEn { get; set; }
         public string Summary { get; set; }
         public string? Slug { get; set; }
         public string BodyText { get; set; }
@@ -40,6 +41,7 @@ namespace IranFilmPort.Application.Services.News.News.Commands.UpdateNews
             if (req == null ||
                 req.Id == Guid.Empty ||
                 string.IsNullOrEmpty(req.Title) ||
+                string.IsNullOrEmpty(req.TitleEn) ||
                 string.IsNullOrEmpty(req.Summary) ||
                 string.IsNullOrEmpty(req.BodyText) ||
                 string.IsNullOrEmpty(req.Author) ||
@@ -62,6 +64,7 @@ namespace IranFilmPort.Application.Services.News.News.Commands.UpdateNews
             fetchedData.NewsCategoryId = req.CategoryId;
             fetchedData.BodyText = WebUtility.HtmlDecode(req.BodyText.Trim());
             fetchedData.Title = WebUtility.HtmlDecode(req.Title.Trim());
+            fetchedData.TitleEn = WebUtility.HtmlDecode(req.TitleEn.Trim());
 
             // the main image
             if (req.MainImage != null)

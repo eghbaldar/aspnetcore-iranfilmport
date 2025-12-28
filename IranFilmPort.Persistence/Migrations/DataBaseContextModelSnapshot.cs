@@ -108,6 +108,10 @@ namespace IranFilmPort.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TitleEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<long>("UniqueCode")
                         .HasColumnType("bigint");
 
@@ -282,36 +286,36 @@ namespace IranFilmPort.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5aabeadb-4f56-4787-bc6f-a253fbb548e3"),
-                            InsertDateTime = new DateTime(2025, 12, 26, 21, 32, 1, 859, DateTimeKind.Local).AddTicks(8683),
+                            Id = new Guid("154850e0-84c5-43ab-bc66-8489e83e35c3"),
+                            InsertDateTime = new DateTime(2025, 12, 28, 13, 33, 53, 91, DateTimeKind.Local).AddTicks(235),
                             Title = "King",
                             UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("75918b63-9d8d-46be-ad39-70da56d0bae4"),
-                            InsertDateTime = new DateTime(2025, 12, 26, 21, 32, 1, 859, DateTimeKind.Local).AddTicks(8725),
+                            Id = new Guid("dad2573b-9de5-4872-9491-4328d48615ce"),
+                            InsertDateTime = new DateTime(2025, 12, 28, 13, 33, 53, 91, DateTimeKind.Local).AddTicks(279),
                             Title = "SuperAdmin",
                             UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("cbdcbd5e-7a94-4d0c-887d-db7cea7f8816"),
-                            InsertDateTime = new DateTime(2025, 12, 26, 21, 32, 1, 859, DateTimeKind.Local).AddTicks(8730),
+                            Id = new Guid("7e7919e8-1990-4db7-9698-063476483f5d"),
+                            InsertDateTime = new DateTime(2025, 12, 28, 13, 33, 53, 91, DateTimeKind.Local).AddTicks(284),
                             Title = "Admin",
                             UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("fc031c5c-712d-4a9e-b7e3-5e3d9a9d570b"),
-                            InsertDateTime = new DateTime(2025, 12, 26, 21, 32, 1, 859, DateTimeKind.Local).AddTicks(8748),
+                            Id = new Guid("3cf5c248-ed04-4579-8ca4-3175ed4d6c7f"),
+                            InsertDateTime = new DateTime(2025, 12, 28, 13, 33, 53, 91, DateTimeKind.Local).AddTicks(303),
                             Title = "Client",
                             UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("ea28ff58-c301-4084-b517-dcbf2e680a8d"),
-                            InsertDateTime = new DateTime(2025, 12, 26, 21, 32, 1, 859, DateTimeKind.Local).AddTicks(8753),
+                            Id = new Guid("ab0f4bd6-bda8-4baa-bc47-3f11b024e138"),
+                            InsertDateTime = new DateTime(2025, 12, 28, 13, 33, 53, 91, DateTimeKind.Local).AddTicks(307),
                             Title = "User",
                             UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });

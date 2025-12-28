@@ -15,6 +15,7 @@ namespace IranFilmPort.Application.Services.News.News.Queries.GetNews
     {
         public Guid Id { get; set; }
         public string Title { get; set; } // سایت خبری کنیگتو افتتاح شد
+        public string TitleEn { get; set; }
         public string Summary { get; set; }
         public string BodyText { get; set; }
         public string MainImage { get; set; } // Filename
@@ -65,6 +66,7 @@ namespace IranFilmPort.Application.Services.News.News.Queries.GetNews
                     Id = x.Id,
                     InsertDate = x.InsertDateTime,
                     Title = x.Title,
+                    TitleEn = x.TitleEn,
                     Visit = x.Visit,
                     Author = x.Author,
                     BodyText = x.BodyText,
@@ -103,6 +105,7 @@ namespace IranFilmPort.Application.Services.News.News.Queries.GetNews
                 Id = final.Id,
                 InsertDate = final.InsertDate,
                 Title = final.Title,
+                TitleEn = final.TitleEn,
                 Visit = final.Visit,
                 Author = final.Author,
                 BodyText = final.BodyText,

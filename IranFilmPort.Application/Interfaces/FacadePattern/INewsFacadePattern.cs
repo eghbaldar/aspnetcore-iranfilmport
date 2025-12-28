@@ -4,6 +4,7 @@ using IranFilmPort.Application.Services.News.News.Commands.UpdateNews;
 using IranFilmPort.Application.Services.News.News.Commands.UpdateNewsVisit;
 using IranFilmPort.Application.Services.News.News.Queries.GetAllNewsForAdmin;
 using IranFilmPort.Application.Services.News.News.Queries.GetNews;
+using IranFilmPort.Application.Services.News.News.Queries.GetNewsByFilterForAdmin;
 
 namespace IranFilmPort.Application.Interfaces.FacadePattern
 {
@@ -15,5 +16,6 @@ namespace IranFilmPort.Application.Interfaces.FacadePattern
         public GetAllNewsForAdminService GetAllNewsForAdminService { get; }
         public GetNewsService GetNewsService { get; }
         public UpdateNewsVisitService UpdateNewsVisitService { get; }
+        public GetNewsByFilterForAdminService GetNewsByFilterForAdminService { get; }
     }
 }
