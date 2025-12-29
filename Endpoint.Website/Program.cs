@@ -1,6 +1,9 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
 using IranFilmPort.Application.Interfaces.FacadePattern;
 using IranFilmPort.Application.Services._Turnstile;
+using IranFilmPort.Application.Services.FestivalDeadlines.FacadePattern;
+using IranFilmPort.Application.Services.Festivals.FacadePattern;
+using IranFilmPort.Application.Services.FestivalSection.FacadePattern;
 using IranFilmPort.Application.Services.News.News.FacadePattern;
 using IranFilmPort.Application.Services.NewsCategories.FacadePattern;
 using IranFilmPort.Application.Services.NewsComments.FacadePattern;
@@ -31,6 +34,9 @@ builder.Services.AddScoped<IUsersFacadePattern, UsersFacadePattern>();
 builder.Services.AddScoped<IRoleFacadePattern, RoleFacadePattern>();
 builder.Services.AddScoped<INewsCategoriesFacadePattern, NewsCategoriesFacadePattern>();
 builder.Services.AddScoped<INewsCommentsFacadePattern, NewsCommentsFacadePattern>();
+builder.Services.AddScoped<IFestivalsFacadePattern, FestivalsFacadePattern>();
+builder.Services.AddScoped<IFestivalSectionFacadePattern, FestivalSectionFacadePattern>();
+builder.Services.AddScoped<IFestivalDeadlinesFacadePattern, FestivalDeadlinesFacadePattern>();
 
 // token and authentication services
 builder.Services.AddScoped<ITurnstileService, TurnstileService>();

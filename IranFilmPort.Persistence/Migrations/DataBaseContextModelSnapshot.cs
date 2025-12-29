@@ -63,6 +63,164 @@ namespace IranFilmPort.Persistence.Migrations
                     b.ToTable("Contacts", "dbo");
                 });
 
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.Festival.FestivalDeadlines", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Deadline")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Fee")
+                        .IsRequired()
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
+
+                    b.Property<Guid>("FestivalSectionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("InsertDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("UpdateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FestivalSectionId");
+
+                    b.ToTable("FestivalDeadlines", "dbo");
+                });
+
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.Festival.FestivalSections", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeleteDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("FestivalId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("InsertDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FestivalId");
+
+                    b.ToTable("FestivalSections", "dbo");
+                });
+
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.Festival.Festivals", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Attribute")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("CountryCode")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime?>("DeleteDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Detail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EventEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EventStartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Genres")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("InsertDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte>("Level")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("Logo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("NotificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OpeningDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte>("Platform")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("Premiere")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("Rules")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("ShortFeature")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("Submitway")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleFa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UniqueCode")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Visit")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Website")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Festivals", "dbo");
+                });
+
             modelBuilder.Entity("IranFilmPort.Domain.Entities.News.News", b =>
                 {
                     b.Property<Guid>("Id")
@@ -286,36 +444,36 @@ namespace IranFilmPort.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("154850e0-84c5-43ab-bc66-8489e83e35c3"),
-                            InsertDateTime = new DateTime(2025, 12, 28, 13, 33, 53, 91, DateTimeKind.Local).AddTicks(235),
+                            Id = new Guid("35974289-23a7-48e4-b0a1-e110124da5c0"),
+                            InsertDateTime = new DateTime(2025, 12, 29, 9, 32, 36, 29, DateTimeKind.Local).AddTicks(4121),
                             Title = "King",
                             UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("dad2573b-9de5-4872-9491-4328d48615ce"),
-                            InsertDateTime = new DateTime(2025, 12, 28, 13, 33, 53, 91, DateTimeKind.Local).AddTicks(279),
+                            Id = new Guid("cd8711da-0a5a-4ca9-885e-43002f674a56"),
+                            InsertDateTime = new DateTime(2025, 12, 29, 9, 32, 36, 29, DateTimeKind.Local).AddTicks(4162),
                             Title = "SuperAdmin",
                             UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("7e7919e8-1990-4db7-9698-063476483f5d"),
-                            InsertDateTime = new DateTime(2025, 12, 28, 13, 33, 53, 91, DateTimeKind.Local).AddTicks(284),
+                            Id = new Guid("0cd4a406-1cee-422b-9000-ba673a92382a"),
+                            InsertDateTime = new DateTime(2025, 12, 29, 9, 32, 36, 29, DateTimeKind.Local).AddTicks(4167),
                             Title = "Admin",
                             UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("3cf5c248-ed04-4579-8ca4-3175ed4d6c7f"),
-                            InsertDateTime = new DateTime(2025, 12, 28, 13, 33, 53, 91, DateTimeKind.Local).AddTicks(303),
+                            Id = new Guid("d38d0132-f53b-4704-b42a-7846c3476dd3"),
+                            InsertDateTime = new DateTime(2025, 12, 29, 9, 32, 36, 29, DateTimeKind.Local).AddTicks(4191),
                             Title = "Client",
                             UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("ab0f4bd6-bda8-4baa-bc47-3f11b024e138"),
-                            InsertDateTime = new DateTime(2025, 12, 28, 13, 33, 53, 91, DateTimeKind.Local).AddTicks(307),
+                            Id = new Guid("faa0b0ac-0098-4c4e-bd7a-cacb89d8eab0"),
+                            InsertDateTime = new DateTime(2025, 12, 29, 9, 32, 36, 29, DateTimeKind.Local).AddTicks(4195),
                             Title = "User",
                             UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -497,6 +655,28 @@ namespace IranFilmPort.Persistence.Migrations
                     b.ToTable("UsersSuspicious", "dbo");
                 });
 
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.Festival.FestivalDeadlines", b =>
+                {
+                    b.HasOne("IranFilmPort.Domain.Entities.Festival.FestivalSections", "FestivalSection")
+                        .WithMany("FestivalDeadlines")
+                        .HasForeignKey("FestivalSectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FestivalSection");
+                });
+
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.Festival.FestivalSections", b =>
+                {
+                    b.HasOne("IranFilmPort.Domain.Entities.Festival.Festivals", "Festival")
+                        .WithMany("FestivalSections")
+                        .HasForeignKey("FestivalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Festival");
+                });
+
             modelBuilder.Entity("IranFilmPort.Domain.Entities.News.News", b =>
                 {
                     b.HasOne("IranFilmPort.Domain.Entities.News.NewsCategories", "NewsCategory")
@@ -555,6 +735,16 @@ namespace IranFilmPort.Persistence.Migrations
                     b.HasOne("IranFilmPort.Domain.Entities.User.Users", null)
                         .WithMany("UsersSuspicious")
                         .HasForeignKey("UsersId");
+                });
+
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.Festival.FestivalSections", b =>
+                {
+                    b.Navigation("FestivalDeadlines");
+                });
+
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.Festival.Festivals", b =>
+                {
+                    b.Navigation("FestivalSections");
                 });
 
             modelBuilder.Entity("IranFilmPort.Domain.Entities.News.News", b =>

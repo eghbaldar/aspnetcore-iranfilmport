@@ -2,6 +2,9 @@
 using Endpoint.Website.Models.AddUsers;
 using Endpoint.Website.Models.Users;
 using IranFilmPort.Application.Interfaces.FacadePattern;
+using IranFilmPort.Application.Services.Festivals.Commands.PostFestival;
+using IranFilmPort.Application.Services.Festivals.Commands.UpdateFestival;
+using IranFilmPort.Application.Services.Festivals.Queries.GetAllFestivalsForAdminService;
 using IranFilmPort.Application.Services.News.News.Commands.DeleteNews;
 using IranFilmPort.Application.Services.News.News.Commands.PostNews;
 using IranFilmPort.Application.Services.News.News.Commands.UpdateNews;
@@ -33,22 +36,27 @@ namespace Endpoint.Website.Controllers
         private readonly INewsFacadePattern _newsFacadePattern;
         private readonly INewsCategoriesFacadePattern _newsCategoriesFacadePattern;
         private readonly INewsCommentsFacadePattern _newsCommentsFacadePattern;
+        private readonly IFestivalsFacadePattern _festivalsFacadePattern;
         public AdminController(IUsersFacadePattern usersFacadePattern,
             IRoleFacadePattern roleFacadePattern,
             INewsFacadePattern newsFacadePattern,
             INewsCategoriesFacadePattern newsCategoriesFacadePattern,
-            INewsCommentsFacadePattern newsCommentsFacadePattern)
+            INewsCommentsFacadePattern newsCommentsFacadePattern,
+            IFestivalsFacadePattern festivalsFacadePattern)
         {
             _usersFacadePattern = usersFacadePattern;
             _roleFacadePattern = roleFacadePattern;
             _newsFacadePattern = newsFacadePattern;
             _newsCategoriesFacadePattern = newsCategoriesFacadePattern;
             _newsCommentsFacadePattern = newsCommentsFacadePattern;
+            _festivalsFacadePattern = festivalsFacadePattern;
         }
         public IActionResult Index()
         {
             return View();
         }
+
+        // User
         public IActionResult AddUser(Guid? id, string? role)
         {
             ModelAddUsers modelAddUsers = new ModelAddUsers()
@@ -87,6 +95,8 @@ namespace Endpoint.Website.Controllers
             if (req == null) BadRequest();
             return Json(_usersFacadePattern.UpdateUserService.Execute(req));
         }
+
+        // News
         [HttpGet]
         public IActionResult News(int page)
         {
@@ -192,8 +202,6 @@ namespace Endpoint.Website.Controllers
             var result = _newsCategoriesFacadePattern.GetNewsChildrenCategories.Execute(req);
             return Json(result);
         }
-
-        // CKeditor
         [HttpPost]
         public async Task<IActionResult> UploadNewsMiddlePost(IFormFile upload)
         {
@@ -224,6 +232,41 @@ namespace Endpoint.Website.Controllers
                                   .ToList();
 
             return View(images);
+        }
+
+        // Festivals
+        [HttpGet]
+        public IActionResult Festivals(int page)
+        {
+            return View(_festivalsFacadePattern.GetAllFestivalsForAdminService.Execute(new RequestGetAllFestivalsForAdminServiceDto
+            {
+                CurrentPage = page
+            }));
+        }
+        [HttpGet]
+        public IActionResult AddFestival(int? id)
+        {
+            if (id == null)
+            {
+                return View();
+            }
+            else
+            {
+                return View(_festivalsFacadePattern.GetFestivalService.Execute(new IranFilmPort.Application.Services.Festivals.Queries.GetFestival.RequestGetFestivalServiceDto
+                {
+                    UniqueCode = (int)id
+                }));
+            }
+        }
+        [HttpPost]
+        public IActionResult PostFestival(RequestPostFestivalServiceDto req)
+        {
+            return Json(_festivalsFacadePattern.PostFestivalService.Execute(req));
+        }
+        [HttpPut]
+        public IActionResult UpdateFestival(RequestUpdateFestivalServiceDto req)
+        {
+            return Json(_festivalsFacadePattern.UpdateFestivalService.Execute(req));
         }
     }
 }

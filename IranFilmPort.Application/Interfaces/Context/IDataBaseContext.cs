@@ -1,4 +1,5 @@
 ﻿using IranFilmPort.Domain.Entities.Contact;
+using IranFilmPort.Domain.Entities.Festival;
 using IranFilmPort.Domain.Entities.News;
 using IranFilmPort.Domain.Entities.Newsletter;
 using IranFilmPort.Domain.Entities.User;
@@ -27,6 +28,11 @@ namespace IranFilmPort.Application.Interfaces.Context
         // guest
         DbSet<Contacts> Contacts { get; set; }
         DbSet<Newsletters> Newsletters { get; set; }
+
+        // festival
+        DbSet<Festivals> Festivals { get; set; }
+        DbSet<FestivalSections> FestivalSections { get; set; }
+        DbSet<FestivalDeadlines> FestivalDeadlines { get; set; }
 
         //SaveChanges
         int SaveChanges(bool acceptAllChangesOnSuccess);

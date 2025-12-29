@@ -1,8 +1,12 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
 using IranFilmPort.Domain.Entities.Contact;
+using IranFilmPort.Domain.Entities.Festival;
 using IranFilmPort.Domain.Entities.News;
 using IranFilmPort.Domain.Entities.Newsletter;
 using IranFilmPort.Domain.Entities.User;
+using IranFilmPort.Infranstructure.Configurations.FestivalDeadlines;
+using IranFilmPort.Infranstructure.Configurations.Festivals;
+using IranFilmPort.Infranstructure.Configurations.FestivalSections;
 using IranFilmPort.Infranstructure.Configurations.News;
 using IranFilmPort.Infranstructure.Configurations.NewsCategories;
 using IranFilmPort.Infranstructure.Configurations.NewsTags;
@@ -31,9 +35,15 @@ namespace IranFilmPort.Persistence.Contexts
         public DbSet<NewsComments> NewsComments { get; set; }
         public DbSet<NewsTags> NewsTags { get; set; }
 
-        //guest
+        // guest
         public DbSet<Contacts> Contacts { get; set; }
         public DbSet<Newsletters> Newsletters { get; set; }
+
+        // Festival
+
+        public DbSet<Festivals> Festivals { get; set; }
+        public DbSet<FestivalSections> FestivalSections { get; set; }
+        public DbSet<FestivalDeadlines> FestivalDeadlines { get; set; }
 
         // Entities Configurations
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,9 +52,12 @@ namespace IranFilmPort.Persistence.Contexts
             modelBuilder.HasDefaultSchema("dbo");
 
             modelBuilder.ApplyConfiguration(new RolesConfigurations());
-            modelBuilder.ApplyConfiguration(new NewsCategoriesConfigurations());
-            modelBuilder.ApplyConfiguration(new NewsTagsConfigurations());
             modelBuilder.ApplyConfiguration(new NewsConfigurations());
+            modelBuilder.ApplyConfiguration(new NewsTagsConfigurations());
+            modelBuilder.ApplyConfiguration(new NewsTagsConfigurations());
+            modelBuilder.ApplyConfiguration(new FestivalDeadlinesConfigurations());
+            modelBuilder.ApplyConfiguration(new FestivalsConfigurations());
+            modelBuilder.ApplyConfiguration(new FestivalSectionsConfigurations());
         }
         public override int SaveChanges()
         {

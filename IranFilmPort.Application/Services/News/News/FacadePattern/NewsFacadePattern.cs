@@ -14,7 +14,6 @@ namespace IranFilmPort.Application.Services.News.News.FacadePattern
     {
         private readonly IDataBaseContext _context;
         private readonly IServiceProvider _serviceProvider;
-
         public NewsFacadePattern(IDataBaseContext context, IServiceProvider serviceProvider)
         {
             _context = context;

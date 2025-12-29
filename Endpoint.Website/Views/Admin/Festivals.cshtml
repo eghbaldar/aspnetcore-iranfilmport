@@ -1,0 +1,6 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    ViewData["HeadTitle"] = "فستیوال ها";
+    int currentPage = 1;
+    int.TryParse(Context.Request.Query["page"], out currentPage);
+}
