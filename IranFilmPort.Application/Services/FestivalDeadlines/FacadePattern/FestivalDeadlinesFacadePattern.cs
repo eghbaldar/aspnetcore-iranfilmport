@@ -2,8 +2,8 @@
 using IranFilmPort.Application.Interfaces.FacadePattern;
 using IranFilmPort.Application.Services.FestivalDeadlines.Commands.DeleteFestivalDeadline;
 using IranFilmPort.Application.Services.FestivalDeadlines.Commands.PostFestivalDeadline;
-using IranFilmPort.Application.Services.FestivalDeadlines.Queries.GetDeadlinesByFestivalSectionId;
-using IranFilmPort.Application.Services.FestivalSection.Commands.UpdateFestivalSection;
+using IranFilmPort.Application.Services.FestivalDeadlines.Commands.UpdateFestivalDeadline;
+using IranFilmPort.Application.Services.FestivalDeadlines.Queries.GetDeadlinesByFestivalId;
 
 namespace IranFilmPort.Application.Services.FestivalDeadlines.FacadePattern
 {
@@ -15,16 +15,16 @@ namespace IranFilmPort.Application.Services.FestivalDeadlines.FacadePattern
             _context = context;
         }
         // DeleteNewsService
-        public GetDeadlinesByFestivalSectionIdService _getDeadlinesByFestivalSectionIdService;
-        public GetDeadlinesByFestivalSectionIdService GetDeadlinesByFestivalSectionIdService
+        public GetDeadlinesByFestivalIdService _getDeadlinesByFestivalIdService;
+        public GetDeadlinesByFestivalIdService GetDeadlinesByFestivalIdService
         {
-            get { return _getDeadlinesByFestivalSectionIdService = _getDeadlinesByFestivalSectionIdService ?? new GetDeadlinesByFestivalSectionIdService(_context); }
+            get { return _getDeadlinesByFestivalIdService = _getDeadlinesByFestivalIdService ?? new GetDeadlinesByFestivalIdService(_context); }
         }
         // UpdateFestivalSectionService
-        public UpdateFestivalSectionService _updateFestivalSectionService;
-        public UpdateFestivalSectionService UpdateFestivalSectionService
+        public UpdateFestivalDeadlineService _updateFestivalDeadlineService;
+        public UpdateFestivalDeadlineService UpdateFestivalDeadlineService
         {
-            get { return _updateFestivalSectionService = _updateFestivalSectionService ?? new UpdateFestivalSectionService(_context); }
+            get { return _updateFestivalDeadlineService = _updateFestivalDeadlineService ?? new UpdateFestivalDeadlineService(_context); }
         }
         // PostFestivalDeadlineService
         public PostFestivalDeadlineService _postFestivalDeadlineService;

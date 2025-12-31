@@ -1,0 +1,3 @@
+﻿function deleteFestival(id) {
+
+}

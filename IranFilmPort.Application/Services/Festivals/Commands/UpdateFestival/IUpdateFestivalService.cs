@@ -8,7 +8,7 @@ namespace IranFilmPort.Application.Services.Festivals.Commands.UpdateFestival
 {
     public class RequestUpdateFestivalServiceDto
     {
-        public int UniqueCode { get; set; }
+        public Guid Id { get; set; }
         public byte Level { get; set; } // FestivalLevels.cs
         public string Genres { get; set; } // value => "1,2,3"
         public byte ShortFeature { get; set; } // FestivalShortFeatureConstants.cs
@@ -46,11 +46,11 @@ namespace IranFilmPort.Application.Services.Festivals.Commands.UpdateFestival
         public ResultDto Execute(RequestUpdateFestivalServiceDto req)
         {
             if (req == null ||
+                req.Id == Guid.Empty ||
                 string.IsNullOrEmpty(req.TitleEn) ||
                 string.IsNullOrEmpty(req.TitleFa) ||
                 string.IsNullOrEmpty(req.Genres) ||
                 string.IsNullOrEmpty(req.Detail) ||
-                req.Logo == null ||
                 string.IsNullOrEmpty(req.Rules) ||
                 string.IsNullOrEmpty(req.Website)
                 )
@@ -60,7 +60,7 @@ namespace IranFilmPort.Application.Services.Festivals.Commands.UpdateFestival
 
             // entity
             var festival = _context.Festivals
-                .FirstOrDefault(x => x.UniqueCode == req.UniqueCode);
+                .FirstOrDefault(x => x.Id == req.Id);
             if (festival == null) return new ResultDto { IsSuccess = false };
 
             // the main image

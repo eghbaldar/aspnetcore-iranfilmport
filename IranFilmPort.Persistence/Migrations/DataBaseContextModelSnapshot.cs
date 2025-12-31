@@ -55,12 +55,43 @@ namespace IranFilmPort.Persistence.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("UpdateDateTime")
+                    b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("Contacts", "dbo");
+                });
+
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.Countries.Countries", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte>("CountryCode")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime?>("DeleteDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("InsertDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NameEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameFa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Countries", "dbo");
                 });
 
             modelBuilder.Entity("IranFilmPort.Domain.Entities.Festival.FestivalDeadlines", b =>
@@ -86,7 +117,7 @@ namespace IranFilmPort.Persistence.Migrations
                     b.Property<DateTime>("InsertDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("UpdateDateTime")
+                    b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -115,7 +146,7 @@ namespace IranFilmPort.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdateDateTime")
+                    b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -206,7 +237,7 @@ namespace IranFilmPort.Persistence.Migrations
                     b.Property<int>("UniqueCode")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdateDateTime")
+                    b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Visit")
@@ -273,7 +304,7 @@ namespace IranFilmPort.Persistence.Migrations
                     b.Property<long>("UniqueCode")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("UpdateDateTime")
+                    b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Visit")
@@ -309,7 +340,7 @@ namespace IranFilmPort.Persistence.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<DateTime>("UpdateDateTime")
+                    b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -351,7 +382,7 @@ namespace IranFilmPort.Persistence.Migrations
                     b.Property<Guid?>("ParentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("UpdateDateTime")
+                    b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -380,7 +411,7 @@ namespace IranFilmPort.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdateDateTime")
+                    b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -410,7 +441,7 @@ namespace IranFilmPort.Persistence.Migrations
                     b.Property<DateTime>("InsertDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("UpdateDateTime")
+                    b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -434,7 +465,7 @@ namespace IranFilmPort.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdateDateTime")
+                    b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -444,38 +475,33 @@ namespace IranFilmPort.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("35974289-23a7-48e4-b0a1-e110124da5c0"),
-                            InsertDateTime = new DateTime(2025, 12, 29, 9, 32, 36, 29, DateTimeKind.Local).AddTicks(4121),
-                            Title = "King",
-                            UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Id = new Guid("9f90cd1f-49fe-465f-a2c8-e85a247f19bb"),
+                            InsertDateTime = new DateTime(2025, 12, 30, 10, 33, 11, 290, DateTimeKind.Local).AddTicks(6646),
+                            Title = "King"
                         },
                         new
                         {
-                            Id = new Guid("cd8711da-0a5a-4ca9-885e-43002f674a56"),
-                            InsertDateTime = new DateTime(2025, 12, 29, 9, 32, 36, 29, DateTimeKind.Local).AddTicks(4162),
-                            Title = "SuperAdmin",
-                            UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Id = new Guid("4aba8f8e-9782-4e63-8c55-f7d1f67b823d"),
+                            InsertDateTime = new DateTime(2025, 12, 30, 10, 33, 11, 290, DateTimeKind.Local).AddTicks(6708),
+                            Title = "SuperAdmin"
                         },
                         new
                         {
-                            Id = new Guid("0cd4a406-1cee-422b-9000-ba673a92382a"),
-                            InsertDateTime = new DateTime(2025, 12, 29, 9, 32, 36, 29, DateTimeKind.Local).AddTicks(4167),
-                            Title = "Admin",
-                            UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Id = new Guid("882fbd4b-5c24-454a-a197-2a66331910e8"),
+                            InsertDateTime = new DateTime(2025, 12, 30, 10, 33, 11, 290, DateTimeKind.Local).AddTicks(6718),
+                            Title = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("d38d0132-f53b-4704-b42a-7846c3476dd3"),
-                            InsertDateTime = new DateTime(2025, 12, 29, 9, 32, 36, 29, DateTimeKind.Local).AddTicks(4191),
-                            Title = "Client",
-                            UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Id = new Guid("7453bcd8-70df-4051-8713-f1e81fd81768"),
+                            InsertDateTime = new DateTime(2025, 12, 30, 10, 33, 11, 290, DateTimeKind.Local).AddTicks(6727),
+                            Title = "Client"
                         },
                         new
                         {
-                            Id = new Guid("faa0b0ac-0098-4c4e-bd7a-cacb89d8eab0"),
-                            InsertDateTime = new DateTime(2025, 12, 29, 9, 32, 36, 29, DateTimeKind.Local).AddTicks(4195),
-                            Title = "User",
-                            UpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Id = new Guid("89185ff7-6a85-4893-a00a-e0497074bc44"),
+                            InsertDateTime = new DateTime(2025, 12, 30, 10, 33, 11, 290, DateTimeKind.Local).AddTicks(6800),
+                            Title = "User"
                         });
                 });
 
@@ -551,7 +577,7 @@ namespace IranFilmPort.Persistence.Migrations
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("UpdateDateTime")
+                    b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Username")
@@ -593,7 +619,7 @@ namespace IranFilmPort.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdateDateTime")
+                    b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserAgent")
@@ -635,7 +661,7 @@ namespace IranFilmPort.Persistence.Migrations
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdateDateTime")
+                    b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserAgent")

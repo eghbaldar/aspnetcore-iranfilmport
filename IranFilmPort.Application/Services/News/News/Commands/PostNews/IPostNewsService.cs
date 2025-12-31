@@ -55,6 +55,7 @@ namespace IranFilmPort.Application.Services.News.News.Commands.PostNews
             }
             // generate slug & unique code
             long UNIQUECODE = EnsureUniqueCode(GenerateRandomLongValue());
+            if (UNIQUECODE == 0) return new ResultDto { IsSuccess = false };
 
             // populating the entity
             Domain.Entities.News.News news = new Domain.Entities.News.News()

@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "E:\\IranFilmPort\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|e:\\iranfilmport\\iranfilmport.application\\services\\festivalsection\\queries\\getsectionsbyfestivalid\\igetsectionsbyfestivalidservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|solutionrelative:iranfilmport.application\\services\\festivalsection\\queries\\getsectionsbyfestivalid\\igetsectionsbyfestivalidservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\views\\admin\\festivals.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\views\\admin\\festivals.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\views\\admin\\news.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\views\\admin\\news.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,28 +26,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "IGetSectionsByFestivalIdService.cs",
-              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\FestivalSection\\Queries\\GetSectionsByFestivalId\\IGetSectionsByFestivalIdService.cs",
-              "RelativeDocumentMoniker": "IranFilmPort.Application\\Services\\FestivalSection\\Queries\\GetSectionsByFestivalId\\IGetSectionsByFestivalIdService.cs",
-              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\FestivalSection\\Queries\\GetSectionsByFestivalId\\IGetSectionsByFestivalIdService.cs",
-              "RelativeToolTip": "IranFilmPort.Application\\Services\\FestivalSection\\Queries\\GetSectionsByFestivalId\\IGetSectionsByFestivalIdService.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAcwA4AAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T14:53:20.939Z",
+              "DocumentIndex": 1,
+              "Title": "News.cshtml",
+              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\News.cshtml",
+              "RelativeDocumentMoniker": "Endpoint.Website\\Views\\Admin\\News.cshtml",
+              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\News.cshtml",
+              "RelativeToolTip": "Endpoint.Website\\Views\\Admin\\News.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-31T11:36:36.411Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "Endpoint.Website\\Controllers\\AdminController.cs",
-              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Controllers\\AdminController.cs",
-              "RelativeToolTip": "Endpoint.Website\\Controllers\\AdminController.cs",
-              "ViewState": "AgIAAMEAAAAAAAAAAAAswAoBAABQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T05:46:44.106Z",
+              "DocumentIndex": 0,
+              "Title": "Festivals.cshtml",
+              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\Festivals.cshtml",
+              "RelativeDocumentMoniker": "Endpoint.Website\\Views\\Admin\\Festivals.cshtml",
+              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\Festivals.cshtml",
+              "RelativeToolTip": "Endpoint.Website\\Views\\Admin\\Festivals.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-31T10:54:45.165Z",
               "EditorCaption": ""
             }
           ]

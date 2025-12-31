@@ -1,8 +1,8 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
 using IranFilmPort.Application.Interfaces.FacadePattern;
-using IranFilmPort.Application.Services.News.NewsComments.GetNewsComments;
 using IranFilmPort.Application.Services.NewsComments.Commands.PostNewsComment;
 using IranFilmPort.Application.Services.NewsComments.Commands.UpdateNewsCommentActive;
+using IranFilmPort.Application.Services.NewsComments.Queries.GetNewsComments;
 using IranFilmPort.Application.Services.NewsComments.Queries.GetNewsCommentsByUniqueCode;
 
 namespace IranFilmPort.Application.Services.NewsComments.FacadePattern

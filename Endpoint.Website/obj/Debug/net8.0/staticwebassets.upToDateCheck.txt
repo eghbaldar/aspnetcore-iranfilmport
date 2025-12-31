@@ -2,7 +2,11 @@ wwwroot\AdminTemplate\pagecssjs\AddUser\AddUser.js
 wwwroot\AdminTemplate\pagecssjs\categories\categories.css
 wwwroot\AdminTemplate\pagecssjs\categories\categories.js
 wwwroot\AdminTemplate\pagecssjs\contact\contact.js
+wwwroot\AdminTemplate\pagecssjs\festivals\festivals.js
+wwwroot\AdminTemplate\pagecssjs\festivalSectionDeadline\festivalSectionDeadline.js
 wwwroot\AdminTemplate\pagecssjs\news\news.js
+wwwroot\AdminTemplate\pagecssjs\postfestival\postfestival.css
+wwwroot\AdminTemplate\pagecssjs\postfestival\postfestival.js
 wwwroot\AdminTemplate\pagecssjs\postnews\postnews.css
 wwwroot\AdminTemplate\pagecssjs\postnews\postnews.js
 wwwroot\AuthTemplate\css\bootstrap-rtl.min.css
@@ -305,6 +309,8 @@ wwwroot\SiteTemplate\assets\js\vendor\popper.min.js
 wwwroot\SiteTemplate\assets\js\vendor\slick.min.js
 wwwroot\SiteTemplate\assets\js\vendor\waypoints.min.js
 wwwroot\SiteTemplate\assets\js\vendor\wow.min.js
+wwwroot\UploadedStuff\admin\images\admin-festival-images\20251231121224-639027799445109494.webp
+wwwroot\UploadedStuff\admin\images\admin-festival-images\20251231124443-639027818838237106.webp
 wwwroot\UploadedStuff\admin\images\admin-news-images\20251227171611-639024525710482587.webp
 wwwroot\UploadedStuff\admin\images\admin-news-images\20251227175244-639024547640769502.webp
 wwwroot\UploadedStuff\admin\images\admin-news-images\20251228132405-639025250455944444.webp

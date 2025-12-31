@@ -1,5 +1,6 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
 using IranFilmPort.Domain.Entities.Contact;
+using IranFilmPort.Domain.Entities.Countries;
 using IranFilmPort.Domain.Entities.Festival;
 using IranFilmPort.Domain.Entities.News;
 using IranFilmPort.Domain.Entities.Newsletter;
@@ -8,7 +9,6 @@ using IranFilmPort.Infranstructure.Configurations.FestivalDeadlines;
 using IranFilmPort.Infranstructure.Configurations.Festivals;
 using IranFilmPort.Infranstructure.Configurations.FestivalSections;
 using IranFilmPort.Infranstructure.Configurations.News;
-using IranFilmPort.Infranstructure.Configurations.NewsCategories;
 using IranFilmPort.Infranstructure.Configurations.NewsTags;
 using IranFilmPort.Infranstructure.Configurations.Roles;
 using Microsoft.EntityFrameworkCore;
@@ -22,14 +22,14 @@ namespace IranFilmPort.Persistence.Contexts
         {
 
         }
-        //users
+        // users
         public DbSet<Users> Users { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<UsersSuspicious> UsersSuspicious { get; set; }
         public DbSet<UsersLogs> UsersLogs { get; set; }
         public DbSet<UserRefreshToken> UserRefreshToken { get; set; }
 
-        //news
+        // news
         public DbSet<News> News { get; set; }
         public DbSet<NewsCategories> NewsCategories { get; set; }
         public DbSet<NewsComments> NewsComments { get; set; }
@@ -41,6 +41,7 @@ namespace IranFilmPort.Persistence.Contexts
 
         // Festival
 
+        public DbSet<Countries> Countries { get; set; }
         public DbSet<Festivals> Festivals { get; set; }
         public DbSet<FestivalSections> FestivalSections { get; set; }
         public DbSet<FestivalDeadlines> FestivalDeadlines { get; set; }

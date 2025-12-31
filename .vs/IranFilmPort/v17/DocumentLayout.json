@@ -1,12 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\IranFilmPort\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|e:\\iranfilmport\\iranfilmport.application\\services\\festivals\\commands\\deletefestival\\ideletefestivalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|solutionrelative:iranfilmport.application\\services\\festivals\\commands\\deletefestival\\ideletefestivalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -14,24 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "IDeleteFestivalService.cs",
-              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Festivals\\Commands\\DeleteFestival\\IDeleteFestivalService.cs",
-              "RelativeDocumentMoniker": "IranFilmPort.Application\\Services\\Festivals\\Commands\\DeleteFestival\\IDeleteFestivalService.cs",
-              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Festivals\\Commands\\DeleteFestival\\IDeleteFestivalService.cs",
-              "RelativeToolTip": "IranFilmPort.Application\\Services\\Festivals\\Commands\\DeleteFestival\\IDeleteFestivalService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T15:18:50.952Z",
-              "EditorCaption": ""
             }
           ]
         }

@@ -1,4 +1,703 @@
-﻿@{
+﻿@using Endpoint.Website.Models.AddFestival
+@using IranFilmPort.Application.Services.Festivals.Queries.GetFestival
+@using IranFilmPort.Common.Constants
+@using IranFilmPort.Common.Helpers
+@{
     Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
     ViewData["HeadTitle"] = "درج و ویرایش فستیوال";
+}
+@model ModelAddFestival
+<div class="row">
+    <div class="col-12">
+        <a href="/admin/festivals" class="btn btn-success waves-effect width-md waves-light">لیست فستیوال ها</a>  
+        <div class="card-box">
+            <div class="row">       
+                <div class="col-12">                    
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">فعال یا غیرفعال</label>
+                        <div class="col-sm-10 alignCenter">
+                            <div class="custom-control custom-switch ">
+                                @{
+                                    if (Model.GetFestivalServiceDto == null)
+                                    {
+                                        <label class="custom-control material-switch">
+                                            <input checked="checked" type="checkbox" name="active" id="chkActive" class="material-switch-control-input">
+                                            <span class="material-switch-control-indicator"></span>
+                                        </label>
+                                    }
+                                    else
+                                    {
+                                        if ((bool)Model.GetFestivalServiceDto.Active)
+                                        {
+                                            <label class="custom-control material-switch">
+                                                <input checked type="checkbox" name="active" id="chkActive" class="material-switch-control-input">
+                                                <span class="material-switch-control-indicator"></span>
+                                            </label>
+                                        }
+                                        else
+                                        {
+                                            <label class="custom-control material-switch">
+                                                <input type="checkbox" name="active" id="chkActive" class="material-switch-control-input">
+                                                <span class="material-switch-control-indicator"></span>
+                                            </label>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label">سطح</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <select class="custom-select" id="selectLevel">
+                                        <option selected="" disabled>سطح را انتخاب کنید...</option>
+                                        <option value="@FestivalLevelsConstants.APlus">A+</option>
+                                        <option value="@FestivalLevelsConstants.A">A</option>
+                                        <option value="@FestivalLevelsConstants.B">B</option>
+                                        <option value="@FestivalLevelsConstants.C">C</option>
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="custom-select" id="selectLevel">
+                                        <option disabled>سطح را انتخاب کنید...</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Level == @FestivalLevelsConstants.APlus)"value="@FestivalLevelsConstants.APlus">A+</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Level == @FestivalLevelsConstants.A)"value="@FestivalLevelsConstants.A">A</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Level == @FestivalLevelsConstants.B)"value="@FestivalLevelsConstants.B">B</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Level == @FestivalLevelsConstants.C)"value="@FestivalLevelsConstants.C">C</option>
+                                    </select>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">ژانر</label>
+                        <div class="col-sm-10 genres">
+                            <label for="chkGenre_animation">Animation</label>
+                            <input type="checkbox" id="chkGenre_animation" value="@FestivalGenreContants.Animation" />
+                            <label for="chkGenre_doc">Documentary</label>
+                            <input type="checkbox" id="chkGenre_doc" value="@FestivalGenreContants.Documentary" />
+                            <label for="chkGenre_exp">Experimental</label>
+                            <input type="checkbox" id="chkGenre_exp" value="@FestivalGenreContants.Experimental" />
+                            <label for="chkGenre_musicvideo">Music Video</label>
+                            <input type="checkbox" id="chkGenre_musicvideo" value="@FestivalGenreContants.MusicVideo" />
+                            <label for="chkGenre_fiction">Fiction - Live Action - Narrative</label>
+                            <input type="checkbox" id="chkGenre_fiction" value="@FestivalGenreContants.FictionLiveActionNarrative" />
+                            <label for="chkGenre_tv">Television</label>
+                            <input type="checkbox" id="chkGenre_tv" value="@FestivalGenreContants.Television" />
+                            <label for="chkGenre_vr">Virtual Reality</label>
+                            <input type="checkbox" id="chkGenre_vr" value="@FestivalGenreContants.VirtualReality" />
+                            <label for="chkGenre_adv">Advertisement</label>
+                            <input type="checkbox" id="chkGenre_adv" value="@FestivalGenreContants.Advertisement" />
+                            <label for="chkGenre_script">Script</label>
+                            <input type="checkbox" id="chkGenre_script" value="@FestivalGenreContants.Script" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">گونه</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <select class="custom-select" id="selectShortFeature">
+                                        <option disabled selected="">گونه را انتخاب کنید...</option>
+                                        <option value="@FestivalShortFeatureConstants.Short">کوتاه</option>
+                                        <option value="@FestivalShortFeatureConstants.Feature">بلند</option>
+                                        <option value="@FestivalShortFeatureConstants.Both">هر دو</option>
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="custom-select" id="selectShortFeature">
+                                        <option disabled selected="">گونه را انتخاب کنید...</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.ShortFeature == @FestivalShortFeatureConstants.Short)" value="@FestivalShortFeatureConstants.Short">کوتاه</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.ShortFeature == @FestivalShortFeatureConstants.Feature)" value="@FestivalShortFeatureConstants.Feature">بلند</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.ShortFeature == @FestivalShortFeatureConstants.Both)" value="@FestivalShortFeatureConstants.Both">هر دو</option>
+                                    </select>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">عنوان انگلیسی</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <input type="text" id="txtTitleEn"
+                                    oninput="updateCounter(this, 95)"
+                                            onkeydown="enforceMaxLength(this, 95)"
+                                    class="form-control ltr" placeholder="English Title ...">
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtTitleEn"
+                                            value="@Model.GetFestivalServiceDto.TitleEn"
+                                            oninput="updateCounter(this, 95)"
+                                            onkeydown="enforceMaxLength(this, 95)"
+                                            class="form-control ltr" placeholder="English Title ...">
+
+                                }
+                            }
+                                                    @{
+                    if (Model.GetFestivalServiceDto == null)
+                    {
+                        <span class="form-label-counter" id="txtTitleEnCounter">0 / 95</span>
+                    }
+                    else
+                    {
+                        <span class="form-label-counter" id="txtTitleEnCounter">@Model.GetFestivalServiceDto.TitleEn.Length / 95</span>
+                    }
+                }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">عنوان فارسی</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <input type="text" id="txtTitleFa"
+                                    oninput="updateCounter(this, 95)"
+                                            onkeydown="enforceMaxLength(this, 95)"
+                                    class="form-control"  placeholder="عنوان فارسی ...">
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtTitleFa"
+                                            value="@Model.GetFestivalServiceDto.TitleFa"
+                                            oninput="updateCounter(this, 95)"
+                                            onkeydown="enforceMaxLength(this, 95)"
+                                            class="form-control" placeholder="عنوان فارسی ...">
+
+                                }
+                            }
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <span class="form-label-counter" id="txtTitleFaCounter">0 / 95</span>
+                                }
+                                else
+                                {
+                                    <span class="form-label-counter" id="txtTitleFaCounter">@Model.GetFestivalServiceDto.TitleFa.Length / 95</span>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label">کشور</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <select class="custom-select" id="selectCountry">
+                                        <option value="-1" selected="selected" disabled readonly>کشور را انتخاب کنید...</option>
+                                        @{
+                                            foreach(var country in Model.ResultGetAllCountriesServiceDto.Result)
+                                            {
+                                                <option value="@country.CountryCode" >@country.NameEn</option>        
+                                            }
+                                        }
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="custom-select" id="selectCountry">
+                                        <option value="-1" selected="">کشور را انتخاب کنید...</option>
+                                        @{
+                                            foreach(var country in Model.ResultGetAllCountriesServiceDto.Result)
+                                            {
+                                                <option value="@country.CountryCode" selected="@(Model.GetFestivalServiceDto.CountryCode==country.CountryCode)" >@country.NameEn</option>        
+                                            }
+                                        }
+                                    </select>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">آدرس</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <input type="text" id="txtAddress"
+                                    class="form-control ltr"  placeholder="عنوان فارسی ...">
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtAddress"
+                                            value="@Model.GetFestivalServiceDto.Address"
+                                            class="form-control ltr" placeholder="عنوان فارسی ...">
+
+                                }
+                            }                
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">وب سایت</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <input type="text" id="txtWebsite"
+                                    class="form-control ltr"  placeholder="وب سایت ...">
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtWebsite"
+                                            value="@Model.GetFestivalServiceDto.Website"
+                                            class="form-control ltr" placeholder="وب سایت ...">
+
+                                }
+                            }                
+                        </div>
+                    </div>
+                    <div class="form-group row">                        
+                        <label class="col-sm-2  col-form-label" for="simpleinput">تاریخ شروع پذیرش - Opening Date</label>                        
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <input type="text" id="txtShamsiDate_Opening" class="form-control shamsidate" readonly>
+                                }
+                                else
+                                {
+                                    var pureDateTime = Model.GetFestivalServiceDto.OpeningDate;
+                                    @* ----- *@
+                                    var shamsidateFuture = new PersianDateTime(Convert.ToDateTime(pureDateTime).Date);
+                                    var shamsidateStringFuture = shamsidateFuture.ToString("yyyy/MM/dd");
+                                    var persiandateTimeFuture = PersianNumberHelper.ConvertToPersian(shamsidateStringFuture);
+                                    <input type="text" id="txtShamsiDate_Opening"
+                                           value="@persiandateTimeFuture"
+                                           class="form-control shamsidate" readonly>                                    
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">                        
+                        <label class="col-sm-2  col-form-label" for="simpleinput">تاریخ اعلان نتایج- Notification Date</label>                        
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <input type="text" id="txtShamsiDate_Notification" class="form-control shamsidate" readonly>
+                                }
+                                else
+                                {
+                                    var pureDateTime = Model.GetFestivalServiceDto.NotificationDate;
+                                    @* ----- *@
+                                    var shamsidateFuture = new PersianDateTime(Convert.ToDateTime(pureDateTime).Date);
+                                    var shamsidateStringFuture = shamsidateFuture.ToString("yyyy/MM/dd");
+                                    var persiandateTimeFuture = PersianNumberHelper.ConvertToPersian(shamsidateStringFuture);
+                                    <input type="text" id="txtShamsiDate_Notification"
+                                           value="@persiandateTimeFuture"
+                                           class="form-control shamsidate" readonly>                                    
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">                        
+                        <label class="col-sm-2  col-form-label" for="simpleinput">تاریخ شروع مراسم اختتامیه- Starting Event Date</label>                        
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <input type="text" id="txtShamsiDate_EventStartDate" class="form-control shamsidate" readonly>
+                                }
+                                else
+                                {
+                                    var pureDateTime = Model.GetFestivalServiceDto.EventStartDate;
+                                    @* ----- *@
+                                    var shamsidateFuture = new PersianDateTime(Convert.ToDateTime(pureDateTime).Date);
+                                    var shamsidateStringFuture = shamsidateFuture.ToString("yyyy/MM/dd");
+                                    var persiandateTimeFuture = PersianNumberHelper.ConvertToPersian(shamsidateStringFuture);
+                                    <input type="text" id="txtShamsiDate_EventStartDate"
+                                           value="@persiandateTimeFuture"
+                                           class="form-control shamsidate" readonly>                                    
+                                }
+                            }
+                    </div>
+                    </div>
+                    <div class="form-group row">                        
+                        <label class="col-sm-2  col-form-label" for="simpleinput">تاریخ پایان مراسم اختتامیه- Ending Event Date</label>                        
+                        <div class="col-sm-10">
+
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <input type="text" id="txtShamsiDate_EventEndDate" class="form-control shamsidate" readonly>
+                                }
+                                else
+                                {
+                                    var pureDateTime = Model.GetFestivalServiceDto.EventStartDate;
+                                    @* ----- *@
+                                    var shamsidateFuture = new PersianDateTime(Convert.ToDateTime(pureDateTime).Date);
+                                    var shamsidateStringFuture = shamsidateFuture.ToString("yyyy/MM/dd");
+                                    var persiandateTimeFuture = PersianNumberHelper.ConvertToPersian(shamsidateStringFuture);
+                                    <input type="text" id="txtShamsiDate_EventEndDate"
+                                           value="@persiandateTimeFuture"
+                                           class="form-control shamsidate" readonly>                                    
+                                }
+                            }
+                    </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label">پریمیر</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <select class="custom-select" id="selectPremiere">
+                                        <option disabled selected="">پریمیر را انتخاب کنید...</option>
+                                        <option value="@FestivalPremiereConstants.NoPremiere">NoPremiere</option>
+                                        <option value="@FestivalPremiereConstants.Wolrd">Wolrd</option>
+                                        <option value="@FestivalPremiereConstants.Continental">Continental </option>
+                                        <option value="@FestivalPremiereConstants.Intertional">Intertional</option>
+                                        <option value="@FestivalPremiereConstants.National">National</option>
+                                        <option value="@FestivalPremiereConstants.Regional">Regional</option>
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="custom-select" id="selectPremiere">
+                                        <option disabled>سطح را انتخاب کنید...</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Premiere == @FestivalPremiereConstants.NoPremiere)" value="@FestivalPremiereConstants.NoPremiere">NoPremiere</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Premiere == @FestivalPremiereConstants.Wolrd)" value="@FestivalPremiereConstants.Wolrd">Wolrd</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Premiere == @FestivalPremiereConstants.Continental)" value="@FestivalPremiereConstants.Continental">Continental</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Premiere == @FestivalPremiereConstants.Intertional)" value="@FestivalPremiereConstants.Intertional">Intertional</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Premiere == @FestivalPremiereConstants.National)" value="@FestivalPremiereConstants.National">National</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Premiere == @FestivalPremiereConstants.Regional)" value="@FestivalPremiereConstants.Regional">Regional</option>
+                                    </select>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-password">توضیحات اصلی</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <textarea class="form-control" id="txtDetail"></textarea>
+
+                                }
+                                else
+                                {
+                                    <textarea class="form-control"
+                                              id="txtDetail">@Model.GetFestivalServiceDto.Detail</textarea>
+
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-password">مشخصات خاص</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <textarea class="form-control" id="txtAttributes"></textarea>
+
+                                }
+                                else
+                                {
+                                    <textarea class="form-control"
+                                              id="txtAttributes">@Model.GetFestivalServiceDto.Attribute</textarea>
+
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-password">قوانین و مقررات</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <textarea class="form-control" id="txtRules"></textarea>
+
+                                }
+                                else
+                                {
+                                    <textarea class="form-control"
+                                              id="txtRules">@Model.GetFestivalServiceDto.Rules</textarea>
+
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label">پلتفرم</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <select class="custom-select" id="selectPlatform">
+                                        <option value="-1" selected="">پلتفرم را انتخاب کنید...</option>
+                                        <option value="@FestivalPlatformConstants.FilmFreeWay">FilmFreeWay</option>
+                                        <option value="@FestivalPlatformConstants.WithoutaBox">WithoutaBox</option>
+                                        <option value="@FestivalPlatformConstants.Reelport">Reelport</option>
+                                        <option value="@FestivalPlatformConstants.Shortfilmdepot">Shortfilmdepot</option>
+                                        <option value="@FestivalPlatformConstants.ClickForFestivals">ClickForFestivals</option>
+                                        <option value="@FestivalPlatformConstants.Festhome">Festhome</option>
+                                        <option value="@FestivalPlatformConstants.MovieBeta">MovieBeta</option>
+                                        <option value="@FestivalPlatformConstants.UpToFest">UpToFest</option>
+                                        <option value="@FestivalPlatformConstants.FilmFestivalLife">FilmFestivalLife</option>
+                                        <option value="@FestivalPlatformConstants.FilmFestPlatform">FilmFestPlatform</option>
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="custom-select" id="selectPlatform">
+                                        <option value="-1" selected="">پلتفرم را انتخاب کنید...</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Platform == @FestivalPlatformConstants.FilmFreeWay)" value="@FestivalPlatformConstants.FilmFreeWay">FilmFreeWay</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Platform == @FestivalPlatformConstants.WithoutaBox)" value="@FestivalPlatformConstants.WithoutaBox">WithoutaBox</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Platform == @FestivalPlatformConstants.Reelport)" value="@FestivalPlatformConstants.Reelport">Reelport</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Platform == @FestivalPlatformConstants.Shortfilmdepot)" value="@FestivalPlatformConstants.Shortfilmdepot">Shortfilmdepot</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Platform == @FestivalPlatformConstants.ClickForFestivals)" value="@FestivalPlatformConstants.ClickForFestivals">ClickForFestivals</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Platform == @FestivalPlatformConstants.Festhome)" value="@FestivalPlatformConstants.Festhome">Festhome</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Platform == @FestivalPlatformConstants.MovieBeta)" value="@FestivalPlatformConstants.MovieBeta">MovieBeta</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Platform == @FestivalPlatformConstants.UpToFest)" value="@FestivalPlatformConstants.UpToFest">UpToFest</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Platform == @FestivalPlatformConstants.FilmFestivalLife)" value="@FestivalPlatformConstants.FilmFestivalLife">FilmFestivalLife</option>
+                                        <option selected="@(Model.GetFestivalServiceDto.Platform == @FestivalPlatformConstants.FilmFestPlatform)" value="@FestivalPlatformConstants.FilmFestPlatform">FilmFestPlatform</option>
+                                    </select>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-password">راه ثبت نام</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetFestivalServiceDto == null)
+                                {
+                                    <textarea class="form-control" id="txtSubmitWay"></textarea>
+
+                                }
+                                else
+                                {
+                                    <textarea class="form-control"
+                                              id="txtSubmitWay">@Model.GetFestivalServiceDto.Submitway</textarea>
+
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-fileinput">لوگو</label>                       
+                        <div class="col-sm-10">                             
+                            <input type="file" class="form-control" id="fileLogo">
+                        <div class="alert alert-primary" role="alert">
+                          <a target="_blank" href="https://www.freeconvert.com/jpg-to-webp" class="btn btn-lighten-purple waves-effect  width-md waves-purple">jpg->webp (1)</a>
+                          <a target="_blank" href="https://cloudconvert.com/jpg-to-webp" class="btn btn-lighten-purple waves-effect  width-md waves-purple">jpg->webp (2)</a>
+                          <a target="_blank" href="http://optimizilla.com/" class="btn btn-lighten-primary waves-effect  width-md waves-purple">optmize jpg (1)</a>
+                          <a target="_blank" href="https://www.imgonline.com.ua/eng/compress-image-size.php" class="btn btn-lighten-primary waves-effect  width-md waves-purple">optmize jpg (2)</a>
+                        </div>
+                            @{
+                                if (Model.GetFestivalServiceDto != null)
+                                {
+                                    <div class="mt-10">
+                                    <a id="btnShowHideMainImage" class="cursorPointer kingBlueText">(نمایش تصویر)</a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    @{
+                        if (Model.GetFestivalServiceDto != null)
+                        {                            
+                            <div class="form-group row" id="mainImgContent" hidden>
+                                <label class="col-sm-2  col-form-label" for="example-fileinput"></label>
+                                <div class="col-sm-10">
+
+                                    <img class="img-fluid rounded"
+                                         src="/UploadedStuff/admin/images/admin-festival-images/@Model.GetFestivalServiceDto.Logo" />
+                                </div>
+                            </div>
+                        }
+                    }
+                    @{
+                        if (Model.GetFestivalServiceDto == null)
+                        {
+                            <button type="button" onclick="addFestival();"
+                                    class="btn btn-primary waves-effect width-md waves-light">
+                                درج
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" onclick="updateFestival('@Model.GetFestivalServiceDto.Id');"
+                                    class="btn btn-primary waves-effect width-md waves-light">
+                                ویرایش
+                            </button>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles {
+    @*Remaing Characters*@
+    <link href="~/common/remainingcharacters/remainingcharacters.css" rel="stylesheet" />
+    @*Datapicker*@
+    <link href="~/common/datapicker/css/persiandatepicker-default.css" rel="stylesheet" />
+    @*tags*@
+    <link href="~/lib/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+    @*page*@
+    <link href="~/admintemplate/pagejscss/postfestival/postfestival.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/common/fileextensionsize/fileextensionsize.js"></script>
+    <script src="~/lib/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script src="~/common/datapicker/js/persiandatepicker.min.js"></script>
+    <script src="~/common/datapicker/js/farvardin.min.js"></script>
+    <script>
+        $(".shamsidate").persianDatepicker();
+    </script>
+    <script src="https://cdn.ckeditor.com/4.9.2/full-all/ckeditor.js"></script>
+    <script>
+        // detail
+        CKEDITOR.replace('txtDetail',
+            {
+                extraPlugins: 'codesnippet',
+                codeSnippet_theme: 'monokai_sublime',
+                toolbar: [
+                    { name: 'document', items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates'] }, { name: 'bidi', items: ['BidiLtr', 'BidiRtl'] },
+                    '/', // Line break
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', '-', 'RemoveFormat'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv'] },
+                    { name: 'alignment', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] }, // Alignment options
+                    { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                    { name: 'colors', items: ['TextColor', 'BGColor'] },
+                    { name: 'insert', items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'] },
+                    '/', // Line break
+                    { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt'] },
+                    { name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+                    { name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] },
+                    { name: 'forms', items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'] },
+                    '/', // Line break
+                    { name: 'coding', items: ['CodeSnippet'] },
+                ],
+                filebrowserUploadUrl: '/admin/UploadNewsMiddlePost/', // Update this URL to your server-side upload handler
+                filebrowserImageUploadUrl: '/admin/UploadNewsMiddlePost?type=Images',
+                filebrowserImageBrowseUrl: '/admin/AdminNewsImageBrower/', // Update this URL to point to your image browser
+            });
+        // Attributes
+        CKEDITOR.replace('txtAttributes',
+            {
+                extraPlugins: 'codesnippet',
+                codeSnippet_theme: 'monokai_sublime',
+                toolbar: [
+                    { name: 'document', items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates'] }, { name: 'bidi', items: ['BidiLtr', 'BidiRtl'] },
+                    '/', // Line break
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', '-', 'RemoveFormat'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv'] },
+                    { name: 'alignment', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] }, // Alignment options
+                    { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                    { name: 'colors', items: ['TextColor', 'BGColor'] },
+                    { name: 'insert', items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'] },
+                    '/', // Line break
+                    { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt'] },
+                    { name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+                    { name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] },
+                    { name: 'forms', items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'] },
+                    '/', // Line break
+                    { name: 'coding', items: ['CodeSnippet'] },
+                ],
+                filebrowserUploadUrl: '/admin/UploadNewsMiddlePost/', // Update this URL to your server-side upload handler
+                filebrowserImageUploadUrl: '/admin/UploadNewsMiddlePost?type=Images',
+                filebrowserImageBrowseUrl: '/admin/AdminNewsImageBrower/', // Update this URL to point to your image browser
+            });
+        // Rules
+        CKEDITOR.replace('txtRules',
+            {
+                extraPlugins: 'codesnippet',
+                codeSnippet_theme: 'monokai_sublime',
+                toolbar: [
+                    { name: 'document', items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates'] }, { name: 'bidi', items: ['BidiLtr', 'BidiRtl'] },
+                    '/', // Line break
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', '-', 'RemoveFormat'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv'] },
+                    { name: 'alignment', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] }, // Alignment options
+                    { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                    { name: 'colors', items: ['TextColor', 'BGColor'] },
+                    { name: 'insert', items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'] },
+                    '/', // Line break
+                    { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt'] },
+                    { name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+                    { name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] },
+                    { name: 'forms', items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'] },
+                    '/', // Line break
+                    { name: 'coding', items: ['CodeSnippet'] },
+                ],
+                filebrowserUploadUrl: '/admin/UploadNewsMiddlePost/', // Update this URL to your server-side upload handler
+                filebrowserImageUploadUrl: '/admin/UploadNewsMiddlePost?type=Images',
+                filebrowserImageBrowseUrl: '/admin/AdminNewsImageBrower/', // Update this URL to point to your image browser
+            });
+        // detSubmitWayail
+        CKEDITOR.replace('txtSubmitWay',
+            {
+                extraPlugins: 'codesnippet',
+                codeSnippet_theme: 'monokai_sublime',
+                toolbar: [
+                    { name: 'document', items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates'] }, { name: 'bidi', items: ['BidiLtr', 'BidiRtl'] },
+                    '/', // Line break
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', '-', 'RemoveFormat'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv'] },
+                    { name: 'alignment', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] }, // Alignment options
+                    { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                    { name: 'colors', items: ['TextColor', 'BGColor'] },
+                    { name: 'insert', items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'] },
+                    '/', // Line break
+                    { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt'] },
+                    { name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+                    { name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] },
+                    { name: 'forms', items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'] },
+                    '/', // Line break
+                    { name: 'coding', items: ['CodeSnippet'] },
+                ],
+                filebrowserUploadUrl: '/admin/UploadNewsMiddlePost/', // Update this URL to your server-side upload handler
+                filebrowserImageUploadUrl: '/admin/UploadNewsMiddlePost?type=Images',
+                filebrowserImageBrowseUrl: '/admin/AdminNewsImageBrower/', // Update this URL to point to your image browser
+            });
+        // Clean the textarea content before CKEditor loads
+        KingSweetAlertCenterParticularTimer("در حال آماده سازی فرم ها ...",2000);
+    </script>
+@{
+        if (Model.GetFestivalServiceDto == null)
+        {
+            <script>
+                setTimeout(function(){
+                // کد زیر برای این گذاشتم که متاسفانه ی سری تگ های html برای خودش اد میکرد
+                CKEDITOR.instances.txtDetail.setData('');                
+                CKEDITOR.instances.txtAttributes.setData('');                
+                CKEDITOR.instances.txtRules.setData('');                
+                CKEDITOR.instances.txtSubmitWay.setData('');                
+                },8000);
+            </script>
+        }
+        else
+        {
+            <script>
+                var savedGenreValues  = '@Model.GetFestivalServiceDto.Genres';
+            </script>
+        }
+    }
+    <script src="~/admintemplate/pagecssjs/postfestival/postfestival.js"></script>
+    <script src="~/common/remainingcharacters/remainingcharacters.js"></script>
+<script src="http://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.js"></script>
+
 }

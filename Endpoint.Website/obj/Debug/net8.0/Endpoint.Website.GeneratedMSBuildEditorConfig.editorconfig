@@ -48,6 +48,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRmVzdGl2YWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/IranFilmPort/Endpoint.Website/Views/Admin/FestivalSectionDeadline.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRmVzdGl2YWxTZWN0aW9uRGVhZGxpbmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/IranFilmPort/Endpoint.Website/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

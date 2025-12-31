@@ -58,12 +58,12 @@ namespace IranFilmPort.Application.Services.Festivals.Commands.PostFestival
             }
             // generate slug & unique code
             int UNIQUECODE = EnsureUniqueCode(GenerateRandomLongValue());
-
+            if (UNIQUECODE == 0) return new ResultDto { IsSuccess = false };
             // entity
             IranFilmPort.Domain.Entities.Festival.Festivals festival =
                 new Domain.Entities.Festival.Festivals()
                 {
-                    UniqueCode = UNIQUECODE,                    
+                    UniqueCode = UNIQUECODE,
                     Website = WebUtility.HtmlDecode(req.Website.Trim()),
                     Rules = WebUtility.HtmlDecode(req.Rules.Trim()),
                     NotificationDate = req.NotificationDate,

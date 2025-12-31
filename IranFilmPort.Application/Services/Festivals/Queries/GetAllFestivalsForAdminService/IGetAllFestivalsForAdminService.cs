@@ -48,6 +48,7 @@ namespace IranFilmPort.Application.Services.Festivals.Queries.GetAllFestivalsFor
                     TitleEn = x.TitleEn,
                     TitleFa = x.TitleFa,
                     Visit = x.Visit,
+                    UniqueCode = x.UniqueCode
                 })
                 .OrderByDescending(x => x.InsertDate)
                 .ToPaged(req.CurrentPage, RowsOnEachPage, out RowsCount) //  <----  pagination

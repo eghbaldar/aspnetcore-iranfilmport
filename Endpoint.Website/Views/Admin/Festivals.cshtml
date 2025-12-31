@@ -1,6 +1,110 @@
-﻿@{
+﻿@using IranFilmPort.Application.Services.Festivals.Queries.GetAllFestivalsForAdminService
+@using IranFilmPort.Common.Helpers
+@model ResultGetAllFestivalsForAdminServiceDto
+@addTagHelper *,LazZiya.TagHelpers
+@{
     Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
     ViewData["HeadTitle"] = "فستیوال ها";
     int currentPage = 1;
     int.TryParse(Context.Request.Query["page"], out currentPage);
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div>
+            <a href="/admin/addfestival/" class="btn btn-primary waves-effect width-md waves-light">فستیوال جدید</a>
+        </div>
+        <div class="card-box mt-20">
+            <h4 class="mt-0 header-title">لیست فستیوال ها</h4>
+            <div class="mt-10 mb-20">
+                <a class="btn btn-warning waves-effect width-md waves-light">جستجو</a>
+            </div>
+            <div class="table-responsive" id="divNews">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>عنوان</th>
+                            <th>بازدید</th>
+                            <th>تاریخ درج</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbFestivals">
+                        @{
+                            foreach (var item in Model.Result)
+                            {
+                                <tr>
+                                    <td>
+
+                                        @{
+                                            if ((bool)item.Active)
+                                            {
+                                                <input type="checkbox" disabled checked />
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" disabled />
+                                            }
+                                        }
+                                        <a target="_blank" href="/admin/addnews/@item.UniqueCode">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5" />
+                                                <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z" />
+                                            </svg>
+                                        </a>
+                                        <a href="/admin/addfestival/@item.UniqueCode">
+                                            @item.TitleFa
+                                            <br/>
+                                            <small>(@item.TitleEn)</small>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="/admin/FestivalSectionDeadline/@item.UniqueCode" class="btn btn-pink waves-effect width-md waves-light">بخش و ددلاین ها</a>
+                                    </td>
+                                    <td>@item.Visit</td>
+                                    <td>
+                                        @{
+                                            var shamsidate = new PersianDateTime(@item.InsertDate);
+                                            var shamsidateString = shamsidate.ToString("yyyy/MM/dd");
+                                            var persiandateTime = PersianNumberHelper.ConvertToPersian(shamsidateString);
+                                            @persiandateTime
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="dropdown float-right">
+                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="/admin/addfestival/@item.UniqueCode" class="dropdown-item">ویرایش</a>
+                                                <a href="/festival/@item.UniqueCode" target="_blank" class="dropdown-item">مشاهده</a>
+                                                <a onclick="deleteFestival('@item.Id')" class="dropdown-item">حذف</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row mt-10">
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers"
+                         id="datatable-buttons_paginate">
+                        <paging page-no="@currentPage == 0 ? 1 : currentPage"
+                                query-string-key-page-no="page"
+                                page-size="@Model.RowsOnEachPage"
+                                total-records="@Model.RowCount">
+                        </paging>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+    </script>
+    <script src="~/admintemplate/pagecssjs/festivals/festivals.js"></script>
 }

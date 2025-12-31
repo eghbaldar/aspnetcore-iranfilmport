@@ -21,6 +21,7 @@ namespace IranFilmPort.Application.Services.NewsComments.Queries.GetNewsComments
                AcceptedCount = g.Where(c => c.Active == 1).ToList().Count,
                RejectedCount = g.Where(c => c.Active == 2).ToList().Count,
                NewsTitle = _context.News.Where(x => x.Id == g.Key).First().Title,
+               NewsUniqueCode = _context.News.Where(x => x.Id == g.Key).First().UniqueCode,
            })
            .OrderByDescending(c => c.UnderConsiderationCount)
            .ToList();

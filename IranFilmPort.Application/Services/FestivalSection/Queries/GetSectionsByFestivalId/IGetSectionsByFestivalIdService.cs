@@ -5,10 +5,11 @@ namespace IranFilmPort.Application.Services.FestivalSection.Queries.GetSectionsB
 {
     public class RequestGetSectionsByFestivalIdServiceDto
     {
-        public Guid FestivalId { get; set; }
+        public int FestivalUniqueCode { get; set; }
     }
     public class GetSectionsByFestivalIdServiceDto
     {
+        public Guid FestivalId { get; set; }
         public Guid SectionId { get; set; }
         public string SectionTitle { get; set; }
     }
@@ -29,13 +30,16 @@ namespace IranFilmPort.Application.Services.FestivalSection.Queries.GetSectionsB
         }
         public ResultGetSectionsByFestivalIdServiceDto Execute(RequestGetSectionsByFestivalIdServiceDto req)
         {
-            if (req == null || req.FestivalId == Guid.Empty) return null;
+            if (req == null || req.FestivalUniqueCode == 0) return null;
+            var festival = _context.Festivals.FirstOrDefault(x => x.UniqueCode == req.FestivalUniqueCode);
+            if (festival == null) return null;
             var result = _context.FestivalSections
-                .Where(x => x.FestivalId == req.FestivalId)
+                .Where(x => x.FestivalId == festival.Id)
                 .Select(x => new GetSectionsByFestivalIdServiceDto
                 {
                     SectionTitle = x.Title,
                     SectionId = x.Id,
+                    FestivalId = x.FestivalId,
                 })
                 .ToList();
             return new ResultGetSectionsByFestivalIdServiceDto

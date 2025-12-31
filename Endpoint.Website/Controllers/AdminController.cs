@@ -1,10 +1,22 @@
-﻿using Endpoint.Website.Models.AddNews;
+﻿using Endpoint.Website.Models.AddFestival;
+using Endpoint.Website.Models.AddNews;
 using Endpoint.Website.Models.AddUsers;
+using Endpoint.Website.Models.FestivalSectionDeadline;
 using Endpoint.Website.Models.Users;
 using IranFilmPort.Application.Interfaces.FacadePattern;
+using IranFilmPort.Application.Services.FestivalDeadlines.Commands.DeleteFestivalDeadline;
+using IranFilmPort.Application.Services.FestivalDeadlines.Commands.PostFestivalDeadline;
+using IranFilmPort.Application.Services.FestivalDeadlines.Commands.UpdateFestivalDeadline;
+using IranFilmPort.Application.Services.FestivalDeadlines.Queries.GetDeadlinesByFestivalId;
+using IranFilmPort.Application.Services.Festivals.Commands.DeleteFestival;
 using IranFilmPort.Application.Services.Festivals.Commands.PostFestival;
 using IranFilmPort.Application.Services.Festivals.Commands.UpdateFestival;
 using IranFilmPort.Application.Services.Festivals.Queries.GetAllFestivalsForAdminService;
+using IranFilmPort.Application.Services.Festivals.Queries.GetIdByUniqueCode;
+using IranFilmPort.Application.Services.FestivalSection.Commands.DeleteSectionFestival;
+using IranFilmPort.Application.Services.FestivalSection.Commands.PostFestivalSection;
+using IranFilmPort.Application.Services.FestivalSection.Commands.UpdateFestivalSection;
+using IranFilmPort.Application.Services.FestivalSection.Queries.GetSectionsByFestivalId;
 using IranFilmPort.Application.Services.News.News.Commands.DeleteNews;
 using IranFilmPort.Application.Services.News.News.Commands.PostNews;
 using IranFilmPort.Application.Services.News.News.Commands.UpdateNews;
@@ -14,7 +26,6 @@ using IranFilmPort.Application.Services.News.News.Queries.GetNewsByFilterForAdmi
 using IranFilmPort.Application.Services.NewsCategories.Commands.DeleteNewsCategory;
 using IranFilmPort.Application.Services.NewsCategories.Commands.PostNewsCategory;
 using IranFilmPort.Application.Services.NewsCategories.Commands.UpdateNewsCategory;
-using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsCategoriesBySubId;
 using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsChildrenCategories;
 using IranFilmPort.Application.Services.Users.Commands.PostUser;
 using IranFilmPort.Application.Services.Users.Commands.UpdateUser;
@@ -37,12 +48,18 @@ namespace Endpoint.Website.Controllers
         private readonly INewsCategoriesFacadePattern _newsCategoriesFacadePattern;
         private readonly INewsCommentsFacadePattern _newsCommentsFacadePattern;
         private readonly IFestivalsFacadePattern _festivalsFacadePattern;
+        private readonly IFestivalSectionFacadePattern _festivalSectionFacadePattern;
+        private readonly IFestivalDeadlinesFacadePattern _festivalDeadlinesFacadePattern;
+        private readonly ICountiresFacadePattern _countiresFacadePattern;
         public AdminController(IUsersFacadePattern usersFacadePattern,
             IRoleFacadePattern roleFacadePattern,
             INewsFacadePattern newsFacadePattern,
             INewsCategoriesFacadePattern newsCategoriesFacadePattern,
             INewsCommentsFacadePattern newsCommentsFacadePattern,
-            IFestivalsFacadePattern festivalsFacadePattern)
+            IFestivalsFacadePattern festivalsFacadePattern,
+            IFestivalSectionFacadePattern festivalSectionFacadePattern,
+            IFestivalDeadlinesFacadePattern festivalDeadlinesFacadePattern,
+            ICountiresFacadePattern countiresFacadePattern)
         {
             _usersFacadePattern = usersFacadePattern;
             _roleFacadePattern = roleFacadePattern;
@@ -50,6 +67,9 @@ namespace Endpoint.Website.Controllers
             _newsCategoriesFacadePattern = newsCategoriesFacadePattern;
             _newsCommentsFacadePattern = newsCommentsFacadePattern;
             _festivalsFacadePattern = festivalsFacadePattern;
+            _festivalSectionFacadePattern = festivalSectionFacadePattern;
+            _festivalDeadlinesFacadePattern = festivalDeadlinesFacadePattern;
+            _countiresFacadePattern = countiresFacadePattern;
         }
         public IActionResult Index()
         {
@@ -248,14 +268,24 @@ namespace Endpoint.Website.Controllers
         {
             if (id == null)
             {
-                return View();
+                ModelAddFestival modelAddFestival = new ModelAddFestival()
+                {
+                    GetFestivalServiceDto = null,
+                    ResultGetAllCountriesServiceDto = _countiresFacadePattern.GetAllCountriesService.Execute(),
+                };
+                return View(modelAddFestival);
             }
             else
             {
-                return View(_festivalsFacadePattern.GetFestivalService.Execute(new IranFilmPort.Application.Services.Festivals.Queries.GetFestival.RequestGetFestivalServiceDto
+                ModelAddFestival modelAddFestival = new ModelAddFestival()
                 {
-                    UniqueCode = (int)id
-                }));
+                    ResultGetAllCountriesServiceDto = _countiresFacadePattern.GetAllCountriesService.Execute(),
+                    GetFestivalServiceDto = _festivalsFacadePattern.GetFestivalService.Execute(new IranFilmPort.Application.Services.Festivals.Queries.GetFestival.RequestGetFestivalServiceDto
+                    {
+                        UniqueCode = (int)id
+                    })
+                };
+                return View(modelAddFestival);
             }
         }
         [HttpPost]
@@ -267,6 +297,62 @@ namespace Endpoint.Website.Controllers
         public IActionResult UpdateFestival(RequestUpdateFestivalServiceDto req)
         {
             return Json(_festivalsFacadePattern.UpdateFestivalService.Execute(req));
+        }
+        [HttpPut]
+        public IActionResult DeleteFestival(RequestDeleteFestivalServiceDto req)
+        {
+            return Json(_festivalsFacadePattern.DeleteFestivalService.Execute(req));
+        }
+        [HttpGet]
+        public IActionResult FestivalSectionDeadline(int id)
+        {
+            ModelFestivalSectionDeadline modelFestivalSectionDeadline = new ModelFestivalSectionDeadline()
+            {
+                UniqueCode = id,
+                ResultGetSectionsByFestivalIdServiceDto = _festivalSectionFacadePattern.GetSectionsByFestivalIdService.Execute(new RequestGetSectionsByFestivalIdServiceDto
+                {
+                    FestivalUniqueCode = id,
+                }),
+                ResultGetDeadlinesByFestivalIdServiceDto = _festivalDeadlinesFacadePattern.GetDeadlinesByFestivalIdService.Execute(new RequestGetDeadlinesByFestivalIdServiceDto
+                {
+                    FestivalUniqueCode = id
+                }),
+                FestivalId = _festivalsFacadePattern.GetIdByUniqueCodeService.Execute(new RequestGetIdByUniqueCodeDto
+                {
+                    UniqueCode = id
+                })
+            };
+            return View(modelFestivalSectionDeadline);
+        }
+        [HttpPost]
+        public IActionResult PostFestivalSection(RequestPostFestivalSectionServiceDto req)
+        {
+            return Json(_festivalSectionFacadePattern.PostFestivalSectionService.Execute(req));
+        }
+        [HttpPost]
+        public IActionResult PostFestivalDeadline(RequestPostFestivalDeadlineServiceDto req)
+        {
+            return Json(_festivalDeadlinesFacadePattern.PostFestivalDeadlineService.Execute(req));
+        }
+        [HttpPut]
+        public IActionResult UpdateFestivalSection(RequestUpdateFestivalSectionServiceDto req)
+        {
+            return Json(_festivalSectionFacadePattern.UpdateFestivalSectionService.Execute(req));
+        }
+        [HttpPut]
+        public IActionResult UpdateFestivalDeadline(RequestUpdateFestivalDeadlineServiceDto req)
+        {
+            return Json(_festivalDeadlinesFacadePattern.UpdateFestivalDeadlineService.Execute(req));
+        }
+        [HttpPut]
+        public IActionResult DeleteFestivalSection(RequestDeleteSectionFestivalServiceDto req)
+        {
+            return Json(_festivalSectionFacadePattern.DeleteSectionFestivalService.Execute(req));
+        }
+        [HttpPut]
+        public IActionResult DeleteFestivalDeadline(RequestDeleteFestivalDeadlineServiceDto req)
+        {
+            return Json(_festivalDeadlinesFacadePattern.DeleteFestivalDeadlineService.Execute(req));
         }
     }
 }
