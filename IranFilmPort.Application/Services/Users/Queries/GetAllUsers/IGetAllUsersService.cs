@@ -41,7 +41,7 @@ namespace IranFilmPort.Application.Services.Users.Queries.GetAllUsers
                 .Select(x => new GetAllUsersServiceDto
                 {
                     UserId = x.Id,
-                    Fullname = x.Username,
+                    Fullname = $"{x.Firstname} {x.Lastname}",
                     InsertDateTime = x.InsertDateTime,
                     Username = x.Username,
                     RoleTitle = req.RoleTitle

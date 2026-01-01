@@ -475,32 +475,32 @@ namespace IranFilmPort.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9f90cd1f-49fe-465f-a2c8-e85a247f19bb"),
-                            InsertDateTime = new DateTime(2025, 12, 30, 10, 33, 11, 290, DateTimeKind.Local).AddTicks(6646),
+                            Id = new Guid("a4ce3392-04a5-4908-b780-29b4b8a44250"),
+                            InsertDateTime = new DateTime(2026, 1, 1, 14, 56, 26, 331, DateTimeKind.Local).AddTicks(6047),
                             Title = "King"
                         },
                         new
                         {
-                            Id = new Guid("4aba8f8e-9782-4e63-8c55-f7d1f67b823d"),
-                            InsertDateTime = new DateTime(2025, 12, 30, 10, 33, 11, 290, DateTimeKind.Local).AddTicks(6708),
+                            Id = new Guid("28e24f1c-fa28-427d-85d0-eb1fbea62944"),
+                            InsertDateTime = new DateTime(2026, 1, 1, 14, 56, 26, 331, DateTimeKind.Local).AddTicks(6088),
                             Title = "SuperAdmin"
                         },
                         new
                         {
-                            Id = new Guid("882fbd4b-5c24-454a-a197-2a66331910e8"),
-                            InsertDateTime = new DateTime(2025, 12, 30, 10, 33, 11, 290, DateTimeKind.Local).AddTicks(6718),
+                            Id = new Guid("df29e227-0dd7-457a-945d-405dd8e4a746"),
+                            InsertDateTime = new DateTime(2026, 1, 1, 14, 56, 26, 331, DateTimeKind.Local).AddTicks(6093),
                             Title = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("7453bcd8-70df-4051-8713-f1e81fd81768"),
-                            InsertDateTime = new DateTime(2025, 12, 30, 10, 33, 11, 290, DateTimeKind.Local).AddTicks(6727),
+                            Id = new Guid("430a307c-0b1f-4c07-b808-b7bf038fe02d"),
+                            InsertDateTime = new DateTime(2026, 1, 1, 14, 56, 26, 331, DateTimeKind.Local).AddTicks(6098),
                             Title = "Client"
                         },
                         new
                         {
-                            Id = new Guid("89185ff7-6a85-4893-a00a-e0497074bc44"),
-                            InsertDateTime = new DateTime(2025, 12, 30, 10, 33, 11, 290, DateTimeKind.Local).AddTicks(6800),
+                            Id = new Guid("faf42f18-cf58-4b49-acb8-ef1d88379e2a"),
+                            InsertDateTime = new DateTime(2026, 1, 1, 14, 56, 26, 331, DateTimeKind.Local).AddTicks(6115),
                             Title = "User"
                         });
                 });
@@ -545,6 +545,15 @@ namespace IranFilmPort.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime?>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte?>("Degree")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("DegreeField")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("DeleteDateTime")
                         .HasColumnType("datetime2");
 
@@ -552,15 +561,62 @@ namespace IranFilmPort.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("Email_Visibility")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Facebook")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
                     b.Property<string>("Firstname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Firstname_En")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Headshot")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte?>("HeadshotStatus")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("HeadshotStatusMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IMDb")
+                        .HasMaxLength(220)
+                        .HasColumnType("nvarchar(220)");
+
                     b.Property<DateTime>("InsertDateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Instagram")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
                     b.Property<string>("Lastname")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lastname_En")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<byte>("MainStatus")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("MainStatusMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MeliCard")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte?>("MeliCardStatus")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("MeliCardStatusMessage")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
@@ -568,14 +624,31 @@ namespace IranFilmPort.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("Phone_Visibility")
+                        .HasColumnType("bit");
+
+                    b.Property<byte>("Position")
+                        .HasColumnType("tinyint");
 
                     b.Property<byte>("ProviderId")
                         .HasColumnType("tinyint");
 
+                    b.Property<string>("Resume")
+                        .HasMaxLength(3000)
+                        .HasColumnType("nvarchar(3000)");
+
+                    b.Property<string>("Resume_En")
+                        .HasMaxLength(3000)
+                        .HasColumnType("nvarchar(3000)");
+
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Twitter")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("datetime2");
@@ -583,6 +656,10 @@ namespace IranFilmPort.Persistence.Migrations
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Website")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 

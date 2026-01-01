@@ -28,6 +28,9 @@ using IranFilmPort.Application.Services.NewsCategories.Commands.PostNewsCategory
 using IranFilmPort.Application.Services.NewsCategories.Commands.UpdateNewsCategory;
 using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsChildrenCategories;
 using IranFilmPort.Application.Services.Users.Commands.PostUser;
+using IranFilmPort.Application.Services.Users.Commands.UpdateHeadshotByAdmin;
+using IranFilmPort.Application.Services.Users.Commands.UpdateMeliCardByAdmin;
+using IranFilmPort.Application.Services.Users.Commands.UpdateProfileByAdmin;
 using IranFilmPort.Application.Services.Users.Commands.UpdateUser;
 using IranFilmPort.Application.Services.Users.Queries.GetAllUsers;
 using IranFilmPort.Application.Services.Users.Queries.GetUserById;
@@ -353,6 +356,36 @@ namespace Endpoint.Website.Controllers
         public IActionResult DeleteFestivalDeadline(RequestDeleteFestivalDeadlineServiceDto req)
         {
             return Json(_festivalDeadlinesFacadePattern.DeleteFestivalDeadlineService.Execute(req));
+        }
+        [HttpGet]
+        public IActionResult UserHeadshotVerifications()
+        {
+            return View(_usersFacadePattern.GetUserHeadshotsService.Execute());
+        }
+        [HttpGet]
+        public IActionResult UserMeliCardVerifications()
+        {
+            return View(_usersFacadePattern.GetUserMelicardsService.Execute());
+        }
+        [HttpGet]
+        public IActionResult UserProfileVerifications()
+        {
+            return View(_usersFacadePattern.GetUserProfilesService.Execute());
+        }
+        [HttpPut]
+        public IActionResult UpdateUserHeadshot(RequestUpdateHeadshotByAdminServiceDto req)
+        {
+            return Json(_usersFacadePattern.UpdateHeadshotByAdminService.Execute(req));
+        }
+        [HttpPut]
+        public IActionResult UpdateUserProfile(RequestUpdateProfileByAdminServiceDto req)
+        {
+            return Json(_usersFacadePattern.UpdateProfileByAdminService.Execute(req));
+        }
+        [HttpPut]
+        public IActionResult UpdateUserMeliCard(RequestUpdateMeliCardByAdminServiceDto req)
+        {
+            return Json(_usersFacadePattern.UpdateMeliCardByAdminService.Execute(req));
         }
     }
 }

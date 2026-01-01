@@ -1,0 +1,395 @@
+﻿@using IranFilmPort.Application.Services.Users.Queries.GetUserById
+@using IranFilmPort.Common.Constants
+@using IranFilmPort.Common.Helpers
+@model GetUserByIdServiceDto
+@{
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    ViewData["HeadTitle"] = "مدیریت کاربران";
+    ViewData["pageHeadTitle"] = "ویرایش اطلاعات اصلی";
+    ViewData["pageSubTitle"] = "در این صفحه میتوانید اطلاعات اصلی قابل نمایش را ویرایش کنید.";
+}
+<div class="row">
+    <div class="col-9">
+        <div class="card-box">
+            <div class="row" id="divInfo">
+                <div class="col-12">
+                    <div class="alert alert-primary" role="alert">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
+                        </svg>
+                        شما میتوانید از طریق لینک زیر به پروفایل خارجی‌تان دسترسی و لینک را در شبکه های اجتماعی خودتان به اشتراک بگذارید:
+                        <div class="ltr mt-20">
+                            <a href="https://iranfilmport.com/filmmaker/@Model.Username" target="_blank">https://iranfilmport.com/filmmaker/@Model.Username</a>
+                        </div>
+                    </div>
+                    <div class="alert alert-primary" role="alert">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
+                        </svg>
+                        اطلاعات شما بصورت عمومی دردسترس  همگان خواهد بود.
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-fileinput">تصویر پروفایل</label>
+                        <div class="col-sm-10">
+                            @{
+                                switch (Model.HeadshotStatus)
+                                {
+                                    case StatusConstants.UnderConsideration:
+                                        <div class="alert alert-warning" role="alert">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                                            </svg>
+                                            تصویر شما در حال بررسی است.
+                                        </div>
+                                        break;
+                                    case StatusConstants.Rejected:
+                                        <div class="alert alert-danger" role="alert">
+                                            تصویر شما تائید نشده است.
+                                            <div class="p-20">
+                                                @Model.HeadshotStatusMessage
+                                            </div>
+                                        </div>
+                                        <input type="file" class="form-control" id="fileHeashot">
+                                        <div class="mt-10">
+                                            <button type="button" onclick="updateHeadshot();"
+                                                    class="btn btn-success waves-effect width-md waves-light">
+                                                ارسال تصویر
+                                            </button>
+                                        </div>
+                                        break;
+                                    case StatusConstants.Accepted:
+                                        <div class="alert alert-success" role="alert">
+                                            تصویر شما تائید شده است.
+                                        </div>
+                                        <input type="file" class="form-control" id="fileHeashot">
+                                        <div class="mt-10">
+                                            <button type="button" onclick="updateHeadshot();"
+                                                    class="btn btn-success waves-effect width-md waves-light">
+                                                ارسال تصویر
+                                            </button>
+                                        </div>
+                                        break;
+                                    default:
+                                        <input type="file" class="form-control" id="fileHeashot">
+                                        <div class="mt-10">
+                                            <button type="button" onclick="updateHeadshot();"
+                                                    class="btn btn-success waves-effect width-md waves-light">
+                                                ارسال تصویر
+                                            </button>
+                                        </div>
+                                        break;
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-fileinput">تصویر کارت ملی</label>
+                        <div class="col-sm-10">
+                            @{
+                                switch (Model.MeliCardStatus)
+                                {
+                                    case StatusConstants.UnderConsideration:
+                                        <div class="alert alert-warning" role="alert">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                                            </svg>
+                                            اطلاعات هویتی شما در حال بررسی است.
+                                        </div>
+                                        break;
+                                    case StatusConstants.Rejected:
+                                        <div class="alert alert-danger" role="alert">
+                                            اطلاعات شما تائید نشده است.
+                                            <div class="p-20">
+                                                @Model.MeliCardStatusMessage
+                                            </div>
+                                        </div>
+                                        <input type="file" class="form-control" id="fileMeliCard">
+                                        <div class="mt-10">
+                                            <button type="button" onclick="updateMelicard();"
+                                                    class="btn btn-success waves-effect width-md waves-light">
+                                                ارسال کارت ملی
+                                            </button>
+                                        </div>
+                                        break;
+                                    case StatusConstants.Accepted:
+                                        <div class="alert alert-success" role="alert">
+                                            اطلاعات هویتی شما تائید و پروفایل شما تبدیل به هنرمند ویژه شده است.
+                                        </div>
+                                        break;
+                                    default:
+                                        <input type="file" class="form-control" id="fileMeliCard">
+                                        <div class="mt-10">
+                                            <button type="button" onclick="updateMelicard();"
+                                                    class="btn btn-success waves-effect width-md waves-light">
+                                                ارسال کارت ملی
+                                            </button>
+                                        </div>
+                                        break;
+                                }
+                            }
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">نام</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="txtFirstname"
+                                   value="@Model.Firstname"
+                                   class="form-control" placeholder="مانند: علیمحمد">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">نام خانوادگی</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="txtLastname"
+                                   value="@Model.Lastname"
+                                   class="form-control" placeholder="مانند: اقبالدار">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">نام کاربری</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="txtUsername"
+                                   style="background-color:#FADE46"
+                                   value="@Model.Username"
+                                   class="form-control ltr" placeholder="e.g. @@iranfilmport">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">شماره موبایل</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="txtPhone"
+                                   value="@Model.Phone (تغییر شماره موبایل)" disabled
+                                   class="form-control ltr" placeholder="e.g. 09111111111">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">ایمیل</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="txtEmail"
+                                   value="@Model.Email (تغییر ایمیل)" disabled
+                                   class="form-control ltr" placeholder="e.g. info@@iranfilmport.com">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">حرفه</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="selectPosition">
+                                <option disabled>حرفه را انتخاب کنید ...</option>
+                                <option selected="@(Model.Position == PositionContants.Director)" value="@PositionContants.Director">کارگردان</option>
+                                <option selected="@(Model.Position == PositionContants.Producer)" value="@PositionContants.Producer">تهیه کننده</option>
+                                <option selected="@(Model.Position == PositionContants.Distributor)" value="@PositionContants.Distributor">پخش کننده</option>
+                                <option selected="@(Model.Position == PositionContants.Agent)" value="@PositionContants.Agent">نماینده</option>
+                                <option selected="@(Model.Position == PositionContants.Company)" value="@PositionContants.Company">مجری طرح</option>
+                                <option selected="@(Model.Position == PositionContants.Writer)" value="@PositionContants.Writer">نویسنده</option>
+                                <option selected="@(Model.Position == PositionContants.Actor)" value="@PositionContants.Actor">بازیگر</option>
+                                <option selected="@(Model.Position == PositionContants.DOP)" value="@PositionContants.DOP">فیلمبردار</option>
+                                <option selected="@(Model.Position == PositionContants.Editor)" value="@PositionContants.Editor">تدوینگر</option>
+                                <option selected="@(Model.Position == PositionContants.Sound)" value="@PositionContants.Sound">صدا</option>
+                                <option selected="@(Model.Position == PositionContants.Makeup)" value="@PositionContants.Makeup">طراح گریم</option>
+                                <option selected="@(Model.Position == PositionContants.Custome)" value="@PositionContants.Custome">طراح لباس</option>
+                                <option selected="@(Model.Position == PositionContants.Designer)" value="@PositionContants.Designer">طراح صحنه</option>
+                                <option selected="@(Model.Position == PositionContants.Other)" value="@PositionContants.Other">سایر</option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">نام به انگلیسی</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="txtFirstname_En"
+                                   value="@Model.Firstname_En"
+                                   class="form-control ltr" placeholder="e.g. Ali">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">نام خانوادگی به انگلیسی</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="txtLastname_En" value="@Model.Lastname_En" class="form-control ltr" placeholder="e.g. Eghbaldar">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">روزمه</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="txtResume" rows="5">@Model.Resume</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">Resume</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control ltr" id="txtResume_En" rows="5">@Model.Resume_En</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">تاریخ تولد</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.Birthday == null)
+                                {
+                                    <input type="text" id="txtBirthday" class="form-control shamsidate" readonly>
+                                }
+                                else
+                                {
+                                    var pureDateTime = Model.Birthday;
+                                    @* ----- *@
+                                    var shamsidateFuture = new PersianDateTime(Convert.ToDateTime(pureDateTime).Date);
+                                    var shamsidateStringFuture = shamsidateFuture.ToString("yyyy/MM/dd");
+                                    var persiandateTimeFuture = PersianNumberHelper.ConvertToPersian(shamsidateStringFuture);
+                                    <input type="text" id="txtBirthday" value="@persiandateTimeFuture" class="form-control shamsidate" readonly>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">نمایش شماره همراه بصورت عمومی</label>
+                        <div class="col-sm-10 alignCenter">
+                            <div class="custom-control custom-switch ">
+                                <label class="custom-control material-switch">
+                                    <input checked="@(Model.Phone_Visibility)" type="checkbox" name="active" id="chkMobile" class="material-switch-control-input">
+                                    <span class="material-switch-control-indicator"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">نمایش ایمیل همراه بصورت عمومی</label>
+                        <div class="col-sm-10 alignCenter">
+                            <div class="custom-control custom-switch ">
+                                <label class="custom-control material-switch">
+                                    <input checked="@(Model.Email_Visibility)" type="checkbox" name="active" id="chkEmail" class="material-switch-control-input">
+                                    <span class="material-switch-control-indicator"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">تحصیلات</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="selectDegree">
+                                <option disabled>مدرک تحصیلی</option>
+                                <option selected="@(Model.Degree == DegreeContants.ZirDiplom)" value="@DegreeContants.ZirDiplom">زیر دپلم</option>
+                                <option selected="@(Model.Degree == DegreeContants.Diplom)" value="@DegreeContants.Diplom">دیپلم</option>
+                                <option selected="@(Model.Degree == DegreeContants.FogheDiplom)" value="@DegreeContants.FogheDiplom">فوق دیپلم</option>
+                                <option selected="@(Model.Degree == DegreeContants.Lisans)" value="@DegreeContants.Lisans">لیسانس</option>
+                                <option selected="@(Model.Degree == DegreeContants.FogheLisans)" value="@DegreeContants.FogheLisans">فوق لیسانس</option>
+                                <option selected="@(Model.Degree == DegreeContants.Doctor)" value="@DegreeContants.Doctor">دکتری</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">رشته تحصیلی</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="txtDegreeField" value="@Model.DegreeField" class="form-control" placeholder="متن دلخواه شما...">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">وب سایت شخصی</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="txtWebsite" value="@Model.Website" class="form-control" placeholder="متن دلخواه شما...">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">آیدی توئیتر</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="txtTwitter" value="@Model.Twitter" class="form-control" placeholder="متن دلخواه شما...">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">آیدی فیسبوک</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="txtFacebook" value="@Model.Facebook" class="form-control" placeholder="متن دلخواه شما...">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">آیدی اینستاگرام</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="txtInstagram" value="@Model.Instagram" class="form-control" placeholder="متن دلخواه شما...">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">آدرس صفحه IMDb</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="txtIMDb" value="@Model.IMDb" class="form-control" placeholder="متن دلخواه شما...">
+                        </div>
+                    </div>
+                    <button type="button" onclick="updateInfo();"
+                            class="btn btn-success waves-effect width-md waves-light">
+                        بروزرسانی اطلاعات
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="alert alert-light" role="alert">
+            @{
+                switch (Model.MeliCardStatus)
+                {
+                    case StatusConstants.Accepted:
+                        <div class="text-center">
+                            <img class="img-fluid rounded" src="~/CommonTemplate/assets/imgs/confidence_logo_small.webp" />
+                        </div>
+                        break;
+                    case StatusConstants.Rejected:
+                        <div class="alert alert-danger" role="alert">
+                            وضعیت هویتی کاربر تائید نشده است.
+                            <div class="p-10">
+                                @Model.MeliCardStatusMessage
+                            </div>
+                        </div>
+                        break;
+                    case StatusConstants.UnderConsideration:
+                        <div class="alert alert-Warning" role="alert">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                            </svg>
+                            وضعیت هویتی کاربر در انتظار تائید می باشد.
+                        </div>
+                        break;
+                }
+            }
+            @{
+                switch (Model.MainStatus)
+                {
+                    case StatusConstants.Accepted:
+                        <div class="alert alert-success" role="alert">
+                            وضعیت پروفایل: فعال
+                        </div>
+                        break;
+                    case StatusConstants.Rejected:
+                        <div class="alert alert-danger" role="alert">
+                            وضعیت پروفایل کاربر تائید نشده است.
+                            <div class="p-10">
+                                @Model.MainStatusMessage
+                            </div>
+                        </div>
+                        break;
+                    case StatusConstants.UnderConsideration:
+                        <div class="alert alert-Warning" role="alert">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                            </svg>
+                            وضعیت پروفایل کاربر در انتظار تائید می باشد.
+                        </div>
+                        break;
+                }
+            }
+        </div>
+        <img class="img-fluid rounded" src="~/CommonTemplate/assets/imgs/leftSideCommonUserInformation.webp" />
+    </div>
+</div>
+@section Styles {
+    @*Remaing Characters*@
+    <link href="~/common/remainingcharacters/remainingcharacters.css" rel="stylesheet" />
+    @*Datapicker*@
+    <link href="~/common/datapicker/css/persiandatepicker-default.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/common/fileextensionsize/fileextensionsize.js"></script>
+    <script src="~/common/datapicker/js/persiandatepicker.min.js"></script>
+    <script src="~/common/datapicker/js/farvardin.min.js"></script>
+    <script>
+        $(".shamsidate").persianDatepicker();
+    </script>
+    <script src="~/commontemplate/pagecssjs/information/information.js"></script>
+}

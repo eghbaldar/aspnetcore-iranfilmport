@@ -15,8 +15,10 @@
     } else {
         KingWarningStyleOff("#txtPassword", 0);
     }
-    
+    // loading part
+    btnWaitMe_Start("btnLogin");
     GoogleLoader.start(); // goolge effect
+    // end loading part
     turnstile.render('#turnstile-login', {
         sitekey: '0x4AAAAAACJBcc8Xh8rmgVEA',
         callback: function (token) {
@@ -35,24 +37,28 @@
                 success: function (data) {
                     if (data.isSuccess) {
                         KingSweetAlertCenterWithoutTimer('در حال ورود به پرتال ...');
-                        window.location = "/user/";
+                        window.location = data.reutrnedUrl;
                     }
                     else {
                         KingSweetAlert(0, data.message);
+                        btnWaitMe_Stop("btnLogin");
+                        GoogleLoader.finish();
                     }
                 },
                 error: function (e) {
                     KingSweetAlert(0, null);
+                    btnWaitMe_Stop("btnLogin");
+                    GoogleLoader.finish();
                 }, done(e) {
                     GoogleLoader.finish();
+                    btnWaitMe_Stop("btnLogin");
                 }
             });
         },
         'error-callback': function (e) {
             KingSweetAlert(0, "مشکلی در هویت سنجی شما بوجود آماده است.");
             GoogleLoader.finish();
+            btnWaitMe_Stop("btnLogin");
         }
-    });
-    btnWaitMe_Start("btnLogin");
-
+    });    
 }

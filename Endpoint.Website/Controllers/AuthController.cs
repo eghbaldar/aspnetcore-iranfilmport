@@ -1,9 +1,11 @@
-﻿using IranFilmPort.Application.Interfaces.Context;
+﻿using Endpoint.Website.Utilities.Claim;
+using IranFilmPort.Application.Interfaces.Context;
 using IranFilmPort.Application.Interfaces.FacadePattern;
 using IranFilmPort.Application.Services._Token;
 using IranFilmPort.Application.Services._Turnstile;
 using IranFilmPort.Application.Services.UserRefreshToken;
 using IranFilmPort.Application.Services.Users.Queries.CheckUsernamePassword;
+using IranFilmPort.Common.Constants;
 using IranFilmPort.Infranstructure.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -29,9 +31,30 @@ namespace Endpoint.Website.Controllers
 
         [KingCheckUserAttribute(Role.King, Role.SuperAdmin, Role.Admin, Role.Client, Role.User)]
         public IActionResult index()
+        
         {
             if (User.Identity.IsAuthenticated)
-                return Redirect("/user/");
+            {
+                var roles = ClaimUtility.GetUserRole(User as ClaimsPrincipal);
+                if (roles.Contains(RoleConstants.King) || 
+                    roles.Contains(RoleConstants.SuperAdmin) ||
+                    roles.Contains(RoleConstants.Admin))
+                {
+                    return Redirect("/admin/");
+                }
+                else if (roles.Contains(RoleConstants.User))
+                {
+                    return Redirect("/user/");
+                }
+                else if (roles.Contains(RoleConstants.Client))
+                {
+                    return Redirect("/client/");
+                }
+                else
+                {
+                    return RedirectToAction(TokenStatics.DestinationActionAfterLogout, TokenStatics.DestinationControllerAfterLogout);
+                }
+            }
             else
                 return View();
         }
@@ -53,6 +76,7 @@ namespace Endpoint.Website.Controllers
             }
 
             // Add try-catch for error handling
+            string _role = "";
             try
             {
                 // captcha
@@ -107,6 +131,7 @@ namespace Endpoint.Website.Controllers
                     string token = tokenService.GenerateToken(userTokenDto, TokenStatics.AccessTokenKey);
                     // generate cookie
                     var checkCookie = cookieService.GenerateCookie(TokenStatics.AuthCookieName, token, exp);
+                    _role = login.Data.Role;
                 }
                 else
                 {
@@ -118,7 +143,23 @@ namespace Endpoint.Website.Controllers
                 // Log the exception
                 return Json(new { IsSuccess = false, Message = "خطایی در سامانه رخ داده است. لطفا مجددا تلاش کنید." });
             }
-            return Json(new { IsSuccess = true});
+
+            string _reutrnedUrl = "";
+            switch (_role)
+            {
+                case RoleConstants.King:
+                case RoleConstants.SuperAdmin:
+                case RoleConstants.Admin:
+                    _reutrnedUrl = "/admin/";
+                    break;
+                case RoleConstants.Client:
+                    _reutrnedUrl = "/client/";
+                    break;
+                case RoleConstants.User:                
+                    _reutrnedUrl = "/user/";
+                    break;
+            }
+            return Json(new { IsSuccess = true , ReutrnedUrl = _reutrnedUrl });
         }
         public IActionResult Logout()
         {

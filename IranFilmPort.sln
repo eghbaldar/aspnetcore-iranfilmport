@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IranFilmPort.Persistence", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endpoint.Website", "Endpoint.Website\Endpoint.Website.csproj", "{4E1862C2-C658-4D4F-B135-32309169D815}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{B32C4DE3-B6D4-4534-95B6-4F168A3E671D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{4E1862C2-C658-4D4F-B135-32309169D815}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E1862C2-C658-4D4F-B135-32309169D815}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E1862C2-C658-4D4F-B135-32309169D815}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B32C4DE3-B6D4-4534-95B6-4F168A3E671D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B32C4DE3-B6D4-4534-95B6-4F168A3E671D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B32C4DE3-B6D4-4534-95B6-4F168A3E671D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B32C4DE3-B6D4-4534-95B6-4F168A3E671D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{60AD6774-F138-4F3D-B5A6-FFC67148A56A} = {0B36EA61-6B59-4C5F-8505-2F19C33B707D}
 		{5D158831-72E4-4E44-83B0-AE88DC874ECE} = {0B36EA61-6B59-4C5F-8505-2F19C33B707D}
 		{4E1862C2-C658-4D4F-B135-32309169D815} = {F3B2F5E3-D7CC-4EB2-B643-1DD2B488E4EA}
+		{B32C4DE3-B6D4-4534-95B6-4F168A3E671D} = {8A1878C7-2C72-48D7-803F-546ABE44E5A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35A5901B-063F-4932-BF75-8C140B6A037F}

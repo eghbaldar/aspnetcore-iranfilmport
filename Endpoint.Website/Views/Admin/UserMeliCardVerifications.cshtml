@@ -1,0 +1,58 @@
+﻿@*
+    DeVeloped: Alimohammad Eghbaldar
+    www.eghbaldar.ir
+    www.iranfilmport.com
+*@
+@using IranFilmPort.Application.Services.Users.Queries.GetUserMelicards
+@using IranFilmPort.Common.Constants
+@using IranFilmPort.Common.Helpers
+@{
+    Layout = "~/views/shared/_LayoutUserClientAdmin.cshtml";
+}
+@model ResultGetUserMelicardsServiceDto
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h4 class="mt-0 header-title">جدول تصاویر کاربران</h4>
+            <div class="table-responsive">
+                <table class="table mb-0" id="tb">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>نام</th>
+                            <th>تصویر</th>
+                            <th>تاریخ درج</th>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Result)
+                        {
+                            <tr>
+                                <td>
+                                    <a class="kingBlueText" href="/admin/adminUsers/@item.UserId" target="_blank">@item.Fullname</a>
+                                </td>
+                                <td><a href="/UploadedStuff/users/images/user-melicard/@item.Melicard-original.jpg" target="_blank">مشاهده تصویر</a></td>
+                                <td>
+                                    @{
+                                        var shamsiDate = new PersianDateTime(Convert.ToDateTime(item.InsertDateTime));
+                                        var shamsiDateString = shamsiDate.ToString("yyyy/MM/dd");
+                                        var persianDateString = PersianNumberHelper.ConvertToPersian(shamsiDateString);
+                                    }
+                                    @persianDateString
+                                </td>
+                                <td>
+                                    <button type="button" onclick="reject('@item.UserId','@StatusConstants.Rejected');" class="btn btn-primary btnWaiting" data-dismiss="modal">رد</button>
+                                    <button type="button" onclick="accept('@item.UserId','@StatusConstants.Accepted');" class="btn btn-primary btnWaiting" data-dismiss="modal">تائید</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/admintemplate/pagecssjs/usermelicard/usermelicard.js"></script>
+}

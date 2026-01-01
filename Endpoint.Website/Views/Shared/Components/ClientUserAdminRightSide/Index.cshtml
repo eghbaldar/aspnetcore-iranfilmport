@@ -1,7 +1,12 @@
 ﻿@using System.Security.Claims
+@using Endpoint.Website.Utilities.Claim
+@using IranFilmPort.Application.Services._AdminStuff.Queries.GetPanelNotification
 @using IranFilmPort.Common.Constants
+@model GetPanelNotificationServiceDto
 @{
     var claimIdentity = User.Identity as ClaimsIdentity;
+    var fullname = ClaimUtility.GetUserFullname(User);
+    var role = ClaimUtility.GetUserRole(User);
 }
 <div class="left-side-menu">
     <div class="slimscroll-menu">
@@ -10,37 +15,39 @@
         <div class="user-box text-center">
             <img src="/common/images/square-colored-logo.webp" alt="تصویر" height="100" class="rounded-circle img-thumbnail avatar-lg">
             <img src="/UserTemplate/assets/images/users/user-1.jpg" alt="تصویر کاربر" title="قائم امیدی" class="rounded-circle img-thumbnail avatar-lg">
+            <br />
             <div class="dropdown">
-                <a href="#" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown">قائم امیدی</a>
+                <a href="#" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown">@fullname</a>
                 <div class="dropdown-menu user-pro-dropdown">
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fe-user mr-1"></i>
-                        <span>حساب کاربری</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fe-settings mr-1"></i>
-                        <span>تنظیمات</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fe-lock mr-1"></i>
-                        <span>قفل کردن صفحه</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <a href="/auth/logout/" class="dropdown-item notify-item">
                         <i class="fe-log-out mr-1"></i>
                         <span>خروج</span>
                     </a>
 
                 </div>
             </div>
-            <p class="text-muted">مدیر</p>
+            <p class="text-muted">
+                @{
+                    switch (@role)
+                    {
+                        case RoleConstants.King:
+                            <b>پادشاه</b>
+                            break;
+                        case RoleConstants.SuperAdmin:
+                            <b>سوپرادمین</b>
+                            break;
+                        case RoleConstants.Admin:
+                            <b>ادمین</b>
+                            break;
+                        case RoleConstants.Client:
+                            <b>مشتری</b>
+                            break;
+                        case RoleConstants.User:
+                            <b>کاربر عادی</b>
+                            break;
+                    }
+                }
+            </p>
             <ul class="list-inline">
                 <li class="list-inline-item">
                     <a href="#" class="text-muted">
@@ -69,6 +76,13 @@
                         <span> پیشخوان </span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="/common/information">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span> اطلاعات کاربر </span>
+                    </a>
+                </li>
                 @{
                     if (claimIdentity.FindFirst(ClaimTypes.Role).Value.ToString() == RoleConstants.King ||
                     claimIdentity.FindFirst(ClaimTypes.Role).Value.ToString() == RoleConstants.SuperAdmin)
@@ -87,11 +101,65 @@
                                 <li><a href="/admin/users/user">کاربران عادی</a></li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="mdi mdi-invert-colors"></i>
+                                <span>
+                                    @{
+                                        if (
+                                            Model.UserProfileStatus != 0 ||
+                                            Model.UserHeadshotStatus != 0 ||
+                                            Model.UserMeliCardStatus != 0
+                                        )
+                                        {
+                                            <i class="blink"></i>
+                                        }
+                                    }
+                                    در حال بررسی‌ها
+                                </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li>
+                                    <a href="/admin/userprofileverifications">
+                                        @{
+                                            if (Model.UserProfileStatus != 0)
+                                            {
+                                                <i class="blink"></i>
+                                            }
+                                        }
+                                        پروفایل کاربران
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/admin/userheadshotverifications">
+                                        @{
+                                            if (Model.UserHeadshotStatus != 0)
+                                            {
+                                                <i class="blink"></i>
+                                            }
+                                        }
+                                        تصاویر کاربران
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/admin/usermelicardverifications">
+                                        @{
+                                            if (Model.UserMeliCardStatus != 0)
+                                            {
+                                                <i class="blink"></i>
+                                            }
+                                        }
+                                        هویت کاربران
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     }
                     if (
                     claimIdentity.FindFirst(ClaimTypes.Role).Value.ToString() == RoleConstants.King ||
                     claimIdentity.FindFirst(ClaimTypes.Role).Value.ToString() == RoleConstants.SuperAdmin ||
-                        claimIdentity.FindFirst(ClaimTypes.Role).Value.ToString() == RoleConstants.Admin)
+                    claimIdentity.FindFirst(ClaimTypes.Role).Value.ToString() == RoleConstants.Admin)
                     {
                         <li>
                             <a href="javascript: void(0);">

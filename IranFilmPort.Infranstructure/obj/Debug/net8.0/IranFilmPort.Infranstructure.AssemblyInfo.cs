@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IranFilmPort.Infranstructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba822e83409dd0fd974616df9fc77487b96f4df3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6bca0aa9c3c050bdb890a3f4f017027e4a716191")]
 [assembly: System.Reflection.AssemblyProductAttribute("IranFilmPort.Infranstructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IranFilmPort.Infranstructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

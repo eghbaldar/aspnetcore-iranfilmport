@@ -1,0 +1,15 @@
+E:\IranFilmPort\Helpers\bin\Debug\net8.0\Helpers.exe
+E:\IranFilmPort\Helpers\bin\Debug\net8.0\Helpers.deps.json
+E:\IranFilmPort\Helpers\bin\Debug\net8.0\Helpers.runtimeconfig.json
+E:\IranFilmPort\Helpers\bin\Debug\net8.0\Helpers.dll
+E:\IranFilmPort\Helpers\bin\Debug\net8.0\Helpers.pdb
+E:\IranFilmPort\Helpers\obj\Debug\net8.0\Helpers.GeneratedMSBuildEditorConfig.editorconfig
+E:\IranFilmPort\Helpers\obj\Debug\net8.0\Helpers.AssemblyInfoInputs.cache
+E:\IranFilmPort\Helpers\obj\Debug\net8.0\Helpers.AssemblyInfo.cs
+E:\IranFilmPort\Helpers\obj\Debug\net8.0\Helpers.csproj.CoreCompileInputs.cache
+E:\IranFilmPort\Helpers\obj\Debug\net8.0\Helpers.sourcelink.json
+E:\IranFilmPort\Helpers\obj\Debug\net8.0\Helpers.dll
+E:\IranFilmPort\Helpers\obj\Debug\net8.0\refint\Helpers.dll
+E:\IranFilmPort\Helpers\obj\Debug\net8.0\Helpers.pdb
+E:\IranFilmPort\Helpers\obj\Debug\net8.0\Helpers.genruntimeconfig.cache
+E:\IranFilmPort\Helpers\obj\Debug\net8.0\ref\Helpers.dll
