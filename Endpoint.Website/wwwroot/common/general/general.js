@@ -247,6 +247,7 @@ function KingValidEmail(email) {
 // copy a text
 function KingCopyText(text) {
     navigator.clipboard.writeText(text);
+    KingSweetAtCenter("", "کپی شد.", "success");
 }
 
 // close a modal

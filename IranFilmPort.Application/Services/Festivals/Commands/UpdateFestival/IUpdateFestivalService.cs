@@ -1,7 +1,9 @@
 ﻿using IranFilmPort.Application.Common;
 using IranFilmPort.Application.Interfaces.Context;
+using IranFilmPort.Application.Services.Common.Sitemap;
 using IranFilmPort.Application.Services.Common.UploadFile;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 
 namespace IranFilmPort.Application.Services.Festivals.Commands.UpdateFestival
@@ -34,16 +36,18 @@ namespace IranFilmPort.Application.Services.Festivals.Commands.UpdateFestival
     }
     public interface IUpdateFestivalService
     {
-        ResultDto Execute(RequestUpdateFestivalServiceDto req);
+        Task<ResultDto> Execute(RequestUpdateFestivalServiceDto req);
     }
     public class UpdateFestivalService : IUpdateFestivalService
     {
         private readonly IDataBaseContext _context;
-        public UpdateFestivalService(IDataBaseContext context)
+        private readonly IServiceProvider _serviceProvider;
+        public UpdateFestivalService(IDataBaseContext context, IServiceProvider serviceProvider)
         {
             _context = context;
+            _serviceProvider = serviceProvider;
         }
-        public ResultDto Execute(RequestUpdateFestivalServiceDto req)
+        public async Task<ResultDto> Execute(RequestUpdateFestivalServiceDto req)
         {
             if (req == null ||
                 req.Id == Guid.Empty ||
@@ -58,53 +62,83 @@ namespace IranFilmPort.Application.Services.Festivals.Commands.UpdateFestival
                 return new ResultDto { IsSuccess = false };
             }
 
-            // entity
-            var festival = _context.Festivals
-                .FirstOrDefault(x => x.Id == req.Id);
-            if (festival == null) return new ResultDto { IsSuccess = false };
-
-            // the main image
-            if (req.Logo != null)
+            using (var scope = _serviceProvider.CreateScope())
             {
-                // upload the main photo
-                var file = CreateFilename(req.Logo, req.AllowedOver150);
-                switch (file.IsSuccess)
+                var dbContext = scope.ServiceProvider.GetRequiredService<IDataBaseContext>();
+                var sitemapFacade = scope.ServiceProvider.GetRequiredService<ISitemapService>();
+
+                using (var transaction = await dbContext.Database.BeginTransactionAsync())
                 {
-                    case true:
-                        festival.Logo = file.Filename;
-                        break;
-                    case false:
-                        return new ResultDto
+                    try
+                    {
+                        // entity
+                        var festival = dbContext.Festivals
+                            .FirstOrDefault(x => x.Id == req.Id);
+                        if (festival == null) return new ResultDto { IsSuccess = false };
+
+                        // the main image
+                        if (req.Logo != null)
                         {
-                            IsSuccess = false,
-                            Message = file.Message,
-                        };
+                            // upload the main photo
+                            var file = CreateFilename(req.Logo, req.AllowedOver150);
+                            switch (file.IsSuccess)
+                            {
+                                case true:
+                                    festival.Logo = file.Filename;
+                                    break;
+                                case false:
+                                    return new ResultDto
+                                    {
+                                        IsSuccess = false,
+                                        Message = file.Message,
+                                    };
+                            }
+                        }
+
+                        festival.Active = req.Active;
+                        festival.Address = WebUtility.HtmlDecode(req.Address.Trim());
+                        festival.TitleEn = WebUtility.HtmlDecode(req.TitleEn.Trim());
+                        festival.TitleFa = WebUtility.HtmlDecode(req.TitleFa.Trim());
+                        festival.Attribute = WebUtility.HtmlDecode(req.Attribute.Trim());
+                        festival.Rules = WebUtility.HtmlDecode(req.Rules.Trim());
+                        festival.ShortFeature = req.ShortFeature;
+                        festival.CountryCode = req.CountryCode;
+                        festival.Detail = WebUtility.HtmlDecode(req.Detail.Trim());
+                        festival.EventStartDate = req.EventStartDate;
+                        festival.EventEndDate = req.EventEndDate;
+                        festival.Genres = req.Genres;
+                        festival.OpeningDate = req.OpeningDate;
+                        festival.NotificationDate = req.NotificationDate;
+                        festival.Level = req.Level;
+                        festival.Submitway = WebUtility.HtmlDecode(req.Submitway.Trim());
+                        festival.Premiere = req.Premiere;
+                        festival.Platform = req.Platform;
+                        festival.Website = WebUtility.HtmlDecode(req.Website.Trim());
+
+                        // Step 3: Save changes and commit the transaction
+                        var output = await dbContext.SaveChangesAsync();
+
+                        // sitemap ...
+                        sitemapFacade.CreateOrUpdateSitemap();
+
+                        if (output >= 0)
+                        {
+                            await transaction.CommitAsync(); 
+                            return new ResultDto { IsSuccess = true };
+                        }
+                        else
+                        {
+                            await transaction.RollbackAsync();
+                            return new ResultDto { IsSuccess = false };
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await transaction.RollbackAsync();
+                        return new ResultDto { IsSuccess = false };
+                    }
                 }
             }
-
-            festival.Active = req.Active;
-            festival.Address = WebUtility.HtmlDecode(req.Address.Trim());
-            festival.TitleEn = WebUtility.HtmlDecode(req.TitleEn.Trim());
-            festival.TitleFa = WebUtility.HtmlDecode(req.TitleFa.Trim());
-            festival.Attribute = WebUtility.HtmlDecode(req.Attribute.Trim());
-            festival.Rules = WebUtility.HtmlDecode(req.Rules.Trim());
-            festival.ShortFeature = req.ShortFeature;
-            festival.CountryCode = req.CountryCode;
-            festival.Detail = WebUtility.HtmlDecode(req.Detail.Trim());
-            festival.EventStartDate = req.EventStartDate;
-            festival.EventEndDate = req.EventEndDate;
-            festival.Genres = req.Genres;
-            festival.OpeningDate = req.OpeningDate;
-            festival.NotificationDate = req.NotificationDate;
-            festival.Level = req.Level;
-            festival.Submitway = WebUtility.HtmlDecode(req.Submitway.Trim());
-            festival.Premiere = req.Premiere;
-            festival.Platform = req.Platform;
-            festival.Website = WebUtility.HtmlDecode(req.Website.Trim());
-
-            // post & save
-            if (_context.SaveChanges() >= 0) return new ResultDto { IsSuccess = true };
-            else return new ResultDto { IsSuccess = false };
         }
         private ResultUploadDto CreateFilename(IFormFile file, bool AllowedOver150)
         {

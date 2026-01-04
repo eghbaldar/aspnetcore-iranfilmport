@@ -329,6 +329,19 @@
           }
         }
       },
+      "RestSharp/113.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/RestSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/RestSharp.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.Drawing.Common/8.0.22": {
         "type": "package",
         "dependencies": {
@@ -937,6 +950,31 @@
         "persiandatetime.nuspec"
       ]
     },
+    "RestSharp/113.0.0": {
+      "sha512": "ijR2XOerzv8+rzHbC1pSkf5pEWw3JiqgtvJkJqL5XBwuNfokTNCt0SGV0xfbQe1Ty1Oc/WyshGP+L7x+j6m/mw==",
+      "type": "package",
+      "path": "restsharp/113.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net10.0/RestSharp.dll",
+        "lib/net10.0/RestSharp.xml",
+        "lib/net471/RestSharp.dll",
+        "lib/net471/RestSharp.xml",
+        "lib/net48/RestSharp.dll",
+        "lib/net48/RestSharp.xml",
+        "lib/net8.0/RestSharp.dll",
+        "lib/net8.0/RestSharp.xml",
+        "lib/net9.0/RestSharp.dll",
+        "lib/net9.0/RestSharp.xml",
+        "lib/netstandard2.0/RestSharp.dll",
+        "lib/netstandard2.0/RestSharp.xml",
+        "restsharp.113.0.0.nupkg.sha512",
+        "restsharp.nuspec",
+        "restsharp.png"
+      ]
+    },
     "System.Drawing.Common/8.0.22": {
       "sha512": "Bfqx9udaTLSyH3Icb0EjFvewfrZ/hbvKTmOlDsAVtXlheSZGz3+8yljqLRH5wm0hj+IGsqXFwqDSlIMFUBQ32w==",
       "type": "package",
@@ -1058,6 +1096,7 @@
       "Microsoft.EntityFrameworkCore >= 8.0.0",
       "Microsoft.Extensions.Configuration.Abstractions >= 8.0.0",
       "Newtonsoft.Json >= 13.0.4",
+      "RestSharp >= 113.0.0",
       "System.Drawing.Common >= 8.0.22"
     ]
   },
@@ -1137,6 +1176,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.4, )"
+          },
+          "RestSharp": {
+            "target": "Package",
+            "version": "[113.0.0, )"
           },
           "System.Drawing.Common": {
             "target": "Package",

@@ -107,9 +107,11 @@
                                 <span>
                                     @{
                                         if (
-                                            Model.UserProfileStatus != 0 ||
-                                            Model.UserHeadshotStatus != 0 ||
-                                            Model.UserMeliCardStatus != 0
+                                        Model.UserProfileStatus != 0 ||
+                                        Model.UserProjects != 0 ||
+                                        Model.UserProjectPhotos != 0 ||
+                                        Model.UserHeadshotStatus != 0 ||
+                                        Model.UserMeliCardStatus != 0
                                         )
                                         {
                                             <i class="blink"></i>
@@ -153,6 +155,28 @@
                                         هویت کاربران
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="/admin/userProjectVerfications">
+                                        @{
+                                            if (Model.UserProjects != 0)
+                                            {
+                                                <i class="blink"></i>
+                                            }
+                                        }
+                                        پروژه ها
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/admin/userProjectPhotoVerfications">
+                                        @{
+                                            if (Model.UserProjectPhotos != 0)
+                                            {
+                                                <i class="blink"></i>
+                                            }
+                                        }
+                                        تصاویر پروژه ها
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     }
@@ -172,6 +196,36 @@
                                 <li><a href="/admin/newscategories">دسته بندی پست ها</a></li>
                                 <li><a href="/admin/addnews">درج پست جدید</a></li>
                                 <li><a href="/admin/newscomments">کامنت پست ها</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="mdi mdi-invert-colors"></i>
+                                <span> مدیریت فستیوال ها </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="/admin/festivals">نمایش فستیوال ها</a></li>
+                                <li><a href="/admin/addfestival">درج فستیوال جدید</a></li>
+                                <li><a href="/admin/festivalcomments">کامنت فستیوال ها</a></li>
+                            </ul>
+                        </li>
+                    }
+                    if (
+                    claimIdentity.FindFirst(ClaimTypes.Role).Value.ToString() == RoleConstants.King ||
+                    claimIdentity.FindFirst(ClaimTypes.Role).Value.ToString() == RoleConstants.Client ||
+                    claimIdentity.FindFirst(ClaimTypes.Role).Value.ToString() == RoleConstants.User
+                    )
+                    {
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="mdi mdi-invert-colors"></i>
+                                <span> مدیریت پروژه‌ها </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="/user/projects">نمایش پروژه‌ها</a></li>
+                                <li><a href="/user/addProject">درج پروژه</a></li>
                             </ul>
                         </li>
                         <li>

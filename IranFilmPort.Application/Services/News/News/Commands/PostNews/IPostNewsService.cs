@@ -1,8 +1,10 @@
 ﻿using IranFilmPort.Application.Common;
 using IranFilmPort.Application.Interfaces.Context;
+using IranFilmPort.Application.Services.Common.Sitemap;
 using IranFilmPort.Application.Services.Common.UploadFile;
 using IranFilmPort.Domain.Entities.News;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Text.RegularExpressions;
 
@@ -25,16 +27,18 @@ namespace IranFilmPort.Application.Services.News.News.Commands.PostNews
     }
     public interface IPostNewsService
     {
-        ResultDto Execute(RequestPostNewsServiceDto req);
+        Task<ResultDto> Execute(RequestPostNewsServiceDto req);
     }
     public class PostNewsService : IPostNewsService
     {
         private readonly IDataBaseContext _context;
-        public PostNewsService(IDataBaseContext context)
+        private readonly IServiceProvider _serviceProvider;
+        public PostNewsService(IDataBaseContext context, IServiceProvider serviceProvider)
         {
             _context = context;
+            _serviceProvider = serviceProvider;
         }
-        public ResultDto Execute(RequestPostNewsServiceDto req)
+        public async Task<ResultDto> Execute(RequestPostNewsServiceDto req)
         {
             if (req == null ||
                 string.IsNullOrEmpty(req.Title) ||
@@ -53,64 +57,94 @@ namespace IranFilmPort.Application.Services.News.News.Commands.PostNews
                     Message = "خطایی در هنگام ورود اطلاعات رخ داده است."
                 };
             }
-            // generate slug & unique code
-            long UNIQUECODE = EnsureUniqueCode(GenerateRandomLongValue());
-            if (UNIQUECODE == 0) return new ResultDto { IsSuccess = false };
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<IDataBaseContext>();
+                var sitemapFacade = scope.ServiceProvider.GetRequiredService<ISitemapService>();
 
-            // populating the entity
-            Domain.Entities.News.News news = new Domain.Entities.News.News()
-            {
-                Active = req.Active,
-                Author = WebUtility.HtmlDecode(req.Author.Trim()),
-                Reference = WebUtility.HtmlDecode(req.Reference.Trim()),
-                NewsCategoryId = req.CategoryId,
-                BodyText = WebUtility.HtmlDecode(req.BodyText.Trim()),
-                Title = WebUtility.HtmlDecode(req.Title.Trim()),
-                TitleEn = WebUtility.HtmlDecode(req.TitleEn.Trim()),
-                UniqueCode = UNIQUECODE,
-                FutureDateTime = req.FutureDateTime,
-                Summary = req.Summary.Trim()
-            };
-            // upload the main photo
-            
-            var file = CreateFilename(req.MainImage,req.AllowedOver150);
-            switch (file.IsSuccess)
-            {
-                case true:
-                    news.MainImage = file.Filename;
-                    break;
-                case false:
-                    return new ResultDto
-                    {
-                        IsSuccess = false,
-                        Message = file.Message,
-                    };
-            }
-            // set into database
-            _context.News.Add(news);
-
-            // news tags...
-            if (!string.IsNullOrEmpty(req.Tags.Trim()))
-            {
-                var count = req.Tags.Split(',').Length;
-                if (count < 3) return new ResultDto { IsSuccess = false, Message = "حداقل سه برچسب باید به خبر اضافه شود." };
-                foreach (var tag in req.Tags.Split(","))
+                using (var transaction = await dbContext.Database.BeginTransactionAsync())
                 {
-                    NewsTags newsTags = new NewsTags()
+                    try
                     {
-                        Title = tag,
-                        NewsId = news.Id
-                    };
-                    _context.NewsTags.Add(newsTags);
-                    _context.SaveChanges();
+                        // generate slug & unique code
+                        long UNIQUECODE = EnsureUniqueCode(GenerateRandomLongValue());
+                        if (UNIQUECODE == 0) return new ResultDto { IsSuccess = false };
+
+                        // populating the entity
+                        Domain.Entities.News.News news = new Domain.Entities.News.News()
+                        {
+                            Active = req.Active,
+                            Author = WebUtility.HtmlDecode(req.Author.Trim()),
+                            Reference = WebUtility.HtmlDecode(req.Reference.Trim()),
+                            NewsCategoryId = req.CategoryId,
+                            BodyText = WebUtility.HtmlDecode(req.BodyText.Trim()),
+                            Title = WebUtility.HtmlDecode(req.Title.Trim()),
+                            TitleEn = WebUtility.HtmlDecode(req.TitleEn.Trim()),
+                            UniqueCode = UNIQUECODE,
+                            FutureDateTime = req.FutureDateTime,
+                            Summary = req.Summary.Trim()
+                        };
+                        // upload the main photo
+
+                        var file = CreateFilename(req.MainImage, req.AllowedOver150);
+                        switch (file.IsSuccess)
+                        {
+                            case true:
+                                news.MainImage = file.Filename;
+                                break;
+                            case false:
+                                return new ResultDto
+                                {
+                                    IsSuccess = false,
+                                    Message = file.Message,
+                                };
+                        }
+                        // set into database
+                        dbContext.News.Add(news);
+
+                        // news tags...
+                        if (!string.IsNullOrEmpty(req.Tags.Trim()))
+                        {
+                            var count = req.Tags.Split(',').Length;
+                            if (count < 3) return new ResultDto { IsSuccess = false, Message = "حداقل سه برچسب باید به خبر اضافه شود." };
+                            foreach (var tag in req.Tags.Split(","))
+                            {
+                                NewsTags newsTags = new NewsTags()
+                                {
+                                    Title = tag,
+                                    NewsId = news.Id
+                                };
+                                dbContext.NewsTags.Add(newsTags);
+                                dbContext.SaveChanges();
+                            }
+                        }
+                        else
+                            return new ResultDto { IsSuccess = false, Message = " برچسبی وارد نشده است." };
+
+                        // Step 3: Save changes and commit the transaction
+                        var output = await dbContext.SaveChangesAsync();
+
+                        // sitemap ...
+                        sitemapFacade.CreateOrUpdateSitemap();
+
+                        if (output >= 0)
+                        {
+                            await transaction.CommitAsync();
+                            return new ResultDto { IsSuccess = true };
+                        }
+                        else
+                        {
+                            await transaction.RollbackAsync();
+                            return new ResultDto { IsSuccess = false };
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await transaction.RollbackAsync();
+                        return new ResultDto { IsSuccess = false };
+                    }
                 }
             }
-            else
-                return new ResultDto { IsSuccess = false, Message = " برچسبی وارد نشده است." };
-
-            // post & save
-            if (_context.SaveChanges() >= 0) return new ResultDto { IsSuccess = true };
-            else return new ResultDto { IsSuccess = false };
         }
         private static long GenerateRandomLongValue()
         {

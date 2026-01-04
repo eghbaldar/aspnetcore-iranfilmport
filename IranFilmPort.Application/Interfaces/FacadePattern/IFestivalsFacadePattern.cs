@@ -2,6 +2,7 @@
 using IranFilmPort.Application.Services.Festivals.Commands.PostFestival;
 using IranFilmPort.Application.Services.Festivals.Commands.UpdateFestival;
 using IranFilmPort.Application.Services.Festivals.Queries.GetAllFestivalsForAdminService;
+using IranFilmPort.Application.Services.Festivals.Queries.GetAllFestivalsForSitemap;
 using IranFilmPort.Application.Services.Festivals.Queries.GetFestival;
 using IranFilmPort.Application.Services.Festivals.Queries.GetIdByUniqueCode;
 
@@ -15,5 +16,6 @@ namespace IranFilmPort.Application.Interfaces.FacadePattern
         public UpdateFestivalService UpdateFestivalService { get; }
         public DeleteFestivalService DeleteFestivalService { get; }
         public GetIdByUniqueCodeService GetIdByUniqueCodeService { get; }
+        public GetAllFestivalsForSitemapService GetAllFestivalsForSitemapService { get; }
     }
 }

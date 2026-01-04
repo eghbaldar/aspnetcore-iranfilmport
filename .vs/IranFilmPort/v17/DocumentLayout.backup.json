@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "E:\\IranFilmPort\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\views\\admin\\usermelicardverifications.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\views\\admin\\usermelicardverifications.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|e:\\iranfilmport\\iranfilmport.application\\services\\settings\\queries\\getsettingbyselector\\igetsettingbyselectorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|solutionrelative:iranfilmport.application\\services\\settings\\queries\\getsettingbyselector\\igetsettingbyselectorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\views\\admin\\userprofileverifications.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\views\\admin\\userprofileverifications.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{93E2FBEB-4AE9-4A08-A50A-699092939226}|IranFilmPort.Common\\IranFilmPort.Common.csproj|e:\\iranfilmport\\iranfilmport.common\\constants\\settingsselectorconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93E2FBEB-4AE9-4A08-A50A-699092939226}|IranFilmPort.Common\\IranFilmPort.Common.csproj|solutionrelative:iranfilmport.common\\constants\\settingsselectorconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\views\\admin\\userheadshotverifications.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\views\\admin\\userheadshotverifications.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{3E1E1C1B-73FC-4CB7-BE88-A6D6AFC73ED0}|IranFilmPort.Domain\\IranFilmPort.Domain.csproj|e:\\iranfilmport\\iranfilmport.domain\\entities\\settings\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E1E1C1B-73FC-4CB7-BE88-A6D6AFC73ED0}|IranFilmPort.Domain\\IranFilmPort.Domain.csproj|solutionrelative:iranfilmport.domain\\entities\\settings\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|e:\\iranfilmport\\iranfilmport.application\\services\\settings\\queries\\getallsettings\\igetallsettingsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|solutionrelative:iranfilmport.application\\services\\settings\\queries\\getallsettings\\igetallsettingsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|e:\\iranfilmport\\iranfilmport.application\\services\\settings\\commands\\updatesettings\\iupdatesettingsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|solutionrelative:iranfilmport.application\\services\\settings\\commands\\updatesettings\\iupdatesettingsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,41 +38,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserProfileVerifications.cshtml",
-              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\UserProfileVerifications.cshtml",
-              "RelativeDocumentMoniker": "Endpoint.Website\\Views\\Admin\\UserProfileVerifications.cshtml",
-              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\UserProfileVerifications.cshtml",
-              "RelativeToolTip": "Endpoint.Website\\Views\\Admin\\UserProfileVerifications.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-01T14:39:14.446Z",
+              "DocumentIndex": 0,
+              "Title": "IGetSettingBySelectorService.cs",
+              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Settings\\Queries\\GetSettingBySelector\\IGetSettingBySelectorService.cs",
+              "RelativeDocumentMoniker": "IranFilmPort.Application\\Services\\Settings\\Queries\\GetSettingBySelector\\IGetSettingBySelectorService.cs",
+              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Settings\\Queries\\GetSettingBySelector\\IGetSettingBySelectorService.cs",
+              "RelativeToolTip": "IranFilmPort.Application\\Services\\Settings\\Queries\\GetSettingBySelector\\IGetSettingBySelectorService.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAACsAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-04T16:14:18.863Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UserMeliCardVerifications.cshtml",
-              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\UserMeliCardVerifications.cshtml",
-              "RelativeDocumentMoniker": "Endpoint.Website\\Views\\Admin\\UserMeliCardVerifications.cshtml",
-              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\UserMeliCardVerifications.cshtml",
-              "RelativeToolTip": "Endpoint.Website\\Views\\Admin\\UserMeliCardVerifications.cshtml",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAACIAAABWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-01T14:39:13.802Z",
+              "DocumentIndex": 3,
+              "Title": "IGetAllSettingsService.cs",
+              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Settings\\Queries\\GetAllSettings\\IGetAllSettingsService.cs",
+              "RelativeDocumentMoniker": "IranFilmPort.Application\\Services\\Settings\\Queries\\GetAllSettings\\IGetAllSettingsService.cs",
+              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Settings\\Queries\\GetAllSettings\\IGetAllSettingsService.cs",
+              "RelativeToolTip": "IranFilmPort.Application\\Services\\Settings\\Queries\\GetAllSettings\\IGetAllSettingsService.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAA9wBYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-04T16:11:49.053Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IUpdateSettingsService.cs",
+              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Settings\\Commands\\UpdateSettings\\IUpdateSettingsService.cs",
+              "RelativeDocumentMoniker": "IranFilmPort.Application\\Services\\Settings\\Commands\\UpdateSettings\\IUpdateSettingsService.cs",
+              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Settings\\Commands\\UpdateSettings\\IUpdateSettingsService.cs",
+              "RelativeToolTip": "IranFilmPort.Application\\Services\\Settings\\Commands\\UpdateSettings\\IUpdateSettingsService.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAmwBsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-04T16:05:33.084Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SettingsSelectorConstants.cs",
+              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Common\\Constants\\SettingsSelectorConstants.cs",
+              "RelativeDocumentMoniker": "IranFilmPort.Common\\Constants\\SettingsSelectorConstants.cs",
+              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Common\\Constants\\SettingsSelectorConstants.cs",
+              "RelativeToolTip": "IranFilmPort.Common\\Constants\\SettingsSelectorConstants.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-04T16:02:35.383Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "UserHeadshotVerifications.cshtml",
-              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\UserHeadshotVerifications.cshtml",
-              "RelativeDocumentMoniker": "Endpoint.Website\\Views\\Admin\\UserHeadshotVerifications.cshtml",
-              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\UserHeadshotVerifications.cshtml",
-              "RelativeToolTip": "Endpoint.Website\\Views\\Admin\\UserHeadshotVerifications.cshtml",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-01T14:39:13.063Z",
+              "Title": "Settings.cs",
+              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Domain\\Entities\\Settings\\Settings.cs",
+              "RelativeDocumentMoniker": "IranFilmPort.Domain\\Entities\\Settings\\Settings.cs",
+              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Domain\\Entities\\Settings\\Settings.cs",
+              "RelativeToolTip": "IranFilmPort.Domain\\Entities\\Settings\\Settings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-04T15:46:36.181Z",
               "EditorCaption": ""
             }
           ]

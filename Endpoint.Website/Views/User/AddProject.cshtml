@@ -1,0 +1,483 @@
+﻿@using IranFilmPort.Application.Services.UserProjects.Queries.GetUserProjectForUser
+@using IranFilmPort.Common.Constants
+@using IranFilmPort.Common.Helpers
+@model GetUserProjectForUserServiceDto
+@{
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    if (Model == null)
+    {
+        ViewData["HeadTitle"] = "درج پروژه فیلم و فیلمنامه جدید";
+        ViewData["pageHeadTitle"] = "درج پروژه فیلم و فیلمنامه جدید";
+    }
+    else
+    {
+        ViewData["HeadTitle"] = "ویرایش پروژه فیلم و فیلمنامه";
+        ViewData["pageHeadTitle"] = "ویرایش پروژه فیلم و فیلمنامه";
+    }
+}
+<div class="row">
+    <div class="col-9">
+        <div class="card-box">
+            <div class="row" id="divInfo">
+                <div class="col-12">
+                    @{
+                        if (Model != null)
+                        {
+                            <div class="mb-20">
+                                <a href="/user/projectphotos/@Model.Id" class="btn btn-primary waves-effect width-md waves-light">مدیریت تصاویر این اثر</a>
+                            </div>
+                            <div class="alert alert-primary" role="alert">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
+                                </svg>
+                                شما می‌توانید از طریق لینک زیر به صفحه اثرتان دسترسی و لینک را در شبکه های اجتماعی خودتان به اشتراک بگذارید:
+                                <div class="ltr mt-20">
+                                    <a href="https://iranfilmport.com/filmmaker/@Model.Username/@Model.UniqueCode" target="_blank">https://iranfilmport.com/filmmaker/@Model.Username/@Model.UniqueCode</a>
+                                    <a onclick="KingCopyText('https://iranfilmport.com/filmmaker/@Model.Username/@Model.UniqueCode')">[کپی کن]</a>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">گونه</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model == null)
+                                {
+                                    <select class="form-control" id="selectType">
+                                        <option disabled selected="selected">گونه را انتخاب کنید ...</option>
+                                        <option value="@UserProjectTypeConstants.ShortFilm">فیلم کوتاه</option>
+                                        <option value="@UserProjectTypeConstants.FeatureFilm">فیلم بلند</option>
+                                        <option value="@UserProjectTypeConstants.Script">فیلمنامه</option>
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="form-control" id="selectType">
+                                        <option disabled>گونه را انتخاب کنید ...</option>
+                                        <option selected="@(Model.Type == UserProjectTypeConstants.ShortFilm)" value="@UserProjectTypeConstants.ShortFilm">فیلم کوتاه</option>
+                                        <option selected="@(Model.Type == UserProjectTypeConstants.FeatureFilm)" value="@UserProjectTypeConstants.FeatureFilm">فیلم بلند</option>
+                                        <option selected="@(Model.Type == UserProjectTypeConstants.Script)" value="@UserProjectTypeConstants.Script">فیلمنامه</option>
+                                    </select>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">نام اثر به فارسی</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model == null)
+                                {
+                                    <input type="text" id="txtTitleFa"
+                                           class="form-control" placeholder="مانند: آخرین ایستگاه">
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtTitleFa"
+                                           value="@Model.TitleFa"
+                                           class="form-control" placeholder="مانند: آخرین ایستگاه">
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">نام اثر به انگلیسی</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model == null)
+                                {
+                                    <input type="text" id="txtTitleEn"
+                                           class="form-control ltr" placeholder="e.g. The Last Station">
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtTitleEn"
+                                           value="@Model.TitleEn"
+                                           class="form-control ltr" placeholder="e.g. The Last Station">
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">خلاصه داستان به فارسی</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model == null)
+                                {
+                                    <textarea class="form-control" id="txtSynopsisFa" rows="5"></textarea>
+                                }
+                                else
+                                {
+                                    <textarea class="form-control" id="txtSynopsisFa" rows="5">@Model.SynopsisFa</textarea>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">خلاصه داستان به انگلیسی</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model == null)
+                                {
+                                    <textarea class="form-control ltr" id="txtSynopsisEn" rows="5"></textarea>
+                                }
+                                else
+                                {
+                                    <textarea class="form-control ltr" id="SynopsisEn" rows="5">@Model.SynopsisEn</textarea>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">تاریخ تولید اثر</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model == null)
+                                {
+                                    <input type="text" id="txtProductionDate" class="form-control shamsidate" readonly>
+                                }
+                                else
+                                {
+                                    var pureDateTime = Model.ProductionDate;
+                                    @* ----- *@
+                                    var shamsidateFuture = new PersianDateTime(Convert.ToDateTime(pureDateTime).Date);
+                                    var shamsidateStringFuture = shamsidateFuture.ToString("yyyy/MM/dd");
+                                    var persiandateTimeFuture = PersianNumberHelper.ConvertToPersian(shamsidateStringFuture);
+                                    <input type="text" id="txtProductionDate" value="@persiandateTimeFuture" class="form-control shamsidate" readonly>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">آدرس وب‌سایت اثر</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model == null)
+                                {
+                                    <input type="text" id="txtPageLink"
+                                           class="form-control ltr" placeholder="e.g. www.iranfilmport.com">
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtPageLink"
+                                           value="@Model.PageLink"
+                                           class="form-control ltr" placeholder="e.g. www.iranfilmport.com">
+                                }
+                            }
+                        </div>
+                    </div>
+                    <hr />
+                    <div>
+                        <h4 class="header-title mt-0 mb-3">اطلاعات عوامل</h4>
+                        <div id="notselectedYet">
+                            <div class="alert alert-warning" role="alert">
+                                ابتدا گونه اثر را انتخاب کنید.
+                            </div>
+                        </div>
+                        <div id="film" hidden>
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">نام کارگردان</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="text" id="txtFilmDirector"
+                                                   class="form-control" placeholder="مانند: علیمحمد اقبالدار">
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="txtFilmDirector"
+                                                   value="@Model.Director"
+                                                   class="form-control" placeholder="مانند: علیمحمد اقبالدار">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">نام کارگردان به انگلیسی</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="text" id="txtFilmDirectorEn"
+                                                   class="form-control ltr" placeholder="e.g. Alimohammad Eghbaldar">
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="txtFilmDirectorEn"
+                                                   value="@Model.DirectorEn"
+                                                   class="form-control ltr" placeholder="e.g. Alimohammad Eghbaldar">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">نام نویسنده</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="text" id="txtFilmWriter"
+                                                   class="form-control" placeholder="مانند: علیمحمد اقبالدار">
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="txtFilmWriter"
+                                                   value="@Model.Writer"
+                                                   class="form-control" placeholder="مانند: علیمحمد اقبالدار">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">نام نویسنده به انگلیسی</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="text" id="txtFilmWriterEn"
+                                                   class="form-control ltr" placeholder="e.g. Alimohammad Eghbaldar">
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="txtFilmWriterEn"
+                                                   value="@Model.WriterEn"
+                                                   class="form-control ltr" placeholder="e.g. Alimohammad Eghbaldar">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">نام تهیه کننده</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="text" id="txtFilmProducer"
+                                                   class="form-control" placeholder="مانند: علیمحمد اقبالدار">
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="txtFilmProducer"
+                                                   value="@Model.Producer"
+                                                   class="form-control" placeholder="مانند: علیمحمد اقبالدار">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">نام تهیه کننده به انگلیسی</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="text" id="txtFilmProducerEn"
+                                                   class="form-control ltr" placeholder="e.g. Alimohammad Eghbaldar">
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="txtFilmProducerEn"
+                                                   value="@Model.ProducerEn"
+                                                   class="form-control ltr" placeholder="e.g. Alimohammad Eghbaldar">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">سایر عوامل</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <textarea id="txtFilmDetail" class="form-control" rows="5"></textarea>
+                                        }
+                                        else
+                                        {
+                                            <textarea id="txtFilmDetail" class="form-control" rows="5" value="@Model.Detail"></textarea>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">سایر عوامل به انگلیسی</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <textarea id="txtFilmDetailEn" class="form-control ltr" rows="5"></textarea>
+                                        }
+                                        else
+                                        {
+                                            <textarea id="txtFilmDetailEn" class="form-control ltr" rows="5" value="@Model.DetailEn"></textarea>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div id="script" hidden>
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">نام فیلمنامه‌نویس</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="text" id="txtScriptWriter"
+                                                   class="form-control" placeholder="مانند: علیمحمد اقبالدار">
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="txtScriptWriter"
+                                                   value="@Model.Writer"
+                                                   class="form-control" placeholder="مانند: علیمحمد اقبالدار">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">نام فیلمنامه‌نویس به انگلیسی</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="text" id="txtScriptWriterEn"
+                                                   class="form-control" placeholder="e.g. Alimohammad Eghbaldar">
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="txtScriptWriterEn"
+                                                   value="@Model.WriterEn"
+                                                   class="form-control" placeholder="e.g. Alimohammad Eghbaldar">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <h4 class="header-title mt-0 mb-3">صحت سنجی اثر</h4>
+                    <div class="alert alert-primary" role="alert">
+                        اگر مایل به دریافت نماد اعتماد درگاه برای اثرتان هستید، لینک اثر را ارسال تا پس از بررسی، نماد دریافت کنید.
+                        <br />
+                        فایل اثر پس از بررسی حذف خواهد شد.
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">لینک</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model == null)
+                                {
+                                    <input type="text" id="txtArtworkLink"
+                                           class="form-control ltr" placeholder="e.g. www.iranfilmport.com">
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtArtworkLink"
+                                           value="@Model.ArtworkLink"
+                                           class="form-control ltr" placeholder="e.g. www.iranfilmport.com">
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">پسورد فایل</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model == null)
+                                {
+                                    <input type="text" id="txtArtworkPassword"
+                                           class="form-control ltr" placeholder="e.g. 12345">
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtArtworkPassword"
+                                           value="@Model.ArtworkPassword"
+                                           class="form-control ltr" placeholder="e.g. 12345">
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @{
+            if (Model == null)
+            {
+                <button type="button" onclick="addArtwork();"
+                        class="btn btn-success waves-effect width-md waves-light">
+                    ثبت اثر
+                </button>
+            }
+            else
+            {
+                <button type="button" onclick="editArtwork('@Model.Id');"
+                        class="btn btn-success waves-effect width-md waves-light">
+                    بروزرسانی اثر
+                </button>
+            }
+        }
+    </div>
+    <div class="col-3">
+        @{
+            if (Model != null)
+            {
+                <div class="alert alert-light" role="alert">
+                    @{
+                        if (!Model.Genuine)
+                        {
+                            switch (Model.Status)
+                            {
+                                case StatusConstants.Accepted:
+                                    <div class="alert alert-success" role="alert">
+                                        اثر تائید شده است.
+                                    </div>
+                                    break;
+                                case StatusConstants.Rejected:
+                                    <div class="alert alert-danger" role="alert">
+                                        اثر تائید نشده است، لطفا طبق قوانین و مقررات اقدام بفرمائید.
+                                    </div>
+                                    break;
+                                case StatusConstants.UnderConsideration:
+                                    <div class="alert alert-warning" role="alert">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                                        </svg>
+                                        اثر در حال بررسی است.
+                                    </div>
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            <div class="text-center">
+                                <img class="img-fluid rounded" src="~/CommonTemplate/assets/imgs/confidence_logo_small.webp" />
+                            </div>
+                            <div class="alert alert-success" role="alert">
+                                اثر تائید و دارای نماد اعتماد است.
+                            </div>
+                        }
+                    }
+                </div>
+            }
+        }
+        <hr/>
+        <img src="~/usertemplate/assets/images/banners/leftsideuserartwork.webp" class="img-fluid rounded" />
+    </div>
+</div>
+
+@section Styles {
+    @*Remaing Characters*@
+    <link href="~/common/remainingcharacters/remainingcharacters.css" rel="stylesheet" />
+    @*Datapicker*@
+    <link href="~/common/datapicker/css/persiandatepicker-default.css" rel="stylesheet" />
+    <link href="~/usertemplate/pagecssjs/addproject/addproject.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/common/fileextensionsize/fileextensionsize.js"></script>
+    <script src="~/common/datapicker/js/persiandatepicker.min.js"></script>
+    <script src="~/common/datapicker/js/farvardin.min.js"></script>
+    <script>
+        $(".shamsidate").persianDatepicker();
+    </script>
+    <script src="~/usertemplate/pagecssjs/addproject/addproject.js"></script>
+}

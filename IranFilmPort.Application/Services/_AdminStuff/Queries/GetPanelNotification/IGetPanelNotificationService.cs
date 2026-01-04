@@ -8,6 +8,8 @@ namespace IranFilmPort.Application.Services._AdminStuff.Queries.GetPanelNotifica
         public int UserProfileStatus { get; set; }
         public int UserHeadshotStatus { get; set; }
         public int UserMeliCardStatus { get; set; }
+        public int UserProjects { get; set; }
+        public int UserProjectPhotos { get; set; }
     }
     public interface IGetPanelNotificationService
     {
@@ -27,6 +29,8 @@ namespace IranFilmPort.Application.Services._AdminStuff.Queries.GetPanelNotifica
                 UserHeadshotStatus = _context.Users.Count(x => x.HeadshotStatus == StatusConstants.UnderConsideration),
                 UserProfileStatus = _context.Users.Count(x => x.MainStatus == StatusConstants.UnderConsideration),
                 UserMeliCardStatus = _context.Users.Count(x => x.MeliCardStatus == StatusConstants.UnderConsideration),
+                UserProjects = _context.UserProjects.Count(x => x.Status == StatusConstants.UnderConsideration),
+                UserProjectPhotos = _context.UserProjectPhotos.Count(x => x.Status == StatusConstants.UnderConsideration),
             };
         }
     }

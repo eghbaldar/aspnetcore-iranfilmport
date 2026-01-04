@@ -1,0 +1,159 @@
+﻿@using IranFilmPort.Application.Services.UserProjectPhotos.Queries.GetAllUserProjectPhotosByUserId
+@using IranFilmPort.Common.Constants
+@using IranFilmPort.Common.Helpers
+@model ResultGetAllUserProjectPhotosByUserIdServiceDto
+@{
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    ViewData["HeadTitle"] = "تصاویر پروژه‌های فیلم و فیلمنامه";
+    ViewData["pageHeadTitle"] = "تصاویر پروژه‌های فیلم و فیلمنامه";
+}
+<div class="row">
+    <div class="card-box">
+        <div class="row" id="divInfo">
+            <div class="col-12">
+                <h4 class="mt-0 header-title mb-20">آپلود</h4>
+                @{
+                    if (Model.ProjectType == UserProjectTypeConstants.Script)
+                    {
+                        <select class="form-control mb-20" id="selectPhotoType">
+                            <option selected="selected" disabled value="@UserProjectPhotoTypes.Poster">کاور - Cover Page</option>
+                        </select>
+                    }
+                    else
+                    {
+                        <select class="form-control mb-20" id="selectPhotoType">
+                            <option disabled selected="selected">گونه تصویر ...</option>
+                            <option value="@UserProjectPhotoTypes.Poster">پوستر - Poster</option>
+                            <option value="@UserProjectPhotoTypes.Scene">عکس صحنه - Still Photograph</option>
+                            <option value="@UserProjectPhotoTypes.Backstage">عکس پشت صحنه - Back Stage</option>
+                        </select>
+                    }
+                }
+                <input type="file" class="form-control mb-20" id="filePhoto">
+                <div class="mt-10">
+                    <button type="button" onclick="sendPhoto();"
+                            class="btn btn-success waves-effect width-md waves-light">
+                        ارسال تصویر
+                    </button>
+                </div>
+            </div>            
+        </div>
+        <hr/>
+        @{
+            if (Model.Result.Count == 0)
+            {
+                <div class="alert alert-warning" role="alert">
+                    تصویری ارسال نشده است.
+                </div>
+            }
+            else
+            {
+                <div id="userproject-content">
+                    @{
+                        if (Model.ProjectType == UserProjectTypeConstants.Script)
+                        {
+                            <div class="col-12">
+                                <div id="page">
+                                    <div class="gallery-item-filter">
+                                        <span class="tab" data-category=".all">همه</span>
+                                        <span class="tab" data-category=".cover">کاور</span>
+                                    </div>
+                                    <div class="gallery-items gallery-masonry">
+                                        @{
+                                            foreach (var item in Model.Result)
+                                            {
+                                                <div class="all cover">
+                                                    @{
+                                                        switch (item.Status)
+                                                        {
+                                                            case StatusConstants.Accepted:
+                                                                <div class="img-title green">تائید شده</div>
+                                                                break;
+                                                            case StatusConstants.Rejected:
+                                                                <div class="img-title yellow">تائید نشده</div>
+                                                                break;
+                                                            case StatusConstants.UnderConsideration:
+                                                                <div class="img-title yellow">در حال بررسی</div>
+                                                                break;
+                                                        }
+                                                    }
+                                                    <a href="/UploadedStuff/users/images/user-project-images/@item.File"><img src="/UploadedStuff/users/images/user-project-images/@item.File" alt="Aetas Hotel" width="223" height="300" /></a>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-12">
+                                <div id="page">
+                                    <div class="gallery-item-filter">
+                                        <span class="tab" data-category=".all">همه</span>
+                                        <span class="tab" data-category=".poster">پوستر</span>
+                                        <span class="tab" data-category=".scene">عکس‌های صحنه</span>
+                                        <span class="tab" data-category=".back">عکس‌های پشت صحنه</span>
+                                    </div>
+
+                                    <div class="gallery-items gallery-masonry">
+                                        @{
+                                            foreach (var item in Model.Result)
+                                            {
+                                                var _class = "";
+                                                switch (item.Type)
+                                                {
+                                                    case UserProjectPhotoTypes.Poster:
+                                                        _class = "poster";
+                                                        break;
+                                                    case UserProjectPhotoTypes.Scene:
+                                                        _class = "scene";
+                                                        break;
+                                                    case UserProjectPhotoTypes.Backstage:
+                                                        _class = "back";
+                                                        break;
+                                                }
+                                                <div class="all @_class">
+                                                    @{
+                                                        switch (item.Status)
+                                                        {
+                                                            case StatusConstants.Accepted:
+                                                                <div class="img-title green">تائید شده</div>
+                                                                break;
+                                                            case StatusConstants.Rejected:
+                                                                <div class="img-title yellow">تائید نشده</div>
+                                                                break;
+                                                            case StatusConstants.UnderConsideration:
+                                                                <div class="img-title yellow">در حال بررسی</div>
+                                                                break;
+                                                        }
+                                                    }
+                                                    <a href="/UploadedStuff/users/images/user-project-images/@item.File"><img src="/UploadedStuff/users/images/user-project-images/@item.File" width="100" height="100" /></a>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+        }
+    </div>
+</div>
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+    <link href="~/usertemplate/pagecssjs/projectphotos/projectphotos.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script>
+        var projectId = '@Model.ProjectId';
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/freewall/1.0.5/freewall.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.1/isotope.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <script src="~/usertemplate/pagecssjs/projectphotos/projectphotos.js"></script>
+    <script src="~/common/fileextensionsize/fileextensionsize.js"></script>
+}

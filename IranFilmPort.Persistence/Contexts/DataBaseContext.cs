@@ -2,15 +2,19 @@
 using IranFilmPort.Domain.Entities.Contact;
 using IranFilmPort.Domain.Entities.Countries;
 using IranFilmPort.Domain.Entities.Festival;
+using IranFilmPort.Domain.Entities.Guest;
 using IranFilmPort.Domain.Entities.News;
 using IranFilmPort.Domain.Entities.Newsletter;
+using IranFilmPort.Domain.Entities.Settings;
 using IranFilmPort.Domain.Entities.User;
+using IranFilmPort.Domain.Entities.UserProjects;
 using IranFilmPort.Infranstructure.Configurations.FestivalDeadlines;
 using IranFilmPort.Infranstructure.Configurations.Festivals;
 using IranFilmPort.Infranstructure.Configurations.FestivalSections;
 using IranFilmPort.Infranstructure.Configurations.News;
 using IranFilmPort.Infranstructure.Configurations.NewsTags;
 using IranFilmPort.Infranstructure.Configurations.Roles;
+using IranFilmPort.Infranstructure.Configurations.UserProjects;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 
@@ -22,12 +26,17 @@ namespace IranFilmPort.Persistence.Contexts
         {
 
         }
+        // Admin
+        public DbSet<Settings> Settings { get; set; }
+
         // users
         public DbSet<Users> Users { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<UsersSuspicious> UsersSuspicious { get; set; }
         public DbSet<UsersLogs> UsersLogs { get; set; }
         public DbSet<UserRefreshToken> UserRefreshToken { get; set; }
+        public DbSet<UserProjects> UserProjects { get; set; }
+        public DbSet<UserProjectPhotos> UserProjectPhotos { get; set; }
 
         // news
         public DbSet<News> News { get; set; }
@@ -38,9 +47,9 @@ namespace IranFilmPort.Persistence.Contexts
         // guest
         public DbSet<Contacts> Contacts { get; set; }
         public DbSet<Newsletters> Newsletters { get; set; }
+        public DbSet<SendInformation> SendInformation { get; set; }
 
         // Festival
-
         public DbSet<Countries> Countries { get; set; }
         public DbSet<Festivals> Festivals { get; set; }
         public DbSet<FestivalSections> FestivalSections { get; set; }
@@ -59,6 +68,8 @@ namespace IranFilmPort.Persistence.Contexts
             modelBuilder.ApplyConfiguration(new FestivalDeadlinesConfigurations());
             modelBuilder.ApplyConfiguration(new FestivalsConfigurations());
             modelBuilder.ApplyConfiguration(new FestivalSectionsConfigurations());
+            modelBuilder.ApplyConfiguration(new UserProjectsConfigurations());
+            modelBuilder.ApplyConfiguration(new UserProjectPhotosConfigurations());
         }
         public override int SaveChanges()
         {

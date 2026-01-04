@@ -1,0 +1,75 @@
+﻿@*
+    DeVeloped: Alimohammad Eghbaldar
+    www.eghbaldar.ir
+    www.iranfilmport.com
+*@
+@using IranFilmPort.Application.Services.UserProjectPhotos.Queries.GetAllUserProjectPhotosForAdmin
+@using IranFilmPort.Common.Constants
+@using IranFilmPort.Common.Helpers
+@{
+    Layout = "~/views/shared/_LayoutUserClientAdmin.cshtml";
+}
+@model ResultGetAllUserProjectPhotosForAdminServiceDto
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h4 class="mt-0 header-title">جدول پروژه های کاربران</h4>
+            <div class="table-responsive">
+                <table class="table mb-0" id="tb">
+                    <thead>
+                        <tr>
+                            <th>نام پروژه</th>
+                            <th>گونه</th>                            
+                            <th>فایل</th>
+                            <th>تاریخ درج</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Result)
+                        {
+                            <tr>
+                                <td>
+                                    <a class="kingBlueText" href="/admin/adminUsers/@item.ProjectId" target="_blank">@item.ProjectTitleFa</a>
+                                </td>
+                                <td>
+                                    @{
+                                        switch (item.Type)
+                                        {
+                                            case UserProjectPhotoTypes.Poster:
+                                            <b>پوستر/کاور</b>
+                                                break;                                                
+                                            case UserProjectPhotoTypes.Scene:
+                                                <b>صحنه</b>
+                                                break;                                                
+                                            case UserProjectPhotoTypes.Backstage:
+                                                <b>پشت صحنه</b>
+                                                break;
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    <a href="/UploadedStuff/users/images/user-project-images/@item.File" target="_blank">{فایل}</a>
+                                </td>
+                                <td>
+                                    <button type="button" onclick="changestatus('@item.PhotoId','@StatusConstants.Rejected');" class="btn btn-primary btnWaiting" data-dismiss="modal">رد</button>
+                                    <button type="button" onclick="changestatus('@item.PhotoId','@StatusConstants.Accepted');" class="btn btn-primary btnWaiting" data-dismiss="modal">تائید</button>
+                                </td>
+                                <td>
+                                    @{
+                                        var shamsiDate = new PersianDateTime(Convert.ToDateTime(item.InsertDateTime));
+                                        var shamsiDateString = shamsiDate.ToString("yyyy/MM/dd");
+                                        var persianDateString = PersianNumberHelper.ConvertToPersian(shamsiDateString);
+                                    }
+                                    @persianDateString
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/admintemplate/pagecssjs/userProjectPhotoVerfications/userProjectPhotoVerfications.js"></script>
+}

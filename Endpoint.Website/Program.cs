@@ -2,6 +2,8 @@
 using IranFilmPort.Application.Interfaces.FacadePattern;
 using IranFilmPort.Application.Services._AdminStuff.FacadePattern;
 using IranFilmPort.Application.Services._Turnstile;
+using IranFilmPort.Application.Services.Common.Email;
+using IranFilmPort.Application.Services.Common.Sitemap;
 using IranFilmPort.Application.Services.Countires.FacadePattern;
 using IranFilmPort.Application.Services.FestivalDeadlines.FacadePattern;
 using IranFilmPort.Application.Services.Festivals.FacadePattern;
@@ -10,6 +12,9 @@ using IranFilmPort.Application.Services.News.News.FacadePattern;
 using IranFilmPort.Application.Services.NewsCategories.FacadePattern;
 using IranFilmPort.Application.Services.NewsComments.FacadePattern;
 using IranFilmPort.Application.Services.Roles.FacadePattern;
+using IranFilmPort.Application.Services.SendInformation.FacadePattern;
+using IranFilmPort.Application.Services.UserProjectPhotos.FacadePattern;
+using IranFilmPort.Application.Services.UserProjects.FacadePattern;
 using IranFilmPort.Application.Services.UserRefreshToken;
 using IranFilmPort.Application.Services.Users.FacadePattern;
 using IranFilmPort.Application.Services.UsersLogs.Commands.PostUserLog;
@@ -32,6 +37,8 @@ builder.Services.AddMemoryCache();
 // Interface
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 // Other Intercaes
+builder.Services.AddScoped<ISitemapService, SitemapService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<INewsFacadePattern, NewsFacadePattern>();
 builder.Services.AddScoped<IUsersFacadePattern, UsersFacadePattern>();
 builder.Services.AddScoped<IRoleFacadePattern, RoleFacadePattern>();
@@ -42,6 +49,9 @@ builder.Services.AddScoped<IFestivalSectionFacadePattern, FestivalSectionFacadeP
 builder.Services.AddScoped<IFestivalDeadlinesFacadePattern, FestivalDeadlinesFacadePattern>();
 builder.Services.AddScoped<ICountiresFacadePattern, CountiresFacadePattern>();
 builder.Services.AddScoped<IAdminStuffFacadePattern, AdminStuffFacadePattern>();
+builder.Services.AddScoped<IUserProjectsFacadePattern, UserProjectsFacadePattern>();
+builder.Services.AddScoped<IUserProjectPhotosFacadePattern, UserProjectPhotosFacadePattern>();
+builder.Services.AddScoped<ISendInformationFacadePattern, SendInformationFacadePattern>();
 
 // token and authentication services
 builder.Services.AddScoped<ITurnstileService, TurnstileService>();

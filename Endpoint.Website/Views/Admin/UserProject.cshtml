@@ -1,0 +1,186 @@
+﻿@*
+    DeVeloped: Alimohammad Eghbaldar
+    www.eghbaldar.ir
+    www.iranfilmport.com
+*@
+@using IranFilmPort.Application.Services.UserProjectPhotos.Queries.GetAllUserProjectPhotosForAdmin
+@using IranFilmPort.Application.Services.UserProjects.Queries.GetUserProjectByIdForAdmin
+@using IranFilmPort.Common.Constants
+@using IranFilmPort.Common.Helpers
+@model GetUserProjectByIdForAdminDto
+@{
+    Layout = "~/views/shared/_LayoutUserClientAdmin.cshtml";
+}
+<div class="row" id="divInfo">
+    <div class="col-12">
+        <div class="form-group row">
+            <label class="col-sm-2  col-form-label" for="simpleinput">گونه</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="selectType">
+                    <option disabled>گونه را انتخاب کنید ...</option>
+                    <option selected="@(Model.Type == UserProjectTypeConstants.ShortFilm)" value="@UserProjectTypeConstants.ShortFilm">فیلم کوتاه</option>
+                    <option selected="@(Model.Type == UserProjectTypeConstants.FeatureFilm)" value="@UserProjectTypeConstants.FeatureFilm">فیلم بلند</option>
+                    <option selected="@(Model.Type == UserProjectTypeConstants.Script)" value="@UserProjectTypeConstants.Script">فیلمنامه</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2  col-form-label" for="simpleinput">نام اثر به فارسی</label>
+            <div class="col-sm-10">
+                <input type="text" id="txtTitleFa"
+                       value="@Model.TitleFa"
+                       class="form-control" placeholder="مانند: آخرین ایستگاه">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2  col-form-label" for="simpleinput">نام اثر به انگلیسی</label>
+            <div class="col-sm-10">
+                <input type="text" id="txtTitleEn"
+                       value="@Model.TitleEn"
+                       class="form-control ltr" placeholder="e.g. The Last Station">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2  col-form-label" for="simpleinput">خلاصه داستان به فارسی</label>
+            <div class="col-sm-10">
+<textarea class="form-control" id="txtSynopsisFa" rows="5">@Model.SynopsisFa</textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2  col-form-label" for="simpleinput">خلاصه داستان به انگلیسی</label>
+            <div class="col-sm-10">
+                <textarea class="form-control ltr" id="SynopsisEn" rows="5">@Model.SynopsisEn</textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2  col-form-label" for="simpleinput">تاریخ تولید اثر</label>
+            <div class="col-sm-10">
+                @{
+                    var pureDateTime = Model.ProductionDate;
+                    @* ----- *@
+                    var shamsidateFuture = new PersianDateTime(Convert.ToDateTime(pureDateTime).Date);
+                    var shamsidateStringFuture = shamsidateFuture.ToString("yyyy/MM/dd");
+                    var persiandateTimeFuture = PersianNumberHelper.ConvertToPersian(shamsidateStringFuture);
+                    <input type="text" id="txtProductionDate" value="@persiandateTimeFuture" class="form-control shamsidate" readonly>
+                }
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2  col-form-label" for="simpleinput">آدرس وب‌سایت اثر</label>
+            <div class="col-sm-10">
+                <input type="text" id="txtPageLink"
+                       value="@Model.PageLink"
+                       class="form-control ltr" placeholder="e.g. www.iranfilmport.com">
+            </div>
+        </div>
+        <hr />
+        <div>
+            <h4 class="header-title mt-0 mb-3">اطلاعات عوامل</h4>
+            <div id="notselectedYet">
+                <div class="alert alert-warning" role="alert">
+                    ابتدا گونه اثر را انتخاب کنید.
+                </div>
+            </div>
+            <div id="film" hidden>
+                <div class="form-group row">
+                    <label class="col-sm-2  col-form-label" for="simpleinput">نام کارگردان</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtFilmDirector"
+                               value="@Model.Director"
+                               class="form-control" placeholder="مانند: علیمحمد اقبالدار">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2  col-form-label" for="simpleinput">نام کارگردان به انگلیسی</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtFilmDirectorEn"
+                               value="@Model.DirectorEn"
+                               class="form-control ltr" placeholder="e.g. Alimohammad Eghbaldar">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2  col-form-label" for="simpleinput">نام نویسنده</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtFilmWriter"
+                               value="@Model.Writer"
+                               class="form-control" placeholder="مانند: علیمحمد اقبالدار">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2  col-form-label" for="simpleinput">نام نویسنده به انگلیسی</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtFilmWriterEn"
+                               value="@Model.WriterEn"
+                               class="form-control ltr" placeholder="e.g. Alimohammad Eghbaldar">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2  col-form-label" for="simpleinput">نام تهیه کننده</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtFilmProducer"
+                               value="@Model.Producer"
+                               class="form-control" placeholder="مانند: علیمحمد اقبالدار">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2  col-form-label" for="simpleinput">نام تهیه کننده به انگلیسی</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtFilmProducerEn"
+                               value="@Model.ProducerEn"
+                               class="form-control ltr" placeholder="e.g. Alimohammad Eghbaldar">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2  col-form-label" for="simpleinput">سایر عوامل</label>
+                    <div class="col-sm-10">
+                        <textarea id="txtFilmDetail" class="form-control" rows="5" value="@Model.Detail"></textarea>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2  col-form-label" for="simpleinput">سایر عوامل به انگلیسی</label>
+                    <div class="col-sm-10">
+                        <textarea id="txtFilmDetailEn" class="form-control ltr" rows="5" value="@Model.DetailEn"></textarea>
+
+                    </div>
+                </div>
+            </div>
+            <div id="script" hidden>
+                <div class="form-group row">
+                    <label class="col-sm-2  col-form-label" for="simpleinput">نام فیلمنامه‌نویس</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtScriptWriter"
+                               value="@Model.Writer"
+                               class="form-control" placeholder="مانند: علیمحمد اقبالدار">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2  col-form-label" for="simpleinput">نام فیلمنامه‌نویس به انگلیسی</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtScriptWriterEn"
+                               value="@Model.WriterEn"
+                               class="form-control" placeholder="e.g. Alimohammad Eghbaldar">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <h4 class="header-title mt-0 mb-3">صحت سنجی اثر</h4>
+        <div class="form-group row">
+            <label class="col-sm-2  col-form-label" for="simpleinput">لینک</label>
+            <div class="col-sm-10">
+                <input type="text" id="txtArtworkLink"
+                       value="@Model.ArtworkLink"
+                       class="form-control ltr" placeholder="e.g. www.iranfilmport.com">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2  col-form-label" for="simpleinput">پسورد فایل</label>
+            <div class="col-sm-10">
+                <input type="text" id="txtArtworkPassword"
+                       value="@Model.ArtworkPassword"
+                       class="form-control ltr" placeholder="e.g. 12345">
+            </div>
+        </div>
+    </div>
+</div>

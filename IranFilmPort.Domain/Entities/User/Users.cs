@@ -55,6 +55,7 @@ namespace IranFilmPort.Domain.Entities.User
 
         // relationships...
 
+        public ICollection<IranFilmPort.Domain.Entities.UserProjects.UserProjects> UserProjects { get; set; }
         public ICollection<UsersSuspicious> UsersSuspicious { get; set; }
         public ICollection<UsersLogs> UsersLogs { get; set; }
         public ICollection<UserRefreshToken> UserRefreshToken { get; set; }

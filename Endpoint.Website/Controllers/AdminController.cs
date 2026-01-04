@@ -27,6 +27,9 @@ using IranFilmPort.Application.Services.NewsCategories.Commands.DeleteNewsCatego
 using IranFilmPort.Application.Services.NewsCategories.Commands.PostNewsCategory;
 using IranFilmPort.Application.Services.NewsCategories.Commands.UpdateNewsCategory;
 using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsChildrenCategories;
+using IranFilmPort.Application.Services.UserProjectPhotos.Commands.UpdateUserProjectPhotoStatus;
+using IranFilmPort.Application.Services.UserProjects.Commands.UpdateUserProjectStatus;
+using IranFilmPort.Application.Services.UserProjects.Queries.GetUserProjectByIdForAdmin;
 using IranFilmPort.Application.Services.Users.Commands.PostUser;
 using IranFilmPort.Application.Services.Users.Commands.UpdateHeadshotByAdmin;
 using IranFilmPort.Application.Services.Users.Commands.UpdateMeliCardByAdmin;
@@ -54,6 +57,8 @@ namespace Endpoint.Website.Controllers
         private readonly IFestivalSectionFacadePattern _festivalSectionFacadePattern;
         private readonly IFestivalDeadlinesFacadePattern _festivalDeadlinesFacadePattern;
         private readonly ICountiresFacadePattern _countiresFacadePattern;
+        private readonly IUserProjectsFacadePattern _userProjectsFacadePattern;
+        private readonly IUserProjectPhotosFacadePattern _userProjectPhotosFacadePattern;
         public AdminController(IUsersFacadePattern usersFacadePattern,
             IRoleFacadePattern roleFacadePattern,
             INewsFacadePattern newsFacadePattern,
@@ -62,7 +67,9 @@ namespace Endpoint.Website.Controllers
             IFestivalsFacadePattern festivalsFacadePattern,
             IFestivalSectionFacadePattern festivalSectionFacadePattern,
             IFestivalDeadlinesFacadePattern festivalDeadlinesFacadePattern,
-            ICountiresFacadePattern countiresFacadePattern)
+            ICountiresFacadePattern countiresFacadePattern,
+            IUserProjectsFacadePattern userProjectsFacadePattern,
+            IUserProjectPhotosFacadePattern userProjectPhotosFacadePattern)
         {
             _usersFacadePattern = usersFacadePattern;
             _roleFacadePattern = roleFacadePattern;
@@ -73,6 +80,8 @@ namespace Endpoint.Website.Controllers
             _festivalSectionFacadePattern = festivalSectionFacadePattern;
             _festivalDeadlinesFacadePattern = festivalDeadlinesFacadePattern;
             _countiresFacadePattern = countiresFacadePattern;
+            _userProjectsFacadePattern = userProjectsFacadePattern;
+            _userProjectPhotosFacadePattern = userProjectPhotosFacadePattern;
         }
         public IActionResult Index()
         {
@@ -386,6 +395,34 @@ namespace Endpoint.Website.Controllers
         public IActionResult UpdateUserMeliCard(RequestUpdateMeliCardByAdminServiceDto req)
         {
             return Json(_usersFacadePattern.UpdateMeliCardByAdminService.Execute(req));
+        }
+        [HttpGet]
+        public IActionResult UserProjectVerfications()
+        {
+            return View(_userProjectsFacadePattern.GetGetAllUserProjectsForAdminService.Execute());
+        }
+        [HttpGet]
+        public IActionResult UserProjectPhotoVerfications()
+        {
+            return View(_userProjectPhotosFacadePattern.GetAllUserProjectPhotosForAdminService.Execute());
+        }
+        [HttpGet]
+        public IActionResult UserProject(Guid id)
+        {
+            return View(_userProjectsFacadePattern.GetUserProjectByIdForAdmin.Execute(new RequestGetUserProjectByIdForAdminDto
+            {
+                Id = id
+            }));
+        }
+        [HttpPut]
+        public IActionResult UpdateUserProject(RequestUpdateUserProjectStatusServiceDto req)
+        {
+            return Json(_userProjectsFacadePattern.UpdateUserProjectStatusService.Execute(req));
+        }
+        [HttpPut]
+        public IActionResult UpdateUserProjectPhoto(RequestUpdateUserProjectPhotoStatusDto req)
+        {
+            return Json(_userProjectPhotosFacadePattern.UpdateUserProjectPhotoStatusService.Execute(req));
         }
     }
 }

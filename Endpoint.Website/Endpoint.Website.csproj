@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="wwwroot\AuthTemplate\pics\" />
     <Folder Include="wwwroot\SiteTemplate\pagecssjs\" />
-    <Folder Include="wwwroot\UserTemplate\pagecssjs\" />
   </ItemGroup>
 
   <ItemGroup>

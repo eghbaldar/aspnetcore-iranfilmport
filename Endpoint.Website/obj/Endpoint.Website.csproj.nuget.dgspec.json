@@ -175,6 +175,10 @@
               "target": "Package",
               "version": "[13.0.4, )"
             },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[113.0.0, )"
+            },
             "System.Drawing.Common": {
               "target": "Package",
               "version": "[8.0.22, )"

@@ -9,12 +9,22 @@ namespace IranFilmPort.Common.Helpers
 {
     public class General
     {
+        /// <summary>
+        /// true => correct
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public static bool IsValidEmail(string email)
         {
             string emailRegex = @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$";
             Regex regex = new Regex(emailRegex);
             return regex.IsMatch(email);
         }
+        /// <summary>
+        /// true => correct
+        /// </summary>
+        /// <param name="phoneNumber"></param>
+        /// <returns></returns>
         public static bool IsValidIranianCellPhone(string phoneNumber)
         {
             string iranianCellPhoneRegex = @"^((\+98)|0)?9\d{9}$";

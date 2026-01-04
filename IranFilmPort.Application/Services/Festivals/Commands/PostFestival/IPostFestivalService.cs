@@ -1,7 +1,9 @@
 ﻿using IranFilmPort.Application.Common;
 using IranFilmPort.Application.Interfaces.Context;
+using IranFilmPort.Application.Services.Common.Sitemap;
 using IranFilmPort.Application.Services.Common.UploadFile;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 
 namespace IranFilmPort.Application.Services.Festivals.Commands.PostFestival
@@ -33,16 +35,18 @@ namespace IranFilmPort.Application.Services.Festivals.Commands.PostFestival
     }
     public interface IPostFestivalService
     {
-        ResultDto Execute(RequestPostFestivalServiceDto req);
+        Task<ResultDto> Execute(RequestPostFestivalServiceDto req);
     }
     public class PostFestivalService : IPostFestivalService
     {
         private readonly IDataBaseContext _context;
-        public PostFestivalService(IDataBaseContext context)
+        private readonly IServiceProvider _serviceProvider;
+        public PostFestivalService(IDataBaseContext context, IServiceProvider serviceProvider)
         {
             _context = context;
+            _serviceProvider = serviceProvider;
         }
-        public ResultDto Execute(RequestPostFestivalServiceDto req)
+        public async Task<ResultDto> Execute(RequestPostFestivalServiceDto req)
         {
             if (req == null ||
                 string.IsNullOrEmpty(req.TitleEn) ||
@@ -56,53 +60,84 @@ namespace IranFilmPort.Application.Services.Festivals.Commands.PostFestival
             {
                 return new ResultDto { IsSuccess = false };
             }
-            // generate slug & unique code
-            int UNIQUECODE = EnsureUniqueCode(GenerateRandomLongValue());
-            if (UNIQUECODE == 0) return new ResultDto { IsSuccess = false };
-            // entity
-            IranFilmPort.Domain.Entities.Festival.Festivals festival =
-                new Domain.Entities.Festival.Festivals()
-                {
-                    UniqueCode = UNIQUECODE,
-                    Website = WebUtility.HtmlDecode(req.Website.Trim()),
-                    Rules = WebUtility.HtmlDecode(req.Rules.Trim()),
-                    NotificationDate = req.NotificationDate,
-                    OpeningDate = req.OpeningDate,
-                    Platform = req.Platform,
-                    Active = req.Active,
-                    Address = WebUtility.HtmlDecode(req.Address.Trim()),
-                    Attribute = WebUtility.HtmlDecode(req.Attribute.Trim()),
-                    Detail = WebUtility.HtmlDecode(req.Detail.Trim()),
-                    EventEndDate = req.EventEndDate,
-                    Genres = req.Genres,
-                    Level = req.Level,
-                    CountryCode = req.CountryCode,
-                    EventStartDate = req.EventStartDate,
-                    Submitway = WebUtility.HtmlDecode(req.Submitway.Trim()),
-                    TitleEn = WebUtility.HtmlDecode(req.TitleEn.Trim()),
-                    TitleFa = WebUtility.HtmlDecode(req.TitleFa.Trim()),
-                    ShortFeature = req.ShortFeature,
-                    Premiere = req.Premiere,
-                };
-
-            // upload the main photo
-            var file = CreateFilename(req.Logo, req.AllowedOver150);
-            switch (file.IsSuccess)
+            using (var scope = _serviceProvider.CreateScope())
             {
-                case true:
-                    festival.Logo = file.Filename;
-                    break;
-                case false:
-                    return new ResultDto
+                var dbContext = scope.ServiceProvider.GetRequiredService<IDataBaseContext>();
+                var sitemapFacade = scope.ServiceProvider.GetRequiredService<ISitemapService>();
+
+                using (var transaction = await dbContext.Database.BeginTransactionAsync())
+                {
+                    try
                     {
-                        IsSuccess = false,
-                        Message = file.Message,
-                    };
+                        // generate slug & unique code
+                        int UNIQUECODE = EnsureUniqueCode(GenerateRandomLongValue());
+                        if (UNIQUECODE == 0) return new ResultDto { IsSuccess = false };
+                        // entity
+                        IranFilmPort.Domain.Entities.Festival.Festivals festival =
+                            new Domain.Entities.Festival.Festivals()
+                            {
+                                UniqueCode = UNIQUECODE,
+                                Website = WebUtility.HtmlDecode(req.Website.Trim()),
+                                Rules = WebUtility.HtmlDecode(req.Rules.Trim()),
+                                NotificationDate = req.NotificationDate,
+                                OpeningDate = req.OpeningDate,
+                                Platform = req.Platform,
+                                Active = req.Active,
+                                Address = WebUtility.HtmlDecode(req.Address.Trim()),
+                                Attribute = WebUtility.HtmlDecode(req.Attribute.Trim()),
+                                Detail = WebUtility.HtmlDecode(req.Detail.Trim()),
+                                EventEndDate = req.EventEndDate,
+                                Genres = req.Genres,
+                                Level = req.Level,
+                                CountryCode = req.CountryCode,
+                                EventStartDate = req.EventStartDate,
+                                Submitway = WebUtility.HtmlDecode(req.Submitway.Trim()),
+                                TitleEn = WebUtility.HtmlDecode(req.TitleEn.Trim()),
+                                TitleFa = WebUtility.HtmlDecode(req.TitleFa.Trim()),
+                                ShortFeature = req.ShortFeature,
+                                Premiere = req.Premiere,
+                            };
+
+                        // upload the main photo
+                        var file = CreateFilename(req.Logo, req.AllowedOver150);
+                        switch (file.IsSuccess)
+                        {
+                            case true:
+                                festival.Logo = file.Filename;
+                                break;
+                            case false:
+                                return new ResultDto
+                                {
+                                    IsSuccess = false,
+                                    Message = file.Message,
+                                };
+                        }
+                        dbContext.Festivals.Add(festival);
+
+                        // Step 3: Save changes and commit the transaction
+                        var output = await dbContext.SaveChangesAsync();
+
+                        // sitemap ...
+                        sitemapFacade.CreateOrUpdateSitemap();
+
+                        if (output >= 0)
+                        {
+                            await transaction.CommitAsync();
+                            return new ResultDto { IsSuccess = true };
+                        }
+                        else
+                        {
+                            await transaction.RollbackAsync();
+                            return new ResultDto { IsSuccess = false };
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await transaction.RollbackAsync();
+                        return new ResultDto { IsSuccess = false };
+                    }
+                }
             }
-            _context.Festivals.Add(festival);
-            // post & save
-            if (_context.SaveChanges() >= 0) return new ResultDto { IsSuccess = true };
-            else return new ResultDto { IsSuccess = false };
         }
         private static int GenerateRandomLongValue()
         {

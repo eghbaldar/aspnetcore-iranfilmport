@@ -4,6 +4,7 @@ using IranFilmPort.Application.Services.Festivals.Commands.DeleteFestival;
 using IranFilmPort.Application.Services.Festivals.Commands.PostFestival;
 using IranFilmPort.Application.Services.Festivals.Commands.UpdateFestival;
 using IranFilmPort.Application.Services.Festivals.Queries.GetAllFestivalsForAdminService;
+using IranFilmPort.Application.Services.Festivals.Queries.GetAllFestivalsForSitemap;
 using IranFilmPort.Application.Services.Festivals.Queries.GetFestival;
 using IranFilmPort.Application.Services.Festivals.Queries.GetIdByUniqueCode;
 
@@ -12,9 +13,11 @@ namespace IranFilmPort.Application.Services.Festivals.FacadePattern
     public class FestivalsFacadePattern: IFestivalsFacadePattern
     {
         private readonly IDataBaseContext _context;
-        public FestivalsFacadePattern(IDataBaseContext context)
+        private readonly IServiceProvider _serviceProvider;
+        public FestivalsFacadePattern(IDataBaseContext context, IServiceProvider serviceProvider)
         {
             _context = context;
+            _serviceProvider = serviceProvider;
         }
         // DeleteNewsService
         public GetFestivalService _getFestivalService;
@@ -32,13 +35,13 @@ namespace IranFilmPort.Application.Services.Festivals.FacadePattern
         public PostFestivalService _postFestivalService;
         public PostFestivalService PostFestivalService
         {
-            get { return _postFestivalService = _postFestivalService ?? new PostFestivalService(_context); }
+            get { return _postFestivalService = _postFestivalService ?? new PostFestivalService(_context, _serviceProvider); }
         }
         // UpdateFestivalService
         public UpdateFestivalService _updateFestivalService;
         public UpdateFestivalService UpdateFestivalService
         {
-            get { return _updateFestivalService = _updateFestivalService ?? new UpdateFestivalService(_context); }
+            get { return _updateFestivalService = _updateFestivalService ?? new UpdateFestivalService(_context, _serviceProvider); }
         }
         // DeleteFestivalService
         public DeleteFestivalService _deleteFestivalService;
@@ -51,6 +54,12 @@ namespace IranFilmPort.Application.Services.Festivals.FacadePattern
         public GetIdByUniqueCodeService GetIdByUniqueCodeService
         {
             get { return _getIdByUniqueCodeService = _getIdByUniqueCodeService ?? new GetIdByUniqueCodeService(_context); }
+        }
+        // GetAllFestivalsForSitemapService
+        public GetAllFestivalsForSitemapService _getAllFestivalsForSitemapService;
+        public GetAllFestivalsForSitemapService GetAllFestivalsForSitemapService
+        {
+            get { return _getAllFestivalsForSitemapService = _getAllFestivalsForSitemapService ?? new GetAllFestivalsForSitemapService(_context); }
         }
     }
 }
