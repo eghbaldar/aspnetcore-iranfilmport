@@ -1,9 +1,16 @@
-﻿using Endpoint.Website.Models.AddFestival;
+﻿using Endpoint.Website.Models.Accolades;
+using Endpoint.Website.Models.AddAccolade;
+using Endpoint.Website.Models.AddFestival;
 using Endpoint.Website.Models.AddNews;
 using Endpoint.Website.Models.AddUsers;
 using Endpoint.Website.Models.FestivalSectionDeadline;
 using Endpoint.Website.Models.Users;
 using IranFilmPort.Application.Interfaces.FacadePattern;
+using IranFilmPort.Application.Interfaces.FacadePatternDapper;
+using IranFilmPort.Application.Services.Accolades.Commands.PostAccolade;
+using IranFilmPort.Application.Services.Accolades.Commands.UpdateAccolade;
+using IranFilmPort.Application.Services.Accolades.Queries.GetAccoladeById;
+using IranFilmPort.Application.Services.Accolades.Queries.GetAllAccolades;
 using IranFilmPort.Application.Services.FestivalDeadlines.Commands.DeleteFestivalDeadline;
 using IranFilmPort.Application.Services.FestivalDeadlines.Commands.PostFestivalDeadline;
 using IranFilmPort.Application.Services.FestivalDeadlines.Commands.UpdateFestivalDeadline;
@@ -27,6 +34,15 @@ using IranFilmPort.Application.Services.NewsCategories.Commands.DeleteNewsCatego
 using IranFilmPort.Application.Services.NewsCategories.Commands.PostNewsCategory;
 using IranFilmPort.Application.Services.NewsCategories.Commands.UpdateNewsCategory;
 using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsChildrenCategories;
+using IranFilmPort.Application.Services.SendInformation.Commands.UpdateSendInformationStatusByAdmin;
+using IranFilmPort.Application.Services.SendInformation.Queries.GetAllSendInformation;
+using IranFilmPort.Application.Services.Settings.Commands.UpdateSettings;
+using IranFilmPort.Application.Services.Sliders.Commands.DeleteSlider;
+using IranFilmPort.Application.Services.Sliders.Commands.PostSlider;
+using IranFilmPort.Application.Services.Sliders.Commands.UpdateSlider;
+using IranFilmPort.Application.Services.Testimonals.Commands.DeleteTestimonal;
+using IranFilmPort.Application.Services.Testimonals.Commands.PostTestimonal;
+using IranFilmPort.Application.Services.Testimonals.Queries.GetAllTestimonials;
 using IranFilmPort.Application.Services.UserProjectPhotos.Commands.UpdateUserProjectPhotoStatus;
 using IranFilmPort.Application.Services.UserProjects.Commands.UpdateUserProjectStatus;
 using IranFilmPort.Application.Services.UserProjects.Queries.GetUserProjectByIdForAdmin;
@@ -48,6 +64,7 @@ namespace Endpoint.Website.Controllers
     [KingAuthorize(Role.King, Role.SuperAdmin, Role.Admin)]
     public class AdminController : Controller
     {
+        // efcore
         private readonly IUsersFacadePattern _usersFacadePattern;
         private readonly IRoleFacadePattern _roleFacadePattern;
         private readonly INewsFacadePattern _newsFacadePattern;
@@ -59,6 +76,14 @@ namespace Endpoint.Website.Controllers
         private readonly ICountiresFacadePattern _countiresFacadePattern;
         private readonly IUserProjectsFacadePattern _userProjectsFacadePattern;
         private readonly IUserProjectPhotosFacadePattern _userProjectPhotosFacadePattern;
+        private readonly ISettingsFacadePattern _settingsFacadePattern;
+        private readonly ISendInformationFacadePattern _sendInformationFacadePattern;
+        private readonly ISlidersFacadePattern _slidersFacadePattern;
+        private readonly ITestimonalsFacadePattern _testimonalsFacadePattern;
+        private readonly IAccoladesFacadePattern _accoladesFacadePattern;
+        // dapper
+        private readonly IFilmFacadePatternDapper _filmFacadePatternDapper;
+
         public AdminController(IUsersFacadePattern usersFacadePattern,
             IRoleFacadePattern roleFacadePattern,
             INewsFacadePattern newsFacadePattern,
@@ -69,7 +94,13 @@ namespace Endpoint.Website.Controllers
             IFestivalDeadlinesFacadePattern festivalDeadlinesFacadePattern,
             ICountiresFacadePattern countiresFacadePattern,
             IUserProjectsFacadePattern userProjectsFacadePattern,
-            IUserProjectPhotosFacadePattern userProjectPhotosFacadePattern)
+            IUserProjectPhotosFacadePattern userProjectPhotosFacadePattern,
+            ISettingsFacadePattern settingsFacadePattern,
+            ISendInformationFacadePattern sendInformationFacadePattern,
+            ISlidersFacadePattern slidersFacadePattern,
+            ITestimonalsFacadePattern testimonalsFacadePattern,
+            IFilmFacadePatternDapper filmFacadePatternDapper,
+            IAccoladesFacadePattern accoladesFacadePattern)
         {
             _usersFacadePattern = usersFacadePattern;
             _roleFacadePattern = roleFacadePattern;
@@ -82,6 +113,12 @@ namespace Endpoint.Website.Controllers
             _countiresFacadePattern = countiresFacadePattern;
             _userProjectsFacadePattern = userProjectsFacadePattern;
             _userProjectPhotosFacadePattern = userProjectPhotosFacadePattern;
+            _settingsFacadePattern = settingsFacadePattern;
+            _sendInformationFacadePattern = sendInformationFacadePattern;
+            _slidersFacadePattern = slidersFacadePattern;
+            _testimonalsFacadePattern = testimonalsFacadePattern;
+            _filmFacadePatternDapper = filmFacadePatternDapper;
+            _accoladesFacadePattern = accoladesFacadePattern;
         }
         public IActionResult Index()
         {
@@ -401,6 +438,8 @@ namespace Endpoint.Website.Controllers
         {
             return View(_userProjectsFacadePattern.GetGetAllUserProjectsForAdminService.Execute());
         }
+
+        // Projects
         [HttpGet]
         public IActionResult UserProjectPhotoVerfications()
         {
@@ -423,6 +462,126 @@ namespace Endpoint.Website.Controllers
         public IActionResult UpdateUserProjectPhoto(RequestUpdateUserProjectPhotoStatusDto req)
         {
             return Json(_userProjectPhotosFacadePattern.UpdateUserProjectPhotoStatusService.Execute(req));
+        }
+
+        // Settings
+        [HttpGet]
+        public IActionResult Settings()
+        {
+            var result = _settingsFacadePattern.GetAllSettingsService.Execute();
+            return View(result);
+        }
+        [HttpPut]
+        public IActionResult UpdateSettings(RequestUpdateSettingsServiceDto req)
+        {
+            return Json(_settingsFacadePattern.UpdateSettingsService.Execute(req));
+        }
+        [HttpGet]
+        public IActionResult SendInformation(int page)
+        {
+            var result = _sendInformationFacadePattern.GetAllSendInformationService.Execute(new RequestGetAllSendInformationServiceDto
+            {
+                CurrentPage = page
+            });
+            return View(result);
+        }
+        [HttpPut]
+        public IActionResult UpdateSendInformation(RequestUpdateSendInformationStatusByAdminServiceDto req)
+        {
+            return Json(_sendInformationFacadePattern.UpdateSendInformationStatusByAdminService.Execute(req));
+        }
+
+        // Sliders
+        [HttpGet]
+        public IActionResult Sliders(int page)
+        {
+            return View(_slidersFacadePattern.GetSlidersForAdminService.Execute(new IranFilmPort.Application.Services.Sliders.Queries.GetSlidersForAdmin.RequestGetSlidersForAdminServiceDto
+            {
+                CurrentPage = page
+            }));
+        }
+        [HttpPost]
+        public IActionResult PostSlider(RequestPostSliderServiceDto req)
+        {
+            return Json(_slidersFacadePattern.PostSliderService.Execute(req));
+        }
+        [HttpPut]
+        public IActionResult UpdateSlider(RequestUpdateSliderServiceDto req)
+        {
+            return Json(_slidersFacadePattern.UpdateSliderService.Execute(req));
+        }
+        [HttpPut]
+        public IActionResult DeleteSlider(RequestDeleteSliderServiceDto req)
+        {
+            return Json(_slidersFacadePattern.DeleteSliderService.Execute(req));
+        }
+        [HttpGet]
+        public IActionResult Testimonials(int page)
+        {
+            return View(_testimonalsFacadePattern.GetAllTestimonialsService.Execute(new RequestGetAllTestimonialsServiceDto
+            {
+                CurrentPage = page
+            }));
+        }
+        [HttpPost]
+        public IActionResult PostTestimonial(RequestPostTestimonalServiceDto req)
+        {
+            return Json(_testimonalsFacadePattern.PostTestimonalService.Execute(req));
+        }
+        [HttpPut]
+        public IActionResult DeleteTestimonial(RequestDeleteTestimonalServiceDto req)
+        {
+            return Json(_testimonalsFacadePattern.DeleteTestimonalService.Execute(req));
+        }
+
+        // accolades
+        [HttpGet]
+        public async Task<IActionResult> Accolades(int page)
+        {
+            ModelAccolades modelAccolades = new ModelAccolades()
+            {
+                ResutlGetAllAccoladesServiceDto = _accoladesFacadePattern.GetAllAccoladesService.Execute(new RequestGetAllAccoladesServiceDto
+                {
+                    CurrentPage = page
+                }),
+                ResultGetFilmsServiceDapperDto = await _filmFacadePatternDapper.GetFilmsDapperService.Execute()
+            };
+            return View(modelAccolades);
+        }
+        [HttpGet]
+        public async Task<IActionResult> AddAccolade(long? id)
+        {
+            if (id == null || id == 0)
+            {
+                ModelAddAccolade modelAddAccolade = new ModelAddAccolade()
+                {
+                    ResultGetFilmsServiceDapperDto = await _filmFacadePatternDapper.GetFilmsDapperService.Execute()
+                };
+                return View(modelAddAccolade);
+            }
+            else
+            {
+                ModelAddAccolade modelAddAccolade = new ModelAddAccolade()
+                {
+                    ResultGetFilmsServiceDapperDto = await _filmFacadePatternDapper.GetFilmsDapperService.Execute(),
+                    GetAccoladeByIdServiceDto = _accoladesFacadePattern.GetAccoladeByIdService.Execute(new RequestGetAccoladeByIdServiceDto
+                    {
+                        FilmId = (long)id,
+                    }),
+                    FilmId = id,
+                };
+                return View(modelAddAccolade);
+            }
+        }
+        [HttpPut]
+        public IActionResult UpdateAccolade(RequestUpdateAccoladeServiceDto req)
+        {
+            return Json(_accoladesFacadePattern.UpdateAccoladeService.Execute(req));
+        }
+        [HttpPost]
+        public IActionResult PostAccolade(RequestPostAccoladeServiceDto req)
+        {
+            return Json(_accoladesFacadePattern.PostAccoladeService.Execute(req));
         }
     }
 }

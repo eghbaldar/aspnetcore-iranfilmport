@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "J/wGmFFIoH8=",
+  "dgSpecHash": "t//+6MzGzZM=",
   "success": true,
   "projectFilePath": "E:\\IranFilmPort\\Endpoint.Website\\Endpoint.Website.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kinh\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\Kinh\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\lazziya.taghelpers\\6.0.2\\lazziya.taghelpers.6.0.2.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.3.0\\microsoft.aspnetcore.authentication.abstractions.2.3.0.nupkg.sha512",

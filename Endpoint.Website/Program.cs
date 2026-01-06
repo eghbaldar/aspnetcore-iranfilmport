@@ -1,7 +1,9 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
 using IranFilmPort.Application.Interfaces.FacadePattern;
+using IranFilmPort.Application.Interfaces.FacadePatternDapper;
 using IranFilmPort.Application.Services._AdminStuff.FacadePattern;
 using IranFilmPort.Application.Services._Turnstile;
+using IranFilmPort.Application.Services.Accolades.FacadePattern;
 using IranFilmPort.Application.Services.Common.Email;
 using IranFilmPort.Application.Services.Common.Sitemap;
 using IranFilmPort.Application.Services.Countires.FacadePattern;
@@ -13,12 +15,17 @@ using IranFilmPort.Application.Services.NewsCategories.FacadePattern;
 using IranFilmPort.Application.Services.NewsComments.FacadePattern;
 using IranFilmPort.Application.Services.Roles.FacadePattern;
 using IranFilmPort.Application.Services.SendInformation.FacadePattern;
+using IranFilmPort.Application.Services.Settings.FacadePattern;
+using IranFilmPort.Application.Services.Sliders.FacadePattern;
+using IranFilmPort.Application.Services.TemporaryForms.FacadePattern;
+using IranFilmPort.Application.Services.Testimonals.FacadePattern;
 using IranFilmPort.Application.Services.UserProjectPhotos.FacadePattern;
 using IranFilmPort.Application.Services.UserProjects.FacadePattern;
 using IranFilmPort.Application.Services.UserRefreshToken;
 using IranFilmPort.Application.Services.Users.FacadePattern;
 using IranFilmPort.Application.Services.UsersLogs.Commands.PostUserLog;
 using IranFilmPort.Application.Services.UsersSuspicious;
+using IranFilmPort.Application.ServicesDapper.Films.FacadePattern;
 using IranFilmPort.Common.Constants;
 using IranFilmPort.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -36,7 +43,11 @@ builder.Services.AddHttpContextAccessor();  // ✅
 builder.Services.AddMemoryCache();
 // Interface
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
-// Other Intercaes
+builder.Services.AddScoped<IDapperExecutor, DapperExecutor>();
+
+// Interfcaes - Dapper
+builder.Services.AddScoped<IFilmFacadePatternDapper, FilmFacadePatternDapper>();
+// Interfcaes
 builder.Services.AddScoped<ISitemapService, SitemapService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<INewsFacadePattern, NewsFacadePattern>();
@@ -52,6 +63,11 @@ builder.Services.AddScoped<IAdminStuffFacadePattern, AdminStuffFacadePattern>();
 builder.Services.AddScoped<IUserProjectsFacadePattern, UserProjectsFacadePattern>();
 builder.Services.AddScoped<IUserProjectPhotosFacadePattern, UserProjectPhotosFacadePattern>();
 builder.Services.AddScoped<ISendInformationFacadePattern, SendInformationFacadePattern>();
+builder.Services.AddScoped<ISettingsFacadePattern, SettingsFacadePattern>();
+builder.Services.AddScoped<ITemporaryFormsFacadePattern, TemporaryFormsFacadePattern>();
+builder.Services.AddScoped<ISlidersFacadePattern, SlidersFacadePattern>();
+builder.Services.AddScoped<ITestimonalsFacadePattern, TestimonalsFacadePattern>();
+builder.Services.AddScoped<IAccoladesFacadePattern, AccoladesFacadePattern>();
 
 // token and authentication services
 builder.Services.AddScoped<ITurnstileService, TurnstileService>();

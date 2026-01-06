@@ -18,7 +18,7 @@ namespace IranFilmPort.Application.Services.Common.UploadFile
                     byte[] fileBytes = ms.ToArray();
 
                     // Check the file signature
-                    if (IsWEBP(fileBytes) || IsPDF(fileBytes) || IsJPEG(fileBytes) || IsPNG(fileBytes) || VideoFormat(fileBytes))
+                    if (IsWEBP(fileBytes) || IsOGG(fileBytes) || IsPDF(fileBytes) || IsJPEG(fileBytes) || IsPNG(fileBytes) || VideoFormat(fileBytes))
                     {
                         return new ResultDto
                         {

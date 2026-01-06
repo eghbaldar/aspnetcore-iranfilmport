@@ -22,7 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Settings\FacadePattern\" />
+    <Folder Include="Services\Accolades\Queries\GetAccoladeByFilmTitle\" />
+    <Folder Include="Services\TemporaryForms\Queries\" />
     <Folder Include="Services\UsersLogs\FacadePattern\" />
     <Folder Include="Services\UsersLogs\Queries\" />
   </ItemGroup>

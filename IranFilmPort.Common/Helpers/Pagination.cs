@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IranFilmPort.Common.Helpers
+﻿namespace IranFilmPort.Common.Helpers
 {
     public static class Pagination
     {

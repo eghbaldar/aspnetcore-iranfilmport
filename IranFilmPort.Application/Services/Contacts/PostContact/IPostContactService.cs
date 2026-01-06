@@ -32,8 +32,8 @@ namespace IranFilmPort.Application.Services.Contacts.PostContact
                 string.IsNullOrEmpty(req.IP)
                 ) return new ResultDto { IsSuccess = false };
 
-            IranFilmPort.Domain.Entities.Contact.Contacts contacts =
-                new IranFilmPort.Domain.Entities.Contact.Contacts()
+            IranFilmPort.Domain.Entities.Guest.Contacts contacts =
+                new IranFilmPort.Domain.Entities.Guest.Contacts()
                 {
                     Fullname = WebUtility.HtmlDecode(req.Fullname),
                     IP = WebUtility.HtmlDecode(req.IP),

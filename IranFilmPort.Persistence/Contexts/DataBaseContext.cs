@@ -1,11 +1,12 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
-using IranFilmPort.Domain.Entities.Contact;
+using IranFilmPort.Domain.Entities.Accolades;
 using IranFilmPort.Domain.Entities.Countries;
 using IranFilmPort.Domain.Entities.Festival;
 using IranFilmPort.Domain.Entities.Guest;
 using IranFilmPort.Domain.Entities.News;
-using IranFilmPort.Domain.Entities.Newsletter;
 using IranFilmPort.Domain.Entities.Settings;
+using IranFilmPort.Domain.Entities.Sliders;
+using IranFilmPort.Domain.Entities.Testimonials;
 using IranFilmPort.Domain.Entities.User;
 using IranFilmPort.Domain.Entities.UserProjects;
 using IranFilmPort.Infranstructure.Configurations.FestivalDeadlines;
@@ -14,6 +15,8 @@ using IranFilmPort.Infranstructure.Configurations.FestivalSections;
 using IranFilmPort.Infranstructure.Configurations.News;
 using IranFilmPort.Infranstructure.Configurations.NewsTags;
 using IranFilmPort.Infranstructure.Configurations.Roles;
+using IranFilmPort.Infranstructure.Configurations.Sliders;
+using IranFilmPort.Infranstructure.Configurations.Testimonials;
 using IranFilmPort.Infranstructure.Configurations.UserProjects;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
@@ -28,6 +31,9 @@ namespace IranFilmPort.Persistence.Contexts
         }
         // Admin
         public DbSet<Settings> Settings { get; set; }
+        public DbSet<Sliders> Sliders { get; set; }
+        public DbSet<Testimonials> Testimonials { get; set; }
+        public DbSet<Accolades> Accolades { get; set; }
 
         // users
         public DbSet<Users> Users { get; set; }
@@ -48,6 +54,7 @@ namespace IranFilmPort.Persistence.Contexts
         public DbSet<Contacts> Contacts { get; set; }
         public DbSet<Newsletters> Newsletters { get; set; }
         public DbSet<SendInformation> SendInformation { get; set; }
+        public DbSet<TemporaryForms> TemporaryForms { get; set; }
 
         // Festival
         public DbSet<Countries> Countries { get; set; }
@@ -70,6 +77,8 @@ namespace IranFilmPort.Persistence.Contexts
             modelBuilder.ApplyConfiguration(new FestivalSectionsConfigurations());
             modelBuilder.ApplyConfiguration(new UserProjectsConfigurations());
             modelBuilder.ApplyConfiguration(new UserProjectPhotosConfigurations());
+            modelBuilder.ApplyConfiguration(new SlidersConfigurations());
+            modelBuilder.ApplyConfiguration(new TestimonialsConfigurations());
         }
         public override int SaveChanges()
         {

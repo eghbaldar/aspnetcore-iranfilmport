@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "O6qXLLS1WR0=",
+  "dgSpecHash": "lRsApvAYyeA=",
   "success": true,
   "projectFilePath": "E:\\IranFilmPort\\IranFilmPort.Persistence\\IranFilmPort.Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kinh\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\Kinh\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.3.0\\microsoft.aspnetcore.authentication.abstractions.2.3.0.nupkg.sha512",
     "C:\\Users\\Kinh\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.3.0\\microsoft.aspnetcore.authentication.core.2.3.0.nupkg.sha512",

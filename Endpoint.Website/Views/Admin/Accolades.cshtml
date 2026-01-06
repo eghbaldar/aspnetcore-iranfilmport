@@ -1,0 +1,113 @@
+﻿@using Endpoint.Website.Models.Accolades
+@using Endpoint.Website.Models.AddUsers;
+@using IranFilmPort.Common.Constants
+@using IranFilmPort.Common.Helpers;
+@model ModelAccolades
+@addTagHelper *,LazZiya.TagHelpers
+@{
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    ViewData["HeadTitle"] = "افتخارات";
+    int currentPage = 1;
+    int.TryParse(Context.Request.Query["page"], out currentPage);
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div>
+            <a href="/admin/addaccolade/" class="btn btn-warning waves-effect width-md waves-light">درج افتخار</a>
+            <a onclick="openSearchModal()" class="btn btn-primary waves-effect width-md waves-light">جستجوی اثر</a>
+        </div>
+        <div class="card-box mt-20">
+            <h4 class="mt-0 header-title">لیست افتخارات</h4>
+            <div class="table-responsive" id="divAccolades">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>اثر</th>
+                            <th>اولویت</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbNews">
+                        @{
+                            foreach (var item in Model.ResutlGetAllAccoladesServiceDto.Result)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="/admin/addAccolade/@item.FilmId">@item.FilmTitle</a>
+                                    </td>
+                                    <td>
+                                        @item.Priority
+                                    </td>
+                                    <td>
+                                        <div class="dropdown float-right">
+                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="/admin/addaccolade/@item.FilmId" class="dropdown-item">ویرایش</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row mt-10">
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers"
+                         id="datatable-buttons_paginate">
+                        <paging page-no="@currentPage == 0 ? 1 : currentPage"
+                                query-string-key-page-no="page"
+                                page-size="@Model.ResutlGetAllAccoladesServiceDto.RowsOnEachPage"
+                                total-records="@Model.ResutlGetAllAccoladesServiceDto.RowCount">
+                        </paging>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*MODAL - Search on Film *@
+<div class="modal fade" id="ModalEditSearchFilm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">جستجوی اثر</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="hiddenModalUserId" />
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label class="col-sm-2  col-form-label" for="simpleinput">عنوان فارسی</label>
+                    <div class="col-sm-10">
+                        <select id="selectSearchFilms" class="form-control">
+                            <option disabled selected="selected">اثر را انتخاب کنید ...</option>
+                            @{
+                                foreach (var item in Model.ResultGetFilmsServiceDapperDto.Result)
+                                {
+                                    <option value="@item.Id">@item.FullTitle</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="goToAccolade();" class="btn btn-primary">برو به افتخارات</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+    </script>
+    <script src="~/admintemplate/pagecssjs/accolades/accolades.js"></script>
+}

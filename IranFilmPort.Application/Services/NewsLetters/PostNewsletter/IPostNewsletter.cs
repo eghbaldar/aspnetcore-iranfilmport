@@ -1,6 +1,7 @@
 ﻿using IranFilmPort.Application.Common;
 using IranFilmPort.Application.Interfaces.Context;
 using IranFilmPort.Common.Helpers;
+using IranFilmPort.Domain.Entities.Guest;
 using System.Net;
 
 namespace IranFilmPort.Application.Services.NewsLetters.PostNewsletter
@@ -37,8 +38,8 @@ namespace IranFilmPort.Application.Services.NewsLetters.PostNewsletter
                     Message = "فرمت ایمیل وارد شده نادرست است.",
                 };
             }
-            IranFilmPort.Domain.Entities.Newsletter.Newsletters newsletter = 
-                new IranFilmPort.Domain.Entities.Newsletter.Newsletters()
+            Newsletters newsletter = 
+                new IranFilmPort.Domain.Entities.Guest.Newsletters()
             {
                 Email = WebUtility.HtmlDecode(req.Email),
                 IP = WebUtility.HtmlDecode(req.IP),

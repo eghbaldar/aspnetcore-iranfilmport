@@ -1,10 +1,11 @@
-﻿using IranFilmPort.Domain.Entities.Contact;
+﻿using IranFilmPort.Domain.Entities.Accolades;
 using IranFilmPort.Domain.Entities.Countries;
 using IranFilmPort.Domain.Entities.Festival;
 using IranFilmPort.Domain.Entities.Guest;
 using IranFilmPort.Domain.Entities.News;
-using IranFilmPort.Domain.Entities.Newsletter;
 using IranFilmPort.Domain.Entities.Settings;
+using IranFilmPort.Domain.Entities.Sliders;
+using IranFilmPort.Domain.Entities.Testimonials;
 using IranFilmPort.Domain.Entities.User;
 using IranFilmPort.Domain.Entities.UserProjects;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,9 @@ namespace IranFilmPort.Application.Interfaces.Context
 
         // Admin
         DbSet<Settings> Settings { get; set; }
+        DbSet<Sliders> Sliders { get; set; }
+        DbSet<Testimonials> Testimonials { get; set; }
+        DbSet<Accolades> Accolades { get; set; }
 
         // User
         DbSet<Users> Users { get; set; }
@@ -38,6 +42,7 @@ namespace IranFilmPort.Application.Interfaces.Context
         DbSet<Contacts> Contacts { get; set; }
         DbSet<Newsletters> Newsletters { get; set; }
         DbSet<SendInformation> SendInformation { get; set; }
+        DbSet<TemporaryForms> TemporaryForms { get; set; }
 
         // festival
         DbSet<Countries> Countries { get; set; }

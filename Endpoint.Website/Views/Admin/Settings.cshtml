@@ -1,0 +1,242 @@
+﻿@using IranFilmPort.Application.Services.Settings.Queries.GetAllSettings
+@using IranFilmPort.Common.Helpers;
+@using IranFilmPort.Common.Constants
+@{
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    ViewData["HeadTitle"] = "تنظیمات کلی سایت";
+    ViewData["pageHeadTitle"] = "تنظیمات کلی سایت";
+    ViewData["pageSubTitle"] = "";
+}
+@model GetAllSettingsServiceDto
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="row">
+                <div class="col-12">
+                    <div class="p-2">
+                        <div class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">دلار روز به ریال</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="number" id="txtDollarToRial"
+                                                   class="form-control">
+                                        }
+                                        else
+                                        {
+                                            <input type="number" id="txtDollarToRial"
+                                                   value="@Model.DollarToRial"
+                                                   class="form-control">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <div class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">کمیسیون ورودی دارها</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="number" id="txtComissionForFee"
+                                                   class="form-control">
+                                        }
+                                        else
+                                        {
+                                            <input type="number" id="txtComissionForFee"
+                                                   value="@Model.ComissionForFee"
+                                                   class="form-control">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <div class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">کمیسیون رایگان ها</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="number" id="txtCommissionForFree"
+                                                   class="form-control">
+                                        }
+                                        else
+                                        {
+                                            <input type="number" id="txtCommissionForFree"
+                                                   value="@Model.CommissionForFree"
+                                                   class="form-control">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <div class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">ورژن ؟؟</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="number" id="txtVersion"
+                                                   class="form-control">
+                                        }
+                                        else
+                                        {
+                                            <input type="number" id="txtVersion"
+                                                   value="@Model.Version"
+                                                   class="form-control">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <div class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">نسخه اندروید کارمندان</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="number" id="txtApkStuff"
+                                                   class="form-control">
+                                        }
+                                        else
+                                        {
+                                            <input type="number" id="txtApkStuff"
+                                                   value="@Model.ApkStuff"
+                                                   class="form-control">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <div class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">نسخه اندروید مشتریان</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="number" id="txtApkClient"
+                                                   class="form-control">
+                                        }
+                                        else
+                                        {
+                                            <input type="number" id="txtApkClient"
+                                                   value="@Model.ApkClient"
+                                                   class="form-control">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <div class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">آدرس فایل آپدیت نرم افزار دسکتاپ</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="number" id="txtWinApp"
+                                                   class="form-control">
+                                        }
+                                        else
+                                        {
+                                            <input type="number" id="txtWinApp"
+                                                   value="@Model.WinApp"
+                                                   class="form-control">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <div class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-sm-2  col-form-label" for="simpleinput">Marquee</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (Model == null)
+                                        {
+                                            <input type="number" id="txtMarquee"
+                                                   class="form-control">
+                                        }
+                                        else
+                                        {
+                                            <input type="number" id="txtMarquee"
+                                                   value="@Model.Marquee"
+                                                   class="form-control">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">مودال در تمامی صفحات</label>
+                        <div class="col-sm-10 alignCenter">
+                            <div class="custom-control custom-switch ">
+                                @{
+                                    if (Model == null)
+                                    {
+                                        <label class="custom-control material-switch">
+                                            <input type="checkbox" name="active" id="chkModalOnAllPage" class="material-switch-control-input">
+                                            <span class="material-switch-control-indicator"></span>
+                                        </label>
+                                    }
+                                    else
+                                    {
+                                        if ((bool)Model.ModalOnAllPage)
+                                        {
+                                            <label class="custom-control material-switch">
+                                                <input checked type="checkbox" name="active" id="chkModalOnAllPage" class="material-switch-control-input">
+                                                <span class="material-switch-control-indicator"></span>
+                                            </label>
+                                        }
+                                        else
+                                        {
+                                            <label class="custom-control material-switch">
+                                                <input type="checkbox" name="active" id="chkModalOnAllPage" class="material-switch-control-input">
+                                                <span class="material-switch-control-indicator"></span>
+                                            </label>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" onclick="updateSettings();"
+                            class="btn btn-success waves-effect width-md waves-light">
+                        ویرایش
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- end row -->
+
+</div>
+@section Styles {
+
+}
+@section Scripts {
+    <script src="~/admintemplate/pagecssjs/settings/settings.js"></script>
+}

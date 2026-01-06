@@ -1,0 +1,96 @@
+﻿@using IranFilmPort.Application.Services.SendInformation.Queries.GetAllSendInformation
+@using IranFilmPort.Common.Constants
+@using IranFilmPort.Common.Helpers
+@model ResultGetAllSendInformationServiceDto
+@addTagHelper *,LazZiya.TagHelpers
+@{
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    ViewData["HeadTitle"] = "درخواست بررسی اثر از سایت";
+    //Pagination
+    int currentPage = 1;
+    int.TryParse(Context.Request.Query["page"], out currentPage);
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box mt-20">
+            <h4 class="mt-0 header-title">درخواست بررسی آثار از سایت</h4>
+            <div class="table-responsive" id="divSendInformation">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>ارسال کننده</th>
+                            <th>موبایل</th>
+                            <th>ایمیل</th>
+                            <th>از طریق</th>
+                            <th>لینک</th>
+                            <th>وضعیت</th>
+                            <th></th>
+                            <th>تاریخ درج</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbNews">
+                        @{
+                            foreach (var item in Model.Result)
+                            {
+                                <tr>
+                                    <td>@item.Fullname</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.WhichWay</td>
+                                    <td>
+                                        @item.Link
+                                        <hr />
+                                        @item.Password
+                                    </td>
+                                    <td>
+                                        @{
+                                            switch (item.Status)
+                                            {
+                                                case StatusConstants.Accepted:
+                                                    <div class="img-title green">بررسی شده</div>
+                                                    break;
+                                                case StatusConstants.UnderConsideration:
+                                                    <div class="img-title yellow">در حال بررسی</div>
+                                                    break;
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        <a onclick="done('@item.Id');" class="btn btn-success waves-effect width-md waves-light">موفقیت</a>
+                                    </td>
+                                    <td>
+                                        @{
+                                            var shamsidate = new PersianDateTime(@item.InsertDateTime);
+                                            var shamsidateString = shamsidate.ToString("yyyy/MM/dd");
+                                            var persiandateTime = PersianNumberHelper.ConvertToPersian(shamsidateString);
+                                            @persiandateTime
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row mt-10">
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers"
+                         id="datatable-buttons_paginate">
+                        <paging page-no="@currentPage == 0 ? 1 : currentPage"
+                                query-string-key-page-no="page"
+                                page-size="@Model.RowsOnEachPage"
+                                total-records="@Model.RowCount">
+                        </paging>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        var _done = '@StatusConstants.Accepted';
+    </script>
+    <script src="~/admintemplate/pagecssjs/sendinformation/sendinformation.js"></script>
+}
