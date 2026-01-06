@@ -1,6 +1,6 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
 
-namespace IranFilmPort.Application.Services.Contacts.GetContact
+namespace IranFilmPort.Application.Services.Contacts.Queries.GetContact
 {
     public class RequestGetContactServiceDto
     {

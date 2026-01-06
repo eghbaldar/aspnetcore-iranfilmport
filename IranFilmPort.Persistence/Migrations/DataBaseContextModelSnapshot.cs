@@ -87,6 +87,46 @@ namespace IranFilmPort.Persistence.Migrations
                     b.ToTable("Countries", "dbo");
                 });
 
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.Courses.Courses", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeleteDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Detail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("InsertDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Teacher")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TeacherHeadshot")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Courses", "dbo");
+                });
+
             modelBuilder.Entity("IranFilmPort.Domain.Entities.Festival.FestivalDeadlines", b =>
                 {
                     b.Property<Guid>("Id")
@@ -696,32 +736,32 @@ namespace IranFilmPort.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6a2b02aa-3343-443d-b1e1-6830ea985ca7"),
-                            InsertDateTime = new DateTime(2026, 1, 6, 12, 26, 15, 824, DateTimeKind.Local).AddTicks(197),
+                            Id = new Guid("4c4641a1-04a3-4017-b60c-7a28159262d9"),
+                            InsertDateTime = new DateTime(2026, 1, 6, 17, 2, 3, 258, DateTimeKind.Local).AddTicks(9828),
                             Title = "King"
                         },
                         new
                         {
-                            Id = new Guid("78f505f2-871d-4f74-941a-231bc5f039c4"),
-                            InsertDateTime = new DateTime(2026, 1, 6, 12, 26, 15, 824, DateTimeKind.Local).AddTicks(247),
+                            Id = new Guid("bf78bf88-13f7-439d-a61f-b2600089e19c"),
+                            InsertDateTime = new DateTime(2026, 1, 6, 17, 2, 3, 258, DateTimeKind.Local).AddTicks(9880),
                             Title = "SuperAdmin"
                         },
                         new
                         {
-                            Id = new Guid("a494378f-96b6-49e0-b20b-4f96b87f095e"),
-                            InsertDateTime = new DateTime(2026, 1, 6, 12, 26, 15, 824, DateTimeKind.Local).AddTicks(253),
+                            Id = new Guid("0fb23b8a-2036-4345-8eb2-7c4955354edd"),
+                            InsertDateTime = new DateTime(2026, 1, 6, 17, 2, 3, 258, DateTimeKind.Local).AddTicks(9885),
                             Title = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("51857070-25af-4a88-81d1-80c8dbc215c9"),
-                            InsertDateTime = new DateTime(2026, 1, 6, 12, 26, 15, 824, DateTimeKind.Local).AddTicks(259),
+                            Id = new Guid("4d7980b8-726f-4176-9188-86a5a1100cd5"),
+                            InsertDateTime = new DateTime(2026, 1, 6, 17, 2, 3, 258, DateTimeKind.Local).AddTicks(9890),
                             Title = "Client"
                         },
                         new
                         {
-                            Id = new Guid("46e0bf46-1f4c-4483-af63-976fe3bd3435"),
-                            InsertDateTime = new DateTime(2026, 1, 6, 12, 26, 15, 824, DateTimeKind.Local).AddTicks(274),
+                            Id = new Guid("5bef0858-b3d7-4d39-9ae3-3c0e98f3020c"),
+                            InsertDateTime = new DateTime(2026, 1, 6, 17, 2, 3, 258, DateTimeKind.Local).AddTicks(9897),
                             Title = "User"
                         });
                 });

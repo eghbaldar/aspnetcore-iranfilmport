@@ -1,15 +1,14 @@
-﻿@using IranFilmPort.Application.Services.Contacts.GetAllContacts
-@using IranFilmPort.Common.Helpers;
+﻿@using IranFilmPort.Application.Services.Contacts.Queries.GetAllContacts
 @using IranFilmPort.Common.Constants
+@using IranFilmPort.Common.Helpers;
 @{
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
     ViewData["HeadTitle"] = "تماس با ما";
 }
-
 @model ResultGetAllContactsServiceDto
 <div class="row">
     <div class="col-lg-12">
-        <div class="card-box mt-20">
+        <div class="card-box">
             <h4 class="mt-0 header-title">لیست تمام پیام ها</h4>
             @{
                 if (Model.Result.Count==0){
@@ -65,7 +64,7 @@
                                                         <i class="mdi mdi-dots-vertical"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a onclick="showContact('@item.Message')" class="dropdown-item">نمایش پیام</a>
+                                                        <a onclick="showContact('@item.Id','@item.Message')" class="dropdown-item">نمایش پیام</a>
                                                     </div>
                                                 </div>
                                             </td>

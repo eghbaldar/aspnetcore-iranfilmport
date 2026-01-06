@@ -1,0 +1,56 @@
+﻿@using IranFilmPort.Application.Services.Contacts.Queries.GetAllContacts
+@using IranFilmPort.Application.Services.NewsLetters.Queries.GetAllNewsletters
+@using IranFilmPort.Common.Constants
+@using IranFilmPort.Common.Helpers;
+@{
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    ViewData["HeadTitle"] = "خبرنامه";
+}
+@model ResultGetAllNewslettersServiceDto
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h4 class="mt-0 header-title">خبرنامه ها</h4>
+            @{
+                if (Model.Result.Count==0){
+                    <span>خبرنامه ای وارد نشده است.</span>
+                }
+                else{
+                    <div class="table-responsive" id="divNews">
+                        <table class="table table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th>ایمیل</th>
+                                    <th>IP</th>
+                                    <th>تاریخ درج</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var item in Model.Result)
+                                    {
+                                        <tr>
+                                            <td>@item.Email</td>
+                                            <td>@item.IP</td>
+                                            <td>
+                                                @{
+                                                    var shamsidate = new PersianDateTime(@item.InsertDateTime);
+                                                    var shamsidateString = shamsidate.ToString("yyyy/MM/dd");
+                                                    var persiandateTime = PersianNumberHelper.ConvertToPersian(shamsidateString);
+                                                    @persiandateTime
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            }
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+}

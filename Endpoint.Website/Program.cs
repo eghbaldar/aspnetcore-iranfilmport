@@ -6,13 +6,16 @@ using IranFilmPort.Application.Services._Turnstile;
 using IranFilmPort.Application.Services.Accolades.FacadePattern;
 using IranFilmPort.Application.Services.Common.Email;
 using IranFilmPort.Application.Services.Common.Sitemap;
+using IranFilmPort.Application.Services.Contacts.FacadePattern;
 using IranFilmPort.Application.Services.Countires.FacadePattern;
+using IranFilmPort.Application.Services.Courses.FacadePattern;
 using IranFilmPort.Application.Services.FestivalDeadlines.FacadePattern;
 using IranFilmPort.Application.Services.Festivals.FacadePattern;
 using IranFilmPort.Application.Services.FestivalSection.FacadePattern;
 using IranFilmPort.Application.Services.News.News.FacadePattern;
 using IranFilmPort.Application.Services.NewsCategories.FacadePattern;
 using IranFilmPort.Application.Services.NewsComments.FacadePattern;
+using IranFilmPort.Application.Services.NewsLetters.FacadePattern;
 using IranFilmPort.Application.Services.Roles.FacadePattern;
 using IranFilmPort.Application.Services.SendInformation.FacadePattern;
 using IranFilmPort.Application.Services.Settings.FacadePattern;
@@ -68,6 +71,9 @@ builder.Services.AddScoped<ITemporaryFormsFacadePattern, TemporaryFormsFacadePat
 builder.Services.AddScoped<ISlidersFacadePattern, SlidersFacadePattern>();
 builder.Services.AddScoped<ITestimonalsFacadePattern, TestimonalsFacadePattern>();
 builder.Services.AddScoped<IAccoladesFacadePattern, AccoladesFacadePattern>();
+builder.Services.AddScoped<IContactFacadePattern, ContactFacadePattern>();
+builder.Services.AddScoped<INewslettersFacadePattern, NewslettersFacadePattern>();
+builder.Services.AddScoped<ICoursesFacadePattern, CoursesFacadePattern>();
 
 // token and authentication services
 builder.Services.AddScoped<ITurnstileService, TurnstileService>();

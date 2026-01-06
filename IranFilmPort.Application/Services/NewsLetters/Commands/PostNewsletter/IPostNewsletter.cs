@@ -4,7 +4,7 @@ using IranFilmPort.Common.Helpers;
 using IranFilmPort.Domain.Entities.Guest;
 using System.Net;
 
-namespace IranFilmPort.Application.Services.NewsLetters.PostNewsletter
+namespace IranFilmPort.Application.Services.NewsLetters.Commands.PostNewsletter
 {
     public class RequestPostNewsletterDto
     {
@@ -39,7 +39,7 @@ namespace IranFilmPort.Application.Services.NewsLetters.PostNewsletter
                 };
             }
             Newsletters newsletter = 
-                new IranFilmPort.Domain.Entities.Guest.Newsletters()
+                new Newsletters()
             {
                 Email = WebUtility.HtmlDecode(req.Email),
                 IP = WebUtility.HtmlDecode(req.IP),

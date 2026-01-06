@@ -1,6 +1,6 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
 
-namespace IranFilmPort.Application.Services.NewsLetters.GetAllNewsletters
+namespace IranFilmPort.Application.Services.NewsLetters.Queries.GetAllNewsletters
 {
     public class GetAllNewslettersServiceDto
     {

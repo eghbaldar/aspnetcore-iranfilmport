@@ -11,6 +11,7 @@ namespace IranFilmPort.Application.Services._AdminStuff.Queries.GetPanelNotifica
         public int UserProjects { get; set; }
         public int UserProjectPhotos { get; set; }
         public int SendInformation { get; set; }
+        public int Contacts { get; set; }
     }
     public interface IGetPanelNotificationService
     {
@@ -33,6 +34,7 @@ namespace IranFilmPort.Application.Services._AdminStuff.Queries.GetPanelNotifica
                 UserProjects = _context.UserProjects.Count(x => x.Status == StatusConstants.UnderConsideration),
                 UserProjectPhotos = _context.UserProjectPhotos.Count(x => x.Status == StatusConstants.UnderConsideration),
                 SendInformation = _context.SendInformation.Count(x => x.Status == StatusConstants.UnderConsideration),
+                Contacts = _context.Contacts.Count(x => !x.Status),
             };
         }
     }

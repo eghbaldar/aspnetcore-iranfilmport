@@ -11,6 +11,10 @@ using IranFilmPort.Application.Services.Accolades.Commands.PostAccolade;
 using IranFilmPort.Application.Services.Accolades.Commands.UpdateAccolade;
 using IranFilmPort.Application.Services.Accolades.Queries.GetAccoladeById;
 using IranFilmPort.Application.Services.Accolades.Queries.GetAllAccolades;
+using IranFilmPort.Application.Services.Contacts.Commands.UpdateContactStatus;
+using IranFilmPort.Application.Services.Courses.Commands.PostCourse;
+using IranFilmPort.Application.Services.Courses.Commands.UpdateCourse;
+using IranFilmPort.Application.Services.Courses.Queries.GetCourseById;
 using IranFilmPort.Application.Services.FestivalDeadlines.Commands.DeleteFestivalDeadline;
 using IranFilmPort.Application.Services.FestivalDeadlines.Commands.PostFestivalDeadline;
 using IranFilmPort.Application.Services.FestivalDeadlines.Commands.UpdateFestivalDeadline;
@@ -81,6 +85,9 @@ namespace Endpoint.Website.Controllers
         private readonly ISlidersFacadePattern _slidersFacadePattern;
         private readonly ITestimonalsFacadePattern _testimonalsFacadePattern;
         private readonly IAccoladesFacadePattern _accoladesFacadePattern;
+        private readonly IContactFacadePattern _contactFacadePattern;
+        private readonly INewslettersFacadePattern _newslettersFacadePattern;
+        private readonly ICoursesFacadePattern _coursesFacadePattern;
         // dapper
         private readonly IFilmFacadePatternDapper _filmFacadePatternDapper;
 
@@ -100,7 +107,10 @@ namespace Endpoint.Website.Controllers
             ISlidersFacadePattern slidersFacadePattern,
             ITestimonalsFacadePattern testimonalsFacadePattern,
             IFilmFacadePatternDapper filmFacadePatternDapper,
-            IAccoladesFacadePattern accoladesFacadePattern)
+            IAccoladesFacadePattern accoladesFacadePattern,
+            IContactFacadePattern contactFacadePattern,
+            INewslettersFacadePattern newslettersFacadePattern,
+            ICoursesFacadePattern coursesFacadePattern)
         {
             _usersFacadePattern = usersFacadePattern;
             _roleFacadePattern = roleFacadePattern;
@@ -119,6 +129,9 @@ namespace Endpoint.Website.Controllers
             _testimonalsFacadePattern = testimonalsFacadePattern;
             _filmFacadePatternDapper = filmFacadePatternDapper;
             _accoladesFacadePattern = accoladesFacadePattern;
+            _contactFacadePattern = contactFacadePattern;
+            _newslettersFacadePattern = newslettersFacadePattern;
+            _coursesFacadePattern = coursesFacadePattern;
         }
         public IActionResult Index()
         {
@@ -582,6 +595,57 @@ namespace Endpoint.Website.Controllers
         public IActionResult PostAccolade(RequestPostAccoladeServiceDto req)
         {
             return Json(_accoladesFacadePattern.PostAccoladeService.Execute(req));
+        }
+
+        // Contanct
+        [HttpGet]
+        public IActionResult Contacts()
+        {
+            return View(_contactFacadePattern.GetAllContactsService.Execute());
+        }
+        [HttpPut]
+        public IActionResult UpdateContactStatus(RequestUpdateContactStatusDto req)
+        {
+            return Json(_contactFacadePattern.UpdateContactStatus.Execute(req));
+        }
+
+        // Newsletter
+        [HttpGet]
+        public IActionResult Newsletters()
+        {
+            return View(_newslettersFacadePattern.GetAllNewslettersService.Execute());
+        }
+
+        // Courses
+        [HttpGet]
+        public IActionResult Courses(Guid? id)
+        {
+            return View(_coursesFacadePattern.GetAllCoursesService.Execute());
+        }
+        [HttpGet]
+        public IActionResult AddCourse(Guid? id)
+        {
+            if (id == null)
+            {
+                return View();
+            }
+            else
+            {
+                return View(_coursesFacadePattern.GetCourseByIdService.Execute(new RequestGetCourseByIdServiceDto
+                {
+                    Id = (Guid)id
+                }));
+            }
+        }
+        [HttpPost]
+        public IActionResult PostCourse(RequestPostCourseServiceDto req)
+        {
+            return Json(_coursesFacadePattern.PostCourseService.Execute(req));
+        }
+        [HttpPut]
+        public IActionResult UpdateCourse(RequestUpdateCourseServiceDto req)
+        {
+            return Json(_coursesFacadePattern.UpdateCourseService.Execute(req));
         }
     }
 }

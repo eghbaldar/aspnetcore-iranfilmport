@@ -160,5 +160,5 @@ E:\IranFilmPort\Endpoint.Website\bin\Debug\net8.0\Microsoft.Extensions.Options.d
 E:\IranFilmPort\Endpoint.Website\bin\Debug\net8.0\Newtonsoft.Json.dll
 E:\IranFilmPort\Endpoint.Website\bin\Debug\net8.0\LazZiya.TagHelpers.dll
 E:\IranFilmPort\Endpoint.Website\bin\Debug\net8.0\RestSharp.dll
-E:\IranFilmPort\Endpoint.Website\obj\Debug\net8.0\Endpoint.Website.MvcApplicationPartsAssemblyInfo.cs
 E:\IranFilmPort\Endpoint.Website\bin\Debug\net8.0\Dapper.dll
+E:\IranFilmPort\Endpoint.Website\obj\Debug\net8.0\Endpoint.Website.MvcApplicationPartsAssemblyInfo.cs

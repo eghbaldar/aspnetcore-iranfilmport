@@ -1,9 +1,10 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
 
-namespace IranFilmPort.Application.Services.Contacts.GetAllContacts
+namespace IranFilmPort.Application.Services.Contacts.Queries.GetAllContacts
 {
     public class GetAllContactsServiceDto
     {
+        public Guid Id { get; set; }
         public string Fullname { get; set; }
         public string Email { get; set; }
         public string IP { get; set; }
@@ -31,6 +32,7 @@ namespace IranFilmPort.Application.Services.Contacts.GetAllContacts
             var contacts = _context.Contacts
                 .Select(x => new GetAllContactsServiceDto
                 {
+                    Id = x.Id,
                     Email = x.Email,
                     IP = x.IP,
                     Fullname = x.Fullname,

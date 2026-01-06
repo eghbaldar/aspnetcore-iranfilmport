@@ -102,6 +102,16 @@
                         <li>
                             <a href="javascript: void(0);">
                                 <i class="mdi mdi-invert-colors"></i>
+                                <span>صفحات</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="/admin/courses">دوره ها</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="mdi mdi-invert-colors"></i>
                                 <span> مدیریت کاربران </span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -201,6 +211,33 @@
                                         درخواست بررسی آثار
                                     </a>
                                 </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="mdi mdi-invert-colors"></i>
+                                <span>
+                                    @{
+                                        if (
+                                        Model.Contacts != 0)
+                                        {
+                                            <i class="blink"></i>
+                                        }
+                                    }
+                                تماس ها</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="/admin/contacts/">
+                                        @{
+                                            if (Model.Contacts != 0)
+                                            {
+                                                <i class="blink"></i>
+                                            }
+                                        }
+                                تماس با ما</a></li>
+                                <li><a href="/admin/newsletters">خبرنامه</a></li>
+                                <li><a href="/admin/jobRequest">درخواست کار</a></li>
                             </ul>
                         </li>
                     }

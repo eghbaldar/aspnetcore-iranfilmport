@@ -1,0 +1,79 @@
+﻿@using IranFilmPort.Application.Services.Courses.Queries.GetAllCourses
+@using IranFilmPort.Common.Helpers;
+@using IranFilmPort.Common.Constants
+@{
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    ViewData["HeadTitle"] = "دوره ها";
+    ViewData["pageHeadTitle"] = "دوره ها";
+    ViewData["HeadTitle"] = "دوره ها";
+    //Pagination
+    int currentPage = 1;
+    int.TryParse(Context.Request.Query["page"], out currentPage);
+}
+@model ResutlGetAllCoursesServiceDto
+<div class="row">
+    <div>
+        <a href="/admin/addcourse/" class="btn btn-primary waves-effect width-md waves-light">دوره جدید</a>
+    </div>
+    <div class="col-lg-12">
+        <div class="card-box mt-20">
+            <h4 class="mt-0 header-title">دوره ها</h4>
+            @{
+                if (Model.Result.Count == 0)
+                {
+                    <span>دوره ای وجود ندارد.</span>
+                }
+                else
+                {
+                    <div class="table-responsive" id="divSliders">
+                        <table class="table table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th>عنوان</th>
+                                    <th>معلم</th>
+                                    <th>تاریخ درج</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var item in Model.Result)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.Title
+                                            </td>
+                                            <td>
+                                                @item.Teacher
+                                            </td>
+                                            <td>
+                                                @{
+                                                    var shamsidate = new PersianDateTime(@item.InsertDateTime);
+                                                    var shamsidateString = shamsidate.ToString("yyyy/MM/dd");
+                                                    var persiandateTime = PersianNumberHelper.ConvertToPersian(shamsidateString);
+                                                    @persiandateTime
+                                                }
+                                            </td>
+                                            <td>
+                                                <div class="dropdown float-right">
+                                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                                        <i class="mdi mdi-dots-vertical"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a href="/admin/addcourse/@item.Id" class="dropdown-item">ویرایش</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+}

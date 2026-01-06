@@ -2,7 +2,7 @@
 using IranFilmPort.Application.Interfaces.Context;
 using System.Net;
 
-namespace IranFilmPort.Application.Services.Contacts.PostContact
+namespace IranFilmPort.Application.Services.Contacts.Commands.PostContact
 {
     public class RequestPostContactServiceDto
     {
@@ -32,8 +32,8 @@ namespace IranFilmPort.Application.Services.Contacts.PostContact
                 string.IsNullOrEmpty(req.IP)
                 ) return new ResultDto { IsSuccess = false };
 
-            IranFilmPort.Domain.Entities.Guest.Contacts contacts =
-                new IranFilmPort.Domain.Entities.Guest.Contacts()
+            Domain.Entities.Guest.Contacts contacts =
+                new Domain.Entities.Guest.Contacts()
                 {
                     Fullname = WebUtility.HtmlDecode(req.Fullname),
                     IP = WebUtility.HtmlDecode(req.IP),

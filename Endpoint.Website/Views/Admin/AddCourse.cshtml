@@ -1,0 +1,191 @@
+﻿@using IranFilmPort.Application.Services.Courses.Queries.GetCourseById
+@using IranFilmPort.Common.Helpers;
+@using IranFilmPort.Common.Constants
+@{
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    ViewData["HeadTitle"] = "دوره جدید";
+    ViewData["pageHeadTitle"] = "دوره جدید";
+    ViewData["HeadTitle"] = "دوره جدید";
+}
+@model GetCourseByIdServiceDto
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">عنوان دوره</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model == null)
+                                {
+                                    <input type="text" id="txtTitle"
+                                    class="form-control" placeholder="متن دلخواه شما...">
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtTitle"
+                                            value="@Model.Title"
+                                            class="form-control" placeholder="متن دلخواه شما...">
+
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">مدرس</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model == null)
+                                {
+                                    <input type="text" id="txtTeacher"
+                                    class="form-control" placeholder="مثل: اقبالدار">
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtTeacher"
+                                            value="@Model.Teacher"
+                                            class="form-control" placeholder="مثل: اقبالدار">
+
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-password">توضیحات دوره</label>
+                        <div class="col-sm-10">
+                          @{
+                                if (Model == null)
+                                {
+                                    <textarea name="editor1" id="txtBodyText"></textarea>
+
+                                }
+                                else
+                                {
+                                    <textarea name="editor1" id="txtBodyText">@Model.Detail</textarea>
+
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-fileinput">تصویر اصلی</label>                       
+                        <div class="col-sm-10">                             
+                        <input type="file" class="form-control" id="fileImage">                        
+                    </div> 
+                    <div class="form-group row mt-10">
+                        <label class="col-sm-2  col-form-label" for="example-fileinput">تصویر مدرس</label>                       
+                        <div class="col-sm-10">                             
+                            <input type="file" class="form-control" id="fileTeacher">                        
+                    </div> 
+                    <div class="form-group row mt-10">
+                        <label class="col-sm-2  col-form-label" for="example-fileinput"></label>
+                        <div class="col-sm-10">
+                        <div class="alert alert-primary" role="alert">
+                          <a target="_blank" href="https://www.freeconvert.com/jpg-to-webp" class="btn btn-lighten-purple waves-effect  width-md waves-purple">jpg->webp (1)</a>
+                          <a target="_blank" href="https://cloudconvert.com/jpg-to-webp" class="btn btn-lighten-purple waves-effect  width-md waves-purple">jpg->webp (2)</a>
+                          <a target="_blank" href="http://optimizilla.com/" class="btn btn-lighten-primary waves-effect  width-md waves-purple">optmize jpg (1)</a>
+                          <a target="_blank" href="https://www.imgonline.com.ua/eng/compress-image-size.php" class="btn btn-lighten-primary waves-effect  width-md waves-purple">optmize jpg (2)</a>
+                        </div>
+                            @{
+                                if (Model != null)
+                                {
+                                    <div class="mt-10">
+                                    <a id="btnShowHideMainImage" class="cursorPointer kingBlueText">(نمایش تصاویر)</a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                    @{
+                        if (Model != null)
+                        {                            
+                            <div class="form-group row" id="mainImgContent" hidden>
+                                <label class="col-sm-2  col-form-label" for="example-fileinput"></label>
+                                <div class="col-sm-10">
+                                    <img class="img-fluid rounded"
+                                         src="/UploadedStuff/admin/images/admin-teacher-images/@Model.Image" />
+                                         <br/>
+                                    <img class="img-fluid rounded"
+                                         src="/UploadedStuff/admin/images/admin-teacher-images/@Model.TeacherHeadshot" />
+                                </div>
+                            </div>
+                        }
+                    }
+                    @{
+                        if (Model == null)
+                        {
+                            <button type="button" onclick="addCourse();"
+                                    class="btn btn-primary waves-effect width-md waves-light">
+                                درج
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" onclick="updateCourse('@Model.Id');"
+                                    class="btn btn-primary waves-effect width-md waves-light">
+                                ویرایش
+                            </button>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/common/fileextensionsize/fileextensionsize.js"></script>
+    <script src="~/lib/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script src="~/common/datapicker/js/persiandatepicker.min.js"></script>
+    <script src="~/common/datapicker/js/farvardin.min.js"></script>
+<script src="~/admintemplate/pagecssjs/addcourse/addcourse.js"></script>
+    <script>
+        $(".shamsidate").persianDatepicker();
+    </script>
+    <script src="https://cdn.ckeditor.com/4.9.2/full-all/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('txtBodyText',
+            {
+                extraPlugins: 'codesnippet',
+                codeSnippet_theme: 'monokai_sublime',
+                toolbar: [
+                    { name: 'document', items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates'] }, { name: 'bidi', items: ['BidiLtr', 'BidiRtl'] },
+                    '/', // Line break
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', '-', 'RemoveFormat'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv'] },
+                    { name: 'alignment', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] }, // Alignment options
+                    { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                    { name: 'colors', items: ['TextColor', 'BGColor'] },
+                    { name: 'insert', items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'] },
+                    '/', // Line break
+                    { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt'] },
+                    { name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+                    { name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] },
+                    { name: 'forms', items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'] },
+                    '/', // Line break
+                    { name: 'coding', items: ['CodeSnippet'] },
+                ],
+                filebrowserUploadUrl: '/admin/UploadNewsMiddlePost/', // Update this URL to your server-side upload handler
+                filebrowserImageUploadUrl: '/admin/UploadNewsMiddlePost?type=Images',
+                filebrowserImageBrowseUrl: '/admin/AdminNewsImageBrower/', // Update this URL to point to your image browser
+            });
+            // Clean the textarea content before CKEditor loads
+            KingSweetAlertCenterParticularTimer("در حال آماده سازی فرم ها ...",2000);
+    </script>
+@{
+        if (Model == null)
+        {
+            <script>
+                setTimeout(function(){
+                // کد زیر برای این گذاشتم که متاسفانه ی سری تگ های html برای خودش اد میکرد
+                CKEDITOR.instances.txtBodyText.setData('');                
+                },2000);
+            </script>
+        }
+    }
+    }

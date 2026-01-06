@@ -1,6 +1,7 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
 using IranFilmPort.Domain.Entities.Accolades;
 using IranFilmPort.Domain.Entities.Countries;
+using IranFilmPort.Domain.Entities.Courses;
 using IranFilmPort.Domain.Entities.Festival;
 using IranFilmPort.Domain.Entities.Guest;
 using IranFilmPort.Domain.Entities.News;
@@ -34,6 +35,7 @@ namespace IranFilmPort.Persistence.Contexts
         public DbSet<Sliders> Sliders { get; set; }
         public DbSet<Testimonials> Testimonials { get; set; }
         public DbSet<Accolades> Accolades { get; set; }
+        public DbSet<Courses> Courses { get; set; }
 
         // users
         public DbSet<Users> Users { get; set; }

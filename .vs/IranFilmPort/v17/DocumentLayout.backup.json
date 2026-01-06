@@ -3,24 +3,28 @@
   "WorkspaceRootPath": "E:\\IranFilmPort\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\wwwroot\\admintemplate\\pagecssjs\\addcourse\\addcourse.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\wwwroot\\admintemplate\\pagecssjs\\addcourse\\addcourse.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\views\\admin\\addcourse.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\views\\admin\\addcourse.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\wwwroot\\admintemplate\\pagecssjs\\addaccolade\\addaccolade.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\wwwroot\\admintemplate\\pagecssjs\\addaccolade\\addaccolade.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\wwwroot\\admintemplate\\pagecssjs\\sliders\\sliders.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\wwwroot\\admintemplate\\pagecssjs\\sliders\\sliders.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\views\\admin\\addaccolade.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\views\\admin\\addaccolade.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|e:\\iranfilmport\\iranfilmport.application\\services\\courses\\commands\\postcourse\\ipostcourseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|solutionrelative:iranfilmport.application\\services\\courses\\commands\\postcourse\\ipostcourseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\models\\addaccolade\\modeladdaccolade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\models\\addaccolade\\modeladdaccolade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\models\\accolades\\modelaccolades.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\models\\accolades\\modelaccolades.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3E1E1C1B-73FC-4CB7-BE88-A6D6AFC73ED0}|IranFilmPort.Domain\\IranFilmPort.Domain.csproj|e:\\iranfilmport\\iranfilmport.domain\\entities\\courses\\courses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E1E1C1B-73FC-4CB7-BE88-A6D6AFC73ED0}|IranFilmPort.Domain\\IranFilmPort.Domain.csproj|solutionrelative:iranfilmport.domain\\entities\\courses\\courses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -39,66 +43,79 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ModelAddAccolade.cs",
-              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Models\\AddAccolade\\ModelAddAccolade.cs",
-              "RelativeDocumentMoniker": "Endpoint.Website\\Models\\AddAccolade\\ModelAddAccolade.cs",
-              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Models\\AddAccolade\\ModelAddAccolade.cs",
-              "RelativeToolTip": "Endpoint.Website\\Models\\AddAccolade\\ModelAddAccolade.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T12:37:43.214Z",
+              "Title": "sliders.js",
+              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\sliders\\sliders.js",
+              "RelativeDocumentMoniker": "Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\sliders\\sliders.js",
+              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\sliders\\sliders.js",
+              "RelativeToolTip": "Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\sliders\\sliders.js",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAAAIYAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-01-06T14:32:32.224Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ModelAccolades.cs",
-              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Models\\Accolades\\ModelAccolades.cs",
-              "RelativeDocumentMoniker": "Endpoint.Website\\Models\\Accolades\\ModelAccolades.cs",
-              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Models\\Accolades\\ModelAccolades.cs",
-              "RelativeToolTip": "Endpoint.Website\\Models\\Accolades\\ModelAccolades.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAfAAAAAAAAAA==",
+              "Title": "IPostCourseService.cs",
+              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Courses\\Commands\\PostCourse\\IPostCourseService.cs",
+              "RelativeDocumentMoniker": "IranFilmPort.Application\\Services\\Courses\\Commands\\PostCourse\\IPostCourseService.cs",
+              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Courses\\Commands\\PostCourse\\IPostCourseService.cs",
+              "RelativeToolTip": "IranFilmPort.Application\\Services\\Courses\\Commands\\PostCourse\\IPostCourseService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T12:10:11.167Z",
+              "WhenOpened": "2026-01-06T14:20:02.064Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "Endpoint.Website\\Controllers\\AdminController.cs",
-              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Controllers\\AdminController.cs",
-              "RelativeToolTip": "Endpoint.Website\\Controllers\\AdminController.cs",
-              "ViewState": "AgIAABgCAAAAAAAAAAApwDkCAAAXAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "Courses.cs",
+              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Domain\\Entities\\Courses\\Courses.cs",
+              "RelativeDocumentMoniker": "IranFilmPort.Domain\\Entities\\Courses\\Courses.cs",
+              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Domain\\Entities\\Courses\\Courses.cs",
+              "RelativeToolTip": "IranFilmPort.Domain\\Entities\\Courses\\Courses.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T08:27:36.146Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "addAccolade.js",
-              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\addAccolade\\addAccolade.js",
-              "RelativeDocumentMoniker": "Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\addAccolade\\addAccolade.js",
-              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\addAccolade\\addAccolade.js*",
-              "RelativeToolTip": "Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\addAccolade\\addAccolade.js*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-01-06T12:29:25.02Z",
+              "WhenOpened": "2026-01-06T14:08:12.312Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "AddAccolade.cshtml",
-              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\AddAccolade.cshtml",
-              "RelativeDocumentMoniker": "Endpoint.Website\\Views\\Admin\\AddAccolade.cshtml",
-              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\AddAccolade.cshtml",
-              "RelativeToolTip": "Endpoint.Website\\Views\\Admin\\AddAccolade.cshtml",
-              "ViewState": "AgIAAKIAAAAAAAAAAAAAAKcAAAAAAAAAAAAAAA==",
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Endpoint.Website\\Controllers\\AdminController.cs",
+              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Endpoint.Website\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAGUCAAAAAAAAAAAuwIUCAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-06T13:18:04.674Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "addCourse.js",
+              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\addCourse\\addCourse.js",
+              "RelativeDocumentMoniker": "Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\addCourse\\addCourse.js",
+              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\addCourse\\addCourse.js*",
+              "RelativeToolTip": "Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\addCourse\\addCourse.js*",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAQwHQAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-01-06T14:14:54.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AddCourse.cshtml",
+              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\AddCourse.cshtml",
+              "RelativeDocumentMoniker": "Endpoint.Website\\Views\\Admin\\AddCourse.cshtml",
+              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\AddCourse.cshtml",
+              "RelativeToolTip": "Endpoint.Website\\Views\\Admin\\AddCourse.cshtml",
+              "ViewState": "AgIAAIgAAAAAAAAAAAAmwJcAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-06T12:09:07.366Z",
+              "WhenOpened": "2026-01-06T13:34:16.425Z",
               "EditorCaption": ""
             }
           ]
