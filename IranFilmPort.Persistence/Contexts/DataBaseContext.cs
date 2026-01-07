@@ -36,6 +36,8 @@ namespace IranFilmPort.Persistence.Contexts
         public DbSet<Testimonials> Testimonials { get; set; }
         public DbSet<Accolades> Accolades { get; set; }
         public DbSet<Courses> Courses { get; set; }
+        public DbSet<AdvertisementModals> AdvertisementModals { get; set; }
+        public DbSet<Pages> Pages { get; set; }
 
         // users
         public DbSet<Users> Users { get; set; }
@@ -57,6 +59,7 @@ namespace IranFilmPort.Persistence.Contexts
         public DbSet<Newsletters> Newsletters { get; set; }
         public DbSet<SendInformation> SendInformation { get; set; }
         public DbSet<TemporaryForms> TemporaryForms { get; set; }
+        public DbSet<JobRequests> JobRequests { get; set; }
 
         // Festival
         public DbSet<Countries> Countries { get; set; }

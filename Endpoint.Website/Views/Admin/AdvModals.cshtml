@@ -1,0 +1,78 @@
+﻿@using IranFilmPort.Application.Services.AdvertisementModals.Queries.GetAllModals
+@using IranFilmPort.Application.Services.SendInformation.Queries.GetAllSendInformation
+@using IranFilmPort.Common.Constants
+@using IranFilmPort.Common.Helpers
+@model ResutlGetAllModalsServiceDto
+@addTagHelper *,LazZiya.TagHelpers
+@{
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    ViewData["HeadTitle"] = "مودال های تبلیغاتی";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+            <div>
+                <a href="/admin/addAdvModal/" class="btn btn-primary waves-effect width-md waves-light">مودال جدید</a>
+            </div>
+            <h4 class="mt-0 header-title mt-20">مودال های تبلیغاتی</h4>
+            <div class="table-responsive" id="divAdvs">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>عنوان</th>
+                            <th>وضعیت</th>
+                            <th>تاریخ درج</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbNews">
+                        @{
+                            foreach (var item in Model.Result)
+                            {
+                                <tr>
+                                    <td><a href="/admin/addAdvModal/@item.Id">@item.Title</a></td>
+                                    <td>
+                                        @{
+                                            switch (item.Active)
+                                            {
+                                                case true:
+                                                    <span class="badge badge-success">فعال</span>
+                                                    break;
+                                                case false:
+                                                    <span class="badge badge-danger">غیر فعال</span>
+                                                    break;
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @{
+                                            var shamsidate = new PersianDateTime(@item.InsertDateTime);
+                                            var shamsidateString = shamsidate.ToString("yyyy/MM/dd");
+                                            var persiandateTime = PersianNumberHelper.ConvertToPersian(shamsidateString);
+                                            @persiandateTime
+                                        }
+                                    </td>
+                                    <td>
+                                        @{
+                                            switch (item.Active)
+                                            {
+                                                case true:
+                                                    break;
+                                                case false:
+                                                    <button onclick="active('@item.Id')" class="btn btn-success waves-effect"> <i class="fa fa-thumbs-up"></i> <span>فعال شود</span> </button>
+                                                    break;
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/admintemplate/pagecssjs/advmodals/advmodals.js"></script>
+}

@@ -24,6 +24,8 @@ namespace IranFilmPort.Application.Interfaces.Context
         DbSet<Testimonials> Testimonials { get; set; }
         DbSet<Accolades> Accolades { get; set; }
         DbSet<Courses> Courses { get; set; }
+        DbSet<AdvertisementModals> AdvertisementModals { get; set; }
+        DbSet<Pages> Pages { get; set; }
 
         // User
         DbSet<Users> Users { get; set; }
@@ -45,6 +47,7 @@ namespace IranFilmPort.Application.Interfaces.Context
         DbSet<Newsletters> Newsletters { get; set; }
         DbSet<SendInformation> SendInformation { get; set; }
         DbSet<TemporaryForms> TemporaryForms { get; set; }
+        DbSet<JobRequests> JobRequests { get; set; }
 
         // festival
         DbSet<Countries> Countries { get; set; }

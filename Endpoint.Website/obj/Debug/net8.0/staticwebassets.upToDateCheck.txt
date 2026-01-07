@@ -1,14 +1,18 @@
 wwwroot\AdminTemplate\pagecssjs\accolades\accolades.js
 wwwroot\AdminTemplate\pagecssjs\addAccolade\addAccolade.css
 wwwroot\AdminTemplate\pagecssjs\addAccolade\addAccolade.js
+wwwroot\AdminTemplate\pagecssjs\addAdvModal\addAdvModal.js
 wwwroot\AdminTemplate\pagecssjs\addCourse\addCourse.js
 wwwroot\AdminTemplate\pagecssjs\AddUser\AddUser.js
+wwwroot\AdminTemplate\pagecssjs\advModals\advModals.js
 wwwroot\AdminTemplate\pagecssjs\categories\categories.css
 wwwroot\AdminTemplate\pagecssjs\categories\categories.js
 wwwroot\AdminTemplate\pagecssjs\contact\contact.js
 wwwroot\AdminTemplate\pagecssjs\festivals\festivals.js
 wwwroot\AdminTemplate\pagecssjs\festivalSectionDeadline\festivalSectionDeadline.js
+wwwroot\AdminTemplate\pagecssjs\JobRequests\JobRequests.js
 wwwroot\AdminTemplate\pagecssjs\news\news.js
+wwwroot\AdminTemplate\pagecssjs\pages\page.js
 wwwroot\AdminTemplate\pagecssjs\postfestival\postfestival.css
 wwwroot\AdminTemplate\pagecssjs\postfestival\postfestival.js
 wwwroot\AdminTemplate\pagecssjs\postnews\postnews.css
@@ -328,6 +332,10 @@ wwwroot\SiteTemplate\assets\js\vendor\waypoints.min.js
 wwwroot\SiteTemplate\assets\js\vendor\wow.min.js
 wwwroot\UploadedStuff\admin\audios\admin-testimonal-audios\20260105193229-639032383497994311.ogg
 wwwroot\UploadedStuff\admin\audios\admin-testimonal-audios\20260105193310-639032383906483326.ogg
+wwwroot\UploadedStuff\admin\images\admin-advModal-images\20260107105228-639033799488751765.webp
+wwwroot\UploadedStuff\admin\images\admin-advModal-images\20260107105338-639033800187293339.webp
+wwwroot\UploadedStuff\admin\images\admin-advModal-images\20260107142649-639033928099013028.webp
+wwwroot\UploadedStuff\admin\images\admin-advModal-images\20260107142839-639033929194965659.webp
 wwwroot\UploadedStuff\admin\images\admin-festival-images\20251231121224-639027799445109494.webp
 wwwroot\UploadedStuff\admin\images\admin-festival-images\20251231124443-639027818838237106.webp
 wwwroot\UploadedStuff\admin\images\admin-news-images\20251227171611-639024525710482587.webp
@@ -343,6 +351,8 @@ wwwroot\UploadedStuff\admin\images\admin-slider-images\20260105181646-6390323380
 wwwroot\UploadedStuff\admin\images\admin-slider-images\20260105183148-639032347084158727.webp
 wwwroot\UploadedStuff\admin\images\admin-teacher-images\20260106175539-639033189390108019.webp
 wwwroot\UploadedStuff\admin\images\admin-teacher-images\20260106175539-639033189390169682.webp
+wwwroot\UploadedStuff\admin\images\admin-teacher-images\20260106181458-639033200980269591.webp
+wwwroot\UploadedStuff\admin\images\admin-teacher-images\20260106181525-639033201258638519.webp
 wwwroot\UploadedStuff\admin\images\admin-testimonal-images\20260105193254-639032383746400313.webp
 wwwroot\UploadedStuff\ckeditor-uploads-news\79d853bb-6fae-4c88-ad5b-6dcf8d1f94ca_images (1).jpg
 wwwroot\UploadedStuff\users\images\user-melicard\20260101180313-639028873935339739-original.jpg

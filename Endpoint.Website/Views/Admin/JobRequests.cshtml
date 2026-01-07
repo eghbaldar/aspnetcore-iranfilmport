@@ -1,0 +1,104 @@
+﻿@using IranFilmPort.Application.Services.JobRequests.Queries.GetAllJobRequests
+@using IranFilmPort.Common.Constants
+@using IranFilmPort.Common.Helpers
+@model ResultGetAllJobRequestsServiceDto
+@addTagHelper *,LazZiya.TagHelpers
+@{
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    ViewData["HeadTitle"] = "درخواست بررسی اثر از سایت";
+    //Pagination
+    int currentPage = 1;
+    int.TryParse(Context.Request.Query["page"], out currentPage);
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box mt-20">
+            <h4 class="mt-0 header-title">درخواست بررسی آثار از سایت</h4>
+            <div class="table-responsive" id="divJob">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>ارسال کننده</th>
+                            <th>موبایل</th>
+                            <th>ایمیل</th>
+                            <th>دسته</th>
+                            <th>آیپی</th>
+                            <th>وضعیت</th>
+                            <th>تاریخ درج</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbNews">
+                        @{
+                            foreach (var item in Model.Result)
+                            {
+                                <tr>
+                                    <td>@item.Fullname</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Email</td>
+                                    <td>@JobRequestCategoryConstants.GetValue(item.Category)</td>
+                                    <td>@item.IP</td>
+                                    <td>
+                                        @{
+                                            switch (item.Status)
+                                            {
+                                                case StatusConstants.Accepted:
+                                                    <span class="badge badge-success">بررسی شده</span>
+                                                    break;
+                                                case StatusConstants.UnderConsideration:
+                                                    <span class="badge badge-warning">در حال بررسی</span>
+                                                    <br/>
+                                                    <a onclick="done('@item.Id');" class="btn btn-success waves-effect width-md waves-light">تغییر به بررسی شده</a>
+                                                    break;
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @{
+                                            var shamsidate = new PersianDateTime(@item.InsertDateTime);
+                                            var shamsidateString = shamsidate.ToString("yyyy/MM/dd");
+                                            var persiandateTime = PersianNumberHelper.ConvertToPersian(shamsidateString);
+                                            @persiandateTime
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="dropdown float-right">
+                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                @{
+                                                    string resume = @item.Resume;  // Get the value from your model
+                                                    string formattedBio = resume.Replace("\n", "<br/>"); // Replace newline with <br />
+                                                    <a class="cursorPointer" data-resume="@formattedBio" onclick="showResume(this);">(نمایش)</a>
+                                                }
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row mt-10">
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers"
+                         id="datatable-buttons_paginate">
+                        <paging page-no="@currentPage == 0 ? 1 : currentPage"
+                                query-string-key-page-no="page"
+                                page-size="@Model.RowsOnEachPage"
+                                total-records="@Model.RowCount">
+                        </paging>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        var _done = '@StatusConstants.Accepted';
+    </script>
+    <script src="~/admintemplate/pagecssjs/jobrequests/jobrequests.js"></script>
+}

@@ -11,6 +11,10 @@ using IranFilmPort.Application.Services.Accolades.Commands.PostAccolade;
 using IranFilmPort.Application.Services.Accolades.Commands.UpdateAccolade;
 using IranFilmPort.Application.Services.Accolades.Queries.GetAccoladeById;
 using IranFilmPort.Application.Services.Accolades.Queries.GetAllAccolades;
+using IranFilmPort.Application.Services.AdvertisementModals.Commands.PostAdvertisementModal;
+using IranFilmPort.Application.Services.AdvertisementModals.Commands.UpdateActiveModal;
+using IranFilmPort.Application.Services.AdvertisementModals.Commands.UpdateAdvertisementModal;
+using IranFilmPort.Application.Services.AdvertisementModals.Queries.GetAdvertisementModalById;
 using IranFilmPort.Application.Services.Contacts.Commands.UpdateContactStatus;
 using IranFilmPort.Application.Services.Courses.Commands.PostCourse;
 using IranFilmPort.Application.Services.Courses.Commands.UpdateCourse;
@@ -28,6 +32,8 @@ using IranFilmPort.Application.Services.FestivalSection.Commands.DeleteSectionFe
 using IranFilmPort.Application.Services.FestivalSection.Commands.PostFestivalSection;
 using IranFilmPort.Application.Services.FestivalSection.Commands.UpdateFestivalSection;
 using IranFilmPort.Application.Services.FestivalSection.Queries.GetSectionsByFestivalId;
+using IranFilmPort.Application.Services.JobRequests.Commands.UpdateJobRequestStatusByAdmin;
+using IranFilmPort.Application.Services.JobRequests.Queries.GetAllJobRequests;
 using IranFilmPort.Application.Services.News.News.Commands.DeleteNews;
 using IranFilmPort.Application.Services.News.News.Commands.PostNews;
 using IranFilmPort.Application.Services.News.News.Commands.UpdateNews;
@@ -38,6 +44,7 @@ using IranFilmPort.Application.Services.NewsCategories.Commands.DeleteNewsCatego
 using IranFilmPort.Application.Services.NewsCategories.Commands.PostNewsCategory;
 using IranFilmPort.Application.Services.NewsCategories.Commands.UpdateNewsCategory;
 using IranFilmPort.Application.Services.NewsCategories.Queries.GetNewsChildrenCategories;
+using IranFilmPort.Application.Services.Pages.Commands.UpdatePageBySelector;
 using IranFilmPort.Application.Services.SendInformation.Commands.UpdateSendInformationStatusByAdmin;
 using IranFilmPort.Application.Services.SendInformation.Queries.GetAllSendInformation;
 using IranFilmPort.Application.Services.Settings.Commands.UpdateSettings;
@@ -60,6 +67,7 @@ using IranFilmPort.Application.Services.Users.Queries.GetUserById;
 using IranFilmPort.Common.Constants;
 using IranFilmPort.Infranstructure.Attributes;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.PortableExecutable;
 using System.Security.Claims;
 using Role = IranFilmPort.Common.Enums.KingAttributeEnum.UserRole;
 
@@ -88,6 +96,9 @@ namespace Endpoint.Website.Controllers
         private readonly IContactFacadePattern _contactFacadePattern;
         private readonly INewslettersFacadePattern _newslettersFacadePattern;
         private readonly ICoursesFacadePattern _coursesFacadePattern;
+        private readonly IJobRequestsFacadePattern _jobRequestsFacadePattern;
+        private readonly IAdvertisementModalsFacadePattern _advertisementModalsFacadePattern;
+        private readonly IPagesFacadePattern _pagesFacadePattern;
         // dapper
         private readonly IFilmFacadePatternDapper _filmFacadePatternDapper;
 
@@ -110,7 +121,10 @@ namespace Endpoint.Website.Controllers
             IAccoladesFacadePattern accoladesFacadePattern,
             IContactFacadePattern contactFacadePattern,
             INewslettersFacadePattern newslettersFacadePattern,
-            ICoursesFacadePattern coursesFacadePattern)
+            ICoursesFacadePattern coursesFacadePattern,
+            IJobRequestsFacadePattern jobRequestsFacadePattern,
+            IAdvertisementModalsFacadePattern advertisementModalsFacadePattern,
+            IPagesFacadePattern pagesFacadePattern)
         {
             _usersFacadePattern = usersFacadePattern;
             _roleFacadePattern = roleFacadePattern;
@@ -132,6 +146,9 @@ namespace Endpoint.Website.Controllers
             _contactFacadePattern = contactFacadePattern;
             _newslettersFacadePattern = newslettersFacadePattern;
             _coursesFacadePattern = coursesFacadePattern;
+            _jobRequestsFacadePattern = jobRequestsFacadePattern;
+            _advertisementModalsFacadePattern = advertisementModalsFacadePattern;
+            _pagesFacadePattern = pagesFacadePattern;
         }
         public IActionResult Index()
         {
@@ -416,6 +433,8 @@ namespace Endpoint.Website.Controllers
         {
             return Json(_festivalDeadlinesFacadePattern.DeleteFestivalDeadlineService.Execute(req));
         }
+
+        // Profile verifications
         [HttpGet]
         public IActionResult UserHeadshotVerifications()
         {
@@ -446,13 +465,14 @@ namespace Endpoint.Website.Controllers
         {
             return Json(_usersFacadePattern.UpdateMeliCardByAdminService.Execute(req));
         }
+
+
+        // Projects
         [HttpGet]
         public IActionResult UserProjectVerfications()
         {
             return View(_userProjectsFacadePattern.GetGetAllUserProjectsForAdminService.Execute());
         }
-
-        // Projects
         [HttpGet]
         public IActionResult UserProjectPhotoVerfications()
         {
@@ -489,6 +509,8 @@ namespace Endpoint.Website.Controllers
         {
             return Json(_settingsFacadePattern.UpdateSettingsService.Execute(req));
         }
+
+        // send information
         [HttpGet]
         public IActionResult SendInformation(int page)
         {
@@ -528,6 +550,8 @@ namespace Endpoint.Website.Controllers
         {
             return Json(_slidersFacadePattern.DeleteSliderService.Execute(req));
         }
+
+        // testimonials
         [HttpGet]
         public IActionResult Testimonials(int page)
         {
@@ -618,7 +642,7 @@ namespace Endpoint.Website.Controllers
 
         // Courses
         [HttpGet]
-        public IActionResult Courses(Guid? id)
+        public IActionResult Courses()
         {
             return View(_coursesFacadePattern.GetAllCoursesService.Execute());
         }
@@ -646,6 +670,93 @@ namespace Endpoint.Website.Controllers
         public IActionResult UpdateCourse(RequestUpdateCourseServiceDto req)
         {
             return Json(_coursesFacadePattern.UpdateCourseService.Execute(req));
+        }
+
+        // send information
+        [HttpGet]
+        public IActionResult JobRequests(int page)
+        {
+            var result = _jobRequestsFacadePattern.GetAllJobRequestsService.Execute(new IranFilmPort.Application.Services.JobRequests.Queries.GetAllJobRequests.RequestGetAllJobRequestsServiceDto
+            {
+                CurrentPage = page
+            });
+            return View(result);
+        }
+        [HttpPut]
+        public IActionResult UpdateJobRequest(RequestUpdateJobRequestStatusByAdminServiceDto req)
+        {
+            return Json(_jobRequestsFacadePattern.UpdateJobRequestStatusByAdminService.Execute(req));
+        }
+
+        // advertisement modals
+        [HttpGet]
+        public IActionResult AdvModals()
+        {
+            return View(_advertisementModalsFacadePattern.GetAllModalsService.Execute());
+        }
+        [HttpGet]
+        public IActionResult AddAdvModal(Guid? id)
+        {
+            if (id == null)
+            {
+                return View();
+            }
+            else
+            {
+                return View(_advertisementModalsFacadePattern.GetAdvertisementModalByIdService.Execute(new RequestGetAdvertisementModalByIdServiceDto
+                {
+                    Id = (Guid)id
+                }));
+            }
+        }
+        [HttpPost]
+        public IActionResult PostAdvModal(RequestPostAdvertisementModalServiceDto req)
+        {
+            return Json(_advertisementModalsFacadePattern.PostAdvertisementModalService.Execute(req));
+        }
+        [HttpPut]
+        public IActionResult UpdateAdvModal(RequestUpdateAdvertisementModalServiceDto req)
+        {
+            return Json(_advertisementModalsFacadePattern.UpdateAdvertisementModalService.Execute(req));
+        }
+        [HttpPut]
+        public IActionResult UpdateActiveAdvModal(RequestUpdateActiveModalServiceDto req)
+        {
+            return Json(_advertisementModalsFacadePattern.UpdateActiveModalService.Execute(req));
+        }
+
+        // pages
+        public IActionResult PageResume()
+        {
+            return View(_pagesFacadePattern.GetPageBySelectorService.Execute(PageSelectorConstants.Resume));
+        }
+        public IActionResult PageAdvertisements()
+        {
+            return View(_pagesFacadePattern.GetPageBySelectorService.Execute(PageSelectorConstants.Advertisements));
+        }
+        public IActionResult PageParticipatePlan()
+        {
+            return View(_pagesFacadePattern.GetPageBySelectorService.Execute(PageSelectorConstants.ParticipatePlan));
+        }
+        public IActionResult PageAbout()
+        {
+            return View(_pagesFacadePattern.GetPageBySelectorService.Execute(PageSelectorConstants.About));
+        }
+        public IActionResult PageAgents()
+        {
+            return View(_pagesFacadePattern.GetPageBySelectorService.Execute(PageSelectorConstants.Agents));
+        }
+        public IActionResult PageScript()
+        {
+            return View(_pagesFacadePattern.GetPageBySelectorService.Execute(PageSelectorConstants.Script));
+        }
+        public IActionResult PageFeatures()
+        {
+            return View(_pagesFacadePattern.GetPageBySelectorService.Execute(PageSelectorConstants.Features));
+        }
+        public IActionResult UpdatePage(RequestUpdatePageBySelectorServiceDto req)
+        {
+            return Json(_pagesFacadePattern.UpdatePageBySelectorService.Execute(req));
         }
     }
 }

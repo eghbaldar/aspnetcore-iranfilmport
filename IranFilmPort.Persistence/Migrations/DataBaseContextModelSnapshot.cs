@@ -325,6 +325,52 @@ namespace IranFilmPort.Persistence.Migrations
                     b.ToTable("Contacts", "dbo");
                 });
 
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.Guest.JobRequests", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte>("Category")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime?>("DeleteDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fullname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IP")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("InsertDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Resume")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("Status")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime?>("UpdateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("JobRequests", "dbo");
+                });
+
             modelBuilder.Entity("IranFilmPort.Domain.Entities.Guest.Newsletters", b =>
                 {
                     b.Property<Guid>("Id")
@@ -366,6 +412,10 @@ namespace IranFilmPort.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Fullname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IP")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -589,6 +639,114 @@ namespace IranFilmPort.Persistence.Migrations
                     b.ToTable("NewsTags", "dbo");
                 });
 
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.Settings.AdvertisementModals", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("BlinkText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeleteDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("InsertDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LinkSubText1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LinkSubText2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Photo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubText1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubText2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("Visit")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AdvertisementModals", "dbo");
+                });
+
+            modelBuilder.Entity("IranFilmPort.Domain.Entities.Settings.Pages", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AboutEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AboutFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Advertisements")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AgentsEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AgentsFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeleteDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Features")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("InsertDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ParticipatePlan")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResumeEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResumeFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ScriptFa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pages", "dbo");
+                });
+
             modelBuilder.Entity("IranFilmPort.Domain.Entities.Settings.Settings", b =>
                 {
                     b.Property<Guid>("Id")
@@ -736,32 +894,32 @@ namespace IranFilmPort.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4c4641a1-04a3-4017-b60c-7a28159262d9"),
-                            InsertDateTime = new DateTime(2026, 1, 6, 17, 2, 3, 258, DateTimeKind.Local).AddTicks(9828),
+                            Id = new Guid("5a90bbdf-7aef-44cb-9401-419b10d1d56a"),
+                            InsertDateTime = new DateTime(2026, 1, 7, 17, 54, 18, 499, DateTimeKind.Local).AddTicks(7827),
                             Title = "King"
                         },
                         new
                         {
-                            Id = new Guid("bf78bf88-13f7-439d-a61f-b2600089e19c"),
-                            InsertDateTime = new DateTime(2026, 1, 6, 17, 2, 3, 258, DateTimeKind.Local).AddTicks(9880),
+                            Id = new Guid("3fa19e77-4f87-43f9-8f94-03662b8356be"),
+                            InsertDateTime = new DateTime(2026, 1, 7, 17, 54, 18, 499, DateTimeKind.Local).AddTicks(7884),
                             Title = "SuperAdmin"
                         },
                         new
                         {
-                            Id = new Guid("0fb23b8a-2036-4345-8eb2-7c4955354edd"),
-                            InsertDateTime = new DateTime(2026, 1, 6, 17, 2, 3, 258, DateTimeKind.Local).AddTicks(9885),
+                            Id = new Guid("a2c753fd-05c6-435c-94b4-8683d1e7be40"),
+                            InsertDateTime = new DateTime(2026, 1, 7, 17, 54, 18, 499, DateTimeKind.Local).AddTicks(7890),
                             Title = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("4d7980b8-726f-4176-9188-86a5a1100cd5"),
-                            InsertDateTime = new DateTime(2026, 1, 6, 17, 2, 3, 258, DateTimeKind.Local).AddTicks(9890),
+                            Id = new Guid("8f2ead31-e380-4093-b332-600d435a09d5"),
+                            InsertDateTime = new DateTime(2026, 1, 7, 17, 54, 18, 499, DateTimeKind.Local).AddTicks(7895),
                             Title = "Client"
                         },
                         new
                         {
-                            Id = new Guid("5bef0858-b3d7-4d39-9ae3-3c0e98f3020c"),
-                            InsertDateTime = new DateTime(2026, 1, 6, 17, 2, 3, 258, DateTimeKind.Local).AddTicks(9897),
+                            Id = new Guid("761203ff-3c1a-4bc0-9225-d86ed04c3a4c"),
+                            InsertDateTime = new DateTime(2026, 1, 7, 17, 54, 18, 499, DateTimeKind.Local).AddTicks(7899),
                             Title = "User"
                         });
                 });

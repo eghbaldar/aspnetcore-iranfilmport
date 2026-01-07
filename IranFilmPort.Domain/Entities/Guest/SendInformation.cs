@@ -11,6 +11,7 @@ namespace IranFilmPort.Domain.Entities.Guest
         public string WhichWay { get; set; } // SendInformationWhichWayContants.cs
         public string? Link { get; set; }
         public string? Password { get; set; }
+        public string IP { get; set; }
         public byte Status { get; set; } // StatusContants.cs
     }
 }

@@ -1,0 +1,125 @@
+﻿@using IranFilmPort.Application.Services.Courses.Queries.GetCourseById
+@using IranFilmPort.Application.Services.Pages.Queries.GetPageBySelector
+@using IranFilmPort.Common.Helpers;
+@using IranFilmPort.Common.Constants
+@{
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    ViewData["HeadTitle"] = "درباره ی ما";
+    ViewData["pageHeadTitle"] = "درباره ی ما";
+    ViewData["HeadTitle"] = "درباره ی ما";
+}
+@model GetPageBySelectorServiceDto
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">درباره ی ما فارسی</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model == null)
+                                {
+                                    <textarea name="editor1" id="txtFa"></textarea>
+                                }
+                                else
+                                {
+                                    <textarea name="editor1" id="txtFa">@Model.Value</textarea>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">درباره ی ما انگلیسی</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model == null)
+                                {
+                                    <textarea name="editor1" id="txtEn"></textarea>
+                                }
+                                else
+                                {
+                                    <textarea name="editor1" id="txtEn">@Model.ValueEn</textarea>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <button type="button" onclick="updatePage('@PageSelectorConstants.About');"
+                            class="btn btn-primary waves-effect width-md waves-light">
+                        بروزرسانی
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/admintemplate/pagecssjs/pages/page.js"></script>
+    <script src="https://cdn.ckeditor.com/4.9.2/full-all/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('txtFa',
+            {
+                extraPlugins: 'codesnippet',
+                codeSnippet_theme: 'monokai_sublime',
+                toolbar: [
+                    { name: 'document', items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates'] }, { name: 'bidi', items: ['BidiLtr', 'BidiRtl'] },
+                    '/', // Line break
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', '-', 'RemoveFormat'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv'] },
+                    { name: 'alignment', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] }, // Alignment options
+                    { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                    { name: 'colors', items: ['TextColor', 'BGColor'] },
+                    { name: 'insert', items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'] },
+                    '/', // Line break
+                    { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt'] },
+                    { name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+                    { name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] },
+                    { name: 'forms', items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'] },
+                    '/', // Line break
+                    { name: 'coding', items: ['CodeSnippet'] },
+                ],
+                filebrowserUploadUrl: '/admin/UploadNewsMiddlePost/', // Update this URL to your server-side upload handler
+                filebrowserImageUploadUrl: '/admin/UploadNewsMiddlePost?type=Images',
+                filebrowserImageBrowseUrl: '/admin/AdminNewsImageBrower/', // Update this URL to point to your image browser
+            });
+        CKEDITOR.replace('txtEn',
+                    {
+                        extraPlugins: 'codesnippet',
+                        codeSnippet_theme: 'monokai_sublime',
+                        toolbar: [
+                            { name: 'document', items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates'] }, { name: 'bidi', items: ['BidiLtr', 'BidiRtl'] },
+                            '/', // Line break
+                            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', '-', 'RemoveFormat'] },
+                            { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv'] },
+                            { name: 'alignment', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] }, // Alignment options
+                            { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                            { name: 'colors', items: ['TextColor', 'BGColor'] },
+                            { name: 'insert', items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'] },
+                            '/', // Line break
+                            { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt'] },
+                            { name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+                            { name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] },
+                            { name: 'forms', items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'] },
+                            '/', // Line break
+                            { name: 'coding', items: ['CodeSnippet'] },
+                        ],
+                        filebrowserUploadUrl: '/admin/UploadNewsMiddlePost/', // Update this URL to your server-side upload handler
+                        filebrowserImageUploadUrl: '/admin/UploadNewsMiddlePost?type=Images',
+                        filebrowserImageBrowseUrl: '/admin/AdminNewsImageBrower/', // Update this URL to point to your image browser
+                    });
+        // Clean the textarea content before CKEditor loads
+        KingSweetAlertCenterParticularTimer("در حال آماده سازی فرم ها ...",2000);
+    </script>
+    @{
+        if (Model == null)
+        {
+            <script>
+                setTimeout(function(){
+                // کد زیر برای این گذاشتم که متاسفانه ی سری تگ های html برای خودش اد میکرد
+                CKEDITOR.instances.txtFa.setData('');
+                CKEDITOR.instances.txtEn.setData('');
+                },2000);
+            </script>
+        }
+    }
+}

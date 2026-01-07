@@ -28,6 +28,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkQWNjb2xhZGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/IranFilmPort/Endpoint.Website/Views/Admin/AddAdvModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkQWR2TW9kYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/IranFilmPort/Endpoint.Website/Views/Admin/AddCourse.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkQ291cnNlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -46,6 +50,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/IranFilmPort/Endpoint.Website/Views/Admin/AdminNewsImageBrower.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5OZXdzSW1hZ2VCcm93ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/IranFilmPort/Endpoint.Website/Views/Admin/AdvModals.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWR2TW9kYWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/IranFilmPort/Endpoint.Website/Views/Admin/Contacts.cshtml]
@@ -72,6 +80,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/IranFilmPort/Endpoint.Website/Views/Admin/JobRequests.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSm9iUmVxdWVzdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/IranFilmPort/Endpoint.Website/Views/Admin/News.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTmV3cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -94,6 +106,34 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/IranFilmPort/Endpoint.Website/Views/Admin/Newsletters.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTmV3c2xldHRlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/IranFilmPort/Endpoint.Website/Views/Admin/PageAbout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGFnZUFib3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/IranFilmPort/Endpoint.Website/Views/Admin/PageAdvertisements.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGFnZUFkdmVydGlzZW1lbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/IranFilmPort/Endpoint.Website/Views/Admin/PageAgents.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGFnZUFnZW50cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/IranFilmPort/Endpoint.Website/Views/Admin/PageFeatures.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGFnZUZlYXR1cmVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/IranFilmPort/Endpoint.Website/Views/Admin/PageParticipatePlan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGFnZVBhcnRpY2lwYXRlUGxhbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/IranFilmPort/Endpoint.Website/Views/Admin/PageResume.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGFnZVJlc3VtZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/IranFilmPort/Endpoint.Website/Views/Admin/PageScript.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGFnZVNjcmlwdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/IranFilmPort/Endpoint.Website/Views/Admin/SendInformation.cshtml]

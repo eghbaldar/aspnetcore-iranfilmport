@@ -2,9 +2,7 @@
 using IranFilmPort.Application.Interfaces.Context;
 using IranFilmPort.Common.Constants;
 using IranFilmPort.Common.Helpers;
-using Microsoft.AspNetCore.Http;
 using System.Net;
-using System.Security.Cryptography;
 
 namespace IranFilmPort.Application.Services.SendInformation.Commands.PostSendInformation
 {
@@ -16,6 +14,7 @@ namespace IranFilmPort.Application.Services.SendInformation.Commands.PostSendInf
         public string WhichWay { get; set; } // SendInformationWhichWayContants.cs
         public string? Link { get; set; }
         public string? Password { get; set; }
+        public string IP { get; set; }
     }
     public interface IPostSendInformationService
     {
@@ -32,6 +31,7 @@ namespace IranFilmPort.Application.Services.SendInformation.Commands.PostSendInf
         {
             if (req == null ||
                 string.IsNullOrEmpty(req.Fullname) ||
+                string.IsNullOrEmpty(req.IP) ||
                 string.IsNullOrEmpty(req.WhichWay)
                 ) return new ResultDto { IsSuccess = false };
 
@@ -57,6 +57,7 @@ namespace IranFilmPort.Application.Services.SendInformation.Commands.PostSendInf
                     WhichWay = WebUtility.HtmlDecode(req.WhichWay),
                     Password = WebUtility.HtmlDecode(req.Password),
                     Status = StatusConstants.UnderConsideration,
+                    IP = req.IP,
                 };
             _context.SendInformation.Add(sendInformation);
             var output = _context.SaveChanges();

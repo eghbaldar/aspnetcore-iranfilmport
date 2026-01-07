@@ -24,9 +24,7 @@
                             <th>از طریق</th>
                             <th>لینک</th>
                             <th>وضعیت</th>
-                            <th></th>
                             <th>تاریخ درج</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="tbNews">
@@ -48,10 +46,12 @@
                                             switch (item.Status)
                                             {
                                                 case StatusConstants.Accepted:
-                                                    <div class="img-title green">بررسی شده</div>
+                                                    <span class="badge badge-success">بررسی شده</span>
                                                     break;
                                                 case StatusConstants.UnderConsideration:
-                                                    <div class="img-title yellow">در حال بررسی</div>
+                                                    <span class="badge badge-warning">در حال بررسی</span>
+                                                    <br />
+                                                    <a onclick="done('@item.Id');" class="btn btn-success waves-effect width-md waves-light">تغییر به بررسی شده</a>
                                                     break;
                                             }
                                         }

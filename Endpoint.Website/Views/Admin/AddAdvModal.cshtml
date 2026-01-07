@@ -1,0 +1,209 @@
+﻿@using IranFilmPort.Application.Services.AdvertisementModals.Queries.GetAdvertisementModalById
+@using IranFilmPort.Common.Helpers;
+@using IranFilmPort.Common.Constants
+@{
+    Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
+    ViewData["HeadTitle"] = "مودال جدید";
+    ViewData["pageHeadTitle"] = "مودال جدید";
+    ViewData["HeadTitle"] = "مودال جدید";
+}
+@model GetAdvertisementModalByIdServiceDto
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">عنوان مودال</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model == null)
+                                {
+                                    <input type="text" id="txtTitle"
+                                    class="form-control" placeholder="متن دلخواه شما...">
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtTitle"
+                                            value="@Model.Title"
+                                            class="form-control" placeholder="متن دلخواه شما...">
+
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">لینک چشمکزن</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model == null)
+                                {
+                                    <input type="text" id="txtBlinkText"
+                                    class="form-control" placeholder="مثل: ...">
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtBlinkText"
+                                            value="@Model.BlinkText"
+                                            class="form-control" placeholder="مثل: ...">
+
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-password">زیر متن 1</label>
+                        <div class="col-sm-10">
+                          @{
+                                if (Model == null)
+                                {
+                                            <input type="text" id="txtSubText1"
+                                            class="form-control" placeholder="مثل: ...">
+                                }
+                                else
+                                {
+                                            <input type="text" id="txtSubText1"
+                                            value="@Model.SubText1"
+                                            class="form-control" placeholder="مثل: ...">
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-password">لینک زیر متن 1</label>
+                        <div class="col-sm-10">
+                          @{
+                                if (Model == null)
+                                {
+                                            <input type="text" id="txtLinkSubText1"
+                                            class="form-control ltr" placeholder="مثل: ...">
+                                }
+                                else
+                                {
+                                            <input type="text" id="txtLinkSubText1"
+                                            value="@Model.LinkSubText1"
+                                            class="form-control ltr" placeholder="مثل: ...">
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-password">زیر متن 2</label>
+                        <div class="col-sm-10">
+                          @{
+                                if (Model == null)
+                                {
+                                            <input type="text" id="txtSubText2"
+                                            class="form-control" placeholder="مثل: ...">
+                                }
+                                else
+                                {
+                                            <input type="text" id="txtSubText2"
+                                            value="@Model.SubText2"
+                                            class="form-control" placeholder="مثل: ...">
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-password">لینک زیر متن 2</label>
+                        <div class="col-sm-10">
+                          @{
+                                if (Model == null)
+                                {
+                                            <input type="text" id="txtLinkSubText2"
+                                            class="form-control ltr" placeholder="مثل: ...">
+                                }
+                                else
+                                {
+                                            <input type="text" id="txtLinkSubText2"
+                                            value="@Model.LinkSubText2"
+                                            class="form-control ltr" placeholder="مثل: ...">
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-password">رنگ هگزا</label>
+                        <div class="col-sm-10">
+                          @{
+                                if (Model == null)
+                                {
+                                            <input type="text" id="txtColor"
+                                            class="form-control ltr" placeholder="مثل: ...">
+                                }
+                                else
+                                {
+                                            <input type="text" id="txtColor"
+                                            value="@Model.Color"
+                                            class="form-control ltr" placeholder="مثل: ...">
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-fileinput">زیر متن 2</label>                       
+                        <div class="col-sm-10">                             
+                        <input type="file" class="form-control" id="fileImage">                        
+                    </div>  
+                    <div class="form-group row mt-10">
+                        <label class="col-sm-2  col-form-label" for="example-fileinput"></label>
+                        <div class="col-sm-10">
+                        <div class="alert alert-primary" role="alert">
+                          <a target="_blank" href="https://www.freeconvert.com/jpg-to-webp" class="btn btn-lighten-purple waves-effect  width-md waves-purple">jpg->webp (1)</a>
+                          <a target="_blank" href="https://cloudconvert.com/jpg-to-webp" class="btn btn-lighten-purple waves-effect  width-md waves-purple">jpg->webp (2)</a>
+                          <a target="_blank" href="http://optimizilla.com/" class="btn btn-lighten-primary waves-effect  width-md waves-purple">optmize jpg (1)</a>
+                          <a target="_blank" href="https://www.imgonline.com.ua/eng/compress-image-size.php" class="btn btn-lighten-primary waves-effect  width-md waves-purple">optmize jpg (2)</a>
+                        </div>
+                            @{
+                                if (Model != null)
+                                {
+                                    <div class="mt-10">
+                                    <a id="btnShowHideMainImage" class="cursorPointer kingBlueText">(نمایش تصاویر)</a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    </div>
+                    @{
+                        if (Model != null)
+                        {                            
+                            <div class="form-group row" id="mainImgContent" hidden>
+                                <label class="col-sm-2  col-form-label" for="example-fileinput"></label>
+                                <div class="col-sm-10">
+                                    <img class="img-fluid rounded"
+                                         src="/UploadedStuff/admin/images/admin-advModal-images/@Model.Photo" />
+                                         <br/>
+                                </div>
+                            </div>
+                        }
+                    }
+                    @{
+                        if (Model == null)
+                        {
+                            <button type="button" onclick="addModal();"
+                                    class="btn btn-primary waves-effect width-md waves-light">
+                                درج
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" onclick="updateModal('@Model.Id');"
+                                    class="btn btn-primary waves-effect width-md waves-light">
+                                ویرایش
+                            </button>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/common/fileextensionsize/fileextensionsize.js"></script>
+    <script src="~/admintemplate/pagecssjs/addadvmodal/addadvmodal.js"></script>
+}
