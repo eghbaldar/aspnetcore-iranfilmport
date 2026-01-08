@@ -1,4 +1,5 @@
 ﻿@using Endpoint.Website.Models.AddAccolade
+@using IranFilmPort.Common.Constants
 @{
     Layout = "~/Views/Shared/_LayoutUserClientAdmin.cshtml";
     ViewData["HeadTitle"] = "درج افتخار";
@@ -91,6 +92,108 @@
                             }
                     </div>
                 </div>
+
+                <div class="alert alert-secondary" role="alert">
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label">گونه اثر</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetAccoladeByIdServiceDto == null)
+                                {
+                                    <select class="custom-select mt-3" id="selectArtworkType">
+                                        <option disabled selected="">گونه اثر...</option>
+                                        <option value="@ArtworkTypeConstants.Short">کوتاه</option>
+                                        <option value="@ArtworkTypeConstants.Feature">بلند</option>
+                                        <option value="@ArtworkTypeConstants.Script">فیلمنامه</option>
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="custom-select mt-3" id="selectArtworkType">
+                                        <option disabled selected="">گونه اثر...</option>
+                                        <option selected="@(Model.GetAccoladeByIdServiceDto.ArtworkType == @ArtworkTypeConstants.Short)" value="@ArtworkTypeConstants.Short">کوتاه</option>
+                                        <option selected="@(Model.GetAccoladeByIdServiceDto.ArtworkType == @ArtworkTypeConstants.Feature)" value="@ArtworkTypeConstants.Feature">بلند</option>
+                                        <option selected="@(Model.GetAccoladeByIdServiceDto.ArtworkType == @ArtworkTypeConstants.Script)" value="@ArtworkTypeConstants.Script">فیلمنامه</option>
+                                    </select>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">کارگردان</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetAccoladeByIdServiceDto == null)
+                                {
+                                    <input type="text" id="txtDirector"
+                                    class="form-control" placeholder="متن دلخواه شما...">
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtDirector"
+                                            value="@Model.GetAccoladeByIdServiceDto.Director"
+                                            class="form-control" placeholder="متن دلخواه شما...">
+
+                                }
+                            }                                                   
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="simpleinput">تریلر</label>
+                        <div class="col-sm-10">
+                            @{
+                                if (Model.GetAccoladeByIdServiceDto == null)
+                                {
+                                    <input type="text" id="txtTrailer"
+                                    class="form-control" placeholder="متن دلخواه شما...">
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="txtTrailer"
+                                            value="@Model.GetAccoladeByIdServiceDto.TrailerLink"
+                                            class="form-control" placeholder="متن دلخواه شما...">
+
+                                }
+                            }                                                   
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2  col-form-label" for="example-fileinput">پوستر یا کاور پیج اثر</label>                       
+                        <div class="col-sm-10">                             
+                            <input type="file" class="form-control" id="fileImage">
+                        <div class="alert alert-primary" role="alert">
+                            <a target="_blank" href="https://www.freeconvert.com/jpg-to-webp" class="btn btn-lighten-purple waves-effect  width-md waves-purple">jpg->webp (1)</a>
+                            <a target="_blank" href="https://cloudconvert.com/jpg-to-webp" class="btn btn-lighten-purple waves-effect  width-md waves-purple">jpg->webp (2)</a>
+                            <a target="_blank" href="http://optimizilla.com/" class="btn btn-lighten-primary waves-effect  width-md waves-purple">optmize jpg (1)</a>
+                            <a target="_blank" href="https://www.imgonline.com.ua/eng/compress-image-size.php" class="btn btn-lighten-primary waves-effect  width-md waves-purple">optmize jpg (2)</a>
+                        </div>
+                            @{
+                                if (Model.GetAccoladeByIdServiceDto != null)
+                                {
+                                    <div class="mt-10">
+                                    <a id="btnShowHideMainImage" class="cursorPointer kingBlueText">(نمایش تصویر)</a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>                    
+                    @{
+                        if (Model.GetAccoladeByIdServiceDto != null)
+                        {                            
+                            <div class="form-group row" id="mainImgContent" hidden>
+                                <label class="col-sm-2  col-form-label" for="example-fileinput"></label>
+                                <div class="col-sm-10">
+
+                                    <img class="img-fluid rounded"
+                                            src="/UploadedStuff/admin/images/admin-poster-images/@Model.GetAccoladeByIdServiceDto.PosterFile" />
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
                 @{
                     if (Model.GetAccoladeByIdServiceDto == null)
                     {
@@ -115,7 +218,8 @@
 <link href="~/admintemplate/pagecssjs/addaccolade/addaccolade.css" rel="stylesheet" />
 }
 @section Scripts {
-<script src="~/admintemplate/pagecssjs/addaccolade/addaccolade.js"></script>
+    <script src="~/common/fileextensionsize/fileextensionsize.js"></script>
+    <script src="~/admintemplate/pagecssjs/addaccolade/addaccolade.js"></script>
     <script src="https://cdn.ckeditor.com/4.9.2/full-all/ckeditor.js"></script>
     <script>        
         CKEDITOR.replace('txtFa',

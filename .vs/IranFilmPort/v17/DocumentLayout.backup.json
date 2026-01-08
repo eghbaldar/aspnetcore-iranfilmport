@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "E:\\IranFilmPort\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\views\\admin\\pagefeatures.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\views\\admin\\pagefeatures.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\views\\admin\\addaccolade.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\views\\admin\\addaccolade.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\views\\admin\\pageparticipateplan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\views\\admin\\pageparticipateplan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\wwwroot\\admintemplate\\pagecssjs\\addaccolade\\addaccolade.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\wwwroot\\admintemplate\\pagecssjs\\addaccolade\\addaccolade.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|e:\\iranfilmport\\iranfilmport.application\\services\\pages\\commands\\updatepagebyselector\\iupdatepagebyselectorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|solutionrelative:iranfilmport.application\\services\\pages\\commands\\updatepagebyselector\\iupdatepagebyselectorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|e:\\iranfilmport\\iranfilmport.application\\services\\accolades\\commands\\postaccolade\\ipostaccoladeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|solutionrelative:iranfilmport.application\\services\\accolades\\commands\\postaccolade\\ipostaccoladeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|e:\\iranfilmport\\endpoint.website\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4E1862C2-C658-4D4F-B135-32309169D815}|Endpoint.Website\\Endpoint.Website.csproj|solutionrelative:endpoint.website\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|e:\\iranfilmport\\iranfilmport.application\\services\\accolades\\queries\\getallaccolades\\igetallaccoladesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|solutionrelative:iranfilmport.application\\services\\accolades\\queries\\getallaccolades\\igetallaccoladesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|e:\\iranfilmport\\iranfilmport.application\\services\\accolades\\queries\\getaccoladebyid\\igetaccoladebyidservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E61CC6EE-B0B3-4D3F-8004-0E8A8F9E97FB}|IranFilmPort.Application\\IranFilmPort.Application.csproj|solutionrelative:iranfilmport.application\\services\\accolades\\queries\\getaccoladebyid\\igetaccoladebyidservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,53 +39,66 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PageParticipatePlan.cshtml",
-              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\PageParticipatePlan.cshtml",
-              "RelativeDocumentMoniker": "Endpoint.Website\\Views\\Admin\\PageParticipatePlan.cshtml",
-              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\PageParticipatePlan.cshtml",
-              "RelativeToolTip": "Endpoint.Website\\Views\\Admin\\PageParticipatePlan.cshtml",
-              "ViewState": "AgIAADUAAAAAAAAAAAAUwFMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-07T15:10:43.217Z",
+              "Title": "addAccolade.js",
+              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\addAccolade\\addAccolade.js",
+              "RelativeDocumentMoniker": "Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\addAccolade\\addAccolade.js",
+              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\addAccolade\\addAccolade.js",
+              "RelativeToolTip": "Endpoint.Website\\wwwroot\\AdminTemplate\\pagecssjs\\addAccolade\\addAccolade.js",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAQwIsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-01-08T09:59:52.004Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PageFeatures.cshtml",
-              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\PageFeatures.cshtml",
-              "RelativeDocumentMoniker": "Endpoint.Website\\Views\\Admin\\PageFeatures.cshtml",
-              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\PageFeatures.cshtml",
-              "RelativeToolTip": "Endpoint.Website\\Views\\Admin\\PageFeatures.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABaAAAAAAAAAA==",
+              "Title": "AddAccolade.cshtml",
+              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\AddAccolade.cshtml",
+              "RelativeDocumentMoniker": "Endpoint.Website\\Views\\Admin\\AddAccolade.cshtml",
+              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Views\\Admin\\AddAccolade.cshtml*",
+              "RelativeToolTip": "Endpoint.Website\\Views\\Admin\\AddAccolade.cshtml*",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwF4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-07T15:10:33.131Z",
+              "WhenOpened": "2026-01-08T09:08:13.635Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "E:\\IranFilmPort\\Endpoint.Website\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "Endpoint.Website\\Controllers\\AdminController.cs",
-              "ToolTip": "E:\\IranFilmPort\\Endpoint.Website\\Controllers\\AdminController.cs*",
-              "RelativeToolTip": "Endpoint.Website\\Controllers\\AdminController.cs*",
-              "ViewState": "AgIAALkCAAAAAAAAAIAxwO8CAAAJAAAAAAAAAA==",
+              "Title": "IGetAllAccoladesService.cs",
+              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Accolades\\Queries\\GetAllAccolades\\IGetAllAccoladesService.cs",
+              "RelativeDocumentMoniker": "IranFilmPort.Application\\Services\\Accolades\\Queries\\GetAllAccolades\\IGetAllAccoladesService.cs",
+              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Accolades\\Queries\\GetAllAccolades\\IGetAllAccoladesService.cs",
+              "RelativeToolTip": "IranFilmPort.Application\\Services\\Accolades\\Queries\\GetAllAccolades\\IGetAllAccoladesService.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T15:01:12.807Z",
+              "WhenOpened": "2026-01-08T09:07:59.241Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "IUpdatePageBySelectorService.cs",
-              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Pages\\Commands\\UpdatePageBySelector\\IUpdatePageBySelectorService.cs",
-              "RelativeDocumentMoniker": "IranFilmPort.Application\\Services\\Pages\\Commands\\UpdatePageBySelector\\IUpdatePageBySelectorService.cs",
-              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Pages\\Commands\\UpdatePageBySelector\\IUpdatePageBySelectorService.cs",
-              "RelativeToolTip": "IranFilmPort.Application\\Services\\Pages\\Commands\\UpdatePageBySelector\\IUpdatePageBySelectorService.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAD4vzQAAAA3AAAAAAAAAA==",
+              "Title": "IPostAccoladeService.cs",
+              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Accolades\\Commands\\PostAccolade\\IPostAccoladeService.cs",
+              "RelativeDocumentMoniker": "IranFilmPort.Application\\Services\\Accolades\\Commands\\PostAccolade\\IPostAccoladeService.cs",
+              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Accolades\\Commands\\PostAccolade\\IPostAccoladeService.cs",
+              "RelativeToolTip": "IranFilmPort.Application\\Services\\Accolades\\Commands\\PostAccolade\\IPostAccoladeService.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABQAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T15:00:18.378Z",
+              "WhenOpened": "2026-01-08T09:07:29.211Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IGetAccoladeByIdService.cs",
+              "DocumentMoniker": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Accolades\\Queries\\GetAccoladeById\\IGetAccoladeByIdService.cs",
+              "RelativeDocumentMoniker": "IranFilmPort.Application\\Services\\Accolades\\Queries\\GetAccoladeById\\IGetAccoladeByIdService.cs",
+              "ToolTip": "E:\\IranFilmPort\\IranFilmPort.Application\\Services\\Accolades\\Queries\\GetAccoladeById\\IGetAccoladeByIdService.cs",
+              "RelativeToolTip": "IranFilmPort.Application\\Services\\Accolades\\Queries\\GetAccoladeById\\IGetAccoladeByIdService.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAA2wDUAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-08T09:07:17.889Z",
               "EditorCaption": ""
             }
           ]

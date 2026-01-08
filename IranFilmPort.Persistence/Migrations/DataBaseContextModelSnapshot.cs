@@ -36,8 +36,14 @@ namespace IranFilmPort.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte>("ArtworkType")
+                        .HasColumnType("tinyint");
+
                     b.Property<DateTime?>("DeleteDateTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Director")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("FilmId")
                         .HasColumnType("bigint");
@@ -45,8 +51,14 @@ namespace IranFilmPort.Persistence.Migrations
                     b.Property<DateTime>("InsertDateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("PosterFile")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Priority")
                         .HasColumnType("int");
+
+                    b.Property<string>("TrailerLink")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("datetime2");
@@ -894,32 +906,32 @@ namespace IranFilmPort.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5a90bbdf-7aef-44cb-9401-419b10d1d56a"),
-                            InsertDateTime = new DateTime(2026, 1, 7, 17, 54, 18, 499, DateTimeKind.Local).AddTicks(7827),
+                            Id = new Guid("789f9602-4188-4d39-9810-426cd09036d1"),
+                            InsertDateTime = new DateTime(2026, 1, 8, 12, 25, 49, 441, DateTimeKind.Local).AddTicks(8381),
                             Title = "King"
                         },
                         new
                         {
-                            Id = new Guid("3fa19e77-4f87-43f9-8f94-03662b8356be"),
-                            InsertDateTime = new DateTime(2026, 1, 7, 17, 54, 18, 499, DateTimeKind.Local).AddTicks(7884),
+                            Id = new Guid("c8ab9033-a621-402d-b58f-534d15a7fd94"),
+                            InsertDateTime = new DateTime(2026, 1, 8, 12, 25, 49, 441, DateTimeKind.Local).AddTicks(8434),
                             Title = "SuperAdmin"
                         },
                         new
                         {
-                            Id = new Guid("a2c753fd-05c6-435c-94b4-8683d1e7be40"),
-                            InsertDateTime = new DateTime(2026, 1, 7, 17, 54, 18, 499, DateTimeKind.Local).AddTicks(7890),
+                            Id = new Guid("4d342d64-9681-4252-be68-b6a0586ab268"),
+                            InsertDateTime = new DateTime(2026, 1, 8, 12, 25, 49, 441, DateTimeKind.Local).AddTicks(8439),
                             Title = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("8f2ead31-e380-4093-b332-600d435a09d5"),
-                            InsertDateTime = new DateTime(2026, 1, 7, 17, 54, 18, 499, DateTimeKind.Local).AddTicks(7895),
+                            Id = new Guid("27c49e9e-353c-485c-880e-07de717c2d68"),
+                            InsertDateTime = new DateTime(2026, 1, 8, 12, 25, 49, 441, DateTimeKind.Local).AddTicks(8444),
                             Title = "Client"
                         },
                         new
                         {
-                            Id = new Guid("761203ff-3c1a-4bc0-9225-d86ed04c3a4c"),
-                            InsertDateTime = new DateTime(2026, 1, 7, 17, 54, 18, 499, DateTimeKind.Local).AddTicks(7899),
+                            Id = new Guid("cf9e3239-b77f-4f3d-9c2a-2f013d0dbaec"),
+                            InsertDateTime = new DateTime(2026, 1, 8, 12, 25, 49, 441, DateTimeKind.Local).AddTicks(8448),
                             Title = "User"
                         });
                 });

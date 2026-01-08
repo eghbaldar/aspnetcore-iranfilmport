@@ -1,5 +1,6 @@
 ﻿using IranFilmPort.Application.Interfaces.Context;
 using IranFilmPort.Application.Interfaces.FacadePatternDapper;
+using Microsoft.AspNetCore.Http;
 
 namespace IranFilmPort.Application.Services.Accolades.Queries.GetAccoladeById
 {
@@ -15,6 +16,14 @@ namespace IranFilmPort.Application.Services.Accolades.Queries.GetAccoladeById
         public string AccoladeFa { get; set; }
         public string? AccoladeEn { get; set; }
         public int Priority { get; set; }
+        // قسمت زیر ترکیبی شده 
+        // چون در وب سایت قبلی جدولی با عنوان
+        // tbl_posterOFCustomer
+        // داشتیم که نمیخواستم براش جدول جدا بذارم
+        public byte ArtworkType { get; set; } // ArtworkTypeConstants.cs
+        public string? Director { get; set; }
+        public string? PosterFile { get; set; }
+        public string? TrailerLink { get; set; }
     }
     public interface IGetAccoladeByIdService
     {
@@ -39,6 +48,10 @@ namespace IranFilmPort.Application.Services.Accolades.Queries.GetAccoladeById
                     FilmId = x.FilmId,
                     Id = x.Id,
                     Priority = x.Priority,
+                    ArtworkType = x.ArtworkType,
+                    Director = x.Director,
+                    PosterFile = x.PosterFile,
+                    TrailerLink = x.TrailerLink
                 }).FirstOrDefault();
 
             return result;

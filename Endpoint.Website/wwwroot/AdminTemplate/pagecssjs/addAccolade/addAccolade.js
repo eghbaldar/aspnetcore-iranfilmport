@@ -46,10 +46,27 @@ function addAccolade() {
     }
 
     var postData = new FormData();
+
+    // file validations
+    if (!isEmptyKing($("#fileImage").val())) {
+        var _file = $("#fileImage")[0].files[0];
+        var maxSize = "200600";
+        if (!KingCheckSizeExtension(_file, ["webp"],
+            maxSize, true)) {
+            return;
+        }
+        postData.append("PosterFile", _file);
+    }
+
     postData.append("FilmId", filmId);
     postData.append("AccoladeFa", editorFa.getData());
     postData.append("AccoladeEn", editorEn.getData());
     postData.append("Priority", DOMPurify.sanitize($("#txtPriority").val()));
+
+    postData.append("ArtworkType", $("#selectArtworkType").val());
+    postData.append("Director", DOMPurify.sanitize($("#txtDirector").val()));
+    postData.append("TrailerLink", DOMPurify.sanitize($("#txtTrailer").val()));
+
     $.ajax({
         contentType: false,
         processData: false,
@@ -111,6 +128,20 @@ function editAccolade() {
     postData.append("AccoladeEn", editorEn.getData());
     postData.append("Priority", DOMPurify.sanitize($("#txtPriority").val()));
 
+    // file validations
+    if (!isEmptyKing($("#fileImage").val())) {
+        var _file = $("#fileImage")[0].files[0];
+        var maxSize = "200600";
+        if (!KingCheckSizeExtension(_file, ["webp"],
+            maxSize, true)) {
+            return;
+        }
+        postData.append("PosterFile", _file);
+    }
+
+    postData.append("ArtworkType", $("#selectArtworkType").val());
+    postData.append("Director", DOMPurify.sanitize($("#txtDirector").val()));
+    postData.append("TrailerLink", DOMPurify.sanitize($("#txtTrailer").val()));
 
     Swal.fire({
         title: 'ویرایش!',
@@ -213,3 +244,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+$("#btnShowHideMainImage").on("click", function () {
+    if ($("#mainImgContent").prop("hidden"))
+        $("#mainImgContent").prop("hidden", false);
+    else
+        $("#mainImgContent").prop("hidden", true);
+})
